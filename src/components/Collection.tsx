@@ -9,7 +9,7 @@ const Collection: React.FC = () => {
 
   return (
     <section className="p-8">
-      <h2 className="text-4xl font-bold mb-8 text-center">Book from our collection</h2>
+      <h2 className="text-4xl font-bold italic mb-8 text-center">Book from our collection</h2>
       <div className="flex justify-center space-x-8">
         {cars.map((car) => (
           <div key={car.id} className="border p-4 rounded-lg text-center">
