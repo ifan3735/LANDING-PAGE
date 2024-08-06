@@ -6,6 +6,7 @@ import Features from '../components/Features';
 import Collection from '../components/Collection';
 import Testimonials from '../components/Testimonials';
 import GetStarted from '../components/GetStarted';
+import Footer from '../components/Footer';
 
 const Landing: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const Landing: React.FC = () => {
       <Collection />
       <Testimonials />
       <GetStarted />
+      <Footer />
     </div>
   );
 };
