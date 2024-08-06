@@ -2,23 +2,23 @@ import React from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
-import WhyChooseUs from '../components/WhyChooseUs';
+import Features from '../components/Features';
 import Collection from '../components/Collection';
-import Clients from '../components/Clients';
+import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
 
-const LandingPage: React.FC = () => {
+const Landing: React.FC = () => {
   return (
-    <div className="bg-yellow-50 text-gray-900">
+    <div className="font-sans">
       <Header />
       <Hero />
       <About />
-      <WhyChooseUs />
+      <Features />
       <Collection />
-      <Clients />
+      <Testimonials />
       <Footer />
     </div>
   );
-}
+};
 
-export default LandingPage;
+export default Landing;
