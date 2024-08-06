@@ -7,8 +7,8 @@ const Hero: React.FC = () => {
     <section className="bg-white p-8 md:p-16 flex flex-col md:flex-row items-center min-h-[60vh] md:min-h-[50vh]">
       <div className="md:w-1/2 flex flex-col items-start space-y-4 md:ml-16">
         <div>
-          <h1 className="text-3xl font-semibold">Rent cars</h1>
-          <h1 className="text-6xl font-extrabold italic text-black-500">Easily</h1>
+          <h1 className="text-8xl font-semibold">Rent cars</h1>
+          <h1 className="text-9xl font-extrabold italic text-black-500">Easily</h1>
         </div>
         <p className="text-lg mb-4">
           Get access to rent our Luxury cars for your premium events at affordable prices. Experience the convenience and luxury of driving top-class vehicles with ease. Whether you need a car for a special occasion, a business trip, or a weekend getaway, we have the perfect car for you.
