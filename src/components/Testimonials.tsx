@@ -2,9 +2,9 @@ import React from 'react';
 
 const Testimonials: React.FC = () => {
   const testimonials = [
-    { id: 1, name: 'Felix Brandon', image: '/images/user1.png', text: 'Lurex made my car rental experience incredibly smooth and hassle-free.' },
-    { id: 2, name: 'Abraham Landon', image: '/images/user2.png', text: 'Lurex made my car rental experience incredibly smooth and hassle-free.' },
-    { id: 3, name: 'Rebecca Sylvester', image: '/images/user3.png', text: 'Lurex made my car rental experience incredibly smooth and hassle-free.' },
+    { id: 1, name: 'Felix Brandon', image: 'https://i.pinimg.com/474x/7e/35/3f/7e353fb5f0e662d5d6c55cd9302d366d.jpg', text: 'Lurex made my car rental experience incredibly smooth and hassle-free.' },
+    { id: 2, name: 'Abraham Landon', image: 'https://i.pinimg.com/736x/77/34/3a/77343a51e4cd2aae772add1f558bd17e.jpg', text: 'Lurex made my car rental experience incredibly smooth and hassle-free.' },
+    { id: 3, name: 'Rebecca Sylvester', image: 'https://i.pinimg.com/236x/2f/95/2c/2f952cb3710f4895efcc5f5f3c18b56b.jpg', text: 'Lurex made my car rental experience incredibly smooth and hassle-free.' },
   ];
 
   return (

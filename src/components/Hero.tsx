@@ -4,7 +4,7 @@ const Hero: React.FC = () => {
   const HeroImage = 'https://i.pinimg.com/564x/4d/8a/55/4d8a552692d0ddb2870131d83e9dfbf4.jpg';
 
   return (
-    <section className="bg-white p-8 flex flex-col md:flex-row items-center">
+    <section className="bg-white p-8 md:p-16 flex flex-col md:flex-row items-center min-h-screen md:min-h-[70vh]">
       <div className="md:w-1/2 flex flex-col items-start space-y-4 md:ml-16">
         <div>
           <h1 className="text-3xl font-semibold">Rent cars</h1>

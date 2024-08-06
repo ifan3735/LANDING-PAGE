@@ -2,9 +2,9 @@ import React from 'react';
 
 const Collection: React.FC = () => {
   const cars = [
-    { id: 1, name: '2020 Hyundai Sonata', price: '$70/day', image: '/images/sonata.png' },
-    { id: 2, name: '2019 Ford Fusion', price: '$70/day', image: '/images/fusion.png' },
-    { id: 3, name: '2024 BMW X6', price: '$70/day', image: '/images/bmw.png' },
+    { id: 1, name: '2020 Hyundai Sonata', price: '$70/day', image: 'https://i.pinimg.com/236x/a4/b2/4f/a4b24fb318f4b26faaef42ab686fcb4e.jpg' },
+    { id: 2, name: '2019 Ford Fusion', price: '$70/day', image: 'https://i.pinimg.com/564x/3b/98/be/3b98be7c80cb9f163338a56bd3f22a4d.jpg' },
+    { id: 3, name: '2024 BMW X6', price: '$70/day', image: 'https://i.pinimg.com/564x/d9/bf/54/d9bf54d2a986c2ace6b4bef4779d06b8.jpg' },
   ];
 
   return (
