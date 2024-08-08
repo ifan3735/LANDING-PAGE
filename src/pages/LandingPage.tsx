@@ -7,12 +7,14 @@ import Collection from '../components/Collection';
 import Testimonials from '../components/Testimonials';
 import GetStarted from '../components/GetStarted';
 import Footer from '../components/Footer';
+import HowItWorks from '../components/HowItWorks';
 
 const Landing: React.FC = () => {
   return (
     <div className="font-sans">
       <Header />
       <Hero />
+      <HowItWorks />
       <About />
       <Features />
       <Collection />

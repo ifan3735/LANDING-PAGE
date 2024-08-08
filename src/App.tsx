@@ -6,7 +6,7 @@ import SignUp from './pages/Register';
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="bg-yellow-50 text-gray-900">
+      <div className="text-gray-900">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
