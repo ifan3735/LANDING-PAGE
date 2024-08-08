@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FaEnvelope, FaLock, FaUser, FaPhone, FaAddressCard } from 'react-icons/fa';
+import { ToastContainer, toast, ToastOptions } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from './Footer';
 import Header from './Header';
 
 const SignUpPage: React.FC = () => {
   const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    phone: '',
+    address: ''
+  });
 
   const handleNext = () => {
+    if (step === 1 && (!formData.username || !formData.email || !formData.password)) {
+      toast.error('Please fill out all fields before proceeding.', toastOptions);
+      return;
+    }
     setStep(step + 1);
   };
 
@@ -14,10 +28,33 @@ const SignUpPage: React.FC = () => {
     setStep(step - 1);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (!formData.phone || !formData.address) {
+      toast.error('Please fill out all fields before submitting.', toastOptions);
+      return;
+    }
     // Handle final form submission logic here
-    alert('Form submitted');
+    toast.success('Form submitted successfully!', toastOptions);
+  };
+
+  const toastOptions: ToastOptions = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    style: {
+      backgroundColor: '#fbbf24', // Matches the yellow color from your signup page
+      color: '#ffffff'
+    }
   };
 
   return (
@@ -53,6 +90,8 @@ const SignUpPage: React.FC = () => {
                         id="username"
                         type="text"
                         placeholder="Username"
+                        value={formData.username}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -69,6 +108,8 @@ const SignUpPage: React.FC = () => {
                         id="email"
                         type="email"
                         placeholder="Email"
+                        value={formData.email}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -85,6 +126,8 @@ const SignUpPage: React.FC = () => {
                         id="password"
                         type="password"
                         placeholder="Password"
+                        value={formData.password}
+                        onChange={handleChange}
                       />
                     </div>
                     <p className="text-gray-600 text-xs">Your password must have at least 8 characters</p>
@@ -106,6 +149,8 @@ const SignUpPage: React.FC = () => {
                         id="phone"
                         type="text"
                         placeholder="Phone"
+                        value={formData.phone}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -122,6 +167,8 @@ const SignUpPage: React.FC = () => {
                         id="address"
                         type="text"
                         placeholder="Address"
+                        value={formData.address}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -157,13 +204,14 @@ const SignUpPage: React.FC = () => {
             </form>
             <div className="text-center mt-4">
               <p className="text-gray-600">
-                Already have an account? <a href="/login" className="text-yellow-500 hover:text-yellow-700">Log In</a>
+                Already have an account? <Link to="/login" className="text-yellow-500 hover:text-yellow-700">Log In</Link>
               </p>
             </div>
           </div>
         </div>
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

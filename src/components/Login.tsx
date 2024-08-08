@@ -1,12 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast, ToastOptions } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Footer from './Footer';
 import Header from './Header';
 
 const SignInPage: React.FC = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (!formData.email || !formData.password) {
+      toast.error('Please fill out all fields before submitting.', toastOptions);
+      return;
+    }
     // Handle form submission logic here
+    toast.success('Signed in successfully!', toastOptions);
+  };
+
+  const toastOptions: ToastOptions = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    style: {
+      backgroundColor: '#fbbf24', // Matches the yellow color from your sign-in page
+      color: '#ffffff'
+    }
   };
 
   return (
@@ -40,6 +72,8 @@ const SignInPage: React.FC = () => {
                     id="email"
                     type="email"
                     placeholder="Email"
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -56,6 +90,8 @@ const SignInPage: React.FC = () => {
                     id="password"
                     type="password"
                     placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -105,13 +141,14 @@ const SignInPage: React.FC = () => {
             </form>
             <div className="text-center mt-4">
               <p className="text-gray-600">
-                Don't have an account? <a href="/register" className="text-yellow-500 hover:text-yellow-700">Sign Up</a>
+                Don't have an account? <Link to="/register" className="text-yellow-500 hover:text-yellow-700">Sign Up</Link>
               </p>
             </div>
           </div>
         </div>
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 };
