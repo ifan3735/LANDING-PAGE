@@ -8,6 +8,7 @@ import Testimonials from '../components/Testimonials';
 import GetStarted from '../components/GetStarted';
 import Footer from '../components/Footer';
 import HowItWorks from '../components/HowItWorks';
+import OffRoadCars from '../components/OffRoad';
 
 const Landing: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const Landing: React.FC = () => {
       <Hero />
       <HowItWorks />
       <About />
+      <OffRoadCars />
       <Features />
       <Collection />
       <Testimonials />
