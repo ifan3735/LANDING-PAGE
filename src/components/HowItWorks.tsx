@@ -3,7 +3,7 @@ import { faMapMarkerAlt, faCalendarAlt, faCar } from '@fortawesome/free-solid-sv
 
 const HowItWorks = () => {
   return (
-    <section className="bg-gray-100 py-12">
+    <section className="bg-yellow-50 py-12">
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold mb-8">How it Works</h2>
         <div className="flex justify-center space-x-8">

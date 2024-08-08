@@ -6,7 +6,7 @@ const About: React.FC = () => {
   const AboutImage = 'https://i.pinimg.com/564x/42/01/37/420137597ef3a4ea2a4d8ecf3cbeb27f.jpg'; // Replace with your image URL
 
   return (
-    <section className="p-8 flex flex-col md:flex-row items-center md:justify-between bg-gray-100">
+    <section className="p-8 flex flex-col md:flex-row items-center md:justify-between bg-white">
       <div className="md:w-1/2 flex justify-center">
         <img src={AboutImage} alt="Car" className="max-w-full h-auto" />
       </div>
