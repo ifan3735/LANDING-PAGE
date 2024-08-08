@@ -1,7 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero: React.FC = () => {
+  const history = useNavigate();
   const HeroImage = 'https://i.pinimg.com/564x/4d/8a/55/4d8a552692d0ddb2870131d83e9dfbf4.jpg';
+
+  const handleGetStarted = () => {
+    history('/login');
+  };
 
   return (
     <section className="bg-white p-8 md:p-16 flex flex-col md:flex-row items-center min-h-[60vh] md:min-h-[50vh]">
@@ -13,7 +19,7 @@ const Hero: React.FC = () => {
         <p className="text-lg mb-4">
           Get access to rent our Luxury cars for your premium events at affordable prices. Experience the convenience and luxury of driving top-class vehicles with ease. Whether you need a car for a special occasion, a business trip, or a weekend getaway, we have the perfect car for you.
         </p>
-        <button className="bg-yellow-500 text-black px-6 py-3 rounded-lg flex items-center space-x-2">
+        <button onClick={handleGetStarted} className="bg-yellow-500 text-black px-6 py-3 rounded-lg flex items-center space-x-2">
           <span>GET STARTED</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
