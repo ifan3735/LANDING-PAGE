@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Collection: React.FC = () => {
   const cars = [
@@ -45,11 +47,35 @@ const Collection: React.FC = () => {
     setCurrentPage(1);
   };
 
+  const handleDetailsClick = () => {
+    toast.info("Please sign in or sign up to book this car.", {
+      position: "top-center",
+      className: 'custom-toast', // Use a class for custom styling
+    });
+  };
+
+  // Define custom styles for the toast notification using a CSS class
+  const customToastStyle = `
+    .custom-toast {
+      background-color: #fbbf24; /* Yellow background matching the buttons */
+      color: #374151; /* Dark gray text color */
+      font-weight: bold;
+      border-radius: 8px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  `;
+
+  // Inject the custom styles into the document head
+  const styleElement = document.createElement("style");
+  styleElement.textContent = customToastStyle;
+  document.head.appendChild(styleElement);
+
   // Get unique car types based on selected category
   const availableTypes = ['all', ...new Set(cars.filter(car => car.category === selectedCategory).map(car => car.type))];
 
   return (
     <section className="p-8 bg-gradient-to-b from-yellow-100 to-yellow-50">
+      <ToastContainer />
       <h2 className="text-5xl font-extrabold italic mb-12 text-center text-gray-800">Book from our Premium Collection</h2>
 
       <div className="flex justify-between items-center">
@@ -78,7 +104,10 @@ const Collection: React.FC = () => {
               <img src={car.image} alt={car.name} className="w-full h-36 object-cover mb-4 rounded" />
               <h3 className="text-2xl font-semibold text-gray-700">{car.name}</h3>
               <p className="text-yellow-600 text-xl">{car.price}</p>
-              <button className="bg-yellow-600 text-white px-4 py-2 mt-4 rounded-lg shadow-md hover:bg-yellow-700 transition">
+              <button
+                className="bg-yellow-600 text-white px-4 py-2 mt-4 rounded-lg shadow-md hover:bg-yellow-700 transition"
+                onClick={handleDetailsClick}
+              >
                 Details
               </button>
             </div>
