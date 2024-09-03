@@ -4,6 +4,8 @@ import { faCar, faCalendarAlt, faCogs, faHeadset } from '@fortawesome/free-solid
 import Footer from './Footer';
 import Header from './Header';
 
+import { Link } from 'react-router-dom';
+
 const Services: React.FC = () => {
   return (
     <div>
@@ -96,14 +98,21 @@ const Services: React.FC = () => {
         </div>
 
         {/* Call to Action Section */}
-        <div className="mt-20 text-center">
-          <h2 className="text-4xl font-bold text-gray-800">Ready to Hit the Road?</h2>
-          <p className="mt-4 text-lg text-gray-600">Start your journey with Lurex today. Book your car now and experience unmatched service.</p>
-          <div className="mt-8 flex justify-center space-x-4">
-            <button className="px-8 py-3 bg-yellow-500 text-white font-semibold rounded-md shadow-md">Start Your Journey with Lurex</button>
-            <button className="px-8 py-3 bg-gray-800 text-white font-semibold rounded-md shadow-md">Contact Us Today</button>
-          </div>
-        </div>
+        <div className="mt-8 flex justify-center space-x-4">
+  <Link 
+    to="/register" 
+    className="px-8 py-3 bg-yellow-500 text-white font-semibold rounded-md shadow-md hover:bg-yellow-600 transition duration-300 ease-in-out"
+  >
+    Start Your Journey with Lurex
+  </Link>
+  <Link 
+    to="/contact" 
+    className="px-8 py-3 bg-gray-800 text-white font-semibold rounded-md shadow-md hover:bg-gray-900 transition duration-300 ease-in-out"
+  >
+    Contact Us Today
+  </Link>
+</div>
+
       </div>
       <Footer />
     </div>
