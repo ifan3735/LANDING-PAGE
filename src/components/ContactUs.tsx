@@ -32,7 +32,7 @@ const ContactUs: React.FC = () => {
             toast.error('Please fill in all fields before submitting.', {
                 position: 'top-right', // Fix the position prop type
                 autoClose: 3000,
-                hideProgressBar: true,
+                hideProgressBar: false,
             });
             return;
         }
@@ -44,7 +44,7 @@ const ContactUs: React.FC = () => {
         toast.success('Your message has been sent successfully!', {
             position: 'top-right', // Fix the position prop type
             autoClose: 3000,
-            hideProgressBar: true,
+            hideProgressBar: false,
             style: {
                 backgroundColor: '#fbbf24', // Matches the yellow color from your sign-in page
                 color: '#ffffff'
