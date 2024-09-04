@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className="w-72 h-screen bg-yellow-600 text-white flex flex-col">
+    <div className="w-76 h-screen bg-yellow-600 text-white flex flex-col">
       {/* Sidebar Header */}
       <div className="p-6 flex items-center justify-between">
         <span className="text-2xl font-bold">Lurex</span>
