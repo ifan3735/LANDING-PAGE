@@ -1,35 +1,68 @@
-import { FaCar, FaCog, FaSignOutAlt, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign } from 'react-icons/fa';
+import { FaCar, FaCog, FaSignOutAlt, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaUserCircle } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className="w-74 h-screen bg-primary text-white flex flex-col">
-      <div className="p-6 font-bold text-2xl">Lurex</div>
-      <ul>
-        <li className="p-4 hover:bg-accent">
-          <NavLink to="/dashboard" className="flex items-center"><FaCar className="inline-block mr-2" /> Dashboard</NavLink>
+    <div className="w-72 h-screen bg-yellow-600 text-white flex flex-col">
+      {/* Sidebar Header */}
+      <div className="p-6 flex items-center justify-between">
+        <span className="text-2xl font-bold">Lurex</span>
+        <FaUserCircle className="text-3xl" />
+      </div>
+      
+      {/* User Profile */}
+      <div className="px-6 py-4 flex items-center space-x-4 bg-yellow-700 rounded-md mx-4 mb-6">
+        <FaUserCircle className="text-4xl" />
+        <div>
+          <p className="font-semibold">John Doe</p>
+          <p className="text-sm text-yellow-200">Admin</p>
+        </div>
+      </div>
+      
+      {/* Navigation */}
+      <ul className="flex-1 space-y-2 px-4">
+        <li>
+          <NavLink to="/dashboard" className="flex items-center p-4 hover:bg-yellow-500 rounded-md">
+            <FaCar className="mr-3" /> Dashboard
+          </NavLink>
         </li>
-        <li className="p-4 hover:bg-accent">
-          <NavLink to="/listings" className="flex items-center"><FaList className="inline-block mr-2" /> Listings</NavLink>
+        <li>
+          <NavLink to="/listings" className="flex items-center p-4 hover:bg-yellow-500 rounded-md">
+            <FaList className="mr-3" /> Listings
+          </NavLink>
         </li>
-        <li className="p-4 hover:bg-accent">
-          <NavLink to="/tracking" className="flex items-center"><FaMapMarkerAlt className="inline-block mr-2" /> Tracking</NavLink>
+        <li>
+          <NavLink to="/tracking" className="flex items-center p-4 hover:bg-yellow-500 rounded-md">
+            <FaMapMarkerAlt className="mr-3" /> Tracking
+          </NavLink>
         </li>
-        <li className="p-4 hover:bg-accent">
-          <NavLink to="/bids" className="flex items-center"><FaDollarSign className="inline-block mr-2" /> Bids</NavLink>
+        <li>
+          <NavLink to="/bids" className="flex items-center p-4 hover:bg-yellow-500 rounded-md">
+            <FaDollarSign className="mr-3" /> Bids
+          </NavLink>
         </li>
-        <li className="p-4 hover:bg-accent">
-          <NavLink to="/calendar" className="flex items-center"><FaCalendarAlt className="inline-block mr-2" /> Calendar</NavLink>
+        <li>
+          <NavLink to="/calendar" className="flex items-center p-4 hover:bg-yellow-500 rounded-md">
+            <FaCalendarAlt className="mr-3" /> Calendar
+          </NavLink>
         </li>
-        <li className="p-4 hover:bg-accent">
-          <NavLink to="/transactions" className="flex items-center"><FaDollarSign className="inline-block mr-2" /> Transactions</NavLink>
+        <li>
+          <NavLink to="/transactions" className="flex items-center p-4 hover:bg-yellow-500 rounded-md">
+            <FaDollarSign className="mr-3" /> Transactions
+          </NavLink>
         </li>
-        <li className="p-4 hover:bg-accent">
-          <NavLink to="/settings" className="flex items-center"><FaCog className="inline-block mr-2" /> Settings</NavLink>
+        <li>
+          <NavLink to="/settings" className="flex items-center p-4 hover:bg-yellow-500 rounded-md">
+            <FaCog className="mr-3" /> Settings
+          </NavLink>
         </li>
       </ul>
-      <div className="p-4 mt-auto hover:bg-accent">
-        <FaSignOutAlt className="inline-block mr-2" /> Logout
+
+      {/* Logout Section */}
+      <div className="p-4 hover:bg-yellow-500 rounded-md mx-4 mb-6">
+        <NavLink to="/logout" className="flex items-center">
+          <FaSignOutAlt className="mr-3" /> Logout
+        </NavLink>
       </div>
     </div>
   );
