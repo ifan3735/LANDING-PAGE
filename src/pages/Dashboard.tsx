@@ -15,6 +15,7 @@ const Dashboard = () => {
     color: '',
     style: '',
   });
+  const [visibleActivities, setVisibleActivities] = useState(1); // Control how many activities to show
 
   const cars = [
     { name: 'Audi R8 Green', style: 'Audi', type: 'Auto', color: 'Green', price: '$285,892', imageUrl: 'https://media.istockphoto.com/id/174691804/photo/green-supercar-isolated.jpg?s=612x612&w=0&k=20&c=nh6aondlx41IkaHJRG9Ffp6CYjGBOTIUCPrVC0Mn4l0=' },
@@ -37,7 +38,6 @@ const Dashboard = () => {
     }));
   };
 
-  // Filter cars based on search and selected filters
   const filteredCars = cars.filter(car => {
     const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
@@ -49,7 +49,7 @@ const Dashboard = () => {
   const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
 
   const userInfo = {
-    name: ' John Stevens',
+    name: 'John Stevens',
     locationFrom: 'Georgia, 25 Mile',
     locationTo: '106 Saint Laurence, UK',
     distance: '48 KM',
@@ -59,6 +59,16 @@ const Dashboard = () => {
     average: 'Average',
     imageUrl: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
   };
+
+  // Sample activity data
+  const recentActivities = [
+    { carName: 'Lamborghini Autofill', price: '$194,714', imageUrl: 'https://i.pinimg.com/736x/a7/d7/f2/a7d7f2e76dafcb9045e0065d0a772909.jpg' },
+    { carName: 'Tesla Model S', price: '$120,000', imageUrl: 'https://i.pinimg.com/1200x/ba/fa/a9/bafaa9ee834ac42aaf6f08313e930cbe.jpg' },
+    { carName: 'Porsche 911', price: '$200,000', imageUrl: 'https://i.pinimg.com/1200x/e1/06/07/e1060739e7e16b2f935ec364c77cddcd.jpg' }
+  ];
+
+  const loadMoreActivities = () => setVisibleActivities((prev) => prev + 1); // Increase the number of visible activities
+  const seeLessActivities = () => setVisibleActivities(1); // Reset to showing just one activity
 
   return (
     <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
@@ -97,6 +107,7 @@ const Dashboard = () => {
                 </button>
                 {showFilterDropdown && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-4 z-10">
+                    {/* Filter dropdown */}
                     <div className="mb-2">
                       <label className="block text-sm text-gray-700">Type:</label>
                       <select name="type" value={selectedFilters.type} onChange={handleFilterChange} className="w-full p-2 border rounded">
@@ -157,11 +168,36 @@ const Dashboard = () => {
         <div className="col-span-1 lg:col-span-4">
           <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
             <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-            <ActivityCard
-              carName="Lamborghini Autofill"
-              price="$194,714"
-              imageUrl="https://i.pinimg.com/736x/a7/d7/f2/a7d7f2e76dafcb9045e0065d0a772909.jpg"
-            />
+
+            {/* Loop through recent activities based on visibleActivities */}
+            {recentActivities.slice(0, visibleActivities).map((activity, index) => (
+              <ActivityCard
+                key={index}
+                carName={activity.carName}
+                price={activity.price}
+                imageUrl={activity.imageUrl}
+              />
+            ))}
+
+            <div className="flex justify-center mt-4 space-x-4">
+              {visibleActivities < recentActivities.length && (
+                <button
+                  className="text-blue-500 hover:underline"
+                  onClick={loadMoreActivities}
+                >
+                  See More
+                </button>
+              )}
+
+              {visibleActivities > 1 && (
+                <button
+                  className="text-blue-500 hover:underline"
+                  onClick={seeLessActivities}
+                >
+                  See Less
+                </button>
+              )}
+            </div>
           </div>
 
           <UserInfoCard

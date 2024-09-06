@@ -1,25 +1,23 @@
+import React from 'react';
 import { FaCar, FaCog, FaSignOutAlt, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaUserCircle } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className="w-76 h-screen bg-yellow-600 text-white flex flex-col">
-      {/* Sidebar Header */}
+    <div className="w-76 h-full bg-yellow-600 text-white flex flex-col">
       <div className="p-6 flex items-center justify-between">
         <span className="text-2xl font-bold">Lurex</span>
         <FaUserCircle className="text-3xl" />
       </div>
       
-      {/* User Profile */}
       <div className="px-6 py-4 flex items-center space-x-4 bg-yellow-700 rounded-md mx-4 mb-6">
         <FaUserCircle className="text-4xl" />
         <div>
-          <p className="font-semibold">John Doe</p>
+          <p className="font-semibold">John Stevens</p>
           <p className="text-sm text-yellow-200">User</p>
         </div>
       </div>
       
-      {/* Navigation */}
       <ul className="flex-1 space-y-2 px-4">
         <li>
           <NavLink to="/dashboard" className="flex items-center p-4 hover:bg-yellow-500 rounded-md">
@@ -58,7 +56,6 @@ const Sidebar = () => {
         </li>
       </ul>
 
-      {/* Logout Section */}
       <div className="p-4 hover:bg-yellow-500 rounded-md mx-4 mb-6">
         <NavLink to="/logout" className="flex items-center">
           <FaSignOutAlt className="mr-3" /> Logout
