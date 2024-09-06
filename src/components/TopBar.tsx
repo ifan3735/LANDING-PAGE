@@ -37,7 +37,7 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
       {/* User Profile */}
       <div className="flex items-center space-x-3">
         <img
-          src="https://via.placeholder.com/40"
+          src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
           alt="User Avatar"
           className="w-10 h-10 rounded-full"
         />
