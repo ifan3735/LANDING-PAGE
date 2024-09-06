@@ -9,6 +9,12 @@ import { exportData } from '../utils/ExportData'; // assuming exportData is move
 const Dashboard = () => {
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false); // For showing/hiding filter dropdown
+  const [selectedFilters, setSelectedFilters] = useState({
+    type: '',
+    color: '',
+    style: '',
+  });
 
   const cars = [
     { name: 'Audi R8 Green', style: 'Audi', type: 'Auto', color: 'Green', price: '$285,892', imageUrl: 'https://via.placeholder.com/200x150' },
@@ -23,9 +29,24 @@ const Dashboard = () => {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
 
-  const filteredCars = cars.filter(car =>
-    car.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+  };
+
+  // Filter cars based on search and selected filters
+  const filteredCars = cars.filter(car => {
+    const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
+    const matchesColor = selectedFilters.color ? car.color === selectedFilters.color : true;
+    const matchesStyle = selectedFilters.style ? car.style === selectedFilters.style : true;
+    return matchesSearch && matchesType && matchesColor && matchesStyle;
+  });
+
+  const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
 
   const userInfo = {
     name: 'Steven Robert',
@@ -67,9 +88,52 @@ const Dashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Available Cars</h2>
-              <button className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
-                Filter by
-              </button>
+              <div className="relative">
+                <button 
+                  className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                  onClick={toggleFilterDropdown}
+                >
+                  Filter by
+                </button>
+                {showFilterDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-4 z-10">
+                    <div className="mb-2">
+                      <label className="block text-sm text-gray-700">Type:</label>
+                      <select name="type" value={selectedFilters.type} onChange={handleFilterChange} className="w-full p-2 border rounded">
+                        <option value="">All</option>
+                        <option value="Auto">Auto</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Electric">Electric</option>
+                        <option value="Petrol">Petrol</option>
+                      </select>
+                    </div>
+                    <div className="mb-2">
+                      <label className="block text-sm text-gray-700">Color:</label>
+                      <select name="color" value={selectedFilters.color} onChange={handleFilterChange} className="w-full p-2 border rounded">
+                        <option value="">All</option>
+                        <option value="Green">Green</option>
+                        <option value="Brown">Brown</option>
+                        <option value="Yellow">Yellow</option>
+                        <option value="Red">Red</option>
+                        <option value="Blue">Blue</option>
+                        <option value="White">White</option>
+                      </select>
+                    </div>
+                    <div className="mb-2">
+                      <label className="block text-sm text-gray-700">Style:</label>
+                      <select name="style" value={selectedFilters.style} onChange={handleFilterChange} className="w-full p-2 border rounded">
+                        <option value="">All</option>
+                        <option value="Audi">Audi</option>
+                        <option value="Bentley">Bentley</option>
+                        <option value="Lamborghini">Lamborghini</option>
+                        <option value="Porsche">Porsche</option>
+                        <option value="BMW">BMW</option>
+                        <option value="Tesla">Tesla</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -100,7 +164,6 @@ const Dashboard = () => {
             />
           </div>
 
-          {/* Add UserInfoCard below Recent Activities */}
           <UserInfoCard
             name={userInfo.name}
             locationFrom={userInfo.locationFrom}
