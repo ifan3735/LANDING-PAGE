@@ -15,7 +15,7 @@ const Sidebar = () => {
         <FaUserCircle className="text-4xl" />
         <div>
           <p className="font-semibold">John Doe</p>
-          <p className="text-sm text-yellow-200">Admin</p>
+          <p className="text-sm text-yellow-200">User</p>
         </div>
       </div>
       
