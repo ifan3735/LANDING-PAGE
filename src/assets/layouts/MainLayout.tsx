@@ -9,7 +9,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div className="flex h-screen">
       {/* Fixed Sidebar */}
-      <aside className="w-64 bg-yellow-500 p-4 fixed h-full">
+      <aside className="w-64 bg-white-500 p-4 fixed h-full">
         <Sidebar />
         {/* Sidebar content like navigation links */}
       </aside>

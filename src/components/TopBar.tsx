@@ -16,12 +16,28 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
   const [showNotifications, setShowNotifications] = useState(false);
   const [newNotifications, setNewNotifications] = useState(true); // State to track if there are new notifications
   const [currentDate, setCurrentDate] = useState('');
+  const [isOnline, setIsOnline] = useState(navigator.onLine); // Track user's online status
 
   // Dynamically update the date
   useEffect(() => {
     const date = new Date();
     const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short' };
     setCurrentDate(date.toLocaleDateString(undefined, options));
+  }, []);
+
+  // Event listeners to update online/offline status
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
   }, []);
 
   // Toggle notifications dropdown and mark as viewed
@@ -89,13 +105,17 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
             )}
           </div>
 
-          {/* User Profile */}
-          <div className="flex items-center space-x-3">
+          {/* User Profile with Online Status */}
+          <div className="relative flex items-center space-x-3">
             <img
               src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
               alt="User Avatar"
               className="w-10 h-10 rounded-full"
             />
+            {/* Green dot for online status */}
+            {isOnline && (
+              <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></span>
+            )}
             <div>
               <p className="font-semibold">Hello John</p>
               <p className="text-sm text-gray-500">{currentDate}</p>
