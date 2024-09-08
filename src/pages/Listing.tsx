@@ -72,14 +72,29 @@ const CarCard = ({ car }: { car: any }) => {
 const ListingPage = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
   const [showFilters, setShowFilters] = useState(false);   // To toggle filter options
+  const [theme, setTheme] = useState('light');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedFilters, setSelectedFilters] = useState({
+    type: '',
+    color: '',
+    style: '',
+  });
 
+  const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
   const toggleExportDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-
   const toggleFilters = () => {
     setShowFilters(!showFilters);
-    // Logic for opening a filter modal or showing filter options can be added here.
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
   };
 
   const cars = [
@@ -89,6 +104,9 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
+      type: 'Sedan',
+      color: 'Red',
+      style: 'Luxury',
       price: '285,892',
       image: 'https://i.pinimg.com/1200x/a5/cb/83/a5cb831ea2e399e2e4ede6eab618a4f0.jpg',
       owner: 'Jonson Hussain',
@@ -174,35 +192,25 @@ const ListingPage = () => {
       carType: 'Coupe',
       dateListed: '26 Jun',
     },
-    {
-      name: 'Audi Q4 e-tron',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      price: '285,892',
-      image: 'https://i.pinimg.com/474x/4b/b9/89/4bb989295b494cb8185dcb474ae6cbd7.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/0a/0a/5b/0a0a5b1b6ed28ea29e8b00c7515e9c02.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-    }
+    // Add more cars as needed
   ];
 
+  const filteredCars = cars.filter(car => {
+    const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
+    const matchesColor = selectedFilters.color ? car.color === selectedFilters.color : true;
+    const matchesStyle = selectedFilters.style ? car.style === selectedFilters.style : true;
+    return matchesSearch && matchesType && matchesColor && matchesStyle;
+  });
+
   return (
-    <div className="flex-1 p-6 bg-gray-50">
+    <div className={`flex-1 p-6 bg-gray-50 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       {/* Top Bar */}
       <TopBar
-        searchQuery={""}
-        handleSearch={(e: React.ChangeEvent<HTMLInputElement>) => {
-          // Implement the search functionality here if needed
-          console.log(e.target.value);
-        }}
-        toggleTheme={() => {
-          // Implement theme toggling here
-          console.log("Theme toggled");
-        }}
-        theme={"light"} // You can change this value as needed
+        searchQuery={searchQuery}
+        handleSearch={handleSearch}
+        toggleTheme={toggleTheme}
+        theme={theme}
         exportData={() => {
           // Implement export functionality here
           console.log("Data exported");
@@ -257,17 +265,67 @@ const ListingPage = () => {
         <h2 className="text-xl font-semibold">Available Cars</h2>
 
         {/* Filter by Button on the Right */}
-        <button
-          onClick={toggleFilters}
-          className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
-        >
-          <FaBars className="mr-2" /> Filter by
-        </button>
+        <div className="relative">
+          <button
+            onClick={toggleFilters}
+            className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
+          >
+            <FaBars className="mr-2" /> Filter by
+          </button>
+
+          {/* Filter Dropdown */}
+          {showFilters && (
+            <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg">
+              <div className="p-4">
+                <label className="block text-gray-700">Type</label>
+                <select
+                  name="type"
+                  value={selectedFilters.type}
+                  onChange={handleFilterChange}
+                  className="border rounded-lg w-full p-2 mt-1"
+                >
+                  <option value="">All Types</option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="Luxury">Luxury</option>
+                  <option value="Coupe">Coupe</option>
+                </select>
+              </div>
+              <div className="p-4 border-t">
+                <label className="block text-gray-700">Color</label>
+                <select
+                  name="color"
+                  value={selectedFilters.color}
+                  onChange={handleFilterChange}
+                  className="border rounded-lg w-full p-2 mt-1"
+                >
+                  <option value="">All Colors</option>
+                  <option value="Red">Red</option>
+                  <option value="Blue">Blue</option>
+                  <option value="Black">Black</option>
+                </select>
+              </div>
+              <div className="p-4 border-t">
+                <label className="block text-gray-700">Style</label>
+                <select
+                  name="style"
+                  value={selectedFilters.style}
+                  onChange={handleFilterChange}
+                  className="border rounded-lg w-full p-2 mt-1"
+                >
+                  <option value="">All Styles</option>
+                  <option value="Luxury">Luxury</option>
+                  <option value="Sport">Sport</option>
+                  <option value="Classic">Classic</option>
+                </select>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Listings */}
       <div className="grid grid-cols-2 gap-6">
-        {cars.map((car, index) => (
+        {filteredCars.map((car, index) => (
           <CarCard key={index} car={car} />
         ))}
       </div>

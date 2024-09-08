@@ -5,8 +5,10 @@ import CarCard from '../components/CarCard';
 import ActivityCard from '../components/ActivityCard';
 import UserInfoCard from '../components/UserInfoCard'; // Import UserInfoCard
 import { exportData } from '../utils/ExportData'; // assuming exportData is moved into utils folder
+import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
 
 const Dashboard = () => {
+  const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilterDropdown, setShowFilterDropdown] = useState(false); // For showing/hiding filter dropdown
@@ -48,6 +50,10 @@ const Dashboard = () => {
 
   const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
 
+  const toggleExportDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   const userInfo = {
     name: 'John Stevens',
     locationFrom: 'Georgia, 25 Mile',
@@ -80,16 +86,45 @@ const Dashboard = () => {
         exportData={() => exportData(filteredCars)}
       />
 
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-gray-500">Get your latest update for the last 7 days</p>
+      {/* New Layer Below Top Bar */}
+      <div className="flex justify-between items-center my-6">
+        {/* Left Section: Header and Paragraph */}
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
+          <p className="text-sm text-gray-600">
+            Get your latest update for the past 7 days
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mt-4">
-          <InfoBlock label="Location" value="GBT, Mail Quishan" />
-          <InfoBlock label="Pick-up Date" value="06-Sep-2023" />
-          <InfoBlock label="Drop-off Date" value="06-Sep-2023" />
-          <InfoBlock label="Pick-up Time" value="10:00 AM" />
-          <InfoBlock label="Drop-off Time" value="05:00 PM" />
+        {/* Right Section: Export Button with Dropdown */}
+        <div className="relative">
+          <button
+            onClick={toggleExportDropdown}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
+          >
+            <FaFileExport className="mr-2" /> Export
+            <FaChevronDown className="ml-2" />
+          </button>
+
+          {/* Export Dropdown */}
+          {showDropdown && (
+            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+              <ul>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => console.log("Export as CSV")}
+                >
+                  Export as CSV
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => console.log("Export as PDF")}
+                >
+                  Export as PDF
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
@@ -100,10 +135,10 @@ const Dashboard = () => {
               <h2 className="text-xl font-semibold">Available Cars</h2>
               <div className="relative">
                 <button 
-                  className="px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                  className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
                   onClick={toggleFilterDropdown}
                 >
-                  Filter by
+                   <FaBars className="mr-2" /> Filter by
                 </button>
                 {showFilterDropdown && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-4 z-10">
