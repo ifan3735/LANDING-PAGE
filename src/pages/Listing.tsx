@@ -183,7 +183,7 @@ const ListingPage = () => {
       price: '285,892',
       image: 'https://i.pinimg.com/474x/4b/b9/89/4bb989295b494cb8185dcb474ae6cbd7.jpg',
       owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
+      ownerAvatar: 'https://i.pinimg.com/236x/0a/0a/5b/0a0a5b1b6ed28ea29e8b00c7515e9c02.jpg',
       carType: 'Luxury',
       dateListed: '25 Jun',
     }
