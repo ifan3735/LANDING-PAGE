@@ -1,45 +1,68 @@
-import TopBar from "../components/TopBar";
+import TopBar from "../components/TopBar"; // Importing the TopBar component
+import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport } from "react-icons/fa"; // Importing icons
+import { useState } from "react"; // To handle dropdown toggle
 
 // CarCard Component
 const CarCard = ({ car }: { car: any }) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md flex flex-col space-y-4 w-full max-w-lg">
-      {/* Owner Section */}
-      <div className="flex items-center space-x-3">
+    <div className="bg-white p-6 rounded-lg shadow-md flex flex-row space-x-4 w-full max-w-lg">
+      {/* Car Image Section (centralized) */}
+      <div className="flex items-center">
         <img
-          src={car.ownerAvatar} // Avatar image for the car owner
-          alt={car.owner}
-          className="w-12 h-12 rounded-full border-2 border-green-500" // Green border for profile if needed
+          src={car.image}
+          alt={car.name}
+          className="w-40 h-24 rounded-lg object-cover"
         />
-        <div>
-          <p className="font-semibold text-gray-700">{car.owner}</p>
-          <p className="text-sm text-gray-500">{car.dateListed}</p> {/* Dynamic Date */}
-        </div>
       </div>
 
       {/* Car Information Section */}
-      <div className="flex items-start space-x-4">
-        {/* Car Image */}
-        <img src={car.image} alt={car.name} className="w-40 h-24 rounded-lg object-cover" />
+      <div className="flex-1 flex flex-col justify-center">
+        {/* Owner Section */}
+        <div className="flex items-center space-x-3 mb-3">
+          <img
+            src={car.ownerAvatar}
+            alt={car.owner}
+            className="w-12 h-12 rounded-full border-2 border-green-500"
+          />
+          <div>
+            <p className="font-semibold text-gray-700">{car.owner}</p>
+            <p className="text-sm text-gray-500">{car.dateListed}</p>
+          </div>
+        </div>
+
+        {/* Car Name */}
+        <h3 className="font-semibold text-lg text-gray-700 mb-1">{car.name}</h3>
 
         {/* Car Details */}
-        <div className="flex-1">
-          <h3 className="font-semibold text-lg text-gray-700">{car.name}</h3>
-          <div className="text-sm text-gray-500">
-            <p>{car.mileage} KM • {car.fuelType}</p>
-            <p>{car.location}</p>
+        <div className="text-sm text-gray-500 mb-2">
+          {/* Mileage, Fuel Type, Location (on the same line) */}
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-1">
+              <FaTachometerAlt className="text-blue-500" /> {/* Blue icon */}
+              <p>{car.mileage} KM</p>
+            </div>
+            <div className="flex items-center space-x-1">
+              <FaGasPump className="text-blue-500" /> {/* Blue icon */}
+              <p>{car.fuelType}</p>
+            </div>
+            <div className="flex items-center space-x-1">
+              <FaMapMarkerAlt className="text-blue-500" /> {/* Blue icon */}
+              <p>{car.location}</p>
+            </div>
+          </div>
+
+          {/* Car Style, RTO, Speed (on the same line) */}
+          <div className="flex items-center space-x-4 mt-2">
+            <p>Style: {car.carType}</p>
+            <p>RTO: Pending</p> {/* Assuming RTO is "Pending" */}
             <p>Speed: {car.speed}</p>
           </div>
         </div>
-      </div>
 
-      {/* Price Section */}
-      <div className="flex justify-between items-center">
-        {/* Car Type */}
-        <p className="text-sm text-gray-500">{car.carType}</p>
-
-        {/* Price */}
-        <p className="font-bold text-lg text-blue-500">${car.price}</p>
+        {/* Price Section */}
+        <div className="flex justify-between items-center">
+          <p className="font-bold text-lg text-blue-500">${car.price}</p>
+        </div>
       </div>
     </div>
   );
@@ -47,6 +70,18 @@ const CarCard = ({ car }: { car: any }) => {
 
 // ListingPage Component
 const ListingPage = () => {
+  const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
+  const [showFilters, setShowFilters] = useState(false);   // To toggle filter options
+
+  const toggleExportDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const toggleFilters = () => {
+    setShowFilters(!showFilters);
+    // Logic for opening a filter modal or showing filter options can be added here.
+  };
+
   const cars = [
     {
       name: 'Hyundai S Turbo uMT',
@@ -55,9 +90,9 @@ const ListingPage = () => {
       location: 'Dubai',
       speed: '15.5 km/h',
       price: '285,892',
-      image: 'https://i.pinimg.com/564x/d4/a5/7d/d4a57d031492979a866b06809d33fc79.jpg',
+      image: 'https://i.pinimg.com/1200x/a5/cb/83/a5cb831ea2e399e2e4ede6eab618a4f0.jpg',
       owner: 'Jonson Hussain',
-      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg', // Example avatar image
+      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
       carType: 'Sedan',
       dateListed: '28 Jun',
     },
@@ -70,7 +105,7 @@ const ListingPage = () => {
       price: '285,892',
       image: 'https://i.pinimg.com/474x/4b/b9/89/4bb989295b494cb8185dcb474ae6cbd7.jpg',
       owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/0a/0a/5b/0a0a5b1b6ed28ea29e8b00c7515e9c02.jpg', // Example avatar
+      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
       carType: 'Luxury',
       dateListed: '25 Jun',
     },
@@ -81,32 +116,152 @@ const ListingPage = () => {
       location: 'Dubai',
       speed: '15.5 km/h',
       price: '295,892',
-      image: 'https://i.pinimg.com/236x/7b/e0/e4/7be0e479e4134e4a28be487bb6c1655f.jpg',
+      image: 'https://i.pinimg.com/1200x/e1/06/07/e1060739e7e16b2f935ec364c77cddcd.jpg',
       owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/6e/73/2b/6e732b9f25a83bb67629b5f44eaf556f.jpg',
+      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
       carType: 'Coupe',
       dateListed: '26 Jun',
     },
-    // Add more cars as necessary
+    {
+      name: 'Mercedes Benz EQS',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '285,892',
+      image: 'https://i.pinimg.com/474x/4b/b9/89/4bb989295b494cb8185dcb474ae6cbd7.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+    },
+    {
+      name: 'Audi Q4 e-tron',
+      mileage: '369',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '295,892',
+      image: 'https://i.pinimg.com/1200x/e1/06/07/e1060739e7e16b2f935ec364c77cddcd.jpg',
+      owner: 'Robert Rome',
+      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
+      carType: 'Coupe',
+      dateListed: '26 Jun',
+    },
+    {
+      name: 'Toyota Corolla Cross',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '285,892',
+      image: 'https://i.pinimg.com/474x/4b/b9/89/4bb989295b494cb8185dcb474ae6cbd7.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+    },
+    {
+      name: 'BMW i4',
+      mileage: '369',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '295,892',
+      image: 'https://i.pinimg.com/1200x/e1/06/07/e1060739e7e16b2f935ec364c77cddcd.jpg',
+      owner: 'Robert Rome',
+      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
+      carType: 'Coupe',
+      dateListed: '26 Jun',
+    },
+    {
+      name: 'Audi Q4 e-tron',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '285,892',
+      image: 'https://i.pinimg.com/474x/4b/b9/89/4bb989295b494cb8185dcb474ae6cbd7.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+    }
   ];
 
   return (
-    <div className="flex-1 p-6 bg-gray-50 overflow-y-scroll">
+    <div className="flex-1 p-6 bg-gray-50">
       {/* Top Bar */}
-      <TopBar searchQuery={""} handleSearch={function (e: React.ChangeEvent<HTMLInputElement>): void {
-        throw new Error("Function not implemented.");
-      } } toggleTheme={function (): void {
-        throw new Error("Function not implemented.");
-      } } theme={""} exportData={function (): void {
-        throw new Error("Function not implemented.");
-      } } />
+      <TopBar
+        searchQuery={""}
+        handleSearch={(e: React.ChangeEvent<HTMLInputElement>) => {
+          // Implement the search functionality here if needed
+          console.log(e.target.value);
+        }}
+        toggleTheme={() => {
+          // Implement theme toggling here
+          console.log("Theme toggled");
+        }}
+        theme={"light"} // You can change this value as needed
+        exportData={() => {
+          // Implement export functionality here
+          console.log("Data exported");
+        }}
+      />
 
-      {/* Header Section */}
+      {/* New Layer Below Top Bar */}
+      <div className="flex justify-between items-center my-6">
+        {/* Left Section: Header and Paragraph */}
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800">Listings</h2>
+          <p className="text-sm text-gray-600">
+            Get your latest update for the past 7 days
+          </p>
+        </div>
+
+        {/* Right Section: Export Button with Dropdown */}
+        <div className="relative">
+          <button
+            onClick={toggleExportDropdown}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
+          >
+            <FaFileExport className="mr-2" /> Export
+            <FaChevronDown className="ml-2" />
+          </button>
+
+          {/* Export Dropdown */}
+          {showDropdown && (
+            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+              <ul>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => console.log("Export as CSV")}
+                >
+                  Export as CSV
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => console.log("Export as PDF")}
+                >
+                  Export as PDF
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Another Layer: Available Cars and Filter Button */}
       <div className="flex justify-between items-center mb-6">
+        {/* Available on the Left */}
         <h2 className="text-xl font-semibold">Available Cars</h2>
-        {/* Export Button */}
-        <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg">
-          Export
+
+        {/* Filter by Button on the Right */}
+        <button
+          onClick={toggleFilters}
+          className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
+        >
+          <FaBars className="mr-2" /> Filter by
         </button>
       </div>
 

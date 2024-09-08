@@ -60,12 +60,12 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
         {/* Right Section */}
         <div className="flex items-center space-x-6">
           {/* Export Button */}
-          <button
+          {/* <button
             onClick={exportData}
             className="bg-yellow-500 hover:bg-yellow-600 transition-colors text-white px-4 py-2 rounded-full shadow-lg"
           >
             Export
-          </button>
+          </button> */}
 
           {/* Theme Toggle */}
           <button
