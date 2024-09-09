@@ -4,10 +4,17 @@ import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className="w-76 h-full bg-white-600 text-gray flex flex-col">
+    <div
+      className="w-76 h-full bg-white-600 text-gray flex flex-col overflow-y-auto scrollbar-hide" // Add custom class to hide scrollbar
+    >
       <div className="p-6 flex items-center justify-between">
         <span className="text-2xl font-bold">Lurex</span>
-        <FaUserCircle className="text-3xl" />
+        {/* Replace the FaUserCircle icon with the company logo */}
+        <img
+          src="https://i.pinimg.com/236x/16/29/26/16292654e973edd782ceda665533c006.jpg"
+          alt="Company Logo"
+          className="w-12 h-12 object-cover rounded-full" // Styled for better appearance
+        />
       </div>
       
       <div className="px-6 py-4 flex items-center space-x-4 bg-yellow-500 rounded-md mx-4 mb-6">
