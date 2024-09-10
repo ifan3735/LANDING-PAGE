@@ -18,6 +18,7 @@ import Bids from './pages/Bids';
 import Calendar from './pages/Calendar';
 import Transactions from './pages/Transactions';
 import Settings from './pages/Settings';
+import StatisticsPage from './pages/Statistics';
 
 const App: React.FC = () => {
   return (
@@ -44,6 +45,7 @@ const App: React.FC = () => {
           <Route path="/calendar" element={<MainLayout><Calendar /></MainLayout>} />
           <Route path="/transactions" element={<MainLayout><Transactions /></MainLayout>} />
           <Route path="/settings" element={<MainLayout><Settings /></MainLayout>} />
+          <Route path="/statistics" element={<MainLayout><StatisticsPage /></MainLayout>} />
         </Routes>
       </div>
     </Router>

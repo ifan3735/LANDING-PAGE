@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCar, FaCog, FaSignOutAlt, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaUserCircle } from 'react-icons/fa';
+import { FaCar, FaCog, FaSignOutAlt, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaUserCircle, FaChartBar } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -84,6 +84,18 @@ const Sidebar = () => {
             }
           >
             <FaCalendarAlt className="mr-3" /> Calendar
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/statistics"
+            className={({ isActive }) =>
+              `flex items-center p-4 rounded-md ${
+                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              }`
+            }
+          >
+            <FaChartBar className="mr-3" /> Statistics
           </NavLink>
         </li>
         <li>
