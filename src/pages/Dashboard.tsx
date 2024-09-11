@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import TopBar from '../components/TopBar';
-import InfoBlock from '../components/InfoBlock';
 import CarCard from '../components/CarCard';
 import ActivityCard from '../components/ActivityCard';
 import UserInfoCard from '../components/UserInfoCard'; // Import UserInfoCard

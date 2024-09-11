@@ -1,52 +1,109 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaCloudDownloadAlt } from 'react-icons/fa';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/TopBar'; // Assuming this is your custom component
+import { saveAs } from 'file-saver'; // You can use file-saver or other export methods
 
-interface StatisticsPageProps {
-  searchQuery: string;
-  handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  toggleTheme: () => void;
-  theme: string;
-  exportData: () => void;
-}
+const StatisticsPage = () => {
+  const [theme, setTheme] = useState('light');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false); // For export dropdown
 
-const StatisticsPage = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: StatisticsPageProps) => {
+  // Dummy chart and data logic (replace with real implementation)
+  const data = [
+    { name: 'Mercedes', value: 10 },
+    { name: 'Bentley', value: 8 },
+    { name: 'Porsche Tayca', value: 12 },
+    { name: 'Lamborghini', value: 6 },
+  ];
+
+  // Toggle Theme Logic
+  const toggleTheme = () => {
+    const newTheme =  theme === 'light' ? 'yellow' : 'light';
+    setTheme(newTheme);
+    document.body.classList.toggle('dark', newTheme === 'light'); // Assuming you have dark mode styles globally
+  };
+
+  // Search logic
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    // Implement the search logic here, e.g., filter data based on searchQuery
+    console.log('Searching for:', searchQuery);
+  };
+
+  // Export Logic
+  const exportData = (format) => {
+    if (format === 'svg') {
+      // Example: Export chart as SVG logic (dummy example, replace with real logic)
+      console.log('Exporting as SVG');
+      // Here you can convert the chart to SVG and use file-saver to download it
+      const svgData = '<svg>...</svg>';
+      const blob = new Blob([svgData], { type: 'image/svg+xml' });
+      saveAs(blob, 'chart.svg');
+    } else if (format === 'pdf') {
+      console.log('Exporting as PDF');
+      // Example: Export chart as PDF logic (use html2canvas, jsPDF, or similar libraries)
+      const pdfBlob = new Blob(['PDF content'], { type: 'application/pdf' });
+      saveAs(pdfBlob, 'chart.pdf');
+    }
+  };
+
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-
+    <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       {/* Main Content */}
-      <div className="flex-1 p-6">
+      <div>
         {/* TopBar */}
         <TopBar
           searchQuery={searchQuery}
           handleSearch={handleSearch}
           toggleTheme={toggleTheme}
           theme={theme}
-          exportData={exportData}
         />
 
         {/* Statistics Section */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-semibold text-gray-800">Statistics</h2>
-          <button
-            onClick={exportData}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-md flex items-center space-x-2"
-          >
-            <FaCloudDownloadAlt />
-            <span>Export</span>
-          </button>
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800">Statistics</h2>
+          <p className="text-sm text-gray-600">
+            Get your latest update for the past 7 days
+          </p>
+        </div>
+          {/* Export Button with Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setShowDropdown(!showDropdown)}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-md flex items-center space-x-2"
+            >
+              <FaCloudDownloadAlt />
+              <span>Export</span>
+            </button>
+            
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md">
+                <button
+                  onClick={() => exportData('svg')}
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  Export as SVG
+                </button>
+                <button
+                  onClick={() => exportData('pdf')}
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  Export as PDF
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Analytics Report (Bar Chart) */}
-          <div className="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold mb-4">Analytics Report</h3>
-            {/* Bar Chart */}
+          {/* Analytics Report */}
+          <div className="lg:col-span-2 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Analytics Report</h3>
             <div className="h-60">
-              {/* Replace this with actual chart logic like Chart.js or Recharts */}
               <div className="flex items-end space-x-3 justify-around h-full">
+                {/* Dummy chart bars */}
                 <div className="w-12 h-40 bg-blue-500 rounded-md"></div>
                 <div className="w-12 h-28 bg-teal-400 rounded-md"></div>
                 <div className="w-12 h-20 bg-teal-400 rounded-md"></div>
@@ -57,85 +114,18 @@ const StatisticsPage = ({ searchQuery, handleSearch, toggleTheme, theme, exportD
             </div>
           </div>
 
-          {/* Number of Breakdown */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold mb-4">Number of Breakdown</h3>
+          {/* Breakdown Section */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Breakdown</h3>
             <div className="space-y-2">
-              {['Mercedes', 'Bentley', 'Lamborghini', 'Porsche', 'Maruti Suzuki'].map((car, index) => (
-                <div key={index} className="flex justify-between">
-                  <span>{car}</span>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-600">20/10</span>
-                    <span className="font-semibold">{index * 2 + 10} Car</span>
+              {data
+                .filter((car) => car.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                .map((car, index) => (
+                  <div key={index} className="flex justify-between">
+                    <span className="text-gray-800 dark:text-white">{car.name}</span>
+                    <span className="font-semibold">{car.value} Car</span>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Car's Used Section */}
-          <div className="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold mb-4">Car's Used</h3>
-            <div className="space-y-4">
-              {['Mercedes', 'Bentley', 'Porsche Tayca', 'Lamborghini'].map((car, index) => (
-                <div key={index}>
-                  <div className="flex justify-between mb-2">
-                    <span>{car}</span>
-                    <span className="text-gray-600">9 hours</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div
-                      className={`bg-${index % 2 === 0 ? 'blue' : 'teal'}-400 h-2.5 rounded-full`}
-                      style={{ width: `${(index + 1) * 25}%` }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Breakdown Period */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold mb-4">Breakdown Period</h3>
-            <div className="flex flex-col items-center">
-              {/* Circle Diagram (can be a chart library or simple HTML) */}
-              <div className="relative w-40 h-40 mb-4">
-                <svg className="w-full h-full">
-                  <circle
-                    className="text-gray-200"
-                    strokeWidth="10"
-                    stroke="currentColor"
-                    fill="transparent"
-                    r="60"
-                    cx="80"
-                    cy="80"
-                  />
-                  <circle
-                    className="text-blue-500"
-                    strokeWidth="10"
-                    strokeDasharray="180, 360"
-                    strokeLinecap="round"
-                    fill="transparent"
-                    r="60"
-                    cx="80"
-                    cy="80"
-                  />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-2xl font-bold">15 Days</span>
-                  <span className="text-gray-500">Total Period</span>
-                </div>
-              </div>
-              <div className="flex justify-around w-full text-sm">
-                <div className="flex items-center space-x-2">
-                  <span className="block w-4 h-4 bg-blue-500 rounded-full"></span>
-                  <span>20/30 Days</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <span className="block w-4 h-4 bg-teal-400 rounded-full"></span>
-                  <span>114 Weeks</span>
-                </div>
-              </div>
+                ))}
             </div>
           </div>
         </div>
