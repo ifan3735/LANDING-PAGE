@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaCloudDownloadAlt } from 'react-icons/fa';
+import  { useState } from 'react';
+import { FaChevronDown, FaFileExport } from 'react-icons/fa';
 import TopBar from '../components/TopBar';
 import { saveAs } from 'file-saver';
 
@@ -7,6 +7,12 @@ const StatisticsPage = () => {
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
+
+  const toggleExportDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
 
   const data = [
     { name: 'Mercedes', breakdown: '20/10', value: 10 },
@@ -29,7 +35,7 @@ const StatisticsPage = () => {
   };
 
   // Export Logic
-  const exportData = (format) => {
+  const exportData = (format: string) => {
     if (format === 'svg') {
       const svgData = '<svg>...</svg>';
       const blob = new Blob([svgData], { type: 'image/svg+xml' });
@@ -41,46 +47,53 @@ const StatisticsPage = () => {
   };
 
   return (
-    <div className="bg-gray-50 text-gray-900 min-h-screen p-6">
-      <div className="flex justify-between items-center">
+    <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
         <TopBar
           searchQuery={searchQuery}
           handleSearch={handleSearch}
-          theme={theme}
-        />
-      </div>
+          toggleTheme={toggleTheme}
+          theme={theme}    
+          exportData={() => exportData('pdf')}
+          />
 
       {/* Statistics Section */}
-      <div className="flex justify-between items-center mb-6">
+      {/* New Layer Below Top Bar */}
+      <div className="flex justify-between items-center my-6">
+        {/* Left Section: Header and Paragraph */}
         <div>
-          <h2 className="text-2xl font-bold">Statistics</h2>
-          <p className="text-sm text-gray-600">Get your latest update for the past 7 days</p>
+          <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
+          <p className="text-sm text-gray-600">
+            Get your latest update for the past 7 days
+          </p>
         </div>
 
-        {/* Export Button with Dropdown */}
+        {/* Right Section: Export Button with Dropdown */}
         <div className="relative">
           <button
-            onClick={() => setShowDropdown(!showDropdown)}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md flex items-center space-x-2"
+            onClick={toggleExportDropdown}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
           >
-            <FaCloudDownloadAlt />
-            <span>Export</span>
+            <FaFileExport className="mr-2" /> Export
+            <FaChevronDown className="ml-2" />
           </button>
 
+          {/* Export Dropdown */}
           {showDropdown && (
-            <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md">
-              <button
-                onClick={() => exportData('svg')}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
-              >
-                Export as SVG
-              </button>
-              <button
-                onClick={() => exportData('pdf')}
-                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
-              >
-                Export as PDF
-              </button>
+            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+              <ul>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => console.log("Export as CSV")}
+                >
+                  Export as CSV
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => console.log("Export as PDF")}
+                >
+                  Export as PDF
+                </li>
+              </ul>
             </div>
           )}
         </div>
