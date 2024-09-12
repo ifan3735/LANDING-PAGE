@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 
 // Data for Monthly and Weekly stats
 const monthlyData = [
-  { label: 'Jan', spent: 50, gotBack: 0 },
-  { label: 'Mar', spent: 0, gotBack: 30 },
-  { label: 'Apr', spent: 0, gotBack: 20 },
-  { label: 'May', spent: 0, gotBack: 15 },
-  { label: 'Sep', spent: 25, gotBack: 0 },
-  { label: 'Oct', spent: 35, gotBack: 0 },
-  { label: 'Nov', spent: 0, gotBack: 50 },
+  { label: 'Jan', spent: 100, gotBack: 0 },
+    { label: 'Feb', spent: 80, gotBack: 0 },
+  { label: 'Mar', spent: 0, gotBack: 60 },
+  { label: 'Apr', spent: 0, gotBack: 40 },
+  { label: 'May', spent: 0, gotBack: 20 },
+    { label: 'Jun', spent: 0, gotBack: 10 },
+    { label: 'Jul', spent: 0, gotBack: 5 },
+    { label: 'Aug', spent: 0, gotBack: 0 },
+  { label: 'Sep', spent: 50, gotBack: 0 },
+  { label: 'Oct', spent: 80, gotBack: 0 },
+  { label: 'Nov', spent: 0, gotBack: 100 },
+    { label: 'Dec', spent: 80, gotBack: 0 },
 ];
 
 const weeklyData = [
@@ -41,8 +46,8 @@ const AnalyticsReport: React.FC = () => {
         
         {/* Legend and Dropdown */}
         <div className="text-sm space-x-4 flex items-center">
-          <span className="text-yellow-600">● Spent</span>
-          <span className="text-yellow-300">● Got Back</span>
+          <span className="text-[#4F76C1]">● Spent</span>
+          <span className="text-[#4CAF50]">● Got Back</span>
           <select className="ml-4 border rounded p-1" onChange={handleModeChange}>
             <option value="monthly">Monthly</option>
             <option value="weekly">Weekly</option>
@@ -70,21 +75,35 @@ const AnalyticsReport: React.FC = () => {
               {/* Spent Bar */}
               {item.spent > 0 && (
                 <div
-                  className="w-12 bg-yellow-600 rounded-md"
-                  style={{ height: `${item.spent * 1.2}px` }} // Dynamic height based on "spent" value
+                  className="w-12 rounded-md"
+                  style={{
+                    height: `${item.spent * 1.2}px`,
+                    background: 'linear-gradient(180deg, #4F76C1 0%, #003366 100%)', // Gradient
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Shadow for depth
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  }}
                   title={`Spent: ${item.spent}`}
                   aria-label={`${item.label}: Spent ${item.spent}`}
-                ></div>
+                >
+                  <div className="h-full w-full flex items-end justify-center text-white text-xs font-semibold">{item.spent}</div>
+                </div>
               )}
               
               {/* Got Back Bar */}
               {item.gotBack > 0 && (
                 <div
-                  className="w-12 bg-yellow-300 rounded-md mt-1"
-                  style={{ height: `${item.gotBack * 1.2}px` }} // Dynamic height based on "gotBack" value
+                  className="w-12 rounded-md mt-1"
+                  style={{
+                    height: `${item.gotBack * 1.2}px`,
+                    background: 'linear-gradient(180deg, #4CAF50 0%, #1B5E20 100%)', // Gradient
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Shadow for depth
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  }}
                   title={`Got Back: ${item.gotBack}`}
                   aria-label={`${item.label}: Got Back ${item.gotBack}`}
-                ></div>
+                >
+                  <div className="h-full w-full flex items-end justify-center text-white text-xs font-semibold">{item.gotBack}</div>
+                </div>
               )}
 
               {/* Label for Month or Day */}
