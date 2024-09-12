@@ -17,13 +17,13 @@ const monthlyData = [
 ];
 
 const weeklyData = [
-  { label: 'Mon', spent: 10, gotBack: 5 },
-  { label: 'Tue', spent: 15, gotBack: 7 },
-  { label: 'Wed', spent: 20, gotBack: 10 },
-  { label: 'Thu', spent: 12, gotBack: 8 },
-  { label: 'Fri', spent: 18, gotBack: 9 },
-  { label: 'Sat', spent: 22, gotBack: 15 },
-  { label: 'Sun', spent: 30, gotBack: 20 },
+  { label: 'Mon', spent: 100, gotBack: 50 },
+  { label: 'Tue', spent: 90, gotBack: 40 },
+  { label: 'Wed', spent: 40, gotBack: 90 },
+  { label: 'Thu', spent: 35, gotBack: 80 },
+  { label: 'Fri', spent: 60, gotBack: 40 },
+  { label: 'Sat', spent: 90, gotBack: 25 },
+  { label: 'Sun', spent: 100, gotBack: 30 },
 ];
 
 // Main AnalyticsReport component
