@@ -103,28 +103,88 @@ const StatisticsPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Analytics Report */}
         <div className="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">Analytics Report</h3>
-            <div className="text-sm space-x-4">
-              <span className="text-blue-500">.Spent</span>
-              <span className="text-teal-500">.Got Back</span>
-              <select className="ml-4 border rounded p-1">
-                <option value="monthly">Monthly</option>
-                <option value="weekly">Weekly</option>
-              </select>
-            </div>
-          </div>
-          <div className="h-60">
-            <div className="flex items-end space-x-3 justify-around h-full">
-              <div className="w-12 h-40 bg-blue-500 rounded-md"></div>
-              <div className="w-12 h-28 bg-teal-400 rounded-md"></div>
-              <div className="w-12 h-20 bg-teal-400 rounded-md"></div>
-              <div className="w-12 h-16 bg-teal-400 rounded-md"></div>
-              <div className="w-12 h-24 bg-blue-500 rounded-md"></div>
-              <div className="w-12 h-32 bg-blue-500 rounded-md"></div>
-            </div>
-          </div>
+      
+      {/* Header Section: Title and Select Dropdown */}
+      <div className="flex justify-between items-center mb-4">
+        
+        {/* Analytics Report Title */}
+        <h3 className="text-lg font-semibold">Analytics Report</h3>
+        
+        {/* Legend for "Spent" and "Got Back" with dropdown */}
+        <div className="text-sm space-x-4 flex items-center">
+          
+          {/* Legend: Spent */}
+          <span className="text-blue-500">● Spent</span>
+          
+          {/* Legend: Got Back */}
+          <span className="text-teal-500">● Got Back</span>
+          
+          {/* Dropdown to toggle between Monthly and Weekly */}
+          <select className="ml-4 border rounded p-1">
+            <option value="monthly">Monthly</option>
+            <option value="weekly">Weekly</option>
+          </select>
         </div>
+      </div>
+
+      {/* Chart container */}
+      <div className="h-60">
+        <div className="flex items-end space-x-3 justify-around h-full">
+          
+          {/* Each of the bars below represents a month with its respective value */}
+          
+          {/* January: Spent 50 */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-48 bg-blue-500 rounded-md" title="Spent: 50" aria-label="January: Spent 50"></div>
+            <span className="text-sm mt-2">Jan</span>
+            <span className="text-xs text-gray-500">50</span>
+          </div>
+
+          {/* March: Got Back 30 */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-28 bg-teal-400 rounded-md" title="Got Back: 30" aria-label="March: Got Back 30"></div>
+            <span className="text-sm mt-2">Mar</span>
+            <span className="text-xs text-gray-500">30</span>
+          </div>
+
+          {/* April: Got Back 20 */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-20 bg-teal-400 rounded-md" title="Got Back: 20" aria-label="April: Got Back 20"></div>
+            <span className="text-sm mt-2">Apr</span>
+            <span className="text-xs text-gray-500">20</span>
+          </div>
+
+          {/* May: Got Back 15 */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-16 bg-teal-400 rounded-md" title="Got Back: 15" aria-label="May: Got Back 15"></div>
+            <span className="text-sm mt-2">May</span>
+            <span className="text-xs text-gray-500">15</span>
+          </div>
+
+          {/* September: Spent 25 */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-24 bg-blue-500 rounded-md" title="Spent: 25" aria-label="September: Spent 25"></div>
+            <span className="text-sm mt-2">Sep</span>
+            <span className="text-xs text-gray-500">25</span>
+          </div>
+
+          {/* October: Spent 35 */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-32 bg-blue-500 rounded-md" title="Spent: 35" aria-label="October: Spent 35"></div>
+            <span className="text-sm mt-2">Oct</span>
+            <span className="text-xs text-gray-500">35</span>
+          </div>
+
+          {/* November: Got Back 50 */}
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-52 bg-teal-400 rounded-md" title="Got Back: 50" aria-label="November: Got Back 50"></div>
+            <span className="text-sm mt-2">Nov</span>
+            <span className="text-xs text-gray-500">50</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
         {/* Breakdown Section */}
         <div className="bg-white rounded-lg shadow-md p-6">
