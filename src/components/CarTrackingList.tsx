@@ -40,6 +40,14 @@ const CarTrackingList: React.FC = () => {
             location="Location D"
             duration="10:00 AM - 12:55 PM"
             />
+            <CarCard
+            imageUrl='https://i.pinimg.com/236x/2b/38/5a/2b385a8c1232933969a2628676c76135.jpg'
+            carName="Lamborghini Aventador"
+            status="For Ride"
+            time="17, Sep 2h 15 min"
+            location="Location C"
+            duration="10:00 AM - 12:55 PM"
+            />
       </div>
     </div>
   );
