@@ -25,7 +25,11 @@ const CarCard: React.FC<CarCardProps> = ({
   };
 
   return (
-    <div className="bg-white border rounded-lg p-4 shadow-sm hover:shadow-lg transition-shadow duration-300">
+    <div
+      className={`bg-white border rounded-lg p-4 shadow-sm hover:shadow-lg transition-shadow duration-300 ${
+        isExpanded ? 'border-blue-600' : 'border-gray-200'
+      }`}
+    >
       <div className="flex justify-between items-center">
         {/* Car Image and Basic Info */}
         <div className="flex items-center space-x-4">
