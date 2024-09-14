@@ -1,25 +1,33 @@
-import { FaChevronDown } from "react-icons/fa";
+import React, { useState } from 'react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 interface CarCardProps {
-    carName: string;
-    status: string;
-    time: string;
-    location: string;
-    duration: string;
-    imageUrl: string;
-  }
-  
-  const CarCard: React.FC<CarCardProps> = ({
-    carName,
-    status,
-    time,
-    location,
-    duration,
-    imageUrl
-  }) => {
-    return (
-      <div className="flex items-center justify-between bg-white border rounded-lg p-4 shadow-sm hover:shadow-lg transition-shadow duration-300">
-        {/* Car Image */}
+  carName: string;
+  status: string;
+  time: string;
+  location: string;
+  duration: string;
+  imageUrl: string;
+}
+
+const CarCard: React.FC<CarCardProps> = ({
+  carName,
+  status,
+  time,
+  location,
+  duration,
+  imageUrl
+}) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  return (
+    <div className="bg-white border rounded-lg p-4 shadow-sm hover:shadow-lg transition-shadow duration-300">
+      <div className="flex justify-between items-center">
+        {/* Car Image and Basic Info */}
         <div className="flex items-center space-x-4">
           <img
             src={imageUrl}
@@ -29,23 +37,32 @@ interface CarCardProps {
           <div>
             <h4 className="font-medium text-gray-800">{carName}</h4>
             <p className="text-xs text-gray-500">{time}</p>
-            <p className="text-sm mt-2 text-gray-600">
-              {location}
-              <br />
-              <span className="text-xs text-gray-400">{duration}</span>
-            </p>
           </div>
         </div>
-        {/* Status */}
+
+        {/* Status and Expand Button */}
         <div className="flex flex-col items-end">
           <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
             {status}
           </span>
-          <FaChevronDown className="text-gray-400 mt-2" />
+          <button onClick={toggleExpand} className="text-gray-400 mt-2">
+            {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
+          </button>
         </div>
       </div>
-    );
-  };
-  
-  export default CarCard;
-  
+
+      {/* Expanded Section */}
+      {isExpanded && (
+        <div className="mt-4">
+          <p className="text-sm text-gray-600">
+            {location}
+            <br />
+            <span className="text-xs text-gray-400">{duration}</span>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CarCard;
