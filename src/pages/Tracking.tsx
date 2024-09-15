@@ -36,7 +36,7 @@ const Tracking: React.FC = () => {
         <div className="col-span-8 space-y-6">
           <CarDetails
             carName="Panamera Platinum"
-            imageUrl="https://i.pinimg.com/236x/5e/33/89/5e3389a1ab41782cdf60d1edef683bf6.jpg"
+            imageUrl="https://i.pinimg.com/564x/b9/6c/cc/b96ccc62ba9c2306b35dc6882c535892.jpg"
           />
           <RouteDetails />
         </div>

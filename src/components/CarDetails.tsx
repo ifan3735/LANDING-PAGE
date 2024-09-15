@@ -15,7 +15,7 @@ const CarDetails: React.FC<CarDetailsProps> = ({ carName, imageUrl }) => {
       </div>
 
       {/* Car Image */}
-      <div className="w-48 h-32">
+      <div className="w-58 h-35">
         <img
           src={imageUrl}
           alt={carName}
