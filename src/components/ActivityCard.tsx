@@ -10,7 +10,7 @@ interface ActivityCardProps {
       <img src={imageUrl} alt={carName} className="w-16 h-10 object-cover rounded-lg mr-4" />
       <div>
         <h3 className="font-semibold">{carName}</h3>
-        <p className="text-yellow-600 font-bold">{price}</p>
+        <p className="text-blue-600 font-bold">{price}</p>
       </div>
     </div>
   );
