@@ -4,7 +4,7 @@ const RouteDetails: React.FC = () => {
         <div className="flex justify-between items-center">
           <h4 className="font-medium text-lg">Route</h4>
           <span className="text-gray-400">01:12:15 - 48 min. left</span>
-          <button className="bg-yellow-500 text-white px-4 py-1 rounded-lg">
+          <button className="bg-blue-100 text-blue-600 px-4 py-1 rounded-lg">
             Change Route
           </button>
         </div>
