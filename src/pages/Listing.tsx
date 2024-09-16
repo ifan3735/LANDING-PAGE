@@ -11,7 +11,7 @@ const CarCard = ({ car }: { car: any }) => {
         <img
           src={car.image}
           alt={car.name}
-          className="w-40 h-24 rounded-lg object-cover"
+          className="w-46 h-34 rounded-lg object-cover"
         />
       </div>
 
@@ -361,7 +361,6 @@ const ListingPage = () => {
           )}
         </div>
       </div>
-
       {/* Listings */}
       <div className="grid grid-cols-2 gap-6">
         {filteredCars.map((car, index) => (
