@@ -1,18 +1,72 @@
+import React, { useState } from 'react';
+
 const RouteDetails: React.FC = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Control dropdown visibility
+  const [selectedRoute, setSelectedRoute] = useState('Change Route'); // Store the selected route
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleRouteSelect = (route: string) => {
+    setSelectedRoute(route); // Update selected route
+    setIsDropdownOpen(false); // Close dropdown after selection
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 space-y-4">
+      {/* Route Header */}
       <div className="flex justify-between items-center">
         <h4 className="font-medium text-lg">Route</h4>
         <span className="text-gray-400">01:12:15 - 48 min. left</span>
-        <button className="bg-blue-100 text-blue-600 px-4 py-1 rounded-lg">
-          Change Route
-        </button>
+
+        {/* Dropdown Button */}
+        <div className="relative">
+          <button
+            onClick={toggleDropdown}
+            className="bg-blue-100 text-blue-600 px-4 py-1 rounded-lg"
+          >
+            {selectedRoute}
+          </button>
+
+          {/* Dropdown Menu */}
+          {isDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-10">
+              <ul className="py-2">
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleRouteSelect('Route 1')}
+                >
+                  Route 1
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleRouteSelect('Route 2')}
+                >
+                  Route 2
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleRouteSelect('Route 3')}
+                >
+                  Route 3
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleRouteSelect('Route 4')}
+                >
+                  Route 4
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Map Image */}
       <div className="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
         <img
-          src="https://i.pinimg.com/564x/0a/12/13/0a12131d595ca1ac8625fc43a5a87443.jpg" // Replace this with the actual path to your image
+          src="https://i.pinimg.com/564x/0a/12/13/0a12131d595ca1ac8625fc43a5a87443.jpg"
           alt="Car Location Map"
           className="w-full h-full object-cover rounded-lg"
         />
