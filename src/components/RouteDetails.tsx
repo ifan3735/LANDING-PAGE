@@ -3,6 +3,15 @@ import React, { useState } from 'react';
 const RouteDetails: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Control dropdown visibility
   const [selectedRoute, setSelectedRoute] = useState('Change Route'); // Store the selected route
+  const [mapImage, setMapImage] = useState('https://i.pinimg.com/564x/0a/12/13/0a12131d595ca1ac8625fc43a5a87443.jpg'); // Default map image
+
+  // Define the mapping between routes and map images
+  const routeImages: { [key: string]: string } = {
+    'Route 1': 'https://i.pinimg.com/564x/0a/12/13/0a12131d595ca1ac8625fc43a5a87443.jpg',
+    'Route 2': 'https://i.pinimg.com/564x/8f/39/7a/8f397a7a05d7cee5e0f30583be05b8f2.jpg',
+    'Route 3': 'https://i.pinimg.com/564x/57/9c/5f/579c5f105bbb55e700bfe64e232860fd.jpg',
+    'Route 4': 'https://i.pinimg.com/564x/e0/54/bd/e054bdcf455dbee8fef16b7a8d72b2e4.jpg',
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -10,6 +19,7 @@ const RouteDetails: React.FC = () => {
 
   const handleRouteSelect = (route: string) => {
     setSelectedRoute(route); // Update selected route
+    setMapImage(routeImages[route]); // Change the map image based on the route
     setIsDropdownOpen(false); // Close dropdown after selection
   };
 
@@ -33,40 +43,25 @@ const RouteDetails: React.FC = () => {
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-10">
               <ul className="py-2">
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleRouteSelect('Route 1')}
-                >
-                  Route 1
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleRouteSelect('Route 2')}
-                >
-                  Route 2
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleRouteSelect('Route 3')}
-                >
-                  Route 3
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => handleRouteSelect('Route 4')}
-                >
-                  Route 4
-                </li>
+                {Object.keys(routeImages).map((route) => (
+                  <li
+                    key={route}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                    onClick={() => handleRouteSelect(route)}
+                  >
+                    {route}
+                  </li>
+                ))}
               </ul>
             </div>
           )}
         </div>
       </div>
 
-      {/* Map Image */}
+      {/* Dynamic Map Image */}
       <div className="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
         <img
-          src="https://i.pinimg.com/564x/0a/12/13/0a12131d595ca1ac8625fc43a5a87443.jpg"
+          src={mapImage}
           alt="Car Location Map"
           className="w-full h-full object-cover rounded-lg"
         />
