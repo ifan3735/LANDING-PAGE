@@ -1,77 +1,65 @@
-import TopBar from "../components/TopBar"; // Importing the TopBar component
-import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport } from "react-icons/fa"; // Importing icons
-import { useState } from "react"; // To handle dropdown toggle
+import { useState } from "react";
+import TopBar from "../components/TopBar";
+import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport } from "react-icons/fa";
 
-// CarCard Component
-const CarCard = ({ car }: { car: any }) => {
-  return (
-    <div className="bg-white p-6 rounded-lg shadow-md flex flex-row space-x-4 w-full max-w-lg">
-      {/* Car Image Section (centralized) */}
-      <div className="flex items-center">
+// CarCard Component for List and Detail Views
+const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
+  <div
+    onClick={onClick}
+    className="bg-white p-6 rounded-lg shadow-md flex flex-row space-x-4 w-full max-w-lg cursor-pointer"
+  >
+    <div className="flex items-center">
+      <img
+        src={car.image}
+        alt={car.name}
+        className="w-46 h-34 rounded-lg object-cover"
+      />
+    </div>
+    <div className="flex-1 flex flex-col justify-center">
+      <div className="flex items-center space-x-3 mb-3">
         <img
-          src={car.image}
-          alt={car.name}
-          className="w-46 h-34 rounded-lg object-cover"
+          src={car.ownerAvatar}
+          alt={car.owner}
+          className="w-12 h-12 rounded-full border-2 border-green-500"
         />
+        <div>
+          <p className="font-semibold text-gray-700">{car.owner}</p>
+          <p className="text-sm text-gray-500">{car.dateListed}</p>
+        </div>
       </div>
-
-      {/* Car Information Section */}
-      <div className="flex-1 flex flex-col justify-center">
-        {/* Owner Section */}
-        <div className="flex items-center space-x-3 mb-3">
-          <img
-            src={car.ownerAvatar}
-            alt={car.owner}
-            className="w-12 h-12 rounded-full border-2 border-green-500"
-          />
-          <div>
-            <p className="font-semibold text-gray-700">{car.owner}</p>
-            <p className="text-sm text-gray-500">{car.dateListed}</p>
+      <h3 className="font-semibold text-lg text-gray-700 mb-1">{car.name}</h3>
+      <div className="text-sm text-gray-500 mb-2">
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-1">
+            <FaTachometerAlt className="text-blue-500" />
+            <p>{car.mileage} KM</p>
+          </div>
+          <div className="flex items-center space-x-1">
+            <FaGasPump className="text-blue-500" />
+            <p>{car.fuelType}</p>
+          </div>
+          <div className="flex items-center space-x-1">
+            <FaMapMarkerAlt className="text-blue-500" />
+            <p>{car.location}</p>
           </div>
         </div>
-
-        {/* Car Name */}
-        <h3 className="font-semibold text-lg text-gray-700 mb-1">{car.name}</h3>
-
-        {/* Car Details */}
-        <div className="text-sm text-gray-500 mb-2">
-          {/* Mileage, Fuel Type, Location (on the same line) */}
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1">
-              <FaTachometerAlt className="text-blue-500" /> {/* Blue icon */}
-              <p>{car.mileage} KM</p>
-            </div>
-            <div className="flex items-center space-x-1">
-              <FaGasPump className="text-blue-500" /> {/* Blue icon */}
-              <p>{car.fuelType}</p>
-            </div>
-            <div className="flex items-center space-x-1">
-              <FaMapMarkerAlt className="text-blue-500" /> {/* Blue icon */}
-              <p>{car.location}</p>
-            </div>
-          </div>
-
-          {/* Car Style, RTO, Speed (on the same line) */}
-          <div className="flex items-center space-x-4 mt-2">
-            <p>Style: {car.carType}</p>
-            <p>RTO: Pending</p> {/* Assuming RTO is "Pending" */}
-            <p>Speed: {car.speed}</p>
-          </div>
+        <div className="flex items-center space-x-4 mt-2">
+          <p>Style: {car.carType}</p>
+          <p>RTO: Pending</p>
+          <p>Speed: {car.speed}</p>
         </div>
-
-        {/* Price Section */}
-        <div className="flex justify-between items-center">
-          <p className="font-bold text-lg text-blue-500">${car.price}</p>
-        </div>
+      </div>
+      <div className="flex justify-between items-center">
+        <p className="font-bold text-lg text-blue-500">${car.price}</p>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 // ListingPage Component
 const ListingPage = () => {
-  const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
-  const [showFilters, setShowFilters] = useState(false);   // To toggle filter options
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState({
@@ -79,15 +67,12 @@ const ListingPage = () => {
     color: '',
     style: '',
   });
+  const [selectedCar, setSelectedCar] = useState<any>(null); // State for selected car
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
-  const toggleExportDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
-  const toggleFilters = () => {
-    setShowFilters(!showFilters);
-  };
-
+  const toggleExportDropdown = () => setShowDropdown(!showDropdown);
+  const toggleFilters = () => setShowFilters(!showFilters);
+  
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -242,131 +227,147 @@ const ListingPage = () => {
     return matchesSearch && matchesType && matchesColor && matchesStyle;
   });
 
+  const handleCarClick = (car: any) => {
+    setSelectedCar(car);
+  };
+
+  const handleBack = () => {
+    setSelectedCar(null);
+  };
+
   return (
     <div className={`flex-1 p-6 bg-gray-50 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
-      {/* Top Bar */}
       <TopBar
         searchQuery={searchQuery}
         handleSearch={handleSearch}
         toggleTheme={toggleTheme}
         theme={theme}
         exportData={() => {
-          // Implement export functionality here
           console.log("Data exported");
         }}
       />
 
-      {/* New Layer Below Top Bar */}
-      <div className="flex justify-between items-center my-6">
-        {/* Left Section: Header and Paragraph */}
-        <div>
-          <h2 className="text-2xl font-bold text-gray-800">Listings</h2>
-          <p className="text-sm text-gray-600">
-            Get your latest update for the past 7 days
-          </p>
-        </div>
-
-        {/* Right Section: Export Button with Dropdown */}
-        <div className="relative">
+      {selectedCar ? (
+        <div className="flex flex-col items-center">
           <button
-            onClick={toggleExportDropdown}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
+            onClick={handleBack}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full mb-4"
           >
-            <FaFileExport className="mr-2" /> Export
-            <FaChevronDown className="ml-2" />
+            Back
           </button>
-
-          {/* Export Dropdown */}
-          {showDropdown && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
-              <ul>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as CSV")}
-                >
-                  Export as CSV
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as PDF")}
-                >
-                  Export as PDF
-                </li>
-              </ul>
-            </div>
-          )}
+          <CarCard car={selectedCar} onClick={() => {}} /> {/* Detailed view of the selected car */}
         </div>
-      </div>
-
-      {/* Another Layer: Available Cars and Filter Button */}
-      <div className="flex justify-between items-center mb-6">
-        {/* Available on the Left */}
-        <h2 className="text-xl font-semibold">Available Cars</h2>
-
-        {/* Filter by Button on the Right */}
-        <div className="relative">
-          <button
-            onClick={toggleFilters}
-            className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
-          >
-            <FaBars className="mr-2" /> Filter by
-          </button>
-
-          {/* Filter Dropdown */}
-          {showFilters && (
-            <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg">
-              <div className="p-4">
-                <label className="block text-gray-700">Type</label>
-                <select
-                  name="type"
-                  value={selectedFilters.type}
-                  onChange={handleFilterChange}
-                  className="border rounded-lg w-full p-2 mt-1"
-                >
-                  <option value="">All Types</option>
-                  <option value="Sedan">Sedan</option>
-                  <option value="Luxury">Luxury</option>
-                  <option value="Coupe">Coupe</option>
-                </select>
-              </div>
-              <div className="p-4 border-t">
-                <label className="block text-gray-700">Color</label>
-                <select
-                  name="color"
-                  value={selectedFilters.color}
-                  onChange={handleFilterChange}
-                  className="border rounded-lg w-full p-2 mt-1"
-                >
-                  <option value="">All Colors</option>
-                  <option value="Red">Red</option>
-                  <option value="Blue">Blue</option>
-                  <option value="Black">Black</option>
-                </select>
-              </div>
-              <div className="p-4 border-t">
-                <label className="block text-gray-700">Style</label>
-                <select
-                  name="style"
-                  value={selectedFilters.style}
-                  onChange={handleFilterChange}
-                  className="border rounded-lg w-full p-2 mt-1"
-                >
-                  <option value="">All Styles</option>
-                  <option value="Luxury">Luxury</option>
-                  <option value="Sport">Sport</option>
-                  <option value="Classic">Classic</option>
-                </select>
-              </div>
+      ) : (
+        <>
+          <div className="flex justify-between items-center my-6">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">Listings</h2>
+              <p className="text-sm text-gray-600">
+                Get your latest update for the past 7 days
+              </p>
             </div>
-          )}
-        </div>
-      </div>
-      {/* Listings */}
-      <div className="grid grid-cols-2 gap-6">
-        {filteredCars.map((car, index) => (
-          <CarCard key={index} car={car} />
-        ))}
-      </div>
+
+            <div className="relative">
+              <button
+                onClick={toggleExportDropdown}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
+              >
+                <FaFileExport className="mr-2" /> Export
+                <FaChevronDown className="ml-2" />
+              </button>
+
+              {showDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+                  <ul>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => console.log("Export as CSV")}
+                    >
+                      Export as CSV
+                    </li>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => console.log("Export as PDF")}
+                    >
+                      Export as PDF
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-semibold">Available Cars</h2>
+
+            <div className="relative">
+              <button
+                onClick={toggleFilters}
+                className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
+              >
+                <FaBars className="mr-2" /> Filter by
+              </button>
+
+              {showFilters && (
+                <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg">
+                  <div className="p-4">
+                    <label className="block text-gray-700">Type</label>
+                    <select
+                      name="type"
+                      value={selectedFilters.type}
+                      onChange={handleFilterChange}
+                      className="border rounded-lg w-full p-2 mt-1"
+                    >
+                      <option value="">All Types</option>
+                      <option value="Sedan">Sedan</option>
+                      <option value="Luxury">Luxury</option>
+                      <option value="Coupe">Coupe</option>
+                    </select>
+                  </div>
+                  <div className="p-4 border-t">
+                    <label className="block text-gray-700">Color</label>
+                    <select
+                      name="color"
+                      value={selectedFilters.color}
+                      onChange={handleFilterChange}
+                      className="border rounded-lg w-full p-2 mt-1"
+                    >
+                      <option value="">All Colors</option>
+                      <option value="Red">Red</option>
+                      <option value="Blue">Blue</option>
+                      <option value="Black">Black</option>
+                    </select>
+                  </div>
+                  <div className="p-4 border-t">
+                    <label className="block text-gray-700">Style</label>
+                    <select
+                      name="style"
+                      value={selectedFilters.style}
+                      onChange={handleFilterChange}
+                      className="border rounded-lg w-full p-2 mt-1"
+                    >
+                      <option value="">All Styles</option>
+                      <option value="SUV">SUV</option>
+                      <option value="Convertible">Convertible</option>
+                      <option value="Hatchback">Hatchback</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-6">
+            {filteredCars.map((car) => (
+              <CarCard
+                key={car.id}
+                car={car}
+                onClick={() => handleCarClick(car)}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
