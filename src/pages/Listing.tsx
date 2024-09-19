@@ -60,7 +60,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => (
   <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-7xl mx-auto">
     <button
       onClick={onBack}
-      className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition duration-300"
+      className="bg-blue-100 text-blue-600 px-5 py-3 rounded-full text-sm font-medium"
     >
       Back
     </button>
@@ -94,7 +94,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => (
           <p className="text-3xl font-bold text-blue-700">
             ${car.price}
           </p>
-          <button className="bg-blue-600 text-white px-5 py-3 rounded-full text-lg font-medium hover:bg-blue-700 transition duration-300">
+          <button className="bg-blue-100 text-blue-600 px-5 py-3 rounded-full text-ms font-medium">
             Buy Now
           </button>
         </div>
