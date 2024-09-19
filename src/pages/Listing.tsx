@@ -57,46 +57,52 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
 );
 
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => (
-  <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-8xl mx-auto">
+  <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-7xl mx-auto">
     <button
       onClick={onBack}
-      className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium"
+      className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition duration-300"
     >
       Back
     </button>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
       {/* Car Image Section */}
-      <div>
+      <div className="relative">
         <img
           src={car.image}
           alt={car.name}
-          className="w-full h-72 object-cover rounded-lg"
+          className="w-full h-80 object-cover rounded-xl shadow-md"
         />
+        <div className="absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+          Featured
+        </div>
       </div>
       {/* Car Info Section */}
       <div className="flex flex-col justify-between">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">{car.name}</h2>
-        <p className="text-lg text-gray-600 mb-2">
-          Owner: {car.owner} <br />
-          Location: {car.location} <br />
-          Listed on: {car.dateListed}
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">{car.name}</h2>
+        <p className="text-lg text-gray-700 mb-4">
+          <span className="font-semibold">Owner:</span> {car.owner} <br />
+          <span className="font-semibold">Location:</span> {car.location} <br />
+          <span className="font-semibold">Listed on:</span> {car.dateListed}
         </p>
-        <div className="text-gray-600">
-          <p>Mileage: {car.mileage} KM</p>
-          <p>Fuel Type: {car.fuelType}</p>
-          <p>Style: {car.carType}</p>
-          <p>Speed: {car.speed}</p>
+        <div className="text-gray-700 mb-6">
+          <p><span className="font-semibold">Mileage:</span> {car.mileage} KM</p>
+          <p><span className="font-semibold">Fuel Type:</span> {car.fuelType}</p>
+          <p><span className="font-semibold">Style:</span> {car.carType}</p>
+          <p><span className="font-semibold">Speed:</span> {car.speed}</p>
         </div>
-        <p className="text-2xl font-semibold text-blue-600 mt-4">
-          Price: ${car.price}
-        </p>
-        <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
-          Buy Now
-        </button>
+        <div className="flex items-center justify-between mt-6">
+          <p className="text-3xl font-bold text-blue-700">
+            ${car.price}
+          </p>
+          <button className="bg-blue-600 text-white px-5 py-3 rounded-full text-lg font-medium hover:bg-blue-700 transition duration-300">
+            Buy Now
+          </button>
+        </div>
       </div>
     </div>
   </div>
-);    
+);
+
 
 // ListingPage Component
 const ListingPage = () => {
