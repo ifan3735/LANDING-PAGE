@@ -64,51 +64,40 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
 );
 
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
-  const dailyRate = 100; // Example daily rate
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
-  const [totalCost, setTotalCost] = useState<number | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const isDateBooked = (date: Date) => {
-    return bookedDates.some(
-      (booked) => date >= booked.start && date <= booked.end
+  const dailyRate = car.price; // Use the car's price as the daily rental rate
+  const unavailableDates = [
+    new Date(2024, 8, 22), // Example of unavailable date
+    new Date(2024, 8, 23),
+  ];
+
+  const isDateUnavailable = (date: Date) => {
+    return unavailableDates.some(
+      (unavailableDate) =>
+        date.getDate() === unavailableDate.getDate() &&
+        date.getMonth() === unavailableDate.getMonth() &&
+        date.getFullYear() === unavailableDate.getFullYear()
     );
   };
 
-  const handleDateChange = (dates: [Date | null, Date | null]) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-
-    if (start && end) {
-      let overlapping = false;
-      for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-        if (isDateBooked(d)) {
-          overlapping = true;
-          break;
-        }
-      }
-
-      if (overlapping) {
-        setErrorMessage(
-          "The selected dates include unavailable periods. Please choose other dates."
-        );
-        setTotalCost(null);
-      } else {
-        setErrorMessage(null);
-        const rentalDays =
-          (end.getTime() - start.getTime()) / (1000 * 3600 * 24) + 1;
-        setTotalCost(rentalDays * dailyRate);
-      }
+  const calculateTotal = () => {
+    if (startDate && endDate) {
+      const timeDifference = endDate.getTime() - startDate.getTime();
+      const days = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert ms to days
+      return days > 0 ? days * dailyRate : 0;
     }
+    return 0;
   };
+
+  const totalCost = calculateTotal();
 
   return (
     <div className="bg-gray-50 shadow-xl rounded-2xl p-10 w-full max-w-7xl mx-auto">
       <button
         onClick={onBack}
-        className="bg-blue-500 text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-blue-600 transition-all duration-300 ease-in-out"
+        className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold hover:bg-blue-600 transition-all duration-300 ease-in-out"
       >
         Back
       </button>
@@ -156,40 +145,62 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
             <p className="text-4xl font-bold text-blue-700">
               ${car.price.toLocaleString()}
             </p>
-            <button className="bg-blue-600 text-white px-6 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105">
+            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105">
               Buy Now
             </button>
           </div>
         </div>
       </div>
 
-      {/* Rental Calculator Section */}
+      {/* Rental Date Picker Section */}
       <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
-        <h3 className="text-2xl font-semibold mb-4">Car Rental Calculator</h3>
-        <div className="mb-4">
-          <label className="block text-lg font-medium text-gray-700">
-            Select Rental Period:
-          </label>
-          <DatePicker
-            selected={startDate}
-            onChange={handleDateChange}
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            inline
-            excludeDateIntervals={bookedDates}
-            minDate={new Date()}
-          />
+        <h3 className="text-2xl font-semibold mb-4">Rental Date Picker</h3>
+        <div className="flex items-center gap-6">
+          <div className="w-1/2">
+            <label className="block mb-2 text-sm font-semibold text-gray-700">
+              Start Date:
+            </label>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              className="w-full p-2 bg-gray-200 rounded-lg text-gray-700"
+              minDate={new Date()} // Only allow future dates
+              filterDate={(date) => !isDateUnavailable(date)} // Disable unavailable dates
+              placeholderText="Pick a start date"
+              dateFormat="dd/MM/yyyy"
+            />
+          </div>
+          <div className="w-1/2">
+            <label className="block mb-2 text-sm font-semibold text-gray-700">
+              End Date:
+            </label>
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              className="w-full p-2 bg-gray-200 rounded-lg text-gray-700"
+              minDate={startDate || new Date()} // Ensure end date is after start date
+              filterDate={(date) => !isDateUnavailable(date)} // Disable unavailable dates
+              placeholderText="Pick an end date"
+              dateFormat="dd/MM/yyyy"
+            />
+          </div>
         </div>
-        {errorMessage && (
-          <div className="text-red-500 mb-4">{errorMessage}</div>
-        )}
-        {totalCost !== null && (
-          <div className="text-lg font-semibold text-gray-800">
-            Total Rental Cost:{" "}
-            <span className="text-blue-600">${totalCost}</span>
+
+        {startDate && endDate && (
+          <div className="mt-4">
+            <p className="font-semibold">
+              Total Rental Cost: <span className="text-blue-600">${totalCost.toLocaleString()}</span>
+            </p>
           </div>
         )}
+        {!startDate && <p className="text-red-500 font-semibold mt-4">Please select a start date.</p>}
+        {!endDate && startDate && <p className="text-red-500 font-semibold mt-4">Please select an end date.</p>}
       </div>
 
       {/* Similar Cars Section */}
