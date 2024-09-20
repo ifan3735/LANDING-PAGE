@@ -1,6 +1,13 @@
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import TopBar from "../components/TopBar";
-import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport } from "react-icons/fa";
+import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar } from "react-icons/fa";
+
+const bookedDates = [
+  { start: new Date("2024-09-22"), end: new Date("2024-09-25") },
+  { start: new Date("2024-09-30"), end: new Date("2024-10-03") },
+];
 
 // CarCard Component for List and Detail Views
 const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
@@ -56,55 +63,172 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
   </div>
 );
 
-const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => (
-  <div className="bg-gray-50 shadow-xl rounded-2xl p-10 w-full max-w-7xl mx-auto">
-    <button
-      onClick={onBack}
-      className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium"
-    >
-      Back
-    </button>
+const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
+  const dailyRate = 100; // Example daily rate
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [totalCost, setTotalCost] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
-      {/* Car Image Section */}
-      <div className="relative">
-        <img
-          src={car.image}
-          alt={car.name}
-          className="w-full h-100 object-cover rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105"
-        />
-        <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md">
-          Featured
+  const isDateBooked = (date: Date) => {
+    return bookedDates.some(
+      (booked) => date >= booked.start && date <= booked.end
+    );
+  };
+
+  const handleDateChange = (dates: [Date | null, Date | null]) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+
+    if (start && end) {
+      let overlapping = false;
+      for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+        if (isDateBooked(d)) {
+          overlapping = true;
+          break;
+        }
+      }
+
+      if (overlapping) {
+        setErrorMessage(
+          "The selected dates include unavailable periods. Please choose other dates."
+        );
+        setTotalCost(null);
+      } else {
+        setErrorMessage(null);
+        const rentalDays =
+          (end.getTime() - start.getTime()) / (1000 * 3600 * 24) + 1;
+        setTotalCost(rentalDays * dailyRate);
+      }
+    }
+  };
+
+  return (
+    <div className="bg-gray-50 shadow-xl rounded-2xl p-10 w-full max-w-7xl mx-auto">
+      <button
+        onClick={onBack}
+        className="bg-blue-500 text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-blue-600 transition-all duration-300 ease-in-out"
+      >
+        Back
+      </button>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
+        {/* Car Image Section */}
+        <div className="relative">
+          <img
+            src={car.image}
+            alt={car.name}
+            className="w-full h-100 object-cover rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105"
+          />
+          <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md">
+            Featured
+          </div>
+        </div>
+
+        {/* Car Info Section */}
+        <div className="flex flex-col justify-between">
+          <h2 className="text-4xl font-black text-gray-900 mb-6">{car.name}</h2>
+          <p className="text-lg text-gray-800 mb-6">
+            <span className="font-semibold">Owner:</span> {car.owner} <br />
+            <span className="font-semibold">Location:</span> {car.location} <br />
+            <span className="font-semibold">Listed on:</span> {car.dateListed}
+          </p>
+          <div className="grid grid-cols-2 gap-6 text-gray-700 mb-8">
+            <p className="flex items-center">
+              <FaRoad className="mr-2 text-blue-600" />
+              <span className="font-semibold">Mileage:</span> {car.mileage} KM
+            </p>
+            <p className="flex items-center">
+              <FaGasPump className="mr-2 text-blue-600" />
+              <span className="font-semibold">Fuel Type:</span> {car.fuelType}
+            </p>
+            <p className="flex items-center">
+              <FaCar className="mr-2 text-blue-600" />
+              <span className="font-semibold">Style:</span> {car.carType}
+            </p>
+            <p className="flex items-center">
+              <FaTachometerAlt className="mr-2 text-blue-600" />
+              <span className="font-semibold">Speed:</span> {car.speed} KM/H
+            </p>
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="text-4xl font-bold text-blue-700">
+              ${car.price.toLocaleString()}
+            </p>
+            <button className="bg-blue-600 text-white px-6 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105">
+              Buy Now
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Car Info Section */}
-      <div className="flex flex-col justify-between">
-        <h2 className="text-4xl font-black text-gray-900 mb-6">{car.name}</h2>
-        <p className="text-lg text-gray-800 mb-6">
-          <span className="font-semibold">Owner:</span> {car.owner} <br />
-          <span className="font-semibold">Location:</span> {car.location} <br />
-          <span className="font-semibold">Listed on:</span> {car.dateListed}
-        </p>
-        <div className="grid grid-cols-2 gap-6 text-gray-700 mb-8">
-          <p><span className="font-semibold">Mileage:</span> {car.mileage} KM</p>
-          <p><span className="font-semibold">Fuel Type:</span> {car.fuelType}</p>
-          <p><span className="font-semibold">Style:</span> {car.carType}</p>
-          <p><span className="font-semibold">Speed:</span> {car.speed}</p>
+      {/* Rental Calculator Section */}
+      <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
+        <h3 className="text-2xl font-semibold mb-4">Car Rental Calculator</h3>
+        <div className="mb-4">
+          <label className="block text-lg font-medium text-gray-700">
+            Select Rental Period:
+          </label>
+          <DatePicker
+            selected={startDate}
+            onChange={handleDateChange}
+            startDate={startDate}
+            endDate={endDate}
+            selectsRange
+            inline
+            excludeDateIntervals={bookedDates}
+            minDate={new Date()}
+          />
         </div>
-        <div className="flex items-center justify-between">
-          <p className="text-4xl font-bold text-blue-700">
-            ${car.price.toLocaleString()}
-          </p>
-          <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105">
-            Buy Now
-          </button>
+        {errorMessage && (
+          <div className="text-red-500 mb-4">{errorMessage}</div>
+        )}
+        {totalCost !== null && (
+          <div className="text-lg font-semibold text-gray-800">
+            Total Rental Cost:{" "}
+            <span className="text-blue-600">${totalCost}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Similar Cars Section */}
+      <div className="mt-10">
+        <h3 className="text-2xl font-semibold mb-4">Similar Cars</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Example placeholder car cards */}
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <img
+              src="https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg"
+              alt="Car 1"
+              className="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <h4 className="text-lg font-semibold">Car 1</h4>
+            <p className="text-blue-600 font-bold">$20,000</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <img
+              src="https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg"
+              alt="Car 2"
+              className="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <h4 className="text-lg font-semibold">Car 2</h4>
+            <p className="text-blue-600 font-bold">$18,500</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <img
+              src="https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg"
+              alt="Car 3"
+              className="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <h4 className="text-lg font-semibold">Car 3</h4>
+            <p className="text-blue-600 font-bold">$22,000</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
-
+  );
+};
 
 
 // ListingPage Component
