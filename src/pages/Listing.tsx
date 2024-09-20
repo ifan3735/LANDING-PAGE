@@ -4,11 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import TopBar from "../components/TopBar";
 import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar } from "react-icons/fa";
 
-const bookedDates = [
-  { start: new Date("2024-09-22"), end: new Date("2024-09-25") },
-  { start: new Date("2024-09-30"), end: new Date("2024-10-03") },
-];
-
 // CarCard Component for List and Detail Views
 const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
   <div
@@ -86,9 +81,9 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
     if (startDate && endDate) {
       const timeDifference = endDate.getTime() - startDate.getTime();
       const days = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert ms to days
-      return days > 0 ? days * dailyRate : 0;
+      return days > 0 ? days * dailyRate : 0; // Ensure days is positive
     }
-    return 0;
+    return 0; // Return 0 if dates are not valid
   };
 
   const totalCost = calculateTotal();
@@ -97,7 +92,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
     <div className="bg-gray-50 shadow-xl rounded-2xl p-10 w-full max-w-7xl mx-auto">
       <button
         onClick={onBack}
-        className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold hover:bg-blue-600 transition-all duration-300 ease-in-out"
+        className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold"
       >
         Back
       </button>
@@ -145,7 +140,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
             <p className="text-4xl font-bold text-blue-700">
               ${car.price.toLocaleString()}
             </p>
-            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105">
+            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg">
               Buy Now
             </button>
           </div>
@@ -240,7 +235,6 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
     </div>
   );
 };
-
 
 // ListingPage Component
 const ListingPage = () => {
