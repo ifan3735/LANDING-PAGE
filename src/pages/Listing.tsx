@@ -57,44 +57,46 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
 );
 
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => (
-  <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-7xl mx-auto">
+  <div className="bg-gray-50 shadow-xl rounded-2xl p-10 w-full max-w-7xl mx-auto">
     <button
       onClick={onBack}
-      className="bg-blue-100 text-blue-600 px-5 py-3 rounded-full text-sm font-medium"
+      className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium"
     >
       Back
     </button>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
       {/* Car Image Section */}
       <div className="relative">
         <img
           src={car.image}
           alt={car.name}
-          className="w-full h-80 object-cover rounded-xl shadow-md"
+          className="w-full h-100 object-cover rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105"
         />
-        <div className="absolute top-2 right-2 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+        <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md">
           Featured
         </div>
       </div>
+
       {/* Car Info Section */}
       <div className="flex flex-col justify-between">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-4">{car.name}</h2>
-        <p className="text-lg text-gray-700 mb-4">
+        <h2 className="text-4xl font-black text-gray-900 mb-6">{car.name}</h2>
+        <p className="text-lg text-gray-800 mb-6">
           <span className="font-semibold">Owner:</span> {car.owner} <br />
           <span className="font-semibold">Location:</span> {car.location} <br />
           <span className="font-semibold">Listed on:</span> {car.dateListed}
         </p>
-        <div className="text-gray-700 mb-6">
+        <div className="grid grid-cols-2 gap-6 text-gray-700 mb-8">
           <p><span className="font-semibold">Mileage:</span> {car.mileage} KM</p>
           <p><span className="font-semibold">Fuel Type:</span> {car.fuelType}</p>
           <p><span className="font-semibold">Style:</span> {car.carType}</p>
           <p><span className="font-semibold">Speed:</span> {car.speed}</p>
         </div>
-        <div className="flex items-center justify-between mt-6">
-          <p className="text-3xl font-bold text-blue-700">
-            ${car.price}
+        <div className="flex items-center justify-between">
+          <p className="text-4xl font-bold text-blue-700">
+            ${car.price.toLocaleString()}
           </p>
-          <button className="bg-blue-100 text-blue-600 px-5 py-3 rounded-full text-ms font-medium">
+          <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105">
             Buy Now
           </button>
         </div>
@@ -102,6 +104,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => (
     </div>
   </div>
 );
+
 
 
 // ListingPage Component
