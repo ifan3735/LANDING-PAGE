@@ -62,7 +62,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  const dailyRate = car.price; // Use the car's price as the daily rental rate
+  const rentalRate = car.rentalRate || 100; // Set a rental rate, or use car.rentalRate if it's available
   const unavailableDates = [
     new Date(2024, 8, 22), // Example of unavailable date
     new Date(2024, 8, 23),
@@ -81,7 +81,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
     if (startDate && endDate) {
       const timeDifference = endDate.getTime() - startDate.getTime();
       const days = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert ms to days
-      return days > 0 ? days * dailyRate : 0; // Ensure days is positive
+      return days > 0 ? days * rentalRate : 0; // Ensure days is positive
     }
     return 0; // Return 0 if dates are not valid
   };
@@ -138,10 +138,10 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           </div>
           <div className="flex items-center justify-between">
             <p className="text-4xl font-bold text-blue-700">
-              ${car.price.toLocaleString()}
+              ${rentalRate.toLocaleString()} / day
             </p>
             <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg">
-              Buy Now
+              Rent Now
             </button>
           </div>
         </div>
@@ -190,12 +190,23 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         {startDate && endDate && (
           <div className="mt-4">
             <p className="font-semibold">
-              Total Rental Cost: <span className="text-blue-600">${totalCost.toLocaleString()}</span>
+              Total Rental Cost:{" "}
+              <span className="text-blue-600">
+                ${totalCost.toLocaleString()}
+              </span>
             </p>
           </div>
         )}
-        {!startDate && <p className="text-red-500 font-semibold mt-4">Please select a start date.</p>}
-        {!endDate && startDate && <p className="text-red-500 font-semibold mt-4">Please select an end date.</p>}
+        {!startDate && (
+          <p className="text-red-500 font-semibold mt-4">
+            Please select a start date.
+          </p>
+        )}
+        {!endDate && startDate && (
+          <p className="text-red-500 font-semibold mt-4">
+            Please select an end date.
+          </p>
+        )}
       </div>
 
       {/* Similar Cars Section */}
