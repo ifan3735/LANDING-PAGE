@@ -136,14 +136,9 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
               <span className="font-semibold">Speed:</span> {car.speed} KM/H
             </p>
           </div>
-          <div className="flex items-center justify-between">
-            <p className="text-4xl font-bold text-blue-700">
-              ${rentalRate.toLocaleString()} / day
-            </p>
-            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg">
-              Rent Now
-            </button>
-          </div>
+          <p className="text-4xl font-bold text-blue-700">
+            ${rentalRate.toLocaleString()} / day
+          </p>
         </div>
       </div>
 
@@ -206,6 +201,15 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           <p className="text-red-500 font-semibold mt-4">
             Please select an end date.
           </p>
+        )}
+
+        {/* Conditionally Render "Rent Now" Button */}
+        {startDate && endDate && (
+          <div className="mt-6">
+            <button className="bg-blue-600 text-white px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full">
+              Rent Now
+            </button>
+          </div>
         )}
       </div>
 
