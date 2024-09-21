@@ -3,6 +3,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TopBar from "../components/TopBar";
 import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar } from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // CarCard Component for List and Detail Views
 const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
@@ -206,7 +209,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         {/* Conditionally Render "Rent Now" Button */}
         {startDate && endDate && (
           <div className="mt-6">
-            <button className="bg-blue-600 text-white px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full">
+            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full">
               Rent Now
             </button>
           </div>
