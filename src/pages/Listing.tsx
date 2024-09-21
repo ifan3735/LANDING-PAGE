@@ -3,7 +3,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TopBar from "../components/TopBar";
 import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar } from "react-icons/fa";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -55,7 +54,7 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
         </div>
       </div>
       <div className="flex justify-between items-center">
-        <p className="font-bold text-lg text-blue-500">${car.price}</p>
+        <p className="font-bold text-lg text-blue-500">${car.rentalRate}</p>
       </div>
     </div>
   </div>
@@ -290,7 +289,7 @@ const ListingPage = () => {
       type: 'Sedan',
       color: 'Red',
       style: 'Luxury',
-      price: '285,892',
+      rentalRate: '285',
       image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
       owner: 'Jonson Hussain',
       ownerAvatar: 'https://i.pinimg.com/236x/af/9f/1f/af9f1fed99621ae20f9edd2ab6cbb8bd.jpg',
@@ -303,7 +302,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'China',
       speed: '15.5 km/h',
-      price: '285,892',
+      rentalRate: '285',
       image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
       owner: 'Hussain Jahan',
       ownerAvatar: 'https://i.pinimg.com/236x/2a/7d/4c/2a7d4c4bc1381a476b8b8a85885ac392.jpg',
@@ -316,7 +315,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      price: '295,892',
+      rentalRate: '295',
       image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
       owner: 'Robert Rome',
       ownerAvatar: 'https://i.pinimg.com/236x/ad/15/5b/ad155b4cfd5b6d220c3e5b51b349a37a.jpg',
@@ -329,7 +328,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      price: '285,892',
+      rentalRate: '285',
       image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
       owner: 'Hussain Jahan',
       ownerAvatar: 'https://i.pinimg.com/236x/2e/3e/fd/2e3efdc0486a8858f9e0471eee3f68e5.jpg',
@@ -342,7 +341,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      price: '295,892',
+      rentalRatge: '295',
       image: 'https://i.pinimg.com/236x/47/8b/f6/478bf61e4712ba383a76118a6558bfd4.jpg',
       owner: 'Robert Rome',
       ownerAvatar: 'https://i.pinimg.com/236x/f9/58/e4/f958e4ad039823fdc0e5aaa45aae278d.jpg',
@@ -355,7 +354,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      price: '285,892',
+      rentalRate: '285',
       image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
       owner: 'Hussain Jahan',
       ownerAvatar: 'https://i.pinimg.com/236x/78/f1/fa/78f1faef59b24ecc67f1dbef3ddc32ac.jpg',
@@ -368,7 +367,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      price: '295,892',
+      renatalRate: '295',
       image: 'https://i.pinimg.com/564x/5b/cc/d0/5bccd0713bc5c9039393f0bc7ba73d45.jpg',
       owner: 'Robert Rome',
       ownerAvatar: 'https://i.pinimg.com/236x/8b/85/75/8b8575ca1ecb184466a32b228dbeb3f7.jpg',
@@ -381,7 +380,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      price: '285,892',
+      rentalRate: '285',
       image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
       owner: 'Hussain Jahan',
       ownerAvatar: 'https://i.pinimg.com/236x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg',
@@ -394,7 +393,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      price: '295,892',
+      rentalRate: '295',
       image: 'https://i.pinimg.com/736x/3a/a4/6a/3aa46aaba45e09ff09403b42a6127390.jpg',
       owner: 'Robert Rome',
       ownerAvatar: 'https://i.pinimg.com/236x/d2/d2/f8/d2d2f8210f500b3e859d8f282e3d0e9b.jpg',
@@ -407,7 +406,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      price: '285,892',
+      rentalRate: '285',
       image: 'https://i.pinimg.com/564x/5a/e8/d6/5ae8d6218c3c6a9296936347fc2c2eef.jpg',
       owner: 'Hussain Jahan',
       ownerAvatar: 'https://i.pinimg.com/236x/82/cc/d6/82ccd6e43a3334813015ec3247aeca7d.jpg',
