@@ -217,35 +217,35 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
       {/* Similar Cars Section */}
       <div className="mt-10">
-        <h3 className="text-2xl font-semibold mb-4">Similar Cars</h3>
+        <h3 className="text-2xl font-semibold mb-4">Interior View</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Example placeholder car cards */}
           <div className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src="https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg"
+              src="https://i.pinimg.com/564x/a4/29/40/a42940b02387da4b5898b5bc08062d49.jpg"
               alt="Car 1"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h4 className="text-lg font-semibold">Car 1</h4>
-            <p className="text-blue-600 font-bold">$20,000</p>
+            <h4 className="text-lg font-semibold">View 1</h4>
+            <p className="text-blue-600 font-bold">90deg</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src="https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg"
+              src="https://i.pinimg.com/564x/2a/0c/55/2a0c552c373f9c978e626b4fc6e5c935.jpg"
               alt="Car 2"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h4 className="text-lg font-semibold">Car 2</h4>
-            <p className="text-blue-600 font-bold">$18,500</p>
+            <h4 className="text-lg font-semibold">View 2</h4>
+            <p className="text-blue-600 font-bold">60deg</p>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src="https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg"
+              src="https://i.pinimg.com/564x/aa/93/95/aa9395c2f3f30c7f355c1102d5a53076.jpg"
               alt="Car 3"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h4 className="text-lg font-semibold">Car 3</h4>
-            <p className="text-blue-600 font-bold">$22,000</p>
+            <h4 className="text-lg font-semibold">View 3</h4>
+            <p className="text-blue-600 font-bold">120deg</p>
           </div>
         </div>
       </div>
@@ -341,7 +341,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      rentalRatge: '295',
+      rentalRate: '295',
       image: 'https://i.pinimg.com/236x/47/8b/f6/478bf61e4712ba383a76118a6558bfd4.jpg',
       owner: 'Robert Rome',
       ownerAvatar: 'https://i.pinimg.com/236x/f9/58/e4/f958e4ad039823fdc0e5aaa45aae278d.jpg',
@@ -367,7 +367,7 @@ const ListingPage = () => {
       fuelType: 'Petrol',
       location: 'Dubai',
       speed: '15.5 km/h',
-      renatalRate: '295',
+      rentalRate: '295',
       image: 'https://i.pinimg.com/564x/5b/cc/d0/5bccd0713bc5c9039393f0bc7ba73d45.jpg',
       owner: 'Robert Rome',
       ownerAvatar: 'https://i.pinimg.com/236x/8b/85/75/8b8575ca1ecb184466a32b228dbeb3f7.jpg',
