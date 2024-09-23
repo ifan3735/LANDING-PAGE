@@ -61,8 +61,11 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
 );
 
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
+  const [showDropdown, setShowDropdown] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+
+  const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
   const rentalRate = car.rentalRate || 100; // Set a rental rate, or use car.rentalRate if it's available
   const unavailableDates = [
@@ -91,6 +94,44 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const totalCost = calculateTotal();
 
   return (
+    <div>
+       <div className="flex justify-between items-center my-6">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">Car Information</h2>
+              <p className="text-sm text-gray-600">
+                Get your latest update for the past 7 days
+              </p>
+            </div>
+
+            <div className="relative">
+              <button
+                onClick={toggleExportDropdown}
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
+              >
+                <FaFileExport className="mr-2" /> Export
+                <FaChevronDown className="ml-2" />
+              </button>
+
+              {showDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+                  <ul>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => console.log("Export as CSV")}
+                    >
+                      Export as CSV
+                    </li>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => console.log("Export as PDF")}
+                    >
+                      Export as PDF
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
     <div className="bg-gray-50 shadow-xl rounded-2xl p-10 w-full max-w-7xl mx-auto">
       <button
         onClick={onBack}
@@ -249,6 +290,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
