@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import TopBar from '../components/TopBar';
 import { exportData } from '../utils/ExportData';
-import { FaChevronDown, FaFileExport } from 'react-icons/fa';
+import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
 import  Bid from '../components/Bids';
 
 const Bids = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
@@ -183,6 +184,8 @@ const Bids = () => {
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
 
+  const toggleFilters = () => setShowFilters(!showFilters);
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -252,6 +255,67 @@ const Bids = () => {
           )}
         </div>
       </div>
+
+      <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-semibold">Available Cars</h2>
+
+            <div className="relative">
+              <button
+                onClick={toggleFilters}
+                className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
+              >
+                <FaBars className="mr-2" /> Filter by
+              </button>
+
+              {showFilters && (
+                <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg">
+                  <div className="p-4">
+                    <label className="block text-gray-700">Type</label>
+                    <select
+                      name="type"
+                      value={selectedFilter.type}
+                      onChange={handleFilterChange}
+                      className="border rounded-lg w-full p-2 mt-1"
+                    >
+                      <option value="">All Types</option>
+                      <option value="Sedan">Sedan</option>
+                      <option value="Luxury">Luxury</option>
+                      <option value="Coupe">Coupe</option>
+                    </select>
+                  </div>
+                  <div className="p-4 border-t">
+                    <label className="block text-gray-700">Color</label>
+                    <select
+                      name="color"
+                      value={selectedFilter.color}
+                      onChange={handleFilterChange}
+                      className="border rounded-lg w-full p-2 mt-1"
+                    >
+                      <option value="">All Colors</option>
+                      <option value="Red">Red</option>
+                      <option value="Blue">Blue</option>
+                      <option value="Black">Black</option>
+                    </select>
+                  </div>
+                  <div className="p-4 border-t">
+                    <label className="block text-gray-700">Style</label>
+                    <select
+                      name="style"
+                      value={selectedFilter.style}
+                      onChange={handleFilterChange}
+                      className="border rounded-lg w-full p-2 mt-1"
+                    >
+                      <option value="">All Styles</option>
+                      <option value="SUV">SUV</option>
+                      <option value="Convertible">Convertible</option>
+                      <option value="Hatchback">Hatchback</option>
+                    </select>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {filteredCars.map((car, index) => (
           <Bid

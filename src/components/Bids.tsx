@@ -48,7 +48,7 @@ const Bid: React.FC<CarCardProps> = ({ name, imageUrl, location, style, rto, spe
         {/* Price and Bid Button */}
         <div className="flex justify-between items-center">
           <p className="font-bold text-lg text-blue-500">
-            {price} / <span className="text-gray-900">${bidPrice}</span>
+            ${price} / <span className="text-gray-900">${bidPrice}</span>
           </p>
           <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300">
             Bid Now
