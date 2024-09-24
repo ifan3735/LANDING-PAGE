@@ -71,7 +71,7 @@ const Sidebar = () => {
               }`
             }
           >
-            <FaDollarSign className="mr-3" /> Bids
+            <FaDollarSign className="mr-3" />Active Bids
           </NavLink>
         </li>
         <li>
