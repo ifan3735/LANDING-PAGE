@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import TopBar from '../components/TopBar';
 import { exportData } from '../utils/ExportData';
-import { FaChevronDown, FaFileExport } from 'react-icons/fa';
+import { FaCar, FaChevronDown, FaFileExport, FaGasPump, FaRoad, FaTachometerAlt } from 'react-icons/fa';
 import  Bid from '../components/Bids';
+
 const Bids = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState('light');
@@ -201,8 +202,6 @@ const Bids = () => {
   const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
-
-
 
   return (
     <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
