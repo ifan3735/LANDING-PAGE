@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TopBar from '../components/TopBar';
 import { exportData } from '../utils/ExportData';
 import { FaChevronDown, FaFileExport } from 'react-icons/fa';
-
+import  Bid from '../components/Bids';
 const Bids = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState('light');
@@ -15,12 +15,150 @@ const Bids = () => {
   });
 
   const cars = [
-    { name: 'Audi R8 Green', style: 'Audi', type: 'Auto', color: 'Green', price: '$285,892', imageUrl: 'https://media.istockphoto.com/id/174691804/photo/green-supercar-isolated.jpg?s=612x612&w=0&k=20&c=nh6aondlx41IkaHJRG9Ffp6CYjGBOTIUCPrVC0Mn4l0=' },
-    { name: 'Bentley Flying Spur', style: 'Bentley', type: 'Petrol', color: 'Brown', price: '$358,174', imageUrl: 'https://i.pinimg.com/1200x/a5/cb/83/a5cb831ea2e399e2e4ede6eab618a4f0.jpg' },
-    { name: 'Lamborghini Aventador', style: 'Lamborghini', type: 'Auto', color: 'Yellow', price: '$420,000', imageUrl: 'https://i.pinimg.com/1200x/66/ee/a9/66eea93dbd62e9d9f65303efe3da1352.jpg' },
-    { name: 'Porsche 911 Turbo', style: 'Porsche', type: 'Auto', color: 'Red', price: '$200,000', imageUrl: 'https://i.pinimg.com/1200x/e1/06/07/e1060739e7e16b2f935ec364c77cddcd.jpg' },
-    { name: 'BMW M5', style: 'BMW', type: 'Manual', color: 'Blue', price: '$110,000', imageUrl: 'https://i.pinimg.com/1200x/e8/f3/29/e8f329616ed58ee086b10112c8a6d157.jpg' },
-    { name: 'Tesla Model S', style: 'Tesla', type: 'Electric', color: 'White', price: '$120,000', imageUrl: 'https://i.pinimg.com/1200x/ba/fa/a9/bafaa9ee834ac42aaf6f08313e930cbe.jpg' },
+    {
+      name: 'Hyundai S Turbo uMT',
+      mileage: '1028',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      type: 'Sedan',
+      color: 'Red',
+      style: 'Luxury',
+      price: '285',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
+      owner: 'Jonson Hussain',
+      ownerAvatar: 'https://i.pinimg.com/236x/af/9f/1f/af9f1fed99621ae20f9edd2ab6cbb8bd.jpg',
+      carType: 'Sedan',
+      dateListed: '28 Jun',
+    },
+    {
+      name: 'Bentley Flying Spur',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'China',
+      speed: '15.5 km/h',
+      price: '285',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/2a/7d/4c/2a7d4c4bc1381a476b8b8a85885ac392.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+    },
+    {
+      name: 'Porsche Tayca',
+      mileage: '369',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '295',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
+      owner: 'Robert Rome',
+      ownerAvatar: 'https://i.pinimg.com/236x/ad/15/5b/ad155b4cfd5b6d220c3e5b51b349a37a.jpg',
+      carType: 'Coupe',
+      dateListed: '26 Jun',
+    },
+    {
+      name: 'Mercedes Benz EQS',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '285',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/2e/3e/fd/2e3efdc0486a8858f9e0471eee3f68e5.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+    },
+    {
+      name: 'Audi Q4 e-tron',
+      mileage: '369',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '295',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/236x/47/8b/f6/478bf61e4712ba383a76118a6558bfd4.jpg',
+      owner: 'Robert Rome',
+      ownerAvatar: 'https://i.pinimg.com/236x/f9/58/e4/f958e4ad039823fdc0e5aaa45aae278d.jpg',
+      carType: 'Coupe',
+      dateListed: '26 Jun',
+    },
+    {
+      name: 'Toyota Corolla Cross',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '285',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/78/f1/fa/78f1faef59b24ecc67f1dbef3ddc32ac.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+    },
+    {
+      name: 'BMW i4',
+      mileage: '369',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '295',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/564x/5b/cc/d0/5bccd0713bc5c9039393f0bc7ba73d45.jpg',
+      owner: 'Robert Rome',
+      ownerAvatar: 'https://i.pinimg.com/236x/8b/85/75/8b8575ca1ecb184466a32b228dbeb3f7.jpg',
+      carType: 'Coupe',
+      dateListed: '26 Jun',
+    },
+    {
+      name: 'Audi Q4 e-tron',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '285',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+    },
+    {
+      name: 'Toyota Corolla Cross',
+      mileage: '369',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '295',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/736x/3a/a4/6a/3aa46aaba45e09ff09403b42a6127390.jpg',
+      owner: 'Robert Rome',
+      ownerAvatar: 'https://i.pinimg.com/236x/d2/d2/f8/d2d2f8210f500b3e859d8f282e3d0e9b.jpg',
+      carType: 'Coupe',
+      dateListed: '26 Jun',
+    },
+    {
+      name: 'BMW i4',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      price: '285',
+      bidPrice: '300000',
+      image: 'https://i.pinimg.com/564x/5a/e8/d6/5ae8d6218c3c6a9296936347fc2c2eef.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/82/cc/d6/82ccd6e43a3334813015ec3247aeca7d.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+    }
+    // Add more cars as needed
   ];
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
@@ -45,7 +183,7 @@ const Bids = () => {
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
-  
+
 
   return (
     <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
@@ -95,6 +233,21 @@ const Bids = () => {
             </div>
           )}
         </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+        {filteredCars.map((car, index) => (
+          <Bid
+            key={index}
+            name={car.name}
+            imageUrl={car.image}
+            location={car.location}
+            style={car.style}
+            rto={car.rto}
+            spend={car.speed}
+            price={car.price}
+            bidPrice={car.bidPrice}
+          />
+        ))}
       </div>
       </div>
   );
