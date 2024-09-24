@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import TopBar from '../components/TopBar';
 import { exportData } from '../utils/ExportData';
-import { FaCar, FaChevronDown, FaFileExport, FaGasPump, FaRoad, FaTachometerAlt } from 'react-icons/fa';
+import { FaChevronDown, FaFileExport } from 'react-icons/fa';
 import  Bid from '../components/Bids';
 
 const Bids = () => {
