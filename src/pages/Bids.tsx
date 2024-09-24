@@ -257,7 +257,7 @@ const Bids = () => {
       </div>
 
       <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold">Available Cars</h2>
+            <h2 className="text-xl font-semibold">Auction</h2>
 
             <div className="relative">
               <button
