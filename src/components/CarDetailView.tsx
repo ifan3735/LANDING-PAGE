@@ -73,8 +73,8 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           <div className="flex flex-col justify-between">
             <h2 className="text-4xl font-black text-gray-900 mb-6">{car.name}</h2>
             <p className="text-lg text-gray-800 mb-6">
-              <span className="font-semibold">Owner:</span> {car.owner} <br />
-              <span className="font-semibold">Location:</span> {car.location} <br />
+              <span className="font-semibold">RTO:</span> {car.rto} <br />
+              <span className="font-semibold">Color:</span> {car.color} <br />
               <span className="font-semibold">Listed on:</span> {car.dateListed}
             </p>
             <div className="grid grid-cols-2 gap-6 text-gray-700 mb-8">
@@ -100,6 +100,11 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
             </p>
           </div>
         </div>
+        <div className="mt-6">
+            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full">
+              Bid Now
+            </button>
+          </div>
       </div>
     </div>
   );
