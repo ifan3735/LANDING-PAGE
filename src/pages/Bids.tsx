@@ -3,6 +3,7 @@ import TopBar from '../components/TopBar';
 import { exportData } from '../utils/ExportData';
 import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
 import  Bid from '../components/Bids';
+import CarDetailView from '../components/CarDetailView';
 
 const Bids = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -15,6 +16,16 @@ const Bids = () => {
     color: '',
     style: '',
   });
+
+  const [selectedCar, setSelectedCar] = useState<any>(null); // State for selected car
+
+  const handleCarClick = (car: any) => {
+    setSelectedCar(car);
+  };
+
+  const handleBack = () => {
+    setSelectedCar(null);
+  };
 
   const cars = [
     {
@@ -215,6 +226,11 @@ const Bids = () => {
         theme={theme}
         exportData={() => exportData(filteredCars)}
       />
+
+        {selectedCar ? (
+          <CarDetailView car = {selectedCar} onBack = {handleBack} />
+        ) : (
+          <>
       <div className="flex justify-between items-center my-6">
         {/* Left Section: Header and Paragraph */}
         <div>
@@ -328,9 +344,12 @@ const Bids = () => {
             spend={car.speed}
             price={car.price}
             bidPrice={car.bidPrice}
+            onClick={() => handleCarClick(car)}
           />
         ))}
       </div>
+      </>
+        )}
       </div>
   );
 };

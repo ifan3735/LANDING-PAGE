@@ -12,9 +12,11 @@ interface CarCardProps {
   bidPrice: string;
 }
 
-const Bid: React.FC<CarCardProps> = ({ name, imageUrl, location, style, rto, spend, price, bidPrice }) => {
+const Bid: React.FC<CarCardProps> = ({ name, imageUrl, location, style, rto, spend, price, bidPrice, onClick } : { name: string , imageUrl: string, location: string, style: string, rto: string, spend: string, price:string, bidPrice: string,  onClick: () => void}) => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg flex flex-row space-x-6 w-full max-w-xl cursor-pointer hover:shadow-xl transition-shadow duration-300">
+    <div 
+      onClick={onClick}
+    className="bg-white p-6 rounded-lg shadow-lg flex flex-row space-x-6 w-full max-w-xl cursor-pointer hover:shadow-xl transition-shadow duration-300">
       {/* Car Image */}
       <div className="w-48 h-32 overflow-hidden rounded-lg">
         <img

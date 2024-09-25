@@ -96,7 +96,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
               </p>
             </div>
             <p className="text-4xl font-bold text-blue-700">
-              ${rentalRate.toLocaleString()} / day
+              ${car.bidPrice} 
             </p>
           </div>
         </div>
