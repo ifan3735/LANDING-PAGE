@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaCar, FaChevronDown, FaFileExport, FaGasPump, FaRoad, FaTachometerAlt, FaSync } from 'react-icons/fa';
+import { FaSync } from 'react-icons/fa';
 import Slider from 'react-slick'; // Import a carousel library like 'react-slick'
 import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
 import 'slick-carousel/slick/slick-theme.css';
@@ -15,11 +15,11 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   // Sample image list (replace with actual car image data)
   const carImages = car.images || [
     car.image, // Use the main image as a fallback
-    '/images/car-front.jpg',
-    '/images/car-side.jpg',
-    '/images/car-rear.jpg',
-    '/images/car-interior.jpg',
-    '/images/car-engine.jpg'
+    'https://i.pinimg.com/736x/57/d3/bf/57d3bfff31b68e413a877d58be660e85.jpg',
+    'https://i.pinimg.com/736x/7d/84/45/7d8445cee1a098301fff03f63048e8a1.jpg',
+    'https://i.pinimg.com/736x/a5/86/e6/a586e60d0cdf332840e8ab8bbba4fe94.jpg',
+    'https://i.pinimg.com/736x/5a/7f/a7/5a7fa7df087e17df9c197b79586ac5b4.jpg',
+    'https://i.pinimg.com/736x/f9/cd/a1/f9cda1d501f700f16f37c744f02b8672.jpg'
   ];
 
   const settings = {
