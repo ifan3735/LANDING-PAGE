@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaCar, FaChevronDown, FaFileExport, FaGasPump, FaRoad, FaTachometerAlt, FaRegCircle } from 'react-icons/fa';
+import { FaCar, FaChevronDown, FaFileExport, FaGasPump, FaRoad, FaTachometerAlt, FaSync } from 'react-icons/fa';
 import Slider from 'react-slick'; // Import a carousel library like 'react-slick'
 import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
 import 'slick-carousel/slick/slick-theme.css';
@@ -24,6 +24,23 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false, // Hide arrows for a clean look
+    appendDots: dots => (
+      <div>
+        <ul style={{ margin: '0px' }}> {dots} </ul>
+      </div>
+    ),
+    customPaging: i => (
+      <div
+        style={{
+          width: "12px",
+          height: "12px",
+          borderRadius: "50%",
+          background: "#ccc",
+          margin: "0 3px",
+        }}
+      />
+    ),
   };
 
   return (
@@ -31,7 +48,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold mb-6"
+        className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold mb-6 transition-all hover:bg-blue-200"
       >
         Back
       </button>
@@ -40,10 +57,10 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Left Column - Car Images */}
         <div className="relative">
-          {/* 360 Button */}
-          <div className="absolute top-2 left-2 bg-blue-600 text-white text-xs rounded-full px-4 py-2 shadow-lg">
-            360°
-          </div>
+          {/* 360° Button */}
+          <button className="absolute top-4 left-4 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-full p-3 shadow-lg transition-all">
+            <FaSync className="w-4 h-4" />
+          </button>
 
           {/* Car Image Carousel */}
           <Slider {...settings}>
@@ -62,19 +79,22 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         {/* Right Column - Car Info */}
         <div className="flex flex-col justify-between">
           {/* Car Name and Price */}
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">{car.name}</h2>
-          <p className="text-blue-600 text-xl font-semibold mb-6">${car.bidPrice}</p>
+          <h2 className="text-3xl font-black text-gray-900 mb-2">{car.name}</h2>
+          <p className="text-blue-700 text-3xl font-bold mb-6">${car.bidPrice}</p>
 
           {/* Car Details */}
-          <div className="space-y-4">
-            <div>
-              <span className="font-bold">Class:</span> Compact executive car D
+          <div className="space-y-4 text-lg">
+            <div className="flex items-center">
+              <span className="font-semibold text-gray-700">Class:</span>
+              <span className="ml-2 text-gray-600">Compact executive car D</span>
             </div>
-            <div>
-              <span className="font-bold">Layout:</span> Front-engine, rear-wheel drive (4 MATIC)
+            <div className="flex items-center">
+              <span className="font-semibold text-gray-700">Layout:</span>
+              <span className="ml-2 text-gray-600">Front-engine, rear-wheel drive (4 MATIC)</span>
             </div>
-            <div>
-              <span className="font-bold">Predecessor:</span> Mercedes Benz 190 E (W201)
+            <div className="flex items-center">
+              <span className="font-semibold text-gray-700">Predecessor:</span>
+              <span className="ml-2 text-gray-600">Mercedes Benz 190 E (W201)</span>
             </div>
           </div>
 
@@ -83,31 +103,31 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
             <h3 className="text-lg font-bold text-gray-800 mb-4">Document's Needed</h3>
             <ul className="space-y-3">
               <li className="flex items-center">
-                <FaRegCircle className="mr-2 text-blue-500" />
-                Bill of sale
+                <input type="checkbox" className="mr-2" />
+                <label className="text-gray-600">Bill of sale</label>
               </li>
               <li className="flex items-center">
-                <FaRegCircle className="mr-2 text-blue-500" />
-                Buyer’s Guide
+                <input type="checkbox" className="mr-2" />
+                <label className="text-gray-600">Buyer’s Guide</label>
               </li>
               <li className="flex items-center">
-                <FaRegCircle className="mr-2 text-blue-500" />
-                Country of title issuance
+                <input type="checkbox" className="mr-2" />
+                <label className="text-gray-600">Country of title issuance</label>
               </li>
               <li className="flex items-center">
-                <FaRegCircle className="mr-2 text-gray-400" />
-                Application of Texas
+                <input type="checkbox" className="mr-2" disabled />
+                <label className="text-gray-400">Application of Texas</label>
               </li>
             </ul>
 
             {/* Upload Button */}
-            <button className="bg-blue-100 text-blue-600 px-4 py-2 mt-4 rounded-full font-semibold">
+            <button className="bg-blue-100 text-blue-600 px-4 py-2 mt-4 rounded-full font-semibold transition-all hover:bg-blue-200">
               Upload
             </button>
           </div>
 
           {/* Buy Now Button */}
-          <button className="bg-blue-600 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg">
+          <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105">
             Buy Now
           </button>
         </div>
