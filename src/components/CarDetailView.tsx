@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaSync } from 'react-icons/fa';
+import { FaSync, FaMoon, FaSun } from 'react-icons/fa'; // Import icons for dark mode toggle
 import Slider from 'react-slick'; // Import a carousel library like 'react-slick'
 import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
 import 'slick-carousel/slick/slick-theme.css';
@@ -61,9 +61,9 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
         <button
           onClick={toggleDarkMode}
-          className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full transition-all hover:bg-gray-200"
+          className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full transition-all hover:bg-gray-200 flex items-center justify-center"
         >
-          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          {isDarkMode ? <FaSun className="text-yellow-500 w-6 h-6" /> : <FaMoon className="text-gray-800 w-6 h-6" />}
         </button>
       </div>
 
@@ -102,7 +102,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           <h2 className="text-3xl font-black mb-2">{car.name}</h2>
           <p className="text-blue-700 text-3xl font-bold mb-6">${car.bidPrice}</p>
 
-          {/* Car Details */}
+          {/* Expanded Car Details */}
           <div className="space-y-4 text-lg">
             <div className="flex items-center">
               <span className="font-semibold">Class:</span>
@@ -115,6 +115,24 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
             <div className="flex items-center">
               <span className="font-semibold">Predecessor:</span>
               <span className="ml-2">{car.predecessor || "Mercedes Benz 190 E (W201)"}</span>
+            </div>
+
+            {/* Additional Car Details */}
+            <div className="flex items-center">
+              <span className="font-semibold">Engine Type:</span>
+              <span className="ml-2">{car.engine || "2.0L Turbo Inline-4"}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-semibold">Fuel Type:</span>
+              <span className="ml-2">{car.fuelType || "Petrol"}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-semibold">Mileage:</span>
+              <span className="ml-2">{car.mileage || "15,000 miles"}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-semibold">Transmission:</span>
+              <span className="ml-2">{car.transmission || "7-speed Automatic"}</span>
             </div>
           </div>
 
