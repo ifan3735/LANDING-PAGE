@@ -1,14 +1,30 @@
 import { useState } from 'react';
 import { FaCar, FaChevronDown, FaFileExport, FaGasPump, FaRoad, FaTachometerAlt } from 'react-icons/fa';
+import Slider from 'react-slick'; // Import a carousel library like 'react-slick'
+import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
+import 'slick-carousel/slick/slick-theme.css';
 
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
-
-
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
-  const rentalRate = car.rentalRate || 100;
+  // Sample image list (replace with actual car image data)
+  const carImages = car.images || [
+    car.image, // Use the main image as a fallback
+    '/images/car-front.jpg',
+    '/images/car-side.jpg',
+    '/images/car-rear.jpg',
+    '/images/car-interior.jpg',
+    '/images/car-engine.jpg'
+  ];
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   return (
     <div>
@@ -58,6 +74,23 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           Back
         </button>
 
+        {/* Car Image Carousel */}
+        <div className="mt-8">
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Explore the Car</h3>
+          <Slider {...settings}>
+            {carImages.map((image, index) => (
+              <div key={index} className="relative">
+                <img
+                  src={image}
+                  alt={`Car View ${index + 1}`}
+                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                />
+              </div>
+            ))}
+          </Slider>
+        </div>
+
+        {/* Car Details Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
           <div className="relative">
             <img
@@ -101,10 +134,10 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           </div>
         </div>
         <div className="mt-6">
-            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full">
-              Bid Now
-            </button>
-          </div>
+          <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full">
+            Bid Now
+          </button>
+        </div>
       </div>
     </div>
   );
