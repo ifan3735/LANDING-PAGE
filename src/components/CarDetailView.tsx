@@ -6,7 +6,11 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Loading state for images
+  const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
+
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
+  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   // Sample image list (replace with actual car image data)
   const carImages = car.images || [
@@ -41,17 +45,27 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         }}
       />
     ),
+    afterChange: () => setIsLoading(false) // Set loading to false after image changes
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-10 bg-white rounded-xl shadow-lg">
-      {/* Back Button */}
-      <button
-        onClick={onBack}
-        className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold mb-6 transition-all hover:bg-blue-200"
-      >
-        Back
-      </button>
+    <div className={`${isDarkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'} max-w-7xl mx-auto p-10 rounded-xl shadow-lg transition-colors duration-500`}>
+      {/* Dark Mode Toggle */}
+      <div className="flex justify-between items-center mb-6">
+        <button
+          onClick={onBack}
+          className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold transition-all hover:bg-blue-200"
+        >
+          Back
+        </button>
+
+        <button
+          onClick={toggleDarkMode}
+          className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full transition-all hover:bg-gray-200"
+        >
+          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
+      </div>
 
       {/* Main Content */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -66,9 +80,15 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           <Slider {...settings}>
             {carImages.map((image, index) => (
               <div key={index} className="relative">
+                {isLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-2xl">
+                    <div className="w-8 h-8 border-t-4 border-blue-600 rounded-full animate-spin"></div>
+                  </div>
+                )}
                 <img
                   src={image}
                   alt={`Car View ${index + 1}`}
+                  onLoad={() => setIsLoading(false)} // Handle loading state
                   className="w-full h-96 object-cover rounded-2xl shadow-lg"
                 />
               </div>
@@ -79,40 +99,40 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         {/* Right Column - Car Info */}
         <div className="flex flex-col justify-between">
           {/* Car Name and Price */}
-          <h2 className="text-3xl font-black text-gray-900 mb-2">{car.name}</h2>
+          <h2 className="text-3xl font-black mb-2">{car.name}</h2>
           <p className="text-blue-700 text-3xl font-bold mb-6">${car.bidPrice}</p>
 
           {/* Car Details */}
           <div className="space-y-4 text-lg">
             <div className="flex items-center">
-              <span className="font-semibold text-gray-700">Class:</span>
-              <span className="ml-2 text-gray-600">Compact executive car D</span>
+              <span className="font-semibold">Class:</span>
+              <span className="ml-2">{car.class || "Compact executive car D"}</span>
             </div>
             <div className="flex items-center">
-              <span className="font-semibold text-gray-700">Layout:</span>
-              <span className="ml-2 text-gray-600">Front-engine, rear-wheel drive (4 MATIC)</span>
+              <span className="font-semibold">Layout:</span>
+              <span className="ml-2">{car.layout || "Front-engine, rear-wheel drive (4 MATIC)"}</span>
             </div>
             <div className="flex items-center">
-              <span className="font-semibold text-gray-700">Predecessor:</span>
-              <span className="ml-2 text-gray-600">Mercedes Benz 190 E (W201)</span>
+              <span className="font-semibold">Predecessor:</span>
+              <span className="ml-2">{car.predecessor || "Mercedes Benz 190 E (W201)"}</span>
             </div>
           </div>
 
           {/* Documents Needed Section */}
           <div className="mt-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Document's Needed</h3>
+            <h3 className="text-lg font-bold mb-4">Document's Needed</h3>
             <ul className="space-y-3">
               <li className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                <label className="text-gray-600">Bill of sale</label>
+                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
+                <label>Bill of sale</label>
               </li>
               <li className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                <label className="text-gray-600">Buyer’s Guide</label>
+                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
+                <label>Buyer’s Guide</label>
               </li>
               <li className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                <label className="text-gray-600">Country of title issuance</label>
+                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
+                <label>Country of title issuance</label>
               </li>
               <li className="flex items-center">
                 <input type="checkbox" className="mr-2" disabled />
@@ -126,8 +146,8 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
             </button>
           </div>
 
-          {/* Buy Now Button */}
-          <button className="bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105">
+          {/* Sticky Buy Now Button */}
+          <button className="sticky bottom-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105">
             Buy Now
           </button>
         </div>
