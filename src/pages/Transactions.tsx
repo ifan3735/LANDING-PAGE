@@ -2,12 +2,14 @@ import { useState } from "react";
 import TopBar from "../components/TopBar";
 import { FaChevronDown, FaFileExport } from "react-icons/fa";
 
-// Sample transaction data (You can replace this with your actual data fetching logic)
+// Sample transaction data with profile images and car images (You can replace this with your actual data fetching logic)
 const transactions = [
   {
     id: '#1588955',
     owner: 'Albert Hussain',
+    profileImage: '/images/albert.jpg', // Replace with the actual path to profile image
     carType: 'Hyundai',
+    carImage: '/images/hyundai.png', // Replace with the actual path to car image
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$287.12',
@@ -16,7 +18,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Smith Hasan',
+    profileImage: '/images/smith.jpg',
     carType: 'Hyundai',
+    carImage: '/images/hyundai.png',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$120.14',
@@ -25,7 +29,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Jackson Kever',
+    profileImage: '/images/jackson.jpg',
     carType: 'Porsche',
+    carImage: '/images/porsche.png',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$751.32',
@@ -34,7 +40,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Alex Jahan',
+    profileImage: '/images/alex.jpg',
     carType: 'Bentley',
+    carImage: '/images/bentley.png',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$214.32',
@@ -43,7 +51,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Jonson Lee',
+    profileImage: '/images/jonson.jpg',
     carType: 'Mercedes',
+    carImage: '/images/mercedes.png',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$142.00',
@@ -52,7 +62,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Robert Luicee',
+    profileImage: '/images/robert.jpg',
     carType: 'Panamera',
+    carImage: '/images/panamera.png',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$71.10',
@@ -61,7 +73,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Robert Luicee',
+    profileImage: '/images/robert.jpg',
     carType: 'Bentley',
+    carImage: '/images/bentley.png',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$211.22',
@@ -81,10 +95,9 @@ const Transactions = () => {
 
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchQuery(e.target.value);
+  const handleSearch = (e) => setSearchQuery(e.target.value);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
@@ -223,21 +236,38 @@ const Transactions = () => {
               <th className="py-3 px-6 text-left">Status</th>
             </tr>
           </thead>
-          <tbody className="text-gray-600 text-sm">
+          <tbody className="text-gray-700 text-sm">
             {filteredTransactions.map((transaction, index) => (
-              <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
-                <td className="py-3 px-6">{transaction.id}</td>
-                <td className="py-3 px-6">{transaction.owner}</td>
+              <tr
+                key={transaction.id}
+                className="border-b border-gray-200 hover:bg-gray-100"
+              >
+                <td className="py-3 px-6">{index + 1}</td>
+                <td className="py-3 px-6 flex items-center">
+                  <img
+                    src={transaction.profileImage}
+                    alt={transaction.owner}
+                    className="w-10 h-10 rounded-full mr-3"
+                  />
+                  {transaction.owner}
+                </td>
                 <td className="py-3 px-6">{transaction.creationDate}</td>
-                <td className="py-3 px-6">{transaction.carType}</td>
+                <td className="py-3 px-6 flex items-center">
+                  <img
+                    src={transaction.carImage}
+                    alt={transaction.carType}
+                    className="w-8 h-8 mr-2"
+                  />
+                  {transaction.carType}
+                </td>
                 <td className="py-3 px-6">{transaction.date}</td>
                 <td className="py-3 px-6">{transaction.totalMoney}</td>
                 <td className="py-3 px-6">
                   <span
-                    className={`py-1 px-3 rounded-full text-xs ${
+                    className={`text-sm font-semibold ${
                       transaction.status === "Paid"
-                        ? "bg-green-200 text-green-600"
-                        : "bg-yellow-200 text-yellow-600"
+                        ? "text-green-500"
+                        : "text-yellow-500"
                     }`}
                   >
                     {transaction.status}
