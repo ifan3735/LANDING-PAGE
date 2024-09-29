@@ -1,6 +1,6 @@
 import { useState } from "react";
 import TopBar from "../components/TopBar";
-import { FaChevronDown, FaFileExport } from "react-icons/fa";
+import { FaBars, FaChevronDown, FaFileExport } from "react-icons/fa";
 
 // Sample transaction data with profile images and car images (You can replace this with your actual data fetching logic)
 const transactions = [
@@ -180,6 +180,7 @@ const Transactions = () => {
             className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
             onClick={() => setShowFilterDropdown(!showFilterDropdown)}
           >
+            <FaBars className="mr-2" />
             Filter by
           </button>
           {showFilterDropdown && (
