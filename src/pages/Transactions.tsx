@@ -267,8 +267,8 @@ const Transactions = () => {
                   <span
                     className={`text-sm font-semibold ${
                       transaction.status === "Paid"
-                        ? "text-green-500"
-                        : "text-yellow-500"
+                        ? "text-green-500 bg-green-100 rounded-xl py-1 px-3"
+                        : "text-yellow-500 bg-yellow-100 rounded-xl py-1 px-3"
                     }`}
                   >
                     {transaction.status}
