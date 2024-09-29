@@ -237,12 +237,12 @@ const Transactions = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm">
-            {filteredTransactions.map((transaction, index) => (
+            {filteredTransactions.map((transaction) => (
               <tr
                 key={transaction.id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
-                <td className="py-3 px-6">{index + 1}</td>
+                <td className="py-3 px-6">{transaction.id}</td>
                 <td className="py-3 px-6 flex items-center">
                   <img
                     src={transaction.profileImage}
