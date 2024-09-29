@@ -184,7 +184,7 @@ const Transactions = () => {
             Filter by
           </button>
           {showFilterDropdown && (
-            <div className="absolute ml-4 p-4 bg-white border rounded-lg shadow-lg">
+            <div className="absolute right-0 top-0 ml-4 p-4 bg-white border rounded-lg shadow-lg">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Car Type
