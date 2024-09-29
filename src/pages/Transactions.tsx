@@ -7,9 +7,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Albert Hussain',
-    profileImage: '/images/albert.jpg', // Replace with the actual path to profile image
+    profileImage: 'https://i.pinimg.com/564x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg', // Replace with the actual path to profile image
     carType: 'Hyundai',
-    carImage: '/images/hyundai.png', // Replace with the actual path to car image
+    carImage: 'https://i.pinimg.com/736x/3d/c1/30/3dc130a91898a86f8eee906fad397b28.jpg', // Replace with the actual path to car image
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$287.12',
@@ -18,9 +18,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Smith Hasan',
-    profileImage: '/images/smith.jpg',
+    profileImage: 'https://i.pinimg.com/564x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg',
     carType: 'Hyundai',
-    carImage: '/images/hyundai.png',
+    carImage: 'https://i.pinimg.com/736x/3d/c1/30/3dc130a91898a86f8eee906fad397b28.jpg',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$120.14',
@@ -29,9 +29,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Jackson Kever',
-    profileImage: '/images/jackson.jpg',
+    profileImage: 'https://i.pinimg.com/564x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg',
     carType: 'Porsche',
-    carImage: '/images/porsche.png',
+    carImage: 'https://i.pinimg.com/736x/3d/c1/30/3dc130a91898a86f8eee906fad397b28.jpg',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$751.32',
@@ -40,9 +40,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Alex Jahan',
-    profileImage: '/images/alex.jpg',
+    profileImage: 'https://i.pinimg.com/564x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg',
     carType: 'Bentley',
-    carImage: '/images/bentley.png',
+    carImage: 'https://i.pinimg.com/736x/3d/c1/30/3dc130a91898a86f8eee906fad397b28.jpg',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$214.32',
@@ -51,9 +51,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Jonson Lee',
-    profileImage: '/images/jonson.jpg',
+    profileImage: 'https://i.pinimg.com/564x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg',
     carType: 'Mercedes',
-    carImage: '/images/mercedes.png',
+    carImage: 'https://i.pinimg.com/736x/3d/c1/30/3dc130a91898a86f8eee906fad397b28.jpg',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$142.00',
@@ -62,9 +62,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Robert Luicee',
-    profileImage: '/images/robert.jpg',
+    profileImage: 'https://i.pinimg.com/564x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg',
     carType: 'Panamera',
-    carImage: '/images/panamera.png',
+    carImage: 'https://i.pinimg.com/736x/3d/c1/30/3dc130a91898a86f8eee906fad397b28.jpg',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$71.10',
@@ -73,9 +73,9 @@ const transactions = [
   {
     id: '#1588955',
     owner: 'Robert Luicee',
-    profileImage: '/images/robert.jpg',
+    profileImage: 'https://i.pinimg.com/564x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg',
     carType: 'Bentley',
-    carImage: '/images/bentley.png',
+    carImage: 'https://i.pinimg.com/736x/3d/c1/30/3dc130a91898a86f8eee906fad397b28.jpg',
     creationDate: '01 July, 2023',
     date: '03 July, 2023',
     totalMoney: '$211.22',
