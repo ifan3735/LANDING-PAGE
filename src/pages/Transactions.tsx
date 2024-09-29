@@ -242,7 +242,7 @@ const Transactions = () => {
                 key={transaction.id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
-                <td className="py-3 px-6">{transaction.id}</td>
+                <td className="py-3 px-6"><span className="text-gray-400">{transaction.id}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   <img
                     src={transaction.profileImage}
@@ -251,7 +251,7 @@ const Transactions = () => {
                   />
                   {transaction.owner}
                 </td>
-                <td className="py-3 px-6">{transaction.creationDate}</td>
+                <td className="py-3 px-6"><span className="text-gray-400">{transaction.creationDate}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   <img
                     src={transaction.carImage}
@@ -260,7 +260,7 @@ const Transactions = () => {
                   />
                   {transaction.carType}
                 </td>
-                <td className="py-3 px-6">{transaction.date}</td>
+                <td className="py-3 px-6"><span className="text-gray-400">{transaction.date}</span></td>
                 <td className="py-3 px-6">
                   <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">{transaction.totalMoney}</span></td>
                 <td className="py-3 px-6">
