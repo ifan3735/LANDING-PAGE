@@ -177,7 +177,7 @@ const Transactions = () => {
         <h2 className="text-xl font-semibold">Transaction List</h2>
         <div className="flex items-center">
           <button
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+            className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
             onClick={() => setShowFilterDropdown(!showFilterDropdown)}
           >
             Filter by
