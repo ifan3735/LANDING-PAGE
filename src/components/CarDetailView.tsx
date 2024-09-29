@@ -128,7 +128,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Mileage:</span>
-              <span className="ml-2">{car.mileage || "15,000 miles"}</span>
+              <span className="ml-2">{car.mileage || "15,000 miles"}KMs</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Transmission:</span>
