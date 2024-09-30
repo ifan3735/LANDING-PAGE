@@ -180,6 +180,11 @@ const Calendar = () => {
             <FaChevronRight />
           </button>
         </div>
+        <div>
+          <p className="text-sm text-gray-600">
+            {currentDates[0].toDateString()} - {currentDates[6].toDateString()}
+          </p>
+        </div>
       </div>
 
       {/* Calendar View Section */}
