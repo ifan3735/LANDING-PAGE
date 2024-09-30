@@ -119,52 +119,11 @@ const Calendar = () => {
               </ul>
             </div>
           )}
-
-          {/* Dropdown for Today */}
-          <select
-            className="bg-white border border-gray-300 rounded-md px-4 py-2"
-            onChange={handleTodayClick}
-          >
-            <option>Today</option>
-            {currentDates.map((date, index) => (
-              <option key={index}>{date.toDateString()}</option>
-            ))}
-          </select>
-
-          {/* Dropdown for Types */}
-          <select
-            name="type"
-            value={selectedFilters.type}
-            onChange={handleFilterChange}
-            className="bg-white border border-gray-300 rounded-md px-4 py-2"
-          >
-            <option value="">All Types</option>
-            <option value="car">Car</option>
-            <option value="urgent">Urgent</option>
-            <option value="request">Request</option>
-          </select>
-
-          {/* Dropdown for Year */}
-          <select
-            name="year"
-            value={selectedFilters.year}
-            onChange={handleFilterChange}
-            className="bg-white border border-gray-300 rounded-md px-4 py-2"
-          >
-            {[...Array(5)].map((_, i) => {
-              const year = new Date().getFullYear() - i;
-              return (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              );
-            })}
-          </select>
         </div>
       </div>
 
       {/* Week Navigation */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 space-x-4">
         <div className="flex items-center">
           <button
             onClick={prevWeek}
