@@ -139,7 +139,7 @@ const Calendar = () => {
             <FaChevronRight />
           </button>
         </div>
-        <div>
+        <div className="space-x-4">
           {/* Dropdown for Today */}
           <select
             className="bg-white border border-gray-300 rounded-md px-4 py-2"
