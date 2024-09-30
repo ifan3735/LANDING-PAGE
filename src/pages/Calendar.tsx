@@ -51,6 +51,15 @@ const Calendar = () => {
     { id: 4, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[3], type: "car" },
     { id: 5, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[5], type: "urgent" },
     { id: 6, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[6], type: "request" },
+    { id: 7, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[0], type: "car" },
+    { id: 8, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[1], type: "car" },
+    { id: 9, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[2], type: "urgent" },
+    { id: 10, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[3], type: "request" },
+    { id: 11, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[4], type: "car" },
+    { id: 12, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[5], type: "car" },
+    { id: 13, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[6], type: "urgent" },
+    { id: 14, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[0], type: "request" },
+    { id: 15, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[1], type: "car" },
   ];
 
   // Dropdown Handlers
