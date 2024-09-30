@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import TopBar from "../components/TopBar";
 import { FaChevronDown, FaFileExport, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
@@ -45,12 +45,12 @@ const Calendar = () => {
 
   // Sample event data for dynamic rendering
   const events = [
-    { id: 1, title: "Panamera Car", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[0] },
-    { id: 2, title: "Hyundai Turbo", time: "8AM-10PM", location: "Nottingham", date: currentDates[1] },
-    { id: 3, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[2] },
-    { id: 4, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[3] },
-    { id: 5, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[5] },
-    { id: 6, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[6] },
+    { id: 1, title: "Panamera Car", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[0], type: "car" },
+    { id: 2, title: "Hyundai Turbo", time: "8AM-10PM", location: "Nottingham", date: currentDates[1], type: "car" },
+    { id: 3, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[2], type: "car" },
+    { id: 4, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[3], type: "car" },
+    { id: 5, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[5], type: "urgent" },
+    { id: 6, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[6], type: "request" },
   ];
 
   // Dropdown Handlers
