@@ -1,37 +1,21 @@
-import React from 'react';
-import { FaCar, FaCog, FaSignOutAlt, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaUserCircle, FaChartBar } from 'react-icons/fa';
+import { FaCar, FaCog, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaUserCircle, FaChartBar, FaSearch, FaHeadset } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div
-      className="w-76 h-full bg-white-600 text-gray flex flex-col overflow-y-auto scrollbar-hide" // Add custom class to hide scrollbar
-    >
-      <div className="p-6 flex items-center justify-between">
-        <span className="text-2xl font-bold">Lurex</span>
-        {/* Replace the FaUserCircle icon with the company logo */}
-        <img
-          src="https://i.pinimg.com/236x/16/29/26/16292654e973edd782ceda665533c006.jpg"
-          alt="Company Logo"
-          className="w-12 h-12 object-cover rounded-full" // Styled for better appearance
-        />
+    <div className="w-76 h-full bg-white text-gray-700 flex flex-col overflow-y-auto">
+      <div className="p-6 flex items-center">
+        <span className="text-2xl font-bold text-blue-700">CarEmpire</span>
       </div>
-      
-      <div className="px-6 py-4 flex items-center space-x-4 bg-yellow-500 rounded-md mx-4 mb-6">
-        <FaUserCircle className="text-4xl" />
-        <div>
-          <p className="font-semibold">John Stevens</p>
-          <p className="text-sm text-yellow-200">User</p>
-        </div>
-      </div>
-      
+
       <ul className="flex-1 space-y-2 px-4">
+        <h2 className="text-gray-500 text-xs uppercase font-semibold mb-2">Menu</h2>
         <li>
           <NavLink
             to="/dashboard"
             className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -42,20 +26,44 @@ const Sidebar = () => {
           <NavLink
             to="/listings"
             className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
               }`
             }
           >
-            <FaList className="mr-3" /> Listings
+            <FaList className="mr-3" /> Listing
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/calendar"
+            className={({ isActive }) =>
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+              }`
+            }
+          >
+            <FaCalendarAlt className="mr-3" /> Calendar
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/deals"
+            className={({ isActive }) =>
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+              }`
+            }
+          >
+            <FaDollarSign className="mr-3" /> Deals
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/tracking"
             className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -66,32 +74,20 @@ const Sidebar = () => {
           <NavLink
             to="/bids"
             className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
               }`
             }
           >
-            <FaDollarSign className="mr-3" />Active Bids
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/calendar"
-            className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
-              }`
-            }
-          >
-            <FaCalendarAlt className="mr-3" /> Calendar
+            <FaDollarSign className="mr-3" /> Active Bids
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/statistics"
             className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -102,46 +98,57 @@ const Sidebar = () => {
           <NavLink
             to="/transactions"
             className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
               }`
             }
           >
-            <FaDollarSign className="mr-3" /> Transactions
+            <FaDollarSign className="mr-3" /> Transaction
           </NavLink>
         </li>
-        <h2>others</h2>
+      </ul>
+
+      <div className="border-t border-gray-300 my-4 mx-4"></div>
+
+      <ul className="flex-1 space-y-2 px-4">
+        <h2 className="text-gray-500 text-xs uppercase font-semibold mb-2">Other Menu</h2>
         <li>
           <NavLink
-            to="/profile"
+            to="/search"
             className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
               }`
             }
           >
-            <FaUserCircle className="mr-3" /> Search
+            <FaSearch className="mr-3" /> Search
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/settings"
             className={({ isActive }) =>
-              `flex items-center p-4 rounded-md ${
-                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
               }`
             }
           >
             <FaCog className="mr-3" /> Settings
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="/help-center"
+            className={({ isActive }) =>
+              `flex items-center p-3 rounded-md ${
+                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+              }`
+            }
+          >
+            <FaHeadset className="mr-3" /> Help Center
+          </NavLink>
+        </li>
       </ul>
-
-      <div className="p-4 hover:bg-yellow-500 rounded-md mx-4 mb-6">
-        <NavLink to="/logout" className="flex items-center">
-          <FaSignOutAlt className="mr-3" /> Help Center
-        </NavLink>
-      </div>
     </div>
   );
 };
