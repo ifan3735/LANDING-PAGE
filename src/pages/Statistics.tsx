@@ -57,7 +57,7 @@ const StatisticsPage = () => {
       <div className="flex justify-between items-center my-6">
         {/* Left Section: Header and Paragraph */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Statistics</h2>
           <p className="text-sm text-gray-600">
             Get your latest update for the past 7 days
           </p>
