@@ -15,7 +15,7 @@ const Sidebar = () => {
             to="/dashboard"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
