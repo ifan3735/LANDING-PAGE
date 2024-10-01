@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className="w-76 h-full bg-white text-gray-700 flex flex-col overflow-y-auto">
+    <div className="w-76 h-full bg-white text-gray-700 flex flex-col overflow-y-auto scrollbar-hide">
       <div className="p-6 flex items-center space-x-2">
         {/* Added the car logo here */}
         <FaCar className="text-blue-700 text-3xl" />
