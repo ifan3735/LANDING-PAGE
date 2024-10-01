@@ -9,7 +9,7 @@ const Sidebar = () => {
       </div>
 
       <ul className="flex-1 space-y-2 px-4">
-        <h2 className="text-gray-500 text-xs uppercase font-semibold mb-2">Menu</h2>
+        <h2 className="text-gray-500 text-xs font-semibold mb-2">Menu</h2>
         <li>
           <NavLink
             to="/dashboard"
@@ -111,7 +111,7 @@ const Sidebar = () => {
       <div className="border-t border-gray-300 my-4 mx-4"></div>
 
       <ul className="flex-1 space-y-2 px-4">
-        <h2 className="text-gray-500 text-xs uppercase font-semibold mb-2">Other Menu</h2>
+        <h2 className="text-gray-500 text-xs font-semibold mb-2">Other Menu</h2>
         <li>
           <NavLink
             to="/search"
