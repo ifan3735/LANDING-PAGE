@@ -110,6 +110,19 @@ const Sidebar = () => {
             <FaDollarSign className="mr-3" /> Transactions
           </NavLink>
         </li>
+        <h2>others</h2>
+        <li>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              `flex items-center p-4 rounded-md ${
+                isActive ? 'bg-yellow-500' : 'hover:bg-yellow-500'
+              }`
+            }
+          >
+            <FaUserCircle className="mr-3" /> Search
+          </NavLink>
+        </li>
         <li>
           <NavLink
             to="/settings"
@@ -126,7 +139,7 @@ const Sidebar = () => {
 
       <div className="p-4 hover:bg-yellow-500 rounded-md mx-4 mb-6">
         <NavLink to="/logout" className="flex items-center">
-          <FaSignOutAlt className="mr-3" /> Logout
+          <FaSignOutAlt className="mr-3" /> Help Center
         </NavLink>
       </div>
     </div>
