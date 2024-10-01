@@ -27,7 +27,7 @@ const Sidebar = () => {
             to="/listings"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -39,7 +39,7 @@ const Sidebar = () => {
             to="/calendar"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -51,7 +51,7 @@ const Sidebar = () => {
             to="/deals"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -63,7 +63,7 @@ const Sidebar = () => {
             to="/tracking"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -75,7 +75,7 @@ const Sidebar = () => {
             to="/bids"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -87,7 +87,7 @@ const Sidebar = () => {
             to="/statistics"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -99,7 +99,7 @@ const Sidebar = () => {
             to="/transactions"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -117,7 +117,7 @@ const Sidebar = () => {
             to="/search"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -129,7 +129,7 @@ const Sidebar = () => {
             to="/settings"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
@@ -141,7 +141,7 @@ const Sidebar = () => {
             to="/help-center"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
-                isActive ? 'bg-blue-100 text-blue-700' : 'hover:bg-gray-100'
+                isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
               }`
             }
           >
