@@ -60,6 +60,7 @@ const Calendar = () => {
     { id: 13, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[6], type: "urgent" },
     { id: 14, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[0], type: "request" },
     { id: 15, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[1], type: "car" },
+    { id: 16, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[2], type: "car" },
   ];
 
   // Dropdown Handlers
