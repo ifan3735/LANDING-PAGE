@@ -1,5 +1,6 @@
 import TopBar from "../components/TopBar";
 import { useState } from "react";
+import { exportData } from "../utils/ExportData";
 
 const Deals = () => {
     const [showDropdown, setShowDropdown] = useState(false);
