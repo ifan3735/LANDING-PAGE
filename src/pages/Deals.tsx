@@ -10,10 +10,35 @@ const Deals = () => {
         color: '',
         style: '',
       });
+
+      const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
+
+      const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
+
+      const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setSelectedFilters((prevFilters) => ({
+          ...prevFilters,
+          [name]: value,
+        }));
+      };
+
+      const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
+
+      const toggleExportDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
     return (
-        <div>
-        <h1>Deals</h1>
-        </div>
+        <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
+          <TopBar
+        searchQuery={searchQuery}
+        handleSearch={handleSearch}
+        toggleTheme={toggleTheme}
+        theme={theme}
+        exportData={() => exportData(filteredCars)}
+      />    
+    </div>
     );
     };
 
