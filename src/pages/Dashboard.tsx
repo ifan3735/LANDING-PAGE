@@ -76,7 +76,7 @@ const Dashboard = () => {
   const seeLessActivities = () => setVisibleActivities(1); // Reset to showing just one activity
 
   return (
-    <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-blue-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
+    <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       <TopBar
         searchQuery={searchQuery}
         handleSearch={handleSearch}
