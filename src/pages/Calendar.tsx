@@ -80,7 +80,7 @@ const Calendar = () => {
   return (
     <div
       className={`flex-1 p-6 ${
-        theme === "yellow" ? "bg-yellow-100 text-gray-900" : "bg-gray-100 text-gray-900"
+        theme === "yellow" ? "bg-blue-100 text-gray-900" : "bg-gray-100 text-gray-900"
       } min-h-screen`}
     >
       <TopBar
