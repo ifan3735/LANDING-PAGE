@@ -209,15 +209,8 @@ const Deals = () => {
                     {deal.type}
                 </td>
                 <td className="py-3 px-6">
-                  <span
-                    className={`text-sm font-semibold ${
-                      deal.status === "Paid"
-                        ? "text-green-500"
-                        : "text-orange-500"
-                    }`}
-                  >
-                    {deal.status}
-                  </span>
+                  <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">{deal.totalMoney}</span>
+                    
                 </td>
               </tr>
             ))}
