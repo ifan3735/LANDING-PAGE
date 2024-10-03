@@ -116,17 +116,17 @@ const Deals = () => {
 
               <div className="mt-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Status
+                  Type
                 </label>
                 <select
                   name="status"
-                  value={selectedFilters.status}
+                  value={selectedFilters.Type}
                   onChange={handleFilterChange}
                   className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
                 >
                   <option value="">All</option>
-                  <option value="Paid">Paid</option>
-                  <option value="Pending">Pending</option>
+                  <option value="Card">Card</option>
+                  <option value="Cash">Cash</option>
                 </select>
               </div>
             </div>
