@@ -206,9 +206,7 @@ const Deals = () => {
                 </td>
                 <td className="py-3 px-6">{deal.date}</td>
                 <td className="py-3 px-6">
-                  <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">
-                    {deal.totalMoney}
-                  </span>
+                    {deal.type}
                 </td>
                 <td className="py-3 px-6">
                   <span
