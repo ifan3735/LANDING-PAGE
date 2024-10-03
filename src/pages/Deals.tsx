@@ -1,16 +1,47 @@
 import TopBar from "../components/TopBar";
 import { useState } from "react";
-import { exportData } from "../utils/ExportData";
-import { FaBars, FaChevronDown, FaFileExport } from "react-icons/fa";
+import { FaChevronDown, FaFileExport, FaFilter } from "react-icons/fa";
 
 const Deals = () => {
+  const [showExportDropdown, setShowExportDropdown] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
-    type: "",
     carType: "",
+    paymentType: "",
+  });
+
+  const dealsData = [
+    {
+      id: "#1588955",
+      ownerName: "Albert Hussain",
+      creationDate: "01 July, 2023",
+      carType: "Hyundai",
+      returnDate: "03 July, 2023",
+      type: "Card",
+      totalPrice: 148.82,
+    },
+    {
+      id: "#1588956",
+      ownerName: "Jonson Lee",
+      creationDate: "05 July, 2023",
+      carType: "Bentley",
+      returnDate: "06 Aug, 2023",
+      type: "Cash",
+      totalPrice: 287.36,
+    },
+    // Add more data as per the design...
+  ];
+
+  const filteredDeals = dealsData.filter((deal) => {
+    return (
+      (selectedFilters.carType === "" || deal.carType === selectedFilters.carType) &&
+      (selectedFilters.paymentType === "" || deal.type === selectedFilters.paymentType) &&
+      (searchQuery === "" ||
+        deal.ownerName.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
   });
 
   const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
@@ -27,7 +58,12 @@ const Deals = () => {
   };
 
   const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
-  const toggleExportDropdown = () => setShowDropdown(!showDropdown);
+  const toggleExportDropdown = () => setShowExportDropdown(!showExportDropdown);
+
+  const handleExport = (format: string) => {
+    console.log(`Export as ${format}`);
+    setShowExportDropdown(false);
+  };
 
   return (
     <div
@@ -35,24 +71,25 @@ const Deals = () => {
         theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
       } min-h-screen`}
     >
+      {/* TopBar */}
       <TopBar
-        searchQuery={searchQuery}
-        handleSearch={handleSearch}
-        toggleTheme={toggleTheme}
-        theme={theme}
-        exportData={() => exportData([])}
-      />
-
-      {/* Deals Section */}
-      <div className="flex justify-between items-center my-6">
+          searchQuery={searchQuery}
+          handleSearch={handleSearch}
+          toggleTheme={toggleTheme}
+          theme={theme} exportData={function (): void {
+            throw new Error("Function not implemented.");
+          } }      />
+       
+       {/* New Layer Below Top Bar */}
+       <div className="flex justify-between items-center my-6">
         <div>
-          <h2 className="text-2xl font-bold">Deals</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Transactions</h2>
           <p className="text-sm text-gray-600">
             Get your latest update for the past 7 days
           </p>
         </div>
 
-        {/* Export Button */}
+        {/* Export Button with Dropdown */}
         <div className="relative">
           <button
             onClick={toggleExportDropdown}
@@ -62,6 +99,7 @@ const Deals = () => {
             <FaChevronDown className="ml-2" />
           </button>
 
+          {/* Export Dropdown */}
           {showDropdown && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
               <ul>
@@ -82,65 +120,11 @@ const Deals = () => {
           )}
         </div>
       </div>
-
-      {/* Filter Section */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Deals List</h2>
-        <div className="relative">
-          <button
-            className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
-            onClick={toggleFilterDropdown}
-          >
-            <FaBars className="mr-2" />
-            Filter by
-          </button>
-
-          {showFilterDropdown && (
-            <div className="absolute right-0 mt-2 w-64 p-4 bg-white border rounded-lg shadow-lg">
-              <div className="mb-3">
-                <label className="block text-sm font-medium text-gray-700">
-                  Car Type
-                </label>
-                <select
-                  name="carType"
-                  value={selectedFilters.carType}
-                  onChange={handleFilterChange}
-                  className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
-                >
-                  <option value="">All</option>
-                  <option value="Hyundai">Hyundai</option>
-                  <option value="Porsche">Porsche</option>
-                  <option value="Bentley">Bentley</option>
-                  <option value="Mercedes">Mercedes</option>
-                  <option value="Panamera">Panamera</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Payment Type
-                </label>
-                <select
-                  name="type"
-                  value={selectedFilters.type}
-                  onChange={handleFilterChange}
-                  className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
-                >
-                  <option value="">All</option>
-                  <option value="Card">Card</option>
-                  <option value="Cash">Cash</option>
-                </select>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
       {/* Deals List Table */}
-      <div className="bg-white shadow rounded-lg p-4">
+      <div className="bg-white shadow rounded-lg p-4 overflow-x-auto">
         <table className="w-full table-fixed">
           <thead>
-            <tr className="text-left border-b">
+            <tr className="text-left border-b text-gray-600">
               <th className="py-2 w-1/12">No.</th>
               <th className="py-2 w-2/12">Owner Name</th>
               <th className="py-2 w-2/12">Creation Date</th>
@@ -151,18 +135,25 @@ const Deals = () => {
             </tr>
           </thead>
           <tbody>
-            {/* Map over deals data here */}
-            {[...Array(10)].map((_, index) => (
-              <tr key={index} className="border-b">
-                <td className="py-2">#158895{index}</td>
-                <td className="py-2">Owner Name {index}</td>
-                <td className="py-2">01 July, 2023</td>
-                <td className="py-2">Hyundai</td>
-                <td className="py-2">03 July, 2023</td>
-                <td className="py-2">Card</td>
-                <td className="py-2">$ {148.82 + index * 10}</td>
+            {filteredDeals.length > 0 ? (
+              filteredDeals.map((deal, index) => (
+                <tr key={index} className="border-b hover:bg-gray-100">
+                  <td className="py-2">{deal.id}</td>
+                  <td className="py-2">{deal.ownerName}</td>
+                  <td className="py-2">{deal.creationDate}</td>
+                  <td className="py-2">{deal.carType}</td>
+                  <td className="py-2">{deal.returnDate}</td>
+                  <td className="py-2">{deal.type}</td>
+                  <td className="py-2">${deal.totalPrice.toFixed(2)}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={7} className="text-center py-4 text-gray-500">
+                  No deals found.
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
