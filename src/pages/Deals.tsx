@@ -82,62 +82,6 @@ const Deals = () => {
           )}
         </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="col-span-1 lg:col-span-8">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Available Cars</h2>
-              <div className="relative">
-                <button 
-                  className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
-                  onClick={toggleFilterDropdown}
-                >
-                   <FaBars className="mr-2" /> Filter by
-                </button>
-                {showFilterDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-4 z-10">
-                    {/* Filter dropdown */}
-                    <div className="mb-2">
-                      <label className="block text-sm text-gray-700">Type:</label>
-                      <select name="type" value={selectedFilters.type} onChange={handleFilterChange} className="w-full p-2 border rounded">
-                        <option value="">All</option>
-                        <option value="Auto">Auto</option>
-                        <option value="Manual">Manual</option>
-                        <option value="Electric">Electric</option>
-                        <option value="Petrol">Petrol</option>
-                      </select>
-                    </div>
-                    <div className="mb-2">
-                      <label className="block text-sm text-gray-700">Color:</label>
-                      <select name="color" value={selectedFilters.color} onChange={handleFilterChange} className="w-full p-2 border rounded">
-                        <option value="">All</option>
-                        <option value="Green">Green</option>
-                        <option value="Brown">Brown</option>
-                        <option value="Yellow">Yellow</option>
-                        <option value="Red">Red</option>
-                        <option value="Blue">Blue</option>
-                        <option value="White">White</option>
-                      </select>
-                    </div>
-                    <div className="mb-2">
-                      <label className="block text-sm text-gray-700">Style:</label>
-                      <select name="style" value={selectedFilters.style} onChange={handleFilterChange} className="w-full p-2 border rounded">
-                        <option value="">All</option>
-                        <option value="Audi">Audi</option>
-                        <option value="Bentley">Bentley</option>
-                        <option value="Lamborghini">Lamborghini</option>
-                        <option value="Porsche">Porsche</option>
-                        <option value="BMW">BMW</option>
-                        <option value="Tesla">Tesla</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       </div>
     );
     };
