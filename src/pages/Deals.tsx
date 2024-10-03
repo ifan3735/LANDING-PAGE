@@ -186,7 +186,7 @@ const Deals = () => {
                 key={deal.id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
-                <td className="py-3 px-6">{deal.id}</td>
+                <td className="py-3 px-6"><span className="text-gray-400">{deal.id}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   <img
                     src={deal.profileImage}
@@ -195,7 +195,7 @@ const Deals = () => {
                   />
                   {deal.owner}
                 </td>
-                <td className="py-3 px-6">{deal.creationDate}</td>
+                <td className="py-3 px-6"><span className="text-gray-400">{deal.creationDate}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   <img
                     src={deal.carImage}
@@ -204,13 +204,12 @@ const Deals = () => {
                   />
                   {deal.carType}
                 </td>
-                <td className="py-3 px-6">{deal.date}</td>
+                <td className="py-3 px-6"><span className="text-gray-400">{deal.date}</span></td>
                 <td className="py-3 px-6">
                     {deal.type}
                 </td>
                 <td className="py-3 px-6">
-                  <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">{deal.totalMoney}</span>
-                    
+                  <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.totalMoney}</span> 
                 </td>
               </tr>
             ))}
