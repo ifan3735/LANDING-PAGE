@@ -16,6 +16,7 @@ const deals = [
     date: "03 July, 2023",
     totalMoney: "$287.12",
     status: "Paid",
+    type: "Card"
   },
   // other deals omitted for brevity
 ];
@@ -147,7 +148,7 @@ const Deals = () => {
 
               <div className="mt-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Status
+                  Type
                 </label>
                 <select
                   name="status"
@@ -156,8 +157,8 @@ const Deals = () => {
                   className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
                 >
                   <option value="">All</option>
-                  <option value="Paid">Paid</option>
-                  <option value="Pending">Pending</option>
+                  <option value="Paid">Card</option>
+                  <option value="Pending">Cash</option>
                 </select>
               </div>
             </div>
@@ -175,7 +176,7 @@ const Deals = () => {
               <th className="py-3 px-6 text-left">Creation Date</th>
               <th className="py-3 px-6 text-left">Car Type</th>
               <th className="py-3 px-6 text-left">Return Date</th>
-              <th className="py-3 px-6 text-left">Time</th>
+              <th className="py-3 px-6 text-left">Type</th>
               <th className="py-3 px-6 text-left">Total Price</th>
             </tr>
           </thead>
