@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const FilterBar = ({ selectedFilters, handleFilterChange, searchTerm, setSearchTerm }: { selectedFilters: any; handleFilterChange: any; searchTerm: string; setSearchTerm: any }) => (
-    <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 rounded-lg">
+    <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 space-x-6 rounded-lg">
       {/* Dropdown Filters Section */}
       <div className="flex space-x-4">
         {/* Type Filter */}
