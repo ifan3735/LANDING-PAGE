@@ -43,36 +43,10 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
             Color: <span className="text-gray-700">{car.color}</span>
           </p>
         </div>
-  
-        {/* Mileage, Fuel, Location */}
-        <div className="flex items-center text-sm text-gray-500 space-x-6 mb-4">
-          <div className="flex items-center space-x-1">
-            <FaTachometerAlt className="text-blue-500" />
-            <p>{car.mileage} KM</p>
-          </div>
-          <div className="flex items-center space-x-1">
-            <FaGasPump className="text-blue-500" />
-            <p>{car.fuelType}</p>
-          </div>
-          <div className="flex items-center space-x-1">
-            <FaMapMarkerAlt className="text-blue-500" />
-            <p>{car.location}</p>
-          </div>
-        </div>
-  
-        {/* RTO and Speed Details */}
-        <div className="flex items-center text-sm text-gray-500 space-x-6">
-          <p>
-            <span className="font-semibold">RTO:</span> Pending
-          </p>
-          <p>
-            <span className="font-semibold">Speed:</span> {car.speed}
-          </p>
-        </div>
       </div>
     </div>
   );
-  
+
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -350,6 +324,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/af/9f/1f/af9f1fed99621ae20f9edd2ab6cbb8bd.jpg',
       carType: 'Sedan',
       dateListed: '28 Jun',
+      price: '500'
     },
     {
       name: 'Bentley Flying Spur',
@@ -363,6 +338,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/2a/7d/4c/2a7d4c4bc1381a476b8b8a85885ac392.jpg',
       carType: 'Luxury',
       dateListed: '25 Jun',
+      price: '500'
     },
     {
       name: 'Porsche Tayca',
@@ -376,6 +352,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/ad/15/5b/ad155b4cfd5b6d220c3e5b51b349a37a.jpg',
       carType: 'Coupe',
       dateListed: '26 Jun',
+      price: '500'
     },
     {
       name: 'Mercedes Benz EQS',
@@ -389,6 +366,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/2e/3e/fd/2e3efdc0486a8858f9e0471eee3f68e5.jpg',
       carType: 'Luxury',
       dateListed: '25 Jun',
+      price: '500'
     },
     {
       name: 'Audi Q4 e-tron',
@@ -402,6 +380,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/f9/58/e4/f958e4ad039823fdc0e5aaa45aae278d.jpg',
       carType: 'Coupe',
       dateListed: '26 Jun',
+      price: '500'
     },
     {
       name: 'Toyota Corolla Cross',
@@ -415,6 +394,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/78/f1/fa/78f1faef59b24ecc67f1dbef3ddc32ac.jpg',
       carType: 'Luxury',
       dateListed: '25 Jun',
+      price: '500'
     },
     {
       name: 'BMW i4',
@@ -428,6 +408,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/8b/85/75/8b8575ca1ecb184466a32b228dbeb3f7.jpg',
       carType: 'Coupe',
       dateListed: '26 Jun',
+      price: '500'
     },
     {
       name: 'Audi Q4 e-tron',
@@ -441,6 +422,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg',
       carType: 'Luxury',
       dateListed: '25 Jun',
+      price: '500'
     },
     {
       name: 'Toyota Corolla Cross',
@@ -454,6 +436,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/d2/d2/f8/d2d2f8210f500b3e859d8f282e3d0e9b.jpg',
       carType: 'Coupe',
       dateListed: '26 Jun',
+      price: '500'
     },
     {
       name: 'BMW i4',
@@ -467,6 +450,7 @@ const Search = () => {
       ownerAvatar: 'https://i.pinimg.com/236x/82/cc/d6/82ccd6e43a3334813015ec3247aeca7d.jpg',
       carType: 'Luxury',
       dateListed: '25 Jun',
+      price: '500'
     }
     // Add more cars as needed
   ];
