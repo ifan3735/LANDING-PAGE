@@ -494,7 +494,7 @@ const Search = () => {
         <>
           <div className="flex justify-between items-center my-6">
             <div>
-              <h2 className="text-2xl font-bold text-gray-800">Listings</h2>
+              <h2 className="text-2xl font-bold text-gray-800">Search</h2>
               <p className="text-sm text-gray-600">
                 Get your latest update for the past 7 days
               </p>
