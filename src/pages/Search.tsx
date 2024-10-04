@@ -8,32 +8,44 @@ import "slick-carousel/slick/slick-theme.css";
 
 // CarCard Component for List and Detail Views
 const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
-  <div
-    onClick={onClick}
-    className="bg-white p-6 rounded-lg shadow-md flex flex-row space-x-4 w-full max-w-lg cursor-pointer"
-  >
-    <div className="flex items-center">
-      <img
-        src={car.image}
-        alt={car.name}
-        className="w-46 h-34 rounded-lg object-cover"
-      />
-    </div>
-    <div className="flex-1 flex flex-col justify-center">
-      <div className="flex items-center space-x-3 mb-3">
+    <div
+      onClick={onClick}
+      className="bg-white p-6 rounded-lg shadow-md flex flex-col space-y-4 w-full max-w-lg cursor-pointer hover:shadow-lg transition-shadow"
+    >
+      {/* Car Image Section */}
+      <div className="flex justify-center items-center">
         <img
-          src={car.ownerAvatar}
-          alt={car.owner}
-          className="w-12 h-12 rounded-full border-2 border-green-500"
+          src={car.image}
+          alt={car.name}
+          className="w-full max-w-xs h-auto rounded-lg object-cover"
         />
-        <div>
-          <p className="font-semibold text-gray-700">{car.owner}</p>
-          <p className="text-sm text-gray-500">{car.dateListed}</p>
-        </div>
       </div>
-      <h3 className="font-semibold text-lg text-gray-700 mb-1">{car.name}</h3>
-      <div className="text-sm text-gray-500 mb-2">
-        <div className="flex items-center space-x-4">
+  
+      {/* Car Details Section */}
+      <div className="flex flex-col">
+        {/* Car Name and Price */}
+        <h3 className="font-semibold text-2xl text-gray-700 mb-1">
+          {car.name}
+        </h3>
+        <div className="text-xl text-blue-500 font-bold mb-2">
+          ${car.price}
+        </div>
+  
+        {/* Style, Type, and Color */}
+        <div className="text-sm text-gray-500 mb-2 flex flex-wrap gap-4">
+          <p className="font-medium">
+            Style: <span className="text-gray-700">{car.carType}</span>
+          </p>
+          <p className="font-medium">
+            Type: <span className="text-gray-700">{car.type}</span>
+          </p>
+          <p className="font-medium">
+            Color: <span className="text-gray-700">{car.color}</span>
+          </p>
+        </div>
+  
+        {/* Mileage, Fuel, Location */}
+        <div className="flex items-center text-sm text-gray-500 space-x-6 mb-4">
           <div className="flex items-center space-x-1">
             <FaTachometerAlt className="text-blue-500" />
             <p>{car.mileage} KM</p>
@@ -47,21 +59,20 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
             <p>{car.location}</p>
           </div>
         </div>
-        <div className="flex items-center space-x-4 mt-2">
-          <p>Style: {car.carType}</p>
-          <p>RTO: Pending</p>
-          <p>Speed: {car.speed}</p>
+  
+        {/* RTO and Speed Details */}
+        <div className="flex items-center text-sm text-gray-500 space-x-6">
+          <p>
+            <span className="font-semibold">RTO:</span> Pending
+          </p>
+          <p>
+            <span className="font-semibold">Speed:</span> {car.speed}
+          </p>
         </div>
       </div>
-      <div className="flex justify-between items-center">
-        <p className="font-bold text-lg text-gray-500">
-          Rate: <span className="font-bold text-lg text-blue-500">
-             ${car.rentalRate} </span></p>
-      </div>
     </div>
-  </div>
-);
-
+  );
+  
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
