@@ -27,10 +27,6 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
         <h3 className="font-medium text-lg text-gray-700 mb-1">
           {car.name}
         </h3>
-        <div className="text-lg text-blue-500 font-semibold mb-1">
-          ${car.price}
-        </div>
-  
         {/* Style, Type, and Color */}
         <div className="text-xs text-gray-500 mb-1 flex flex-wrap gap-3">
           <p className="font-medium">
@@ -42,6 +38,9 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
           <p className="font-medium">
             Color: <span className="text-gray-700">{car.color}</span>
           </p>
+        </div>
+        <div className="text-lg text-blue-500 font-semibold mb-1">
+          ${car.price}
         </div>
       </div>
     </div>
