@@ -2,9 +2,64 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TopBar from "../components/TopBar";
-import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar } from "react-icons/fa";
+import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar, FaSearch } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+const FilterBar = ({ selectedFilters, handleFilterChange, searchTerm, setSearchTerm }: { selectedFilters: any; handleFilterChange: any; searchTerm: string; setSearchTerm: any }) => (
+    <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 rounded-lg">
+      {/* Dropdown Filters Section */}
+      <div className="flex space-x-4">
+        {/* Type Filter */}
+        <div className="flex items-center space-x-2">
+          <label className="text-gray-600 text-sm font-medium">Type</label>
+          <select
+            name="type"
+            value={selectedFilters.type}
+            onChange={handleFilterChange}
+            className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
+          >
+            <option value="">All Cars</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Luxury">Luxury</option>
+            <option value="Coupe">Coupe</option>
+            <option value="SUV">SUV</option>
+          </select>
+        </div>
+  
+        {/* Brand Filter */}
+        <div className="flex items-center space-x-2">
+          <label className="text-gray-600 text-sm font-medium">Brand</label>
+          <select
+            name="brand"
+            value={selectedFilters.brand}
+            onChange={handleFilterChange}
+            className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
+          >
+            <option value="">All Brands</option>
+            <option value="Lamborghini">Lamborghini</option>
+            <option value="Audi">Audi</option>
+            <option value="BMW">BMW</option>
+            <option value="Mercedes">Mercedes</option>
+          </select>
+        </div>
+      </div>
+  
+      {/* Search Input Section */}
+      <div className="flex items-center w-1/2">
+        <div className="relative w-full">
+          <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
+          />
+        </div>
+      </div>
+    </div>
+  );
 
 // CarCard Component for List and Detail Views
 const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
@@ -282,6 +337,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
 // ListingPage Component
 const Search = () => {
+    const [searchTerm, setSearchTerm] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [theme, setTheme] = useState('light');
@@ -305,6 +361,7 @@ const Search = () => {
       [name]: value,
     }));
   };
+  
 
   const cars = [
     {
@@ -524,63 +581,13 @@ const Search = () => {
           </div>
 
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold">Available Cars</h2>
-
-            <div className="relative">
-              <button
-                onClick={toggleFilters}
-                className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
-              >
-                <FaBars className="mr-2" /> Filter by
-              </button>
-
-              {showFilters && (
-                <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg">
-                  <div className="p-4">
-                    <label className="block text-gray-700">Type</label>
-                    <select
-                      name="type"
-                      value={selectedFilters.type}
-                      onChange={handleFilterChange}
-                      className="border rounded-lg w-full p-2 mt-1"
-                    >
-                      <option value="">All Types</option>
-                      <option value="Sedan">Sedan</option>
-                      <option value="Luxury">Luxury</option>
-                      <option value="Coupe">Coupe</option>
-                    </select>
-                  </div>
-                  <div className="p-4 border-t">
-                    <label className="block text-gray-700">Color</label>
-                    <select
-                      name="color"
-                      value={selectedFilters.color}
-                      onChange={handleFilterChange}
-                      className="border rounded-lg w-full p-2 mt-1"
-                    >
-                      <option value="">All Colors</option>
-                      <option value="Red">Red</option>
-                      <option value="Blue">Blue</option>
-                      <option value="Black">Black</option>
-                    </select>
-                  </div>
-                  <div className="p-4 border-t">
-                    <label className="block text-gray-700">Style</label>
-                    <select
-                      name="style"
-                      value={selectedFilters.style}
-                      onChange={handleFilterChange}
-                      className="border rounded-lg w-full p-2 mt-1"
-                    >
-                      <option value="">All Styles</option>
-                      <option value="SUV">SUV</option>
-                      <option value="Convertible">Convertible</option>
-                      <option value="Hatchback">Hatchback</option>
-                    </select>
-                  </div>
-                </div>
-              )}
-            </div>
+          <FilterBar
+  selectedFilters={selectedFilters}
+  handleFilterChange={handleFilterChange}
+  searchTerm={searchTerm}
+  setSearchTerm={setSearchTerm}
+/>
+            
           </div>
 
           <div className="grid grid-cols-3 gap-6">
