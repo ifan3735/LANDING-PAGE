@@ -10,29 +10,29 @@ import "slick-carousel/slick/slick-theme.css";
 const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
     <div
       onClick={onClick}
-      className="bg-white p-6 rounded-lg shadow-md flex flex-col space-y-4 w-full max-w-lg cursor-pointer hover:shadow-lg transition-shadow"
+      className="bg-white p-4 rounded-md shadow-md flex flex-col space-y-3 w-full max-w-md cursor-pointer hover:shadow-lg transition-shadow"
     >
       {/* Car Image Section */}
       <div className="flex justify-center items-center">
         <img
           src={car.image}
           alt={car.name}
-          className="w-full max-w-xs h-auto rounded-lg object-cover"
+          className="w-full max-w-sm h-40 rounded-md object-cover"
         />
       </div>
   
       {/* Car Details Section */}
       <div className="flex flex-col">
         {/* Car Name and Price */}
-        <h3 className="font-semibold text-2xl text-gray-700 mb-1">
+        <h3 className="font-medium text-lg text-gray-700 mb-1">
           {car.name}
         </h3>
-        <div className="text-xl text-blue-500 font-bold mb-2">
+        <div className="text-lg text-blue-500 font-semibold mb-1">
           ${car.price}
         </div>
   
         {/* Style, Type, and Color */}
-        <div className="text-sm text-gray-500 mb-2 flex flex-wrap gap-4">
+        <div className="text-xs text-gray-500 mb-1 flex flex-wrap gap-3">
           <p className="font-medium">
             Style: <span className="text-gray-700">{car.carType}</span>
           </p>
@@ -46,7 +46,6 @@ const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
       </div>
     </div>
   );
-
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -585,7 +584,7 @@ const Search = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-3 gap-6">
             {filteredCars.map((car) => (
               <CarCard
                 key={car.id}
