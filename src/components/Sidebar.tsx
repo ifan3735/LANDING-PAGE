@@ -140,7 +140,7 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink
-            to="/help-center"
+            to="/help"
             className={({ isActive }) =>
               `flex items-center p-3 rounded-md ${
                 isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-100'
