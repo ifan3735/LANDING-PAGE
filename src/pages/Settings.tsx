@@ -1,10 +1,13 @@
 import { useState } from "react";
 import TopBar from "../components/TopBar";
+import { FaChevronDown, FaFileExport } from "react-icons/fa";
+import { exportData } from "../utils/ExportData";
 
 const Settings = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false); // For showing/hiding filter dropdown
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
     color: '',
@@ -22,20 +25,28 @@ const Settings = () => {
       [name]: value,
     }));
   };
-    return (
-      <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
-         <TopBar
+
+  // Toggle Export Dropdown moved outside the handleFilterChange
+  const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
+
+  const toggleExportDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  return (
+    <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
+      <TopBar
         searchQuery={searchQuery}
         handleSearch={handleSearch}
         toggleTheme={toggleTheme}
         theme={theme}
-        exportData={() => exportData(filteredCars)}
+        exportData={() => exportData(filteredCars)} // filteredCars needs to be defined elsewhere in the actual implementation
       />
       {/* New Layer Below Top Bar */}
       <div className="flex justify-between items-center my-6">
         {/* Left Section: Header and Paragraph */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
+          <h2 className="text-2xl font-bold text-gray-800">Settings</h2>
           <p className="text-sm text-gray-600">
             Get your latest update for the past 7 days
           </p>
@@ -72,9 +83,8 @@ const Settings = () => {
           )}
         </div>
       </div>
-      </div>
-    );
-  };
-  
-  export default Settings;
-  
+    </div>
+  );
+};
+
+export default Settings;
