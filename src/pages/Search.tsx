@@ -6,60 +6,74 @@ import { FaGasPump, FaTachometerAlt, FaChevronDown, FaFileExport, FaRoad, FaCar,
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const FilterBar = ({ selectedBrand, selectedFilters, handleFilterChange, searchTerm, setSearchTerm }: { selectedBrand: string, selectedFilters: any; handleFilterChange: any; searchTerm: string; setSearchTerm: any }) => (
-    <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 space-x-6 rounded-lg">
-      {/* Dropdown Filters Section */}
-      <div className="flex space-x-4">
-        {/* Type Filter */}
-        <div className="flex items-center space-x-2">
-          <label className="text-gray-600 text-sm font-medium">Type</label>
-          <select
-            name="type"
-            value={selectedFilters.type}
-            onChange={handleFilterChange}
-            className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
-          >
-            <option value="">All Cars</option>
-            <option value="Sedan">Sedan</option>
-            <option value="Luxury">Luxury</option>
-            <option value="Coupe">Coupe</option>
-            <option value="SUV">SUV</option>
-          </select>
-        </div>
-  
-        {/* Brand Filter */}
-        <div className="flex items-center space-x-2">
-          <label className="text-gray-600 text-sm font-medium">Brand</label>
-          <select
-            name="brand"
-            value={selectedBrand}
-            onChange={(e) => handleFilterChange(e.target.value)}
-            className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
-          >
-            <option value="">All Brands</option>
-            <option value="Lamborghini">Lamborghini</option>
-            <option value="Audi">Audi</option>
-            <option value="BMW">BMW</option>
-            <option value="Mercedes">Mercedes</option>
-          </select>
-        </div>
+const FilterBar = ({
+  selectedBrand,
+  selectedFilters,
+  handleFilterChange,
+  handleBrandChange,
+  searchTerm,
+  setSearchTerm,
+}: {
+  selectedBrand: string;
+  selectedFilters: any;
+  handleFilterChange: any;
+  handleBrandChange: (value: string) => void;
+  searchTerm: string;
+  setSearchTerm: any;
+}) => (
+  <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 space-x-6 rounded-lg">
+    {/* Dropdown Filters Section */}
+    <div className="flex space-x-4">
+      {/* Type Filter */}
+      <div className="flex items-center space-x-2">
+        <label className="text-gray-600 text-sm font-medium">Type</label>
+        <select
+          name="type"
+          value={selectedFilters.type}
+          onChange={handleFilterChange}
+          className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
+        >
+          <option value="">All Cars</option>
+          <option value="Sedan">Sedan</option>
+          <option value="Luxury">Luxury</option>
+          <option value="Coupe">Coupe</option>
+          <option value="SUV">SUV</option>
+        </select>
       </div>
-  
-      {/* Search Input Section */}
-      <div className="flex items-center w-1/2">
-        <div className="relative w-full">
-          <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
-          />
-        </div>
+
+      {/* Brand Filter */}
+      <div className="flex items-center space-x-2">
+        <label className="text-gray-600 text-sm font-medium">Brand</label>
+        <select
+          name="brand"
+          value={selectedBrand}
+          onChange={(e) => handleBrandChange(e.target.value)}
+          className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
+        >
+          <option value="">All Brands</option>
+          <option value="Lamborghini">Lamborghini</option>
+          <option value="Audi">Audi</option>
+          <option value="BMW">BMW</option>
+          <option value="Mercedes">Mercedes</option>
+        </select>
       </div>
     </div>
-  );
+
+    {/* Search Input Section */}
+    <div className="flex items-center w-1/2">
+      <div className="relative w-full">
+        <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
+        />
+      </div>
+    </div>
+  </div>
+);
 
 // CarCard Component for List and Detail Views
 const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
@@ -338,6 +352,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 // ListingPage Component
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedBrand, setSelectedBrand] = useState<string>(""); // Brand Filter State
   const [showDropdown, setShowDropdown] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [theme, setTheme] = useState('light');
@@ -526,6 +541,13 @@ const Search = () => {
     const matchesColor = selectedFilters.color ? car.color === selectedFilters.color : true;
     const matchesStyle = selectedFilters.style ? car.style === selectedFilters.style : true;
     return matchesSearch && matchesType && matchesColor && matchesStyle;
+    const matchesBrand = selectedBrand === "" || car.brand === selectedBrand;
+    const matchSearch =
+      searchTerm === "" ||
+      car.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchesBrand && matchSearch;
+
   });
 
   const handleCarClick = (car: any) => {
@@ -592,7 +614,8 @@ const Search = () => {
 
           <div className="flex justify-between items-center mb-6">
           <FilterBar
-  selectedFilters={selectedFilters}
+          selectedBrand= {selectedBrand}
+            selectedFilters={selectedFilters}
   handleFilterChange={handleFilterChange}
   searchTerm={searchTerm}
   setSearchTerm={setSearchTerm}
