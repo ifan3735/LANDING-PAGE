@@ -6,7 +6,7 @@ import { FaGasPump, FaTachometerAlt, FaChevronDown, FaFileExport, FaRoad, FaCar,
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const FilterBar = ({ selectedFilters, handleFilterChange, searchTerm, setSearchTerm }: { selectedFilters: any; handleFilterChange: any; searchTerm: string; setSearchTerm: any }) => (
+const FilterBar = ({ selectedBrand, selectedFilters, handleFilterChange, searchTerm, setSearchTerm }: { selectedBrand: string, selectedFilters: any; handleFilterChange: any; searchTerm: string; setSearchTerm: any }) => (
     <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 space-x-6 rounded-lg">
       {/* Dropdown Filters Section */}
       <div className="flex space-x-4">
@@ -32,8 +32,8 @@ const FilterBar = ({ selectedFilters, handleFilterChange, searchTerm, setSearchT
           <label className="text-gray-600 text-sm font-medium">Brand</label>
           <select
             name="brand"
-            value={selectedFilters.brand}
-            onChange={handleFilterChange}
+            value={selectedBrand}
+            onChange={(e) => handleFilterChange(e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
           >
             <option value="">All Brands</option>
