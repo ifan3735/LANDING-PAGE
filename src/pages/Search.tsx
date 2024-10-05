@@ -351,12 +351,11 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
 // ListingPage Component
 const Search = () => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedBrand, setSelectedBrand] = useState<string>(""); // Brand Filter State
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedBrand, setSelectedBrand] = useState<string>(''); // Brand Filter State
   const [showDropdown, setShowDropdown] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [theme, setTheme] = useState('light');
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
     color: '',
@@ -367,8 +366,8 @@ const Search = () => {
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
   const toggleFilters = () => setShowFilters(!showFilters);
-  
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
+
+  // Handle filter changes for both type, brand, etc.
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setSelectedFilters((prevFilters) => ({
@@ -376,7 +375,10 @@ const Search = () => {
       [name]: value,
     }));
   };
-  
+
+  const handleBrandChange = (value: string) => {
+    setSelectedBrand(value);
+  };
 
   const cars = [
     {
@@ -395,159 +397,19 @@ const Search = () => {
       carType: 'Sedan',
       dateListed: '28 Jun',
       price: '500',
-      brand: 'Audi'
+      brand: 'Audi',
     },
-    {
-      name: 'Bentley Flying Spur',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'China',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/2a/7d/4c/2a7d4c4bc1381a476b8b8a85885ac392.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-      price: '500',
-      brand: 'Audi'
-    },
-    {
-      name: 'Porsche Tayca',
-      mileage: '369',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '295',
-      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
-      owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/ad/15/5b/ad155b4cfd5b6d220c3e5b51b349a37a.jpg',
-      carType: 'Coupe',
-      dateListed: '26 Jun',
-      price: '500',
-      brand: 'Audi'
-    },
-    {
-      name: 'Mercedes Benz EQS',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/2e/3e/fd/2e3efdc0486a8858f9e0471eee3f68e5.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-      price: '500',
-      brand: 'Audi'
-    },
-    {
-      name: 'Audi Q4 e-tron',
-      mileage: '369',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '295',
-      image: 'https://i.pinimg.com/236x/47/8b/f6/478bf61e4712ba383a76118a6558bfd4.jpg',
-      owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/f9/58/e4/f958e4ad039823fdc0e5aaa45aae278d.jpg',
-      carType: 'Coupe',
-      dateListed: '26 Jun',
-      price: '500',
-      brand: 'Audi'
-    },
-    {
-      name: 'Toyota Corolla Cross',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/78/f1/fa/78f1faef59b24ecc67f1dbef3ddc32ac.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-      price: '500',
-      brand: 'Audi'
-    },
-    {
-      name: 'BMW i4',
-      mileage: '369',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '295',
-      image: 'https://i.pinimg.com/564x/5b/cc/d0/5bccd0713bc5c9039393f0bc7ba73d45.jpg',
-      owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/8b/85/75/8b8575ca1ecb184466a32b228dbeb3f7.jpg',
-      carType: 'Coupe',
-      dateListed: '26 Jun',
-      price: '500',
-      brand: 'Audi'
-    },
-    {
-      name: 'Audi Q4 e-tron',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-      price: '500',
-      brand: 'Audi'
-    },
-    {
-      name: 'Toyota Corolla Cross',
-      mileage: '369',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '295',
-      image: 'https://i.pinimg.com/736x/3a/a4/6a/3aa46aaba45e09ff09403b42a6127390.jpg',
-      owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/d2/d2/f8/d2d2f8210f500b3e859d8f282e3d0e9b.jpg',
-      carType: 'Coupe',
-      dateListed: '26 Jun',
-      price: '500',
-      brand: 'Audi'
-    },
-    {
-      name: 'BMW i4',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/5a/e8/d6/5ae8d6218c3c6a9296936347fc2c2eef.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/82/cc/d6/82ccd6e43a3334813015ec3247aeca7d.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-      price: '500',
-      brand: 'Audi'
-    }
-    // Add more cars as needed
+    // ... other cars
   ];
 
-  const filteredCars = cars.filter(car => {
-    const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
+  // Combine all filters: search, brand, type
+  const filteredCars = cars.filter((car) => {
+    const matchesSearch = car.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
-    const matchesColor = selectedFilters.color ? car.color === selectedFilters.color : true;
-    const matchesStyle = selectedFilters.style ? car.style === selectedFilters.style : true;
-    return matchesSearch && matchesType && matchesColor && matchesStyle;
-    const matchesBrand = selectedBrand === "" || car.brand === selectedBrand;
-    const matchSearch =
-      searchTerm === "" ||
-      car.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesBrand = selectedBrand === '' || car.brand === selectedBrand;
 
-    return matchesBrand && matchSearch;
-
+    // You can add other filters like color, style here as needed
+    return matchesSearch && matchesType && matchesBrand;
   });
 
   const handleCarClick = (car: any) => {
@@ -561,17 +423,17 @@ const Search = () => {
   return (
     <div className={`flex-1 p-6 bg-gray-50 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       <TopBar
-        searchQuery={searchQuery}
-        handleSearch={handleSearch}
+        searchQuery={searchTerm}
+        handleSearch={(e) => setSearchTerm(e.target.value)}
         toggleTheme={toggleTheme}
         theme={theme}
         exportData={() => {
-          console.log("Data exported");
+          console.log('Data exported');
         }}
       />
 
-{selectedCar ? (
-        <CarDetailView car={selectedCar} onBack={handleBack} /> 
+      {selectedCar ? (
+        <CarDetailView car={selectedCar} onBack={handleBack} />
       ) : (
         <>
           <div className="flex justify-between items-center my-6">
@@ -596,13 +458,13 @@ const Search = () => {
                   <ul>
                     <li
                       className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => console.log("Export as CSV")}
+                      onClick={() => console.log('Export as CSV')}
                     >
                       Export as CSV
                     </li>
                     <li
                       className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => console.log("Export as PDF")}
+                      onClick={() => console.log('Export as PDF')}
                     >
                       Export as PDF
                     </li>
@@ -612,24 +474,19 @@ const Search = () => {
             </div>
           </div>
 
-          <div className="flex justify-between items-center mb-6">
+          {/* FilterBar component */}
           <FilterBar
-          selectedBrand= {selectedBrand}
+            selectedBrand={selectedBrand}
             selectedFilters={selectedFilters}
-  handleFilterChange={handleFilterChange}
-  searchTerm={searchTerm}
-  setSearchTerm={setSearchTerm}
-/>
-            
-          </div>
+            handleFilterChange={handleFilterChange}
+            handleBrandChange={handleBrandChange}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
 
           <div className="grid grid-cols-3 gap-6">
             {filteredCars.map((car) => (
-              <CarCard
-                key={car.id}
-                car={car}
-                onClick={() => handleCarClick(car)}
-              />
+              <CarCard key={car.name} car={car} onClick={() => handleCarClick(car)} />
             ))}
           </div>
         </>
@@ -637,5 +494,8 @@ const Search = () => {
     </div>
   );
 };
+
+export default Search;
+
 
 export default Search;
