@@ -2,7 +2,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TopBar from "../components/TopBar";
-import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar, FaSearch } from "react-icons/fa";
+import { FaGasPump, FaTachometerAlt, FaChevronDown, FaFileExport, FaRoad, FaCar, FaSearch } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
