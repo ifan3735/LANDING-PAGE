@@ -37,102 +37,103 @@ const Settings = () => {
     switch (activeTab) {
       case 'General':
         return (
-          <div className="bg-white p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
-  <h3 className="text-2xl font-bold text-gray-800 mb-6">General Settings</h3>
-  <form className="space-y-8">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="relative bg-gradient-to-r from-blue-50 to-white p-10 rounded-xl shadow-xl max-w-4xl mx-auto">
+  <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">General Settings</h3>
+  
+  <form className="space-y-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
       {/* First Name */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder=" "
+          value="Smith"
+          className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+        />
+        <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
           First Name
         </label>
-        <div className="relative mt-2">
-          <input
-            type="text"
-            placeholder="First Name"
-            value="Smith"
-            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-          />
-        </div>
       </div>
 
       {/* Last Name */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder=" "
+          value="Hussain"
+          className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+        />
+        <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
           Last Name
         </label>
-        <div className="relative mt-2">
-          <input
-            type="text"
-            placeholder="Last Name"
-            value="Hussain"
-            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-          />
-        </div>
       </div>
 
       {/* Email */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
+      <div className="relative">
+        <input
+          type="email"
+          placeholder=" "
+          value="thesmithhussain23@gmail.com"
+          className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+        />
+        <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
           Your Email
         </label>
-        <div className="relative mt-2">
-          <input
-            type="email"
-            placeholder="Email"
-            value="thesmithhussain23@gmail.com"
-            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-          />
-        </div>
       </div>
 
       {/* Address */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder=" "
+          value="Greenman Kingston 1478"
+          className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+        />
+        <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
           Address
         </label>
-        <div className="relative mt-2">
-          <input
-            type="text"
-            placeholder="Address"
-            value="Greenman Kingston 1478"
-            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-          />
-        </div>
       </div>
 
       {/* Currency */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder=" "
+          value="Dollar"
+          className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+        />
+        <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
           Currency Used
         </label>
-        <div className="relative mt-2">
-          <input
-            type="text"
-            placeholder="Currency"
-            value="Dollar"
-            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-          />
-        </div>
       </div>
 
       {/* State */}
-      <div>
-        <label className="block text-sm font-medium text-gray-600">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder=" "
+          value="Canada Ottawa"
+          className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+        />
+        <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
           State
         </label>
-        <div className="relative mt-2">
-          <input
-            type="text"
-            placeholder="State"
-            value="Canada Ottawa"
-            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
-          />
-        </div>
       </div>
+    </div>
+
+    {/* Submit Button */}
+    <div className="text-center mt-10">
+      <button
+        type="submit"
+        className="w-1/2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 hover:shadow-xl transform hover:-translate-y-1"
+      >
+        Save Changes
+      </button>
     </div>
   </form>
 </div>
+
 
         );
       case 'Account':
