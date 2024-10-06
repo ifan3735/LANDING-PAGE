@@ -37,90 +37,103 @@ const Settings = () => {
     switch (activeTab) {
       case 'General':
         return (
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">General Settings</h3>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* First Name */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    value="Smith"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
+          <div className="bg-white p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+  <h3 className="text-2xl font-bold text-gray-800 mb-6">General Settings</h3>
+  <form className="space-y-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* First Name */}
+      <div>
+        <label className="block text-sm font-medium text-gray-600">
+          First Name
+        </label>
+        <div className="relative mt-2">
+          <input
+            type="text"
+            placeholder="First Name"
+            value="Smith"
+            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+          />
+        </div>
+      </div>
 
-                {/* Last Name */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    value="Hussain"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
+      {/* Last Name */}
+      <div>
+        <label className="block text-sm font-medium text-gray-600">
+          Last Name
+        </label>
+        <div className="relative mt-2">
+          <input
+            type="text"
+            placeholder="Last Name"
+            value="Hussain"
+            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+          />
+        </div>
+      </div>
 
-                {/* Email */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    value="thesmithhussain23@gmail.com"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
+      {/* Email */}
+      <div>
+        <label className="block text-sm font-medium text-gray-600">
+          Your Email
+        </label>
+        <div className="relative mt-2">
+          <input
+            type="email"
+            placeholder="Email"
+            value="thesmithhussain23@gmail.com"
+            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+          />
+        </div>
+      </div>
 
-                {/* Address */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Address"
-                    value="Greenman Kingston 1478"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
+      {/* Address */}
+      <div>
+        <label className="block text-sm font-medium text-gray-600">
+          Address
+        </label>
+        <div className="relative mt-2">
+          <input
+            type="text"
+            placeholder="Address"
+            value="Greenman Kingston 1478"
+            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+          />
+        </div>
+      </div>
 
-                {/* Currency */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Currency Used
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Currency"
-                    value="Dollar"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
+      {/* Currency */}
+      <div>
+        <label className="block text-sm font-medium text-gray-600">
+          Currency Used
+        </label>
+        <div className="relative mt-2">
+          <input
+            type="text"
+            placeholder="Currency"
+            value="Dollar"
+            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+          />
+        </div>
+      </div>
 
-                {/* State */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    State
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="State"
-                    value="Canada Ottawa"
-                    className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
+      {/* State */}
+      <div>
+        <label className="block text-sm font-medium text-gray-600">
+          State
+        </label>
+        <div className="relative mt-2">
+          <input
+            type="text"
+            placeholder="State"
+            value="Canada Ottawa"
+            className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
         );
       case 'Account':
         return (
