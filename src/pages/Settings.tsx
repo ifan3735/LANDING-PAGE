@@ -1,139 +1,43 @@
 import { useState } from "react";
-import { FaChevronDown, FaFileExport, FaBell, FaUser } from "react-icons/fa";
+import { FaChevronDown, FaFileExport, FaBell, FaUser, FaCog, FaCreditCard, FaKey, FaLanguage } from "react-icons/fa";
+import TopBar from "../components/TopBar";
+import { exportData } from "../utils/ExportData";
 
 const Settings = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('General');
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false); // For showing/hiding filter dropdown
+  const [selectedFilters, setSelectedFilters] = useState({
+    type: '',
+    color: '',
+    style: '',
+  });
+   // Manage active tab
 
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
-  const handleSearch = (e) => setSearchQuery(e.target.value);
+  const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
-  return (
-    <div
-      className={`transition-all duration-500 p-6 min-h-screen ${
-        theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"
-      }`}
-    >
-      {/* Top Bar */}
-      <div className="flex justify-between items-center pb-4 border-b">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Type here to search"
-            className="px-4 py-2 w-64 rounded-full border border-gray-300 focus:outline-none"
-            value={searchQuery}
-            onChange={handleSearch}
-          />
-          <span className="absolute right-4 top-2 text-gray-400">⌘ K</span>
-        </div>
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedFilters({
+      ...selectedFilters,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-        <div className="flex items-center space-x-4">
-          <button onClick={toggleTheme} className="bg-gray-200 px-4 py-2 rounded-full">
-            {theme === 'light' ? 'Dark' : 'Light'}
-          </button>
-          <FaBell className="text-gray-500" />
-          <div className="flex items-center">
-            <FaUser className="mr-2 text-gray-500" />
-            <span>Hello Smith</span>
-          </div>
-        </div>
-      </div>
+  // Function to handle tab switching
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
 
-      <div className="flex mt-8">
-        {/* Sidebar */}
-        <div className="w-64 bg-white shadow-md rounded-lg p-6 space-y-6">
-          <h2 className="text-xl font-bold text-gray-700 mb-4">Settings</h2>
-          <ul className="space-y-2">
-            <li className="flex items-center space-x-2 text-blue-600 font-semibold">
-              <span className="bg-blue-100 p-2 rounded-full">
-                <i className="fas fa-cog"></i>
-              </span>
-              <span>General</span>
-            </li>
-            <li className="flex items-center space-x-2 text-gray-600">
-              <span className="bg-gray-100 p-2 rounded-full">
-                <i className="fas fa-user"></i>
-              </span>
-              <span>Account</span>
-            </li>
-            <li className="flex items-center space-x-2 text-gray-600">
-              <span className="bg-gray-100 p-2 rounded-full">
-                <i className="fas fa-bell"></i>
-              </span>
-              <span>Notification</span>
-            </li>
-            <li className="flex items-center space-x-2 text-gray-600">
-              <span className="bg-gray-100 p-2 rounded-full">
-                <i className="fas fa-credit-card"></i>
-              </span>
-              <span>Bill Payment</span>
-            </li>
-            <li className="flex items-center space-x-2 text-gray-600">
-              <span className="bg-gray-100 p-2 rounded-full">
-                <i className="fas fa-key"></i>
-              </span>
-              <span>Payment Access</span>
-            </li>
-            <li className="flex items-center space-x-2 text-gray-600">
-              <span className="bg-gray-100 p-2 rounded-full">
-                <i className="fas fa-language"></i>
-              </span>
-              <span>Language</span>
-            </li>
-            <li className="flex items-center space-x-2 text-gray-600">
-              <span className="bg-gray-100 p-2 rounded-full">
-                <i className="fas fa-lock"></i>
-              </span>
-              <span>Change Password</span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Main Content */}
-        <div className="flex-1 ml-8">
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-700">Settings</h2>
-              <p className="text-sm text-gray-500 mt-1">
-                Get your latest updates for the last 7 days
-              </p>
-            </div>
-
-            <div className="relative">
-              <button
-                onClick={toggleExportDropdown}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-md flex items-center transition-all duration-300"
-              >
-                <FaFileExport className="mr-2" /> Export
-                <FaChevronDown className="ml-2" />
-              </button>
-
-              {/* Export Dropdown */}
-              {showDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
-                  <ul>
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => console.log("Export as CSV")}
-                    >
-                      Export as CSV
-                    </li>
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => console.log("Export as PDF")}
-                    >
-                      Export as PDF
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* General Settings Form */}
-          <div className="bg-white p-6 rounded-lg shadow-lg mt-6">
+  // Dynamically render content based on the active tab
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'General':
+        return (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold mb-4">General Settings</h3>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -216,6 +120,167 @@ const Settings = () => {
                 </div>
               </div>
             </form>
+          </div>
+        );
+      case 'Account':
+        return (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Account Information</h3>
+            <p className="text-gray-600">Account details will go here...</p>
+          </div>
+        );
+      case 'Notification':
+        return (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Notification Settings</h3>
+            <p className="text-gray-600">Notification settings content...</p>
+          </div>
+        );
+      case 'Bill Payment':
+        return (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Bill Payment Information</h3>
+            <p className="text-gray-600">Bill payment details...</p>
+          </div>
+        );
+      case 'Payment Access':
+        return (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Payment Access</h3>
+            <p className="text-gray-600">Payment access information...</p>
+          </div>
+        );
+      case 'Language':
+        return (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Language Settings</h3>
+            <p className="text-gray-600">Language selection options...</p>
+          </div>
+        );
+      case 'Change Password':
+        return (
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Change Password</h3>
+            <p className="text-gray-600">Change password form...</p>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
+      {/* Top Bar */}
+      <TopBar
+        searchQuery={searchQuery}
+        handleSearch={handleSearch}
+        toggleTheme={toggleTheme}
+        theme={theme}
+        exportData={() => exportData(filteredCars)}
+      />
+
+      <div className="flex mt-8">
+        {/* Sidebar */}
+        <div className="w-64 bg-white shadow-md rounded-lg p-6 space-y-6">
+          <h2 className="text-xl font-bold text-gray-700 mb-4">Settings</h2>
+          <ul className="space-y-2">
+            <li
+              className={`flex items-center space-x-2 cursor-pointer ${activeTab === 'General' ? 'text-blue-600 font-semibold' : 'text-gray-600'}`}
+              onClick={() => handleTabClick('General')}
+            >
+              <FaCog className="text-gray-500" />
+              <span>General</span>
+            </li>
+            <li
+              className={`flex items-center space-x-2 cursor-pointer ${activeTab === 'Account' ? 'text-blue-600 font-semibold' : 'text-gray-600'}`}
+              onClick={() => handleTabClick('Account')}
+            >
+              <FaUser className="text-gray-500" />
+              <span>Account</span>
+            </li>
+            <li
+              className={`flex items-center space-x-2 cursor-pointer ${activeTab === 'Notification' ? 'text-blue-600 font-semibold' : 'text-gray-600'}`}
+              onClick={() => handleTabClick('Notification')}
+            >
+              <FaBell className="text-gray-500" />
+              <span>Notification</span>
+            </li>
+            <li
+              className={`flex items-center space-x-2 cursor-pointer ${activeTab === 'Bill Payment' ? 'text-blue-600 font-semibold' : 'text-gray-600'}`}
+              onClick={() => handleTabClick('Bill Payment')}
+            >
+              <FaCreditCard className="text-gray-500" />
+              <span>Bill Payment</span>
+            </li>
+            <li
+              className={`flex items-center space-x-2 cursor-pointer ${activeTab === 'Payment Access' ? 'text-blue-600 font-semibold' : 'text-gray-600'}`}
+              onClick={() => handleTabClick('Payment Access')}
+            >
+              <FaKey className="text-gray-500" />
+              <span>Payment Access</span>
+            </li>
+            <li
+              className={`flex items-center space-x-2 cursor-pointer ${activeTab === 'Language' ? 'text-blue-600 font-semibold' : 'text-gray-600'}`}
+              onClick={() => handleTabClick('Language')}
+            >
+              <FaLanguage className="text-gray-500" />
+              <span>Language</span>
+            </li>
+            <li
+              className={`flex items-center space-x-2 cursor-pointer ${activeTab === 'Change Password' ? 'text-blue-600 font-semibold' : 'text-gray-600'}`}
+              onClick={() => handleTabClick('Change Password')}
+            >
+              <FaKey className="text-gray-500" />
+              <span>Change Password</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 ml-8">
+          <div className="flex justify-between items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-700">{activeTab} Settings</h2>
+              <p className="text-sm text-gray-500 mt-1">
+                Get your latest updates for the last 7 days
+              </p>
+            </div>
+
+            <div className="relative">
+              <button
+                onClick={toggleExportDropdown}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-md flex items-center transition-all duration-300"
+              >
+                <FaFileExport className="mr-2" /> Export
+                <FaChevronDown className="ml-2" />
+              </button>
+
+              {/* Export Dropdown */}
+              {showDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
+                  <ul>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => console.log("Export as CSV")}
+                    >
+                      Export as CSV
+                    </li>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => console.log("Export as PDF")}
+                    >
+                      Export as PDF
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Dynamic Content */}
+          <div className="mt-6">
+            {renderContent()}
           </div>
         </div>
       </div>
