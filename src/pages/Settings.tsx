@@ -281,44 +281,6 @@ const Settings = () => {
 
         {/* Main Content */}
         <div className="flex-1 ml-8">
-          <div className="flex justify-between items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-700">{activeTab} Settings</h2>
-              <p className="text-sm text-gray-500 mt-1">
-                Get your latest updates for the last 7 days
-              </p>
-            </div>
-
-            <div className="relative">
-              <button
-                onClick={toggleExportDropdown}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-md flex items-center transition-all duration-300"
-              >
-                <FaFileExport className="mr-2" /> Export
-                <FaChevronDown className="ml-2" />
-              </button>
-
-              {/* Export Dropdown */}
-              {showDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-10">
-                  <ul>
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => console.log("Export as CSV")}
-                    >
-                      Export as CSV
-                    </li>
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => console.log("Export as PDF")}
-                    >
-                      Export as PDF
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
 
           {/* Dynamic Content */}
           <div className="mt-6">
