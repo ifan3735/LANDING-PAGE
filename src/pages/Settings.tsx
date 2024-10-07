@@ -201,6 +201,9 @@ const Settings = () => {
         <select className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300">
           <option>English</option>
           <option>Spanish</option>
+          <option>French</option>
+          <option>German</option>
+          <option>Italian</option>
         </select>
       </div>
     </div>
