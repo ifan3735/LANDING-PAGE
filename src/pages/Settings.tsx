@@ -138,23 +138,23 @@ const Settings = () => {
         );
       case 'Account':
         return (
-          <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-3xl mx-auto">
+     <div className="bg-white p-10 rounded-3xl shadow-xl max-w-4xl mx-auto transition-all duration-300">
   {/* Profile Section */}
-  <h3 className="text-2xl font-bold text-gray-800 mb-8">Profile</h3>
+  <h3 className="text-3xl font-extrabold text-gray-900 mb-10">Profile</h3>
 
   {/* Profile Image Section */}
-  <div className="flex items-center space-x-6 mb-8">
+  <div className="flex items-center space-x-8 mb-10">
     <img
       src="https://via.placeholder.com/100"
       alt="Profile"
-      className="w-24 h-24 rounded-full object-cover border-4 border-gray-200 shadow-md"
+      className="w-28 h-28 rounded-full object-cover border-4 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300"
     />
     <div>
-      <h4 className="text-lg font-medium pb-2 text-gray-800">Choose Image</h4>
-      <button className="bg-blue-600 hover:bg-blue-700 transition-colors text-white px-6 py-2 rounded-lg shadow-sm mr-2">
+      <h4 className="text-lg font-medium text-gray-700 mb-3">Choose Image</h4>
+      <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300 mr-3">
         Browse
       </button>
-      <button className="border border-gray-300 px-6 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors">
+      <button className="border border-gray-400 px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 shadow-md transition-colors duration-300">
         Remove
       </button>
     </div>
@@ -162,43 +162,43 @@ const Settings = () => {
 
   {/* Information Section */}
   <div className="space-y-8">
-    <h4 className="text-xl font-semibold text-gray-800 mb-4">Information</h4>
+    <h4 className="text-2xl font-semibold text-gray-800 mb-6">Information</h4>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
       {/* User Name */}
       <div>
-        <label className="block text-gray-700 font-medium mb-2">User Name</label>
+        <label className="block text-lg text-gray-700 font-semibold mb-3">User Name</label>
         <input
           type="text"
           value="admin"
-          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm text-gray-800"
+          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
         />
       </div>
 
       {/* Display Name */}
       <div>
-        <label className="block text-gray-700 font-medium mb-2">Display Name</label>
+        <label className="block text-lg text-gray-700 font-semibold mb-3">Display Name</label>
         <input
           type="text"
           value="Smith Hussain"
-          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm text-gray-800"
+          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
         />
       </div>
 
       {/* Email */}
       <div>
-        <label className="block text-gray-700 font-medium mb-2">Your Email</label>
+        <label className="block text-lg text-gray-700 font-semibold mb-3">Your Email</label>
         <input
           type="email"
           value="thesmithhussain23@gmail.com"
-          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm text-gray-800"
+          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
         />
       </div>
 
       {/* Language */}
       <div>
-        <label className="block text-gray-700 font-medium mb-2">Language</label>
-        <select className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm text-gray-800">
+        <label className="block text-lg text-gray-700 font-semibold mb-3">Language</label>
+        <select className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300">
           <option>English</option>
           <option>Spanish</option>
         </select>
@@ -215,6 +215,7 @@ const Settings = () => {
       </button>
     </div>
 </div>
+
 
 
         );
