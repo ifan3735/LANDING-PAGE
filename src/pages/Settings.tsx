@@ -280,15 +280,115 @@ const Settings = () => {
         Save Changes
       </button>
     </div>
-        </div>
-               
+        </div>    
         );
+
       case 'Bill Payment':
         return (
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">Bill Payment Information</h3>
-            <p className="text-gray-600">Bill payment details...</p>
-          </div>
+          <div className="bg-white p-10 rounded-3xl shadow-2xl max-w-4xl mx-auto transition-all duration-300">
+  {/* Section Header */}
+  <h3 className="text-3xl font-extrabold text-gray-900 mb-6">Bill Payment Information</h3>
+  
+  {/* Introductory Text */}
+  <p className="text-gray-500 mb-10 leading-relaxed">
+    Manage your bill payments easily. Review your upcoming payments, payment history, and choose your preferred payment method below.
+  </p>
+
+  {/* Payment Overview Cards */}
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+    
+    {/* Total Due */}
+    <div className="p-6 bg-gradient-to-r from-red-50 to-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
+      <h4 className="text-xl font-semibold text-red-600 mb-2">Total Amount Due</h4>
+      <p className="text-gray-700 text-3xl font-bold">$1,200.00</p>
+      <p className="text-gray-500 mt-1">Due on: October 20, 2024</p>
+    </div>
+
+    {/* Last Payment */}
+    <div className="p-6 bg-gradient-to-r from-green-50 to-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
+      <h4 className="text-xl font-semibold text-green-600 mb-2">Last Payment</h4>
+      <p className="text-gray-700 text-3xl font-bold">$600.00</p>
+      <p className="text-gray-500 mt-1">Paid on: September 15, 2024</p>
+    </div>
+
+    {/* Payment Method */}
+    <div className="p-6 bg-gradient-to-r from-blue-50 to-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
+      <h4 className="text-xl font-semibold text-blue-600 mb-2">Payment Method</h4>
+      <p className="text-gray-700 text-lg font-semibold">Credit Card (**** 1234)</p>
+      <button className="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-700 transition-all">Change</button>
+    </div>
+  </div>
+
+  {/* Payment Options Section */}
+  <h4 className="text-2xl font-bold text-gray-900 mb-6">Make a Payment</h4>
+
+  {/* Payment Form */}
+  <div className="space-y-6">
+    {/* Amount Input */}
+    <div className="flex flex-col">
+      <label className="text-lg text-gray-700 mb-2">Payment Amount</label>
+      <input
+        type="text"
+        placeholder="Enter amount"
+        className="w-full border border-gray-300 p-4 rounded-lg text-xl placeholder-gray-400"
+      />
+    </div>
+
+    {/* Payment Methods */}
+    <div className="flex flex-col">
+      <label className="text-lg text-gray-700 mb-2">Payment Method</label>
+      <select className="w-full border border-gray-300 p-4 rounded-lg text-xl">
+        <option>Credit Card (**** 1234)</option>
+        <option>Bank Transfer</option>
+        <option>PayPal</option>
+        <option>Apple Pay</option>
+      </select>
+    </div>
+
+    {/* Pay Now Button */}
+    <div>
+      <button className="bg-green-600 text-white px-6 py-4 rounded-xl w-full text-2xl font-bold shadow-lg hover:bg-green-700 transition-all duration-300">
+        Pay Now
+      </button>
+    </div>
+  </div>
+
+  {/* Payment History Section */}
+  <div className="mt-12">
+    <h4 className="text-2xl font-bold text-gray-900 mb-6">Payment History</h4>
+    <table className="min-w-full bg-white rounded-lg shadow-lg overflow-hidden">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="text-left px-6 py-3 text-gray-600 font-semibold">Date</th>
+          <th className="text-left px-6 py-3 text-gray-600 font-semibold">Amount</th>
+          <th className="text-left px-6 py-3 text-gray-600 font-semibold">Method</th>
+          <th className="text-left px-6 py-3 text-gray-600 font-semibold">Status</th>
+        </tr>
+      </thead>
+      <tbody className="text-gray-700">
+        <tr>
+          <td className="px-6 py-4">September 15, 2024</td>
+          <td className="px-6 py-4">$600.00</td>
+          <td className="px-6 py-4">Credit Card</td>
+          <td className="px-6 py-4 text-green-600">Paid</td>
+        </tr>
+        <tr className="bg-gray-50">
+          <td className="px-6 py-4">August 10, 2024</td>
+          <td className="px-6 py-4">$300.00</td>
+          <td className="px-6 py-4">Bank Transfer</td>
+          <td className="px-6 py-4 text-green-600">Paid</td>
+        </tr>
+        <tr>
+          <td className="px-6 py-4">July 5, 2024</td>
+          <td className="px-6 py-4">$500.00</td>
+          <td className="px-6 py-4">PayPal</td>
+          <td className="px-6 py-4 text-green-600">Paid</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
         );
       case 'Payment Access':
         return (
@@ -467,8 +567,6 @@ const Settings = () => {
 </ul>
 
 </div>
-
-
         {/* Main Content */}
         <div className="flex-1 ml-8">
           {/* Dynamic Content */}
