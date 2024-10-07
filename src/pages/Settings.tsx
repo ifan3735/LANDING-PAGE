@@ -212,16 +212,61 @@ const Settings = () => {
       </button>
     </div>
 </div>
-
-
-
         );
       case 'Notification':
         return (
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">Notification Settings</h3>
-            <p className="text-gray-600">Notification settings content...</p>
+          <div className="bg-white p-8 rounded-2xl shadow-xl max-w-3xl mx-auto transition-all duration-300">
+          <h3 className="text-2xl font-bold text-gray-800 mb-6">Notification Settings</h3>
+          
+          <p className="text-gray-500 mb-8">Manage how you receive notifications for your account activities.</p>
+        
+          {/* Notification Options */}
+          <div className="space-y-6">
+            {/* Email Notifications */}
+            <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div>
+                <h4 className="text-lg font-semibold text-gray-800">Email Notifications</h4>
+                <p className="text-gray-500">Receive notifications via email for account updates and alerts.</p>
+              </div>
+              <label className="inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="form-checkbox h-6 w-6 text-blue-600 rounded-lg focus:ring-2 focus:ring-blue-300 transition-all duration-200" checked />
+              </label>
+            </div>
+        
+            {/* SMS Notifications */}
+            <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div>
+                <h4 className="text-lg font-semibold text-gray-800">SMS Notifications</h4>
+                <p className="text-gray-500">Receive text message notifications for important updates and security alerts.</p>
+              </div>
+              <label className="inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="form-checkbox h-6 w-6 text-blue-600 rounded-lg focus:ring-2 focus:ring-blue-300 transition-all duration-200" />
+              </label>
+            </div>
+        
+            {/* Push Notifications */}
+            <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div>
+                <h4 className="text-lg font-semibold text-gray-800">Push Notifications</h4>
+                <p className="text-gray-500">Enable push notifications for real-time alerts on your mobile device.</p>
+              </div>
+              <label className="inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="form-checkbox h-6 w-6 text-blue-600 rounded-lg focus:ring-2 focus:ring-blue-300 transition-all duration-200" />
+              </label>
+            </div>
+        
+            {/* In-App Notifications */}
+            <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div>
+                <h4 className="text-lg font-semibold text-gray-800">In-App Notifications</h4>
+                <p className="text-gray-500">Receive notifications directly within the app for any important updates.</p>
+              </div>
+              <label className="inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="form-checkbox h-6 w-6 text-blue-600 rounded-lg focus:ring-2 focus:ring-blue-300 transition-all duration-200" checked />
+              </label>
+            </div>
           </div>
+        </div>        
         );
       case 'Bill Payment':
         return (
