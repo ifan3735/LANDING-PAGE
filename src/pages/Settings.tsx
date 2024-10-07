@@ -145,7 +145,7 @@ const Settings = () => {
   {/* Profile Image Section */}
   <div className="flex items-center space-x-8 mb-10">
     <img
-      src="https://via.placeholder.com/100"
+      src="https://i.pinimg.com/236x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg"
       alt="Profile"
       className="w-28 h-28 rounded-full object-cover border-4 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300"
     />
