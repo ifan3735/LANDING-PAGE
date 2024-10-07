@@ -149,7 +149,7 @@ const Settings = () => {
       className="w-20 h-20 rounded-full object-cover"
     />
     <div>
-      <h4 className="text-lg font-semibold">Choose Image</h4>
+      <h4 className="text-lg font-semibold pb-3">Choose Image</h4>
       <button className="bg-blue-600 text-white px-4 py-2 rounded-lg mr-2">Browse</button>
       <button className="border border-gray-300 px-4 py-2 rounded-lg text-gray-600">Remove</button>
     </div>
