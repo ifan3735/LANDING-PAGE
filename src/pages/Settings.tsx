@@ -170,7 +170,7 @@ const Settings = () => {
         <label className="block text-lg text-gray-700 font-semibold mb-3">User Name</label>
         <input
           type="text"
-          value="admin"
+          placeholder="admin"
           className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
         />
       </div>
@@ -180,7 +180,7 @@ const Settings = () => {
         <label className="block text-lg text-gray-700 font-semibold mb-3">Display Name</label>
         <input
           type="text"
-          value="Smith Hussain"
+          placeholder="Smith Hussain"
           className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
         />
       </div>
@@ -190,7 +190,7 @@ const Settings = () => {
         <label className="block text-lg text-gray-700 font-semibold mb-3">Your Email</label>
         <input
           type="email"
-          value="thesmithhussain23@gmail.com"
+          placeholder="thesmithhussain23@gmail.com"
           className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
         />
       </div>
