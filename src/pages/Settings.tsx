@@ -139,9 +139,69 @@ const Settings = () => {
       case 'Account':
         return (
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">Account Information</h3>
-            <p className="text-gray-600">Account details will go here...</p>
-          </div>
+  <h3 className="text-xl font-semibold mb-6">Profile</h3>
+  
+  {/* Profile Image Section */}
+  <div className="flex items-center space-x-6 mb-6">
+    <img
+      src="https://via.placeholder.com/100"
+      alt="Profile"
+      className="w-20 h-20 rounded-full object-cover"
+    />
+    <div>
+      <h4 className="text-lg font-semibold">Choose Image</h4>
+      <button className="bg-blue-600 text-white px-4 py-2 rounded-lg mr-2">Browse</button>
+      <button className="border border-gray-300 px-4 py-2 rounded-lg text-gray-600">Remove</button>
+    </div>
+  </div>
+
+  {/* Information Section */}
+  <div className="space-y-4">
+    <h4 className="text-lg font-semibold mb-2">Information</h4>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* User Name */}
+      <div>
+        <label className="block text-gray-700 mb-2">User Name</label>
+        <input
+          type="text"
+          value="admin"
+          className="w-full border border-gray-300 p-3 rounded-lg"
+        />
+      </div>
+
+      {/* Display Name */}
+      <div>
+        <label className="block text-gray-700 mb-2">Display Name</label>
+        <input
+          type="text"
+          value="Smith Hussain"
+          className="w-full border border-gray-300 p-3 rounded-lg"
+        />
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block text-gray-700 mb-2">Your Email</label>
+        <input
+          type="email"
+          value="thesmithhussain23@gmail.com"
+          className="w-full border border-gray-300 p-3 rounded-lg"
+        />
+      </div>
+
+      {/* Language */}
+      <div>
+        <label className="block text-gray-700 mb-2">Language</label>
+        <select className="w-full border border-gray-300 p-3 rounded-lg">
+          <option>English</option>
+          <option>Spanish</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
         );
       case 'Notification':
         return (
