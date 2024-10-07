@@ -47,8 +47,7 @@ const Settings = () => {
       <div className="relative">
         <input
           type="text"
-          placeholder=" "
-          value="Smith"
+          placeholder="Smith"
           className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
         />
         <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
@@ -60,8 +59,7 @@ const Settings = () => {
       <div className="relative">
         <input
           type="text"
-          placeholder=" "
-          value="Hussain"
+          placeholder="Hussain"
           className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
         />
         <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
@@ -73,8 +71,7 @@ const Settings = () => {
       <div className="relative">
         <input
           type="email"
-          placeholder=" "
-          value="thesmithhussain23@gmail.com"
+          placeholder="thesmithhussain23@gmail.com"
           className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
         />
         <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
@@ -86,8 +83,7 @@ const Settings = () => {
       <div className="relative">
         <input
           type="text"
-          placeholder=" "
-          value="Greenman Kingston 1478"
+          placeholder="Greenman Kingston 1478"
           className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
         />
         <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
@@ -99,8 +95,7 @@ const Settings = () => {
       <div className="relative">
         <input
           type="text"
-          placeholder=" "
-          value="Dollar"
+          placeholder="Dollar"
           className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
         />
         <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
@@ -112,8 +107,7 @@ const Settings = () => {
       <div className="relative">
         <input
           type="text"
-          placeholder=" "
-          value="Canada Ottawa"
+          placeholder="Canada Ottawa"
           className="peer block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
         />
         <label className="absolute left-3 -top-3.5 bg-white px-1 text-gray-600 peer-placeholder-shown:top-3.5 peer-placeholder-shown:left-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:-top-3.5 peer-focus:left-3 peer-focus:text-sm peer-focus:text-blue-500 transition-all duration-200">
