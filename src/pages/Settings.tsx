@@ -241,70 +241,98 @@ const Settings = () => {
         <div className="w-72 bg-white shadow-lg rounded-lg p-8 space-y-8">
   <h2 className="text-2xl font-extrabold text-gray-800 mb-6">Settings</h2>
   <ul className="space-y-4">
-    <li
-      className={`flex items-center space-x-3 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
-        activeTab === 'General' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
-      }`}
-      onClick={() => handleTabClick('General')}
-    >
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'General' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('General')}
+  >
+    <div className="flex items-center space-x-3">
       <FaCog className="text-gray-500" />
       <span className="text-lg">General</span>
-    </li>
-    <li
-      className={`flex items-center space-x-3 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
-        activeTab === 'Account' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
-      }`}
-      onClick={() => handleTabClick('Account')}
-    >
+    </div>
+    <p className="text-sm text-gray-500">Access the general settings</p>
+  </li>
+
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Account' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Account')}
+  >
+    <div className="flex items-center space-x-3">
       <FaUser className="text-gray-500" />
       <span className="text-lg">Account</span>
-    </li>
-    <li
-      className={`flex items-center space-x-3 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
-        activeTab === 'Notification' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
-      }`}
-      onClick={() => handleTabClick('Notification')}
-    >
+    </div>
+    <p className="text-sm text-gray-500">Manage your account information</p>
+  </li>
+
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Notification' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Notification')}
+  >
+    <div className="flex items-center space-x-3">
       <FaBell className="text-gray-500" />
       <span className="text-lg">Notification</span>
-    </li>
-    <li
-      className={`flex items-center space-x-3 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
-        activeTab === 'Bill Payment' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
-      }`}
-      onClick={() => handleTabClick('Bill Payment')}
-    >
+    </div>
+    <p className="text-sm text-gray-500">Set up your notification preferences</p>
+  </li>
+
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Bill Payment' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Bill Payment')}
+  >
+    <div className="flex items-center space-x-3">
       <FaCreditCard className="text-gray-500" />
       <span className="text-lg">Bill Payment</span>
-    </li>
-    <li
-      className={`flex items-center space-x-3 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
-        activeTab === 'Payment Access' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
-      }`}
-      onClick={() => handleTabClick('Payment Access')}
-    >
+    </div>
+    <p className="text-sm text-gray-500">View and manage bill payments</p>
+  </li>
+
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Payment Access' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Payment Access')}
+  >
+    <div className="flex items-center space-x-3">
       <FaKey className="text-gray-500" />
       <span className="text-lg">Payment Access</span>
-    </li>
-    <li
-      className={`flex items-center space-x-3 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
-        activeTab === 'Language' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
-      }`}
-      onClick={() => handleTabClick('Language')}
-    >
+    </div>
+    <p className="text-sm text-gray-500">Manage payment access and permissions</p>
+  </li>
+
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Language' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Language')}
+  >
+    <div className="flex items-center space-x-3">
       <FaLanguage className="text-gray-500" />
       <span className="text-lg">Language</span>
-    </li>
-    <li
-      className={`flex items-center space-x-3 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
-        activeTab === 'Change Password' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
-      }`}
-      onClick={() => handleTabClick('Change Password')}
-    >
+    </div>
+    <p className="text-sm text-gray-500">Change the language settings</p>
+  </li>
+
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Change Password' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Change Password')}
+  >
+    <div className="flex items-center space-x-3">
       <FaKey className="text-gray-500" />
       <span className="text-lg">Change Password</span>
-    </li>
-  </ul>
+    </div>
+    <p className="text-sm text-gray-500">Update your password</p>
+  </li>
+</ul>
+
 </div>
 
 
