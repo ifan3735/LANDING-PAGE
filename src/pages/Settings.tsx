@@ -264,7 +264,7 @@ const Settings = () => {
       <FaUser className="text-gray-500" />
       <span className="text-lg">Account</span>
     </div>
-    <p className="text-sm text-gray-500">Manage your account information</p>
+    <p className="text-sm text-gray-500">Edit your personal information</p>
   </li>
 
   <li
