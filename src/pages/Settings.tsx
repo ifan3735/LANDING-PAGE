@@ -389,9 +389,16 @@ const Settings = () => {
               </tbody>
             </table>
           </div>
+          {/* Submit Button */}
+  <div className="text-center mt-10">
+      <button
+        type="submit"
+        className="w-1/2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 hover:shadow-xl transform hover:-translate-y-1"
+      >
+        Save Changes
+      </button>
+    </div>
         </div>
-        
-
         );
       case 'Payment Access':
         return (
