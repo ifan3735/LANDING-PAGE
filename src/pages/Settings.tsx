@@ -529,10 +529,98 @@ const Settings = () => {
         );
       case 'Language':
         return (
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">Language Settings</h3>
-            <p className="text-gray-600">Language selection options...</p>
-          </div>
+          <div className="bg-gradient-to-r from-white to-gray-100 p-10 rounded-3xl shadow-2xl max-w-4xl mx-auto transition-all duration-300 hover:shadow-3xl hover:scale-[1.02]">
+  
+  {/* Page Header */}
+  <h3 className="text-3xl font-extrabold text-gray-900 mb-10 text-center">Language & Region Settings</h3>
+
+  {/* Introductory Text */}
+  <p className="text-gray-600 text-center mb-12 text-lg leading-relaxed max-w-2xl mx-auto">
+    Customize your language preferences for a personalized experience. Select your preferred language, region, and manage date/time formats.
+  </p>
+
+  {/* Language Selection */}
+  <div className="bg-white p-8 rounded-2xl shadow-lg mb-10 transition-all hover:shadow-xl">
+    <h4 className="text-2xl font-semibold text-gray-900 mb-6">Select Your Preferred Language</h4>
+
+    {/* Language Dropdown */}
+    <div className="flex items-center space-x-4">
+      <label className="text-lg font-medium text-gray-700">Language</label>
+      <select className="w-full max-w-xs border border-gray-300 p-4 rounded-lg text-lg text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
+        <option>English (United States)</option>
+        <option>Español (Spanish)</option>
+        <option>Français (French)</option>
+        <option>Deutsch (German)</option>
+        <option>中文 (Chinese)</option>
+        <option>日本語 (Japanese)</option>
+        <option>العربية (Arabic)</option>
+        <option>हिन्दी (Hindi)</option>
+      </select>
+    </div>
+
+    {/* Language Preview */}
+    <div className="mt-8">
+      <p className="text-gray-600 text-md mb-4">Preview your selected language below:</p>
+      <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <p className="text-lg font-semibold text-gray-900">Welcome! (Translation)</p>
+        <p className="text-gray-700">This is how the interface will appear in your chosen language.</p>
+      </div>
+    </div>
+  </div>
+
+  {/* Region and Date/Time Settings */}
+  <div className="bg-white p-8 rounded-2xl shadow-lg mb-10 transition-all hover:shadow-xl">
+    <h4 className="text-2xl font-semibold text-gray-900 mb-6">Set Your Region & Time Preferences</h4>
+
+    {/* Region Dropdown */}
+    <div className="flex flex-col space-y-6">
+      
+      {/* Region Selection */}
+      <div className="flex items-center space-x-4">
+        <label className="text-lg font-medium text-gray-700">Region</label>
+        <select className="w-full max-w-xs border border-gray-300 p-4 rounded-lg text-lg text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
+          <option>United States</option>
+          <option>Spain</option>
+          <option>France</option>
+          <option>Germany</option>
+          <option>China</option>
+          <option>Japan</option>
+          <option>United Arab Emirates</option>
+          <option>India</option>
+        </select>
+      </div>
+
+      {/* Date Format Selection */}
+      <div className="flex items-center space-x-4">
+        <label className="text-lg font-medium text-gray-700">Date Format</label>
+        <select className="w-full max-w-xs border border-gray-300 p-4 rounded-lg text-lg text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
+          <option>MM/DD/YYYY</option>
+          <option>DD/MM/YYYY</option>
+          <option>YYYY/MM/DD</option>
+        </select>
+      </div>
+
+      {/* Time Format Selection */}
+      <div className="flex items-center space-x-4">
+        <label className="text-lg font-medium text-gray-700">Time Format</label>
+        <select className="w-full max-w-xs border border-gray-300 p-4 rounded-lg text-lg text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
+          <option>12-hour</option>
+          <option>24-hour</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  {/* Save and Apply Changes */}
+  <div className="bg-gray-50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all">
+    <h4 className="text-xl font-semibold text-gray-900 mb-4">Review Your Changes</h4>
+    <p className="text-gray-700 mb-6">Please review your selections before saving. These settings will apply across all interfaces in your account.</p>
+    <button className="bg-blue-600 text-white px-6 py-3 rounded-xl w-full font-bold text-lg hover:bg-blue-700 hover:shadow-xl transition-all">
+      Save and Apply Changes
+    </button>
+  </div>
+</div>
+
         );
       case 'Change Password':
         return (
