@@ -402,49 +402,59 @@ const Settings = () => {
         );
       case 'Payment Access':
         return (
-          <div className="bg-gradient-to-r from-white to-blue-50 p-10 rounded-3xl shadow-2xl max-w-4xl mx-auto transition-all duration-300 hover:shadow-3xl hover:scale-[1.02]">
+          <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-12 rounded-3xl shadow-2xl max-w-5xl mx-auto transition-transform duration-500 hover:scale-105 hover:shadow-3xl">
   
           {/* Section Header */}
-          <h3 className="text-4xl font-bold text-gray-900 mb-8 text-center tracking-wide">Payment Access</h3>
+          <h3 className="text-4xl font-extrabold text-blue-900 mb-10 text-center tracking-wide leading-tight">Payment Access Management</h3>
         
           {/* Introductory Text */}
-          <p className="text-gray-600 text-center mb-12 text-lg leading-relaxed">
-            Securely access your payment options, authorize transactions, and manage permissions for payments with ease.
+          <p className="text-gray-700 text-center mb-12 text-lg leading-relaxed max-w-2xl mx-auto">
+            Manage your payment access seamlessly. Control who can view, authorize, or manage payments. Keep track of all access permissions and transaction activities in a secure environment.
           </p>
         
           {/* Payment Access Options */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
         
             {/* Access Payment Dashboard */}
-            <div className="p-6 bg-gradient-to-r from-blue-100 to-white rounded-2xl shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-              <h4 className="text-2xl font-semibold text-blue-600 mb-3">Payment Dashboard</h4>
-              <p className="text-gray-700 mb-4">View and manage all your payment options and history.</p>
-              <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition-all duration-300">Access Dashboard</button>
+            <div className="p-8 bg-white border-t-4 border-blue-500 rounded-xl shadow-lg transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-center space-x-3 mb-4">
+                <i className="fas fa-tachometer-alt text-blue-600 text-3xl"></i>
+                <h4 className="text-2xl font-semibold text-blue-600">Payment Dashboard</h4>
+              </div>
+              <p className="text-gray-600 mb-6">Access all your payment options, methods, and transaction history in one place.</p>
+              <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition-all duration-300 font-semibold">Access Dashboard</button>
             </div>
         
             {/* Set Up New Payment Method */}
-            <div className="p-6 bg-gradient-to-r from-green-100 to-white rounded-2xl shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-              <h4 className="text-2xl font-semibold text-green-600 mb-3">Add Payment Method</h4>
-              <p className="text-gray-700 mb-4">Securely add and store a new payment method to your account.</p>
-              <button className="mt-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition-all duration-300">Add Method</button>
+            <div className="p-8 bg-white border-t-4 border-green-500 rounded-xl shadow-lg transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-center space-x-3 mb-4">
+                <i className="fas fa-credit-card text-green-600 text-3xl"></i>
+                <h4 className="text-2xl font-semibold text-green-600">Add Payment Method</h4>
+              </div>
+              <p className="text-gray-600 mb-6">Easily add and manage new payment methods to your account.</p>
+              <button className="w-full bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition-all duration-300 font-semibold">Add Method</button>
             </div>
         
             {/* Transaction Authorizations */}
-            <div className="p-6 bg-gradient-to-r from-red-100 to-white rounded-2xl shadow-lg transform hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-              <h4 className="text-2xl font-semibold text-red-600 mb-3">Authorize Transactions</h4>
-              <p className="text-gray-700 mb-4">Approve or reject pending transactions and manage access.</p>
-              <button className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition-all duration-300">Authorize Now</button>
+            <div className="p-8 bg-white border-t-4 border-red-500 rounded-xl shadow-lg transform hover:-translate-y-2 hover:shadow-2xl transition-all duration-300">
+              <div className="flex items-center space-x-3 mb-4">
+                <i className="fas fa-lock text-red-600 text-3xl"></i>
+                <h4 className="text-2xl font-semibold text-red-600">Authorize Transactions</h4>
+              </div>
+              <p className="text-gray-600 mb-6">Control and authorize pending transactions with just a click.</p>
+              <button className="w-full bg-red-600 text-white px-6 py-3 rounded-lg shadow hover:bg-red-700 transition-all duration-300 font-semibold">Authorize Now</button>
             </div>
           </div>
         
-          {/* Payment Permissions */}
-          <div className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300">
+          {/* Payment Permissions Section */}
+          <div className="bg-white p-10 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <h4 className="text-2xl font-semibold text-gray-900 mb-6">Manage Payment Permissions</h4>
             
-            <div className="space-y-6">
-              {/* Select Access Level */}
-              <div className="flex flex-col">
-                <label className="text-lg text-gray-700 mb-2 font-medium">Payment Access Level</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              
+              {/* Access Level Dropdown */}
+              <div>
+                <label className="block text-lg text-gray-700 mb-2 font-medium">Payment Access Level</label>
                 <select className="w-full border border-gray-300 p-4 rounded-lg text-lg text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
                   <option>Full Access</option>
                   <option>View Only</option>
@@ -453,8 +463,8 @@ const Settings = () => {
               </div>
         
               {/* Add Authorized Users */}
-              <div className="flex flex-col">
-                <label className="text-lg text-gray-700 mb-2 font-medium">Add Authorized Users</label>
+              <div>
+                <label className="block text-lg text-gray-700 mb-2 font-medium">Add Authorized Users</label>
                 <input
                   type="email"
                   placeholder="Enter user email"
@@ -462,25 +472,32 @@ const Settings = () => {
                 />
               </div>
         
-              {/* Save Changes Button */}
-              <div>
-                <button className="bg-blue-600 text-white px-6 py-4 rounded-xl w-full text-2xl font-bold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-300">
-                  Save Changes
-                </button>
+              {/* Access Level Description */}
+              <div className="col-span-1 md:col-span-2">
+                <p className="text-gray-600 text-sm">
+                  * Users with "Full Access" can manage all payments and methods, "View Only" allows access to view payments without any changes, and "Authorize Payments Only" grants permission to approve transactions.
+                </p>
               </div>
+            </div>
+        
+            <div className="mt-8">
+              <button className="w-full bg-blue-600 text-white px-6 py-4 rounded-xl text-xl font-bold shadow-lg hover:bg-blue-700 hover:shadow-xl transition-all duration-300">
+                Save Changes
+              </button>
             </div>
           </div>
         
-          {/* Access History */}
+          {/* Access History Section */}
           <div className="mt-16">
             <h4 className="text-3xl font-bold text-gray-900 mb-8 text-center">Access History</h4>
+            
             <table className="min-w-full bg-white rounded-2xl shadow-lg overflow-hidden">
-              <thead className="bg-blue-50">
+              <thead className="bg-blue-50 text-left">
                 <tr>
-                  <th className="text-left px-6 py-4 text-gray-600 font-semibold text-lg">Date</th>
-                  <th className="text-left px-6 py-4 text-gray-600 font-semibold text-lg">User</th>
-                  <th className="text-left px-6 py-4 text-gray-600 font-semibold text-lg">Access Level</th>
-                  <th className="text-left px-6 py-4 text-gray-600 font-semibold text-lg">Status</th>
+                  <th className="px-6 py-4 text-gray-600 font-semibold text-lg">Date</th>
+                  <th className="px-6 py-4 text-gray-600 font-semibold text-lg">User</th>
+                  <th className="px-6 py-4 text-gray-600 font-semibold text-lg">Access Level</th>
+                  <th className="px-6 py-4 text-gray-600 font-semibold text-lg">Status</th>
                 </tr>
               </thead>
               <tbody className="text-gray-700 text-lg">
@@ -505,7 +522,9 @@ const Settings = () => {
               </tbody>
             </table>
           </div>
+        
         </div>
+        
         
         );
       case 'Language':
