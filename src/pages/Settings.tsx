@@ -790,117 +790,102 @@ const Settings = () => {
 
       <div className="flex mt-8">
         {/* Sidebar */}
-        <div className="w-80 bg-gradient-to-br from-gray-900 to-gray-800 shadow-xl rounded-3xl p-8 space-y-10 transform hover:scale-105 transition-all duration-700">
-  {/* Title Section */}
-  <div className="text-center space-y-4 mb-8">
-    <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 animate-pulse">
-      Settings
-    </h2>
-    <p className="text-gray-400 tracking-wider text-sm">Personalize your experience</p>
-  </div>
+        <div className="w-72 bg-white shadow-lg rounded-lg p-8 space-y-8">
+  <h2 className="text-2xl font-extrabold text-gray-800 mb-6">Settings</h2>
+  <ul className="space-y-4">
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'General' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('General')}
+  >
+    <div className="flex items-center space-x-3">
+      <FaCog className="text-gray-500" />
+      <span className="text-lg">General</span>
+    </div>
+    <p className="text-sm text-gray-500">Access the general settings</p>
+  </li>
 
-  {/* Sidebar Menu */}
-  <ul className="space-y-6">
-    {/* General */}
-    <li
-      className={`flex flex-col items-start space-y-2 p-4 cursor-pointer transition-all duration-300 rounded-xl transform hover:scale-105 hover:bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg ${
-        activeTab === 'General' ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl' : 'text-gray-300'
-      }`}
-      onClick={() => handleTabClick('General')}
-    >
-      <div className="flex items-center space-x-4">
-        <FaCog className="text-2xl text-gray-400 hover:text-white transition duration-300" />
-        <span className="text-lg">General</span>
-      </div>
-      <p className="text-sm text-gray-400 hover:text-white">Access the general settings</p>
-    </li>
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Account' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Account')}
+  >
+    <div className="flex items-center space-x-3">
+      <FaUser className="text-gray-500" />
+      <span className="text-lg">Account</span>
+    </div>
+    <p className="text-sm text-gray-500">Edit your personal information</p>
+  </li>
 
-    {/* Account */}
-    <li
-      className={`flex flex-col items-start space-y-2 p-4 cursor-pointer transition-all duration-300 rounded-xl transform hover:scale-105 hover:bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg ${
-        activeTab === 'Account' ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl' : 'text-gray-300'
-      }`}
-      onClick={() => handleTabClick('Account')}
-    >
-      <div className="flex items-center space-x-4">
-        <FaUser className="text-2xl text-gray-400 hover:text-white transition duration-300" />
-        <span className="text-lg">Account</span>
-      </div>
-      <p className="text-sm text-gray-400 hover:text-white">Edit your personal information</p>
-    </li>
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Notification' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Notification')}
+  >
+    <div className="flex items-center space-x-3">
+      <FaBell className="text-gray-500" />
+      <span className="text-lg">Notification</span>
+    </div>
+    <p className="text-sm text-gray-500">Set up your notification preferences</p>
+  </li>
 
-    {/* Notification */}
-    <li
-      className={`flex flex-col items-start space-y-2 p-4 cursor-pointer transition-all duration-300 rounded-xl transform hover:scale-105 hover:bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg ${
-        activeTab === 'Notification' ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl' : 'text-gray-300'
-      }`}
-      onClick={() => handleTabClick('Notification')}
-    >
-      <div className="flex items-center space-x-4">
-        <FaBell className="text-2xl text-gray-400 hover:text-white transition duration-300" />
-        <span className="text-lg">Notification</span>
-      </div>
-      <p className="text-sm text-gray-400 hover:text-white">Set up your notification preferences</p>
-    </li>
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Bill Payment' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Bill Payment')}
+  >
+    <div className="flex items-center space-x-3">
+      <FaCreditCard className="text-gray-500" />
+      <span className="text-lg">Bill Payment</span>
+    </div>
+    <p className="text-sm text-gray-500">View and manage bill payments</p>
+  </li>
 
-    {/* Bill Payment */}
-    <li
-      className={`flex flex-col items-start space-y-2 p-4 cursor-pointer transition-all duration-300 rounded-xl transform hover:scale-105 hover:bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg ${
-        activeTab === 'Bill Payment' ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl' : 'text-gray-300'
-      }`}
-      onClick={() => handleTabClick('Bill Payment')}
-    >
-      <div className="flex items-center space-x-4">
-        <FaCreditCard className="text-2xl text-gray-400 hover:text-white transition duration-300" />
-        <span className="text-lg">Bill Payment</span>
-      </div>
-      <p className="text-sm text-gray-400 hover:text-white">View and manage bill payments</p>
-    </li>
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Payment Access' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Payment Access')}
+  >
+    <div className="flex items-center space-x-3">
+      <FaKey className="text-gray-500" />
+      <span className="text-lg">Payment Access</span>
+    </div>
+    <p className="text-sm text-gray-500">Manage payment access and permissions</p>
+  </li>
 
-    {/* Payment Access */}
-    <li
-      className={`flex flex-col items-start space-y-2 p-4 cursor-pointer transition-all duration-300 rounded-xl transform hover:scale-105 hover:bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg ${
-        activeTab === 'Payment Access' ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl' : 'text-gray-300'
-      }`}
-      onClick={() => handleTabClick('Payment Access')}
-    >
-      <div className="flex items-center space-x-4">
-        <FaKey className="text-2xl text-gray-400 hover:text-white transition duration-300" />
-        <span className="text-lg">Payment Access</span>
-      </div>
-      <p className="text-sm text-gray-400 hover:text-white">Manage payment access and permissions</p>
-    </li>
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Language' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Language')}
+  >
+    <div className="flex items-center space-x-3">
+      <FaLanguage className="text-gray-500" />
+      <span className="text-lg">Language</span>
+    </div>
+    <p className="text-sm text-gray-500">Change the language settings</p>
+  </li>
 
-    {/* Language */}
-    <li
-      className={`flex flex-col items-start space-y-2 p-4 cursor-pointer transition-all duration-300 rounded-xl transform hover:scale-105 hover:bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg ${
-        activeTab === 'Language' ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl' : 'text-gray-300'
-      }`}
-      onClick={() => handleTabClick('Language')}
-    >
-      <div className="flex items-center space-x-4">
-        <FaLanguage className="text-2xl text-gray-400 hover:text-white transition duration-300" />
-        <span className="text-lg">Language</span>
-      </div>
-      <p className="text-sm text-gray-400 hover:text-white">Change the language settings</p>
-    </li>
+  <li
+    className={`flex flex-col items-start space-y-1 p-3 cursor-pointer transition-all duration-300 rounded-lg hover:bg-blue-50 ${
+      activeTab === 'Change Password' ? 'text-blue-600 font-bold bg-blue-100 shadow-sm' : 'text-gray-600'
+    }`}
+    onClick={() => handleTabClick('Change Password')}
+  >
+    <div className="flex items-center space-x-3">
+      <FaKey className="text-gray-500" />
+      <span className="text-lg">Change Password</span>
+    </div>
+    <p className="text-sm text-gray-500">Update your password</p>
+  </li>
+</ul>
 
-    {/* Change Password */}
-    <li
-      className={`flex flex-col items-start space-y-2 p-4 cursor-pointer transition-all duration-300 rounded-xl transform hover:scale-105 hover:bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg ${
-        activeTab === 'Change Password' ? 'text-white bg-gradient-to-r from-purple-500 to-pink-500 shadow-xl' : 'text-gray-300'
-      }`}
-      onClick={() => handleTabClick('Change Password')}
-    >
-      <div className="flex items-center space-x-4">
-        <FaKey className="text-2xl text-gray-400 hover:text-white transition duration-300" />
-        <span className="text-lg">Change Password</span>
-      </div>
-      <p className="text-sm text-gray-400 hover:text-white">Update your password</p>
-    </li>
-  </ul>
 </div>
-
         {/* Main Content */}
         <div className="flex-1 ml-8">
           {/* Dynamic Content */}
