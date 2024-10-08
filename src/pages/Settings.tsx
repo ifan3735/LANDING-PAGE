@@ -644,96 +644,92 @@ const Settings = () => {
         );
       case 'Change Password':
         return (
-          <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-3xl shadow-xl max-w-4xl mx-auto transition duration-300 transform hover:scale-[1.02] hover:shadow-2xl">
+          <div className="bg-gradient-to-b from-purple-900 via-indigo-700 to-blue-800 p-10 rounded-3xl shadow-2xl max-w-3xl mx-auto space-y-12 transform hover:scale-105 transition-all duration-500">
   
-          {/* Header Section */}
-          <div className="text-center mb-10">
-            <h3 className="text-5xl font-extrabold text-gray-900 mb-6">Change Password</h3>
-            <p className="text-xl text-gray-600 leading-relaxed max-w-xl mx-auto">
-              Safeguard your account with a secure password. Use a combination of uppercase, lowercase, numbers, and special characters for the best protection.
+          {/* Page Title */}
+          <div className="text-center mb-6">
+            <h1 className="text-6xl font-bold text-white tracking-wider leading-snug mb-4 animate-pulse">Change Password</h1>
+            <p className="text-xl text-indigo-200 max-w-xl mx-auto leading-relaxed">
+              Elevate your security! Let’s take your password game to the next level with futuristic safety protocols. 
             </p>
           </div>
         
-          {/* Password Change Form */}
-          <div className="bg-white p-10 rounded-2xl shadow-lg">
-            <h4 className="text-2xl font-bold text-gray-900 mb-6">Update Your Password</h4>
+          {/* 3D Form Wrapper */}
+          <div className="bg-white bg-opacity-20 backdrop-blur-xl rounded-2xl p-8 shadow-inner transform hover:scale-105 transition-all duration-500 border border-gray-100 space-y-8">
+            <h2 className="text-3xl font-bold text-indigo-100 mb-6 text-center">Enter New Credentials</h2>
         
-            {/* Old Password Input */}
-            <div className="mb-8">
-              <label className="block text-lg font-semibold text-gray-700 mb-2" htmlFor="current-password">Current Password</label>
-              <div className="relative">
-                <input 
-                  type="password" 
-                  id="current-password" 
-                  className="w-full border border-gray-300 p-4 rounded-lg text-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition duration-200"
-                  placeholder="Enter your current password" 
-                />
-                <button className="absolute right-4 top-4 text-gray-500 focus:outline-none hover:text-gray-700 transition-all">
-                  <i className="fas fa-eye"></i>
-                </button>
-              </div>
-              <small className="text-sm text-gray-500 mt-2 block">Forgot your password? <a href="#" className="text-indigo-500 hover:underline">Reset here</a></small>
+            {/* Old Password */}
+            <div className="relative">
+              <label className="block text-lg text-white font-semibold mb-3" htmlFor="old-password">Current Password</label>
+              <input 
+                type="password" 
+                id="old-password" 
+                className="w-full bg-gradient-to-r from-gray-900 to-gray-700 text-white placeholder-gray-400 border-none p-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-500"
+                placeholder="Enter current password" 
+              />
+              <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200 transition">
+                <i className="fas fa-eye"></i>
+              </button>
             </div>
         
-            {/* New Password Input */}
-            <div className="mb-8">
-              <label className="block text-lg font-semibold text-gray-700 mb-2" htmlFor="new-password">New Password</label>
-              <div className="relative">
-                <input 
-                  type="password" 
-                  id="new-password" 
-                  className="w-full border border-gray-300 p-4 rounded-lg text-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition duration-200"
-                  placeholder="Enter a new password" 
-                />
-                <button className="absolute right-4 top-4 text-gray-500 focus:outline-none hover:text-gray-700 transition-all">
-                  <i className="fas fa-eye"></i>
-                </button>
-              </div>
+            {/* New Password */}
+            <div className="relative">
+              <label className="block text-lg text-white font-semibold mb-3" htmlFor="new-password">New Password</label>
+              <input 
+                type="password" 
+                id="new-password" 
+                className="w-full bg-gradient-to-r from-gray-900 to-gray-700 text-white placeholder-gray-400 border-none p-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-500"
+                placeholder="Create a new password" 
+              />
+              <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200 transition">
+                <i className="fas fa-eye"></i>
+              </button>
             </div>
         
-            {/* Confirm New Password Input */}
-            <div className="mb-8">
-              <label className="block text-lg font-semibold text-gray-700 mb-2" htmlFor="confirm-password">Confirm New Password</label>
-              <div className="relative">
-                <input 
-                  type="password" 
-                  id="confirm-password" 
-                  className="w-full border border-gray-300 p-4 rounded-lg text-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition duration-200"
-                  placeholder="Confirm your new password" 
-                />
-                <button className="absolute right-4 top-4 text-gray-500 focus:outline-none hover:text-gray-700 transition-all">
-                  <i className="fas fa-eye"></i>
-                </button>
-              </div>
+            {/* Confirm New Password */}
+            <div className="relative">
+              <label className="block text-lg text-white font-semibold mb-3" htmlFor="confirm-password">Confirm New Password</label>
+              <input 
+                type="password" 
+                id="confirm-password" 
+                className="w-full bg-gradient-to-r from-gray-900 to-gray-700 text-white placeholder-gray-400 border-none p-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-500"
+                placeholder="Confirm new password" 
+              />
+              <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200 transition">
+                <i className="fas fa-eye"></i>
+              </button>
             </div>
         
             {/* Password Strength Meter */}
-            <div className="mb-6">
-              <p className="text-gray-700 mb-3">Password Strength:</p>
-              <div className="relative h-3 w-full bg-gray-200 rounded-lg overflow-hidden">
-                <div className="absolute h-full bg-green-500 w-3/4 transition-all duration-500"></div> {/* Adjust width dynamically */}
+            <div className="mb-4">
+              <label className="block text-lg text-white font-semibold mb-3">Password Strength</label>
+              <div className="relative h-4 w-full rounded-full bg-gray-700">
+                <div className="absolute left-0 top-0 h-full bg-gradient-to-r from-red-400 to-green-500 rounded-full w-3/5 transition-all duration-500"></div> 
               </div>
-              <p className="text-sm text-gray-500 mt-2">Your password is strong</p>
+              <p className="text-sm text-gray-300 mt-2">Your password strength is good, but adding special characters will make it even better!</p>
             </div>
         
-            {/* Security Tips */}
-            <div className="bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded-lg mb-10">
-              <h5 className="text-lg font-semibold text-indigo-900 mb-2">Password Requirements:</h5>
-              <ul className="list-disc ml-5 text-indigo-700 space-y-2">
-                <li>At least 8 characters long</li>
-                <li>Include uppercase, lowercase letters, numbers, and special characters</li>
-                <li>Avoid common phrases or easily guessed words</li>
-              </ul>
+            {/* AI Assistant - Tips and Suggestions */}
+            <div className="p-6 bg-indigo-800 bg-opacity-20 backdrop-filter backdrop-blur-lg rounded-lg text-center">
+              <p className="text-lg font-semibold text-indigo-100 mb-3">Tip from AI:</p>
+              <p className="text-indigo-200 leading-snug">Using a mix of numbers, symbols, and unique phrases can strengthen your password security by 40%. Aim for at least 12 characters!</p>
             </div>
         
             {/* Submit Button */}
             <div className="text-center">
-              <button className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-12 py-4 rounded-full font-bold text-xl shadow-lg hover:opacity-90 transition duration-300 transform hover:scale-[1.05]">
+              <button className="relative inline-flex items-center justify-center w-full px-12 py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white text-2xl font-bold rounded-full shadow-lg hover:shadow-2xl transform hover:scale-110 transition-all duration-500">
                 Update Password
+                <span className="absolute inset-0 w-full h-full rounded-full bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 opacity-0 group-hover:opacity-50 transition duration-500 ease-out"></span>
               </button>
             </div>
           </div>
+        
+          {/* Footer */}
+          <div className="text-center mt-10">
+            <p className="text-gray-400">Having trouble? <a href="#" className="text-indigo-400 hover:underline">Contact Support</a></p>
+          </div>
         </div>
+        
         
 
         );
