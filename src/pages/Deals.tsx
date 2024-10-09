@@ -252,7 +252,7 @@ const Deals = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm">
-            {filteredDeals.map((deal, index) => (
+            {filteredDeals.map((deal) => (
               <tr
                 key={deal.id}
                 className="border-b border-gray-200 hover:bg-gray-100"
