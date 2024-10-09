@@ -109,17 +109,21 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
             onFocus={() => setShowProfileCard(true)}
             onBlur={() => setShowProfileCard(false)}
           >
-            <img
-              src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
-              alt="User Avatar"
-              className="w-10 h-10 rounded-full"
-              tabIndex={0}
-              aria-label="User Profile"
-            />
-            {/* Green dot for online status */}
-            {isOnline && (
-              <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></span>
-            )}
+            <div className="relative">
+              {/* Profile Picture */}
+              <img
+                src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full"
+                tabIndex={0}
+                aria-label="User Profile"
+              />
+              {/* Online Status Dot */}
+              {isOnline && (
+                <span className="absolute top-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></span>
+              )}
+            </div>
+
             <div>
               <p className="font-semibold">Hello John</p>
               <p className="text-sm text-gray-500">{currentDate}</p>
