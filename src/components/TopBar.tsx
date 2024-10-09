@@ -17,6 +17,7 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
   const [newNotifications, setNewNotifications] = useState(true); // State to track if there are new notifications
   const [currentDate, setCurrentDate] = useState('');
   const [isOnline, setIsOnline] = useState(navigator.onLine); // Track user's online status
+  const [showProfileCard, setShowProfileCard] = useState(false); // Profile hover state
 
   // Dynamically update the date
   useEffect(() => {
@@ -59,14 +60,6 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
 
         {/* Right Section */}
         <div className="flex items-center space-x-6">
-          {/* Export Button */}
-          {/* <button
-            onClick={exportData}
-            className="bg-yellow-500 hover:bg-yellow-600 transition-colors text-white px-4 py-2 rounded-full shadow-lg"
-          >
-            Export
-          </button> */}
-
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
@@ -105,8 +98,12 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
             )}
           </div>
 
-          {/* User Profile with Online Status */}
-          <div className="relative flex items-center space-x-3">
+          {/* User Profile with Hoverable Details */}
+          <div
+            className="relative flex items-center space-x-3"
+            onMouseEnter={() => setShowProfileCard(true)}
+            onMouseLeave={() => setShowProfileCard(false)}
+          >
             <img
               src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"
               alt="User Avatar"
@@ -120,6 +117,19 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
               <p className="font-semibold">Hello John</p>
               <p className="text-sm text-gray-500">{currentDate}</p>
             </div>
+
+            {/* Profile Card on Hover */}
+            {showProfileCard && (
+              <div className="absolute top-12 right-0 mt-2 w-72 bg-white rounded-lg shadow-lg p-4 z-20 transition-transform duration-300 transform translate-y-2">
+                <h3 className="font-semibold text-lg mb-2">User Profile</h3>
+                <p className="text-sm text-gray-700 mb-1"><strong>Name:</strong> John Doe</p>
+                <p className="text-sm text-gray-700 mb-1"><strong>Email:</strong> john@example.com</p>
+                <p className="text-sm text-gray-700 mb-1"><strong>Status:</strong> {isOnline ? 'Online' : 'Offline'}</p>
+                <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full">
+                  View Profile
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
