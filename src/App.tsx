@@ -8,6 +8,7 @@ import SignUp from './pages/Register';
 import Company from './components/Company';
 import Contact from './pages/Contact';
 import Services from './components/Services';
+import Faq from './pages/Faq';
 
 // Importing additional pages and layout
 import MainLayout from '../src/assets/layouts/MainLayout';
@@ -35,6 +36,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<Company />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/faq" element={<Faq />} />
 
           {/* Protected Routes (for logged-in users) */}
           {/* 
