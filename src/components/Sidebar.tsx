@@ -1,4 +1,4 @@
-import { FaCar, FaCog, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaUserCircle, FaChartBar, FaSearch, FaHeadset } from 'react-icons/fa';
+import { FaCar, FaCog, FaList, FaMapMarkerAlt, FaCalendarAlt, FaDollarSign, FaChartBar, FaSearch, FaHeadset } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
