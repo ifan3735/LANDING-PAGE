@@ -132,25 +132,44 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
 
             {/* Profile Card on Hover */}
             {showProfileCard && (
-              <div className="absolute top-12 right-0 mt-2 w-80 bg-white rounded-lg shadow-lg p-4 z-20 transition-transform duration-300 transform translate-y-2">
-                <h3 className="font-semibold text-lg mb-2">User Profile</h3>
-                <p className="text-sm text-gray-700 mb-1"><strong>Name:</strong> John Doe</p>
-                <p className="text-sm text-gray-700 mb-1"><strong>Email:</strong> john@example.com</p>
-                <p className="text-sm text-gray-700 mb-1"><strong>Account Type:</strong> Premium</p>
-                <p className="text-sm text-gray-700 mb-1"><strong>Member Since:</strong> Jan 2021</p>
-                <p className="text-sm text-gray-700 mb-1"><strong>Last Login:</strong> 2 hours ago</p>
-                
-                <div className="flex items-center justify-between mt-4">
-                  <button className="flex items-center space-x-1 bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-full">
-                    <MdOutlineSettings size={20} />
-                    <span>Settings</span>
-                  </button>
-                  <button className="flex items-center space-x-1 bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-full">
-                    <MdLogout size={20} />
-                    <span>Log Out</span>
-                  </button>
-                </div>
+              <div className="absolute top-12 right-0 mt-2 w-80 bg-white bg-opacity-70 backdrop-blur-lg rounded-3xl shadow-2xl p-6 z-20 transition-all duration-500 transform translate-y-4 hover:translate-y-0 hover:shadow-glow">
+              {/* Title */}
+              <h3 className="font-bold text-xl mb-4 text-gray-800 text-center">User Profile</h3>
+            
+              {/* User Details */}
+              <div className="space-y-2">
+                <p className="text-sm text-gray-700 flex items-center justify-between">
+                  <strong className="text-gray-900">Name:</strong> John Doe
+                </p>
+                <p className="text-sm text-gray-700 flex items-center justify-between">
+                  <strong className="text-gray-900">Email:</strong> john@example.com
+                </p>
+                <p className="text-sm text-gray-700 flex items-center justify-between">
+                  <strong className="text-gray-900">Account Type:</strong> Premium
+                </p>
+                <p className="text-sm text-gray-700 flex items-center justify-between">
+                  <strong className="text-gray-900">Member Since:</strong> Jan 2021
+                </p>
+                <p className="text-sm text-gray-700 flex items-center justify-between">
+                  <strong className="text-gray-900">Last Login:</strong> 2 hours ago
+                </p>
               </div>
+            
+              {/* Action Buttons */}
+              <div className="flex items-center justify-between mt-6 space-x-2">
+                {/* Settings Button */}
+                <button className="flex items-center space-x-2 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-700 hover:bg-gradient-to-r hover:from-gray-300 hover:to-gray-400 px-4 py-2 rounded-full shadow-sm transition-all duration-300 transform hover:scale-105">
+                  <MdOutlineSettings size={20} />
+                  <span className="font-semibold">Settings</span>
+                </button>
+            
+                {/* Log Out Button */}
+                <button className="flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 text-white hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 px-4 py-2 rounded-full shadow-sm transition-all duration-300 transform hover:scale-105">
+                  <MdLogout size={20} />
+                  <span className="font-semibold">Log Out</span>
+                </button>
+              </div>
+            </div>            
             )}
           </div>
         </div>
