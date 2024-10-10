@@ -55,11 +55,15 @@ const SignInPage: React.FC = () => {
           role: response.role,
         });
   
-        // Show success toast
+        // Show success toast first
         toast.success('Signed in successfully!', toastOptions);
   
-        // Redirect based on the user role
-        navigate(response.role === 'admin' ? '/admin' : '/dashboard');
+        // Delay navigation to allow the toast to appear
+        setTimeout(() => {
+          // Redirect based on the user role
+          navigate(response.role === 'admin' ? '/admin' : '/dashboard');
+        }, 1500); // Adjust the timeout duration as needed (1.5 seconds in this case)
+  
       } else {
         console.error('Unexpected response structure:', response);
       }
@@ -76,6 +80,7 @@ const SignInPage: React.FC = () => {
       console.error('Failed to login:', error);
     }
   };
+  
   
 
   const toastOptions: ToastOptions = {
