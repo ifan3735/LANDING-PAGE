@@ -149,8 +149,9 @@ const SignInPage: React.FC = () => {
                 <button
                   className="w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
+                  disabled={isLoading}
                 >
-                  Sign In
+                  {isLoading ? 'Signing in...' : 'Sign In'}
                 </button>
               </div>
               <div className="flex items-center justify-center mb-4">
