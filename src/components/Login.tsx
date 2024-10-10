@@ -33,34 +33,50 @@ const SignInPage: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+  
+    // Check if email or password fields are empty
     if (!email || !password) {
       toast.error('Please fill out all fields before submitting.', toastOptions);
       return;
     }
-    // Handle form submission logic here
-    toast.success('Signed in successfully!', toastOptions);
+  
     try {
+      // Make the login request using the mutation
       const response = await loginUser({ email, password }).unwrap();
+      
+      // Log the response for debugging purposes
       console.log('Response:', response);
-
+  
+      // Check if the response contains the expected properties
       if (response && response.email && response.token && response.role && response.id) {
-        // Update the user context and localStorage
+        // Update the user context and save the user details
         setUser({
           name: response.email,
           role: response.role,
         });
-
-        // Redirect based on user role
+  
+        // Show success toast
+        toast.success('Signed in successfully!', toastOptions);
+  
+        // Redirect based on the user role
         navigate(response.role === 'admin' ? '/admin' : '/dashboard');
       } else {
         console.error('Unexpected response structure:', response);
       }
-    }
-    catch (error) {
+    } catch (error) {
+      // Check if the error message indicates wrong credentials
+      if (error.status === 401) {  // Assuming 401 for unauthorized (wrong email/password)
+        toast.error('Wrong email or password.', toastOptions);
+      } else {
+        // For any other errors
+        toast.error('Failed to login. Please try again.', toastOptions);
+      }
+  
+      // Log the error to the console for debugging
       console.error('Failed to login:', error);
     }
-    
   };
+  
 
   const toastOptions: ToastOptions = {
     position: "top-right",
