@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast, ToastOptions } from 'react-toastify';
@@ -14,11 +14,15 @@ const SignInPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { setUser } = React.useContext(UserContext);
+  const userContext = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
+  if (!userContext) {
+    throw new Error('UserContext is not found');
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
