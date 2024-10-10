@@ -33,6 +33,12 @@ const SignInPage: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!email || !password) {
+      toast.error('Please fill out all fields before submitting.', toastOptions);
+      return;
+    }
+    // Handle form submission logic here
+    toast.success('Signed in successfully!', toastOptions);
     try {
       const response = await loginUser({ email, password }).unwrap();
       console.log('Response:', response);
@@ -53,12 +59,7 @@ const SignInPage: React.FC = () => {
     catch (error) {
       console.error('Failed to login:', error);
     }
-    if (!formData.email || !formData.password) {
-      toast.error('Please fill out all fields before submitting.', toastOptions);
-      return;
-    }
-    // Handle form submission logic here
-    toast.success('Signed in successfully!', toastOptions);
+    
   };
 
   const toastOptions: ToastOptions = {

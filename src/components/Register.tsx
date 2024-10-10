@@ -43,6 +43,12 @@ const SignUpPage: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!contactPhone || !address) {
+      toast.error('Please fill out all fields before submitting.', toastOptions);
+      return;
+    }
+    // Handle final form submission logic here
+    toast.success('Form submitted successfully!', toastOptions);
     try {
       const result = await registerUser({ name, email, password, contactPhone, address });
       console.log('User registered:', result);
@@ -50,12 +56,7 @@ const SignUpPage: React.FC = () => {
     } catch (error) {
       console.error('Registration error:', error);
     }
-    if (!contactPhone || !address) {
-      toast.error('Please fill out all fields before submitting.', toastOptions);
-      return;
-    }
-    // Handle final form submission logic here
-    toast.success('Form submitted successfully!', toastOptions);
+    
   };
 
   const toastOptions: ToastOptions = {
