@@ -31,7 +31,7 @@ const SignInPage: React.FC = () => {
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       const response = await loginUser({ email, password }).unwrap();
@@ -106,8 +106,9 @@ const SignInPage: React.FC = () => {
                     id="email"
                     type="email"
                     placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -124,8 +125,8 @@ const SignInPage: React.FC = () => {
                     id="password"
                     type="password"
                     placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
