@@ -105,8 +105,8 @@ const SignUpPage: React.FC = () => {
                         id="username"
                         type="text"
                         placeholder="Username"
-                        value={formData.username}
-                        onChange={handleChange}
+                        value={name}
+                        onChange={(e) => setFullName(e.target.value)}
                       />
                     </div>
                   </div>
@@ -123,8 +123,8 @@ const SignUpPage: React.FC = () => {
                         id="email"
                         type="email"
                         placeholder="Email"
-                        value={formData.email}
-                        onChange={handleChange}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                   </div>
@@ -141,8 +141,8 @@ const SignUpPage: React.FC = () => {
                         id="password"
                         type="password"
                         placeholder="Password"
-                        value={formData.password}
-                        onChange={handleChange}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
                     <p className="text-gray-600 text-xs">Your password must have at least 8 characters</p>
@@ -164,8 +164,8 @@ const SignUpPage: React.FC = () => {
                         id="phone"
                         type="text"
                         placeholder="Phone"
-                        value={formData.phone}
-                        onChange={handleChange}
+                        value={contactPhone}
+                        onChange={(e) => setContactPhone(e.target.value)}
                       />
                     </div>
                   </div>
@@ -182,8 +182,8 @@ const SignUpPage: React.FC = () => {
                         id="address"
                         type="text"
                         placeholder="Address"
-                        value={formData.address}
-                        onChange={handleChange}
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
                       />
                     </div>
                   </div>
