@@ -25,7 +25,7 @@ const SignUpPage: React.FC = () => {
   });
 
   const handleNext = () => {
-    if (step === 1 && (!formData.username || !formData.email || !formData.password)) {
+    if (step === 1 && (!name || !email || !password)) {
       toast.error('Please fill out all fields before proceeding.', toastOptions);
       return;
     }
