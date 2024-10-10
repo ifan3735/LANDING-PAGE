@@ -24,6 +24,8 @@ const SignInPage: React.FC = () => {
     throw new Error('UserContext is not found');
   }
 
+  const { setUser } = userContext;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
@@ -31,6 +33,26 @@ const SignInPage: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    try {
+      const response = await loginUser({ email, password }).unwrap();
+      console.log('Response:', response);
+
+      if (response && response.email && response.token && response.role && response.id) {
+        // Update the user context and localStorage
+        setUser({
+          name: response.email,
+          role: response.role,
+        });
+
+        // Redirect based on user role
+        navigate(response.role === 'admin' ? '/admin' : '/dashboard');
+      } else {
+        console.error('Unexpected response structure:', response);
+      }
+    }
+    catch (error) {
+      console.error('Failed to login:', error);
+    }
     if (!formData.email || !formData.password) {
       toast.error('Please fill out all fields before submitting.', toastOptions);
       return;
