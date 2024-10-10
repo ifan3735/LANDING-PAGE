@@ -62,7 +62,7 @@ const SignInPage: React.FC = () => {
         setTimeout(() => {
           // Redirect based on the user role
           navigate(response.role === 'admin' ? '/admin' : '/dashboard');
-        }, 1500); // Adjust the timeout duration as needed (1.5 seconds in this case)
+        }, 5000); // Adjust the timeout duration as needed (1.5 seconds in this case)
   
       } else {
         console.error('Unexpected response structure:', response);
@@ -80,8 +80,6 @@ const SignInPage: React.FC = () => {
       console.error('Failed to login:', error);
     }
   };
-  
-  
 
   const toastOptions: ToastOptions = {
     position: "top-right",
