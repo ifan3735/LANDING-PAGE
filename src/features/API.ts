@@ -7,6 +7,22 @@ export interface LoginResponse {
     role: string;
 }
 
+export interface Details {
+    name: string;
+    email: string;
+    password: string;
+    contactPhone: string;
+    address: string;
+}
+
+export interface RegisterResponse {
+    name: string;
+    email: string;
+    password: string;
+    contactPhone: string;
+    address: string;
+}
+
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ 
@@ -27,8 +43,19 @@ export const apiSlice = createApi({
                 body: credentials,
             }),
         }),
+        registerUser: builder.mutation<RegisterResponse, Details>({
+            query: (userData) => ({
+                url: '/register',
+                method: 'POST',
+                body: userData,
+            }),
+        }),
     }),
  
 });
 
-export const { useLoginUserMutation } = apiSlice as { useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; };
+export const { useLoginUserMutation, useRegisterUserMutation } = apiSlice as { 
+    useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; 
+    useRegisterUserMutation: () => ReturnType<typeof apiSlice.endpoints.registerUser.useMutation>;
+    
+};

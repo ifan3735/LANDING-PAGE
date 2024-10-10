@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEnvelope, FaLock, FaUser, FaPhone, FaAddressCard } from 'react-icons/fa';
 import { ToastContainer, toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './Footer';
 import Header from './Header';
+import { useRegisterUserMutation } from '../features/API';
 
 const SignUpPage: React.FC = () => {
+  const [registerUser] = useRegisterUserMutation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setFullName] = useState('');
+  const [contactPhone, setContactPhone] = useState('');
+  const [address, setAddress] = useState('');
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     username: '',
@@ -33,8 +41,15 @@ const SignUpPage: React.FC = () => {
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    try {
+      const result = await registerUser({ name, email, password, contactPhone, address });
+      console.log('User registered:', result);
+      navigate('/login');
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
     if (!formData.phone || !formData.address) {
       toast.error('Please fill out all fields before submitting.', toastOptions);
       return;
