@@ -5,8 +5,16 @@ import { ToastContainer, toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './Footer';
 import Header from './Header';
+import { useLoginUserMutation } from '../features/API';
+import { UserContext } from '../contexts/userContext';
+import { useNavigate } from 'react-router-dom';
 
 const SignInPage: React.FC = () => {
+  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const { setUser } = React.useContext(UserContext);
   const [formData, setFormData] = useState({
     email: '',
     password: ''

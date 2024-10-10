@@ -31,4 +31,4 @@ export const apiSlice = createApi({
  
 });
 
-export const { useLoginUserMutation } = apiSlice as     {useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; };
+export const { useLoginUserMutation } = apiSlice as { useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; };
