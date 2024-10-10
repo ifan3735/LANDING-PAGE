@@ -50,7 +50,7 @@ const SignUpPage: React.FC = () => {
     } catch (error) {
       console.error('Registration error:', error);
     }
-    if (!formData.phone || !formData.address) {
+    if (!contactPhone || !address) {
       toast.error('Please fill out all fields before submitting.', toastOptions);
       return;
     }
