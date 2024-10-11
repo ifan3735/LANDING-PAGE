@@ -3,8 +3,7 @@ import { MdOutlineSettings, MdLogout } from 'react-icons/md';
 import { FaBell } from 'react-icons/fa';
 import { FiChevronDown } from 'react-icons/fi';
 import SearchBar from './SearchBar';
-import { Details } from '../features/API';
-
+import { useFetchUserDetailsQuery } from '../features/API';
 interface TopBarProps {
   searchQuery: string;
   handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -12,14 +11,29 @@ interface TopBarProps {
   theme: string;
   exportData: () => void;
 }
+export type UserRole = 'admin' | 'user';
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  contact_phone: string;
+  address: string;
+  role: UserRole;
+  created_at: string;
+  updated_at: string;
+}
 
 const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: TopBarProps) => {
+  const { data: User } = useFetchUserDetailsQuery();
   const [notifications, setNotifications] = useState([{ id: 1, message: "New car added!" }]); // Example notifications
   const [showNotifications, setShowNotifications] = useState(false);
   const [newNotifications, setNewNotifications] = useState(true); // State to track if there are new notifications
   const [currentDate, setCurrentDate] = useState('');
   const [isOnline, setIsOnline] = useState(navigator.onLine); // Track user's online status
   const [showProfileCard, setShowProfileCard] = useState(false); // Profile hover state
+
+
 
   // Dynamically update the date
   useEffect(() => {
