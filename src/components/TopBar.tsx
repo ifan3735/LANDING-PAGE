@@ -120,6 +120,9 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
                     <strong className="text-gray-900">Email:</strong> {user.email}
                   </p>
                   <p className="text-sm text-gray-700 flex items-center justify-between">
+                    <strong className="text-gray-900">Phone:</strong> {user.contact_phone}
+                  </p>
+                  <p className="text-sm text-gray-700 flex items-center justify-between">
                     <strong className="text-gray-900">Account Type:</strong> {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
                   </p>
                   <p className="text-sm text-gray-700 flex items-center justify-between">
