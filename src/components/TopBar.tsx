@@ -38,9 +38,18 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
   const [currentDate, setCurrentDate] = useState('');
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showProfileCard, setShowProfileCard] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+const [showToast, setShowToast] = useState(false);
+
 
   const handleLogOut = () => {
     localStorage.removeItem('userId');
+    setToastMessage('Logged out'); // Set the toast message
+  setShowToast(true); // Show the toast
+
+  setTimeout(() => {
+    setShowToast(false); // Hide the toast after 5 seconds
+  }, 5000);
     navigate('/login');
   }
 
@@ -80,6 +89,11 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
 
   return (
     <div className="relative">
+      {showToast && (
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300">
+          {toastMessage}
+        </div>
+      )}
       <div className="flex justify-between items-center mb-8 pb-2 border-b border-gray-300">
         <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} />
         <div className="flex items-center space-x-6">
