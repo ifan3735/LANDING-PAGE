@@ -3,6 +3,7 @@ import { MdOutlineSettings, MdLogout } from 'react-icons/md';
 import { FaBell } from 'react-icons/fa';
 import { FiChevronDown } from 'react-icons/fi';
 import SearchBar from './SearchBar';
+import { Details } from '../features/API';
 
 interface TopBarProps {
   searchQuery: string;
@@ -139,7 +140,7 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
               {/* User Details */}
               <div className="space-y-2">
                 <p className="text-sm text-gray-700 flex items-center justify-between">
-                  <strong className="text-gray-900">Name:</strong> John Doe
+                  <strong className="text-gray-900">Name:</strong> {Details.name}
                 </p>
                 <p className="text-sm text-gray-700 flex items-center justify-between">
                   <strong className="text-gray-900">Email:</strong> john@example.com
