@@ -1,81 +1,74 @@
 import React, { useState, useContext } from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './Footer';
 import Header from './Header';
 import { useLoginUserMutation } from '../features/API';
 import { UserContext } from '../contexts/userContext';
-import { useNavigate } from 'react-router-dom';
 
 const SignInPage: React.FC = () => {
-  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
+  const [loginUser, { isLoading }] = useLoginUserMutation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-
+  
   if (!userContext) {
     throw new Error('UserContext is not found');
   }
 
   const { setUser } = userContext;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
-  };
-
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-  
+    
     // Check if email or password fields are empty
     if (!email || !password) {
       toast.error('Please fill out all fields before submitting.', toastOptions);
       return;
     }
-  
+
     try {
       // Make the login request using the mutation
       const response = await loginUser({ email, password }).unwrap();
-      
+
       // Log the response for debugging purposes
       console.log('Response:', response);
-  
+
       // Check if the response contains the expected properties
       if (response && response.email && response.token && response.role && response.id) {
+        // Store the user ID in local storage
+        localStorage.setItem('userId', response.id.toString()); // Store user ID
+
         // Update the user context and save the user details
         setUser({
           name: response.email,
           role: response.role,
         });
-  
+
         // Show success toast first
         toast.success('Signed in successfully!', toastOptions);
-  
+
         // Delay navigation to allow the toast to appear
         setTimeout(() => {
           // Redirect based on the user role
           navigate(response.role === 'admin' ? '/admin' : '/dashboard');
-        }, 5000); // Adjust the timeout duration as needed (1.5 seconds in this case)
-  
+        }, 5000); // Adjust the timeout duration as needed (5 seconds in this case)
+
       } else {
         console.error('Unexpected response structure:', response);
       }
     } catch (error) {
       // Check if the error message indicates wrong credentials
-      if (error.status === 401) {  // Assuming 401 for unauthorized (wrong email/password)
+      if (error.status === 401) {
         toast.error('Wrong email or password.', toastOptions);
       } else {
         // For any other errors
         toast.error('Failed to login. Please try again.', toastOptions);
       }
-  
+
       // Log the error to the console for debugging
       console.error('Failed to login:', error);
     }

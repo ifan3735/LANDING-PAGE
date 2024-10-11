@@ -27,9 +27,9 @@ export interface User {
 }
 
 const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: TopBarProps) => {
-  const userId = parseInt(localStorage.getItem('userId') || '0'); // Retrieve user ID from localStorage
+  const userId = parseInt(localStorage.getItem('userId') || '10'); // Retrieve user ID from localStorage
   const { data: user, error, isLoading } = useFetchUserDetailsQuery(userId);
-
+  console.log('User:', user);
   const [notifications, setNotifications] = useState([{ id: 1, message: "New car added!" }]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [newNotifications, setNewNotifications] = useState(true);
