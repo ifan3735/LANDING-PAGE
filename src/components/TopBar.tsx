@@ -42,16 +42,26 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
 const [showToast, setShowToast] = useState(false);
 
 
-  const handleLogOut = () => {
-    localStorage.removeItem('userId');
-    setToastMessage('Logged out'); // Set the toast message
+const handleLogOut = () => {
+  setToastMessage('Logged out successfully!'); // Set the toast message
   setShowToast(true); // Show the toast
 
+  // Delay logout and redirect for 5 seconds
   setTimeout(() => {
-    setShowToast(false); // Hide the toast after 5 seconds
-  }, 5000);
+    localStorage.removeItem('userId');
     navigate('/login');
+  }, 5000);
+};
+
+useEffect(() => {
+  if (showToast) {
+    const timer = setTimeout(() => {
+      setShowToast(false); // Hide the toast after 5 seconds
+    }, 5000);
+
+    return () => clearTimeout(timer); // Cleanup timer on unmount
   }
+}, [showToast]);
 
   // Dynamically update the date
   useEffect(() => {
