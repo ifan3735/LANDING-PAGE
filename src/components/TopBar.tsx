@@ -23,7 +23,7 @@ export interface User {
   id: number;
   name: string;
   email: string;
-  contact_phone: string; // Use correct casing based on API response
+  contact_phone: string;
   address: string;
   role: UserRole;
   created_at: string;
@@ -32,69 +32,41 @@ export interface User {
 
 const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: TopBarProps) => {
   const navigate = useNavigate();
-  const userId = parseInt(localStorage.getItem('userId') || '10'); // Retrieve user ID from localStorage
-  const { data: user, error, isLoading } = useFetchUserDetailsQuery(userId); // Fetch user details
-  console.log('User:', user);
+  const userId = parseInt(localStorage.getItem('userId') || '10');
+  const { data: user, error, isLoading } = useFetchUserDetailsQuery(userId);
   const [notifications, setNotifications] = useState([{ id: 1, message: "New car added!" }]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [newNotifications, setNewNotifications] = useState(true);
   const [currentDate, setCurrentDate] = useState('');
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showProfileCard, setShowProfileCard] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-const [showToast, setShowToast] = useState(false);
-const [progress, setProgress] = useState(100);
-const userContext = useContext(UserContext); // Get UserContext
-// Progress percentage
+  const userContext = useContext(UserContext); // Get UserContext
 
-const handleLogOut = () => {
-  setToastMessage('Logged out successfully!'); // Set the toast message
-  setShowToast(true); // Show the toast
-  setProgress(100); // Reset progress to 100%
+  const handleLogOut = () => {
+    // Show toast notification for logout
+    toast.success('Logged out successfully!', toastOptions);
 
-  // Delay logout and redirect for 5 seconds
-  setTimeout(() => {
-    localStorage.removeItem('userId');
-    navigate('/login');
-  }, 5000);
-};
-
-useEffect(() => {
-  if (showToast) {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev <= 0) {
-          clearInterval(timer); // Clear the interval when progress is zero
-          return 0;
-        }
-        return prev - (100 / 5); // Decrease progress over 5 seconds
-      });
-    }, 100); // Update every 100 ms
-
-    const hideTimer = setTimeout(() => {
-      setShowToast(false); // Hide the toast after 5 seconds
+    // Delay logout and redirect for 5 seconds
+    setTimeout(() => {
+      localStorage.removeItem('userId');
+      navigate('/login');
     }, 5000);
+  };
 
-    return () => {
-      clearInterval(timer); // Cleanup interval on unmount
-      clearTimeout(hideTimer); // Cleanup timer on unmount
-    };
-  }
-}, [showToast]);
+  const toastOptions: ToastOptions = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    style: {
+      backgroundColor: '#fbbf24', // Matches the yellow color from your sign-in page
+      color: '#ffffff',
+    }
+  };
 
-const toastOptions: ToastOptions = {
-  position: "top-right",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  style: {
-    backgroundColor: '#fbbf24', // Matches the yellow color from your sign-in page
-    color: '#ffffff',
-  }
-};
   // Dynamically update the date
   useEffect(() => {
     const date = new Date();
@@ -123,27 +95,15 @@ const toastOptions: ToastOptions = {
     }
   };
 
-  if (isLoading) return <div>Loading user details...</div>; // Loading state
+  if (isLoading) return <div>Loading user details...</div>;
   if (error) {
     console.error('Error fetching user details:', error);
-    return <div>Error loading user details</div>; // Error handling
+    return <div>Error loading user details</div>;
   }
 
   return (
     <div className="relative">
-{/* Toast Notification */}
-{showToast && (
-        <div className="fixed top-5 right-5 w-80 bg-yellow-400 text-black p-4 rounded-lg shadow-lg transition-opacity duration-300 opacity-100">
-          <div className="flex justify-between items-center">
-            <span>{toastMessage}</span>
-            <div
-              className="h-1 bg-yellow-600 transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-        </div>
-      )}   
-       <div className="flex justify-between items-center mb-8 pb-2 border-b border-gray-300">
+      <div className="flex justify-between items-center mb-8 pb-2 border-b border-gray-300">
         <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} />
         <div className="flex items-center space-x-6">
           <button onClick={toggleTheme} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full transition-colors hover:bg-gray-300" aria-label="Toggle theme">
@@ -204,9 +164,10 @@ const toastOptions: ToastOptions = {
                     <MdOutlineSettings size={20} />
                     <span className="font-semibold">Settings</span>
                   </button>
-                  <button className="flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 text-white hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 px-4 py-2 rounded-full shadow-sm transition-all duration-300 transform hover:scale-105"
-                   onClick={handleLogOut}
-                   >
+                  <button
+                    className="flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 text-white hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 px-4 py-2 rounded-full shadow-sm transition-all duration-300 transform hover:scale-105"
+                    onClick={handleLogOut}
+                  >
                     <MdLogout size={20} />
                     <span className="font-semibold">Log Out</span>
                   </button>
@@ -216,7 +177,7 @@ const toastOptions: ToastOptions = {
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer /> {/* Add the ToastContainer component here */}
     </div>
   );
 };
