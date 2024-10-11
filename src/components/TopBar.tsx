@@ -89,12 +89,12 @@ const [showToast, setShowToast] = useState(false);
 
   return (
     <div className="relative">
-      {showToast && (
-        <div className="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300">
+{/* Toast Notification */}
+{showToast && (
+        <div className="fixed bottom-5 right-5 bg-gray-800 text-white p-4 rounded-lg shadow-lg transition-opacity duration-300 opacity-100">
           {toastMessage}
         </div>
-      )}
-      <div className="flex justify-between items-center mb-8 pb-2 border-b border-gray-300">
+      )}      <div className="flex justify-between items-center mb-8 pb-2 border-b border-gray-300">
         <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} />
         <div className="flex items-center space-x-6">
           <button onClick={toggleTheme} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full transition-colors hover:bg-gray-300" aria-label="Toggle theme">
