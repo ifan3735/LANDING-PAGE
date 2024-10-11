@@ -25,7 +25,7 @@ export interface User {
 }
 
 const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: TopBarProps) => {
-  const { data: User } = useFetchUserDetailsQuery();
+  const { data: users } = useFetchUserDetailsQuery();
   const [notifications, setNotifications] = useState([{ id: 1, message: "New car added!" }]); // Example notifications
   const [showNotifications, setShowNotifications] = useState(false);
   const [newNotifications, setNewNotifications] = useState(true); // State to track if there are new notifications

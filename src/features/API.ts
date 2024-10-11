@@ -51,7 +51,7 @@ export const apiSlice = createApi({
             }),
         }),
         fetchUserDetails: builder.query<Details, void>({
-            query: () => '/user',
+            query: () => '/users/${id}',
         }),
     }),
  
