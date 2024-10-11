@@ -140,7 +140,7 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
               {/* User Details */}
               <div className="space-y-2">
                 <p className="text-sm text-gray-700 flex items-center justify-between">
-                  <strong className="text-gray-900">Name:</strong> {Details.name}
+                  <strong className="text-gray-900">Name:</strong> John Doe
                 </p>
                 <p className="text-sm text-gray-700 flex items-center justify-between">
                   <strong className="text-gray-900">Email:</strong> john@example.com

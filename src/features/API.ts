@@ -50,12 +50,15 @@ export const apiSlice = createApi({
                 body: userData,
             }),
         }),
+        fetchUserDetails: builder.query<Details, void>({
+            query: () => '/user',
+        }),
     }),
  
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = apiSlice as { 
+export const { useLoginUserMutation, useRegisterUserMutation, useFetchUserDetailsQuery } = apiSlice as { 
     useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; 
     useRegisterUserMutation: () => ReturnType<typeof apiSlice.endpoints.registerUser.useMutation>;
-    
+    useFetchUserDetailsQuery: () => ReturnType<typeof apiSlice.endpoints.fetchUserDetails.useQuery>;
 };
