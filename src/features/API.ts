@@ -15,6 +15,14 @@ export interface Details {
     address: string;
 }
 
+export interface User2 {   
+    id: number;
+    name: string;
+    email: string;
+    contactPhone: string;
+    address: string;
+}
+
 export interface RegisterResponse {
     name: string;
     email: string;
@@ -50,8 +58,8 @@ export const apiSlice = createApi({
                 body: userData,
             }),
         }),
-        fetchUserDetails: builder.query<Details, void>({
-            query: () => '/users/${id}',
+        fetchUserDetails: builder.query<User2, void>({
+            query: (id) => `/users/${id}`,
         }),
     }),
  
