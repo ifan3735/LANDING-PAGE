@@ -28,7 +28,7 @@ export interface User {
 
 const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: TopBarProps) => {
   const userId = parseInt(localStorage.getItem('userId') || '10'); // Retrieve user ID from localStorage
-  const { data: user, error, isLoading } = useFetchUserDetailsQuery(userId);
+  const { data: user, error, isLoading } = useFetchUserDetailsQuery(userId); // Fetch user details
   console.log('User:', user);
   const [notifications, setNotifications] = useState([{ id: 1, message: "New car added!" }]);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -126,7 +126,7 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
                     <strong className="text-gray-900">Member Since:</strong> {new Date(user.created_at).toLocaleDateString()}
                   </p>
                   <p className="text-sm text-gray-700 flex items-center justify-between">
-                    <strong className="text-gray-900">Last Login:</strong> {new Date(user.updated_at).toLocaleDateString()}
+                    <strong className="text-gray-900">Last Login:</strong> {currentDate}
                   </p>
                 </div>
                 <div className="flex items-center justify-between mt-6 space-x-2">
