@@ -25,7 +25,7 @@ export interface User {
 }
 
 const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: TopBarProps) => {
-  const { data: users } = useFetchUserDetailsQuery();
+  const{ data: User = [], refetch } = useFetchUserDetailsQuery();
   const [notifications, setNotifications] = useState([{ id: 1, message: "New car added!" }]); // Example notifications
   const [showNotifications, setShowNotifications] = useState(false);
   const [newNotifications, setNewNotifications] = useState(true); // State to track if there are new notifications
@@ -154,7 +154,7 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
               {/* User Details */}
               <div className="space-y-2">
                 <p className="text-sm text-gray-700 flex items-center justify-between">
-                  <strong className="text-gray-900">Name:</strong> John Doe
+                  <strong className="text-gray-900">Name:</strong> {User.name}
                 </p>
                 <p className="text-sm text-gray-700 flex items-center justify-between">
                   <strong className="text-gray-900">Email:</strong> john@example.com
