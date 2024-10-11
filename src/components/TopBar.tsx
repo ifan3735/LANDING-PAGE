@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { MdOutlineSettings, MdLogout } from 'react-icons/md';
 import { FaBell } from 'react-icons/fa';
 import { FiChevronDown } from 'react-icons/fi';
 import SearchBar from './SearchBar';
 import { useFetchUserDetailsQuery } from '../features/API';
 import { useNavigate } from 'react-router';
+import { ToastContainer, toast, ToastOptions } from 'react-toastify'; // Import Toast components
+import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
+import { UserContext } from '../contexts/userContext'; // Import UserContext
 
 interface TopBarProps {
   searchQuery: string;
@@ -40,7 +43,9 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
   const [showProfileCard, setShowProfileCard] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 const [showToast, setShowToast] = useState(false);
-const [progress, setProgress] = useState(100); // Progress percentage
+const [progress, setProgress] = useState(100);
+const userContext = useContext(UserContext); // Get UserContext
+// Progress percentage
 
 const handleLogOut = () => {
   setToastMessage('Logged out successfully!'); // Set the toast message
@@ -76,6 +81,20 @@ useEffect(() => {
     };
   }
 }, [showToast]);
+
+const toastOptions: ToastOptions = {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  style: {
+    backgroundColor: '#fbbf24', // Matches the yellow color from your sign-in page
+    color: '#ffffff',
+  }
+};
   // Dynamically update the date
   useEffect(() => {
     const date = new Date();
@@ -123,7 +142,7 @@ useEffect(() => {
             />
           </div>
         </div>
-      )}    
+      )}   
        <div className="flex justify-between items-center mb-8 pb-2 border-b border-gray-300">
         <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} />
         <div className="flex items-center space-x-6">
@@ -197,6 +216,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
