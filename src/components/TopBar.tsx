@@ -4,6 +4,7 @@ import { FaBell } from 'react-icons/fa';
 import { FiChevronDown } from 'react-icons/fi';
 import SearchBar from './SearchBar';
 import { useFetchUserDetailsQuery } from '../features/API';
+import { useNavigate } from 'react-router';
 
 interface TopBarProps {
   searchQuery: string;
@@ -27,6 +28,7 @@ export interface User {
 }
 
 const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: TopBarProps) => {
+  const navigate = useNavigate();
   const userId = parseInt(localStorage.getItem('userId') || '10'); // Retrieve user ID from localStorage
   const { data: user, error, isLoading } = useFetchUserDetailsQuery(userId); // Fetch user details
   console.log('User:', user);
@@ -36,6 +38,11 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
   const [currentDate, setCurrentDate] = useState('');
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showProfileCard, setShowProfileCard] = useState(false);
+
+  const handleLogOut = () => {
+    localStorage.removeItem('userId');
+    navigate('/login');
+  }
 
   // Dynamically update the date
   useEffect(() => {
@@ -120,9 +127,6 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
                     <strong className="text-gray-900">Email:</strong> {user.email}
                   </p>
                   <p className="text-sm text-gray-700 flex items-center justify-between">
-                    <strong className="text-gray-900">Phone:</strong> {user.contact_phone}
-                  </p>
-                  <p className="text-sm text-gray-700 flex items-center justify-between">
                     <strong className="text-gray-900">Account Type:</strong> {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
                   </p>
                   <p className="text-sm text-gray-700 flex items-center justify-between">
@@ -137,7 +141,9 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
                     <MdOutlineSettings size={20} />
                     <span className="font-semibold">Settings</span>
                   </button>
-                  <button className="flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 text-white hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 px-4 py-2 rounded-full shadow-sm transition-all duration-300 transform hover:scale-105">
+                  <button className="flex items-center space-x-2 bg-gradient-to-r from-red-500 to-red-600 text-white hover:bg-gradient-to-r hover:from-red-600 hover:to-red-700 px-4 py-2 rounded-full shadow-sm transition-all duration-300 transform hover:scale-105"
+                   onClick={handleLogOut}
+                   >
                     <MdLogout size={20} />
                     <span className="font-semibold">Log Out</span>
                   </button>
