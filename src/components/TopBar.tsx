@@ -40,11 +40,12 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
   const [showProfileCard, setShowProfileCard] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 const [showToast, setShowToast] = useState(false);
-
+const [progress, setProgress] = useState(100); // Progress percentage
 
 const handleLogOut = () => {
   setToastMessage('Logged out successfully!'); // Set the toast message
   setShowToast(true); // Show the toast
+  setProgress(100); // Reset progress to 100%
 
   // Delay logout and redirect for 5 seconds
   setTimeout(() => {
@@ -55,14 +56,26 @@ const handleLogOut = () => {
 
 useEffect(() => {
   if (showToast) {
-    const timer = setTimeout(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev <= 0) {
+          clearInterval(timer); // Clear the interval when progress is zero
+          return 0;
+        }
+        return prev - (100 / 5); // Decrease progress over 5 seconds
+      });
+    }, 100); // Update every 100 ms
+
+    const hideTimer = setTimeout(() => {
       setShowToast(false); // Hide the toast after 5 seconds
     }, 5000);
 
-    return () => clearTimeout(timer); // Cleanup timer on unmount
+    return () => {
+      clearInterval(timer); // Cleanup interval on unmount
+      clearTimeout(hideTimer); // Cleanup timer on unmount
+    };
   }
 }, [showToast]);
-
   // Dynamically update the date
   useEffect(() => {
     const date = new Date();
@@ -101,10 +114,17 @@ useEffect(() => {
     <div className="relative">
 {/* Toast Notification */}
 {showToast && (
-        <div className="fixed bottom-5 right-5 bg-gray-800 text-white p-4 rounded-lg shadow-lg transition-opacity duration-300 opacity-100">
-          {toastMessage}
+        <div className="fixed top-5 right-5 w-80 bg-yellow-400 text-black p-4 rounded-lg shadow-lg transition-opacity duration-300 opacity-100">
+          <div className="flex justify-between items-center">
+            <span>{toastMessage}</span>
+            <div
+              className="h-1 bg-yellow-600 transition-all duration-500"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
         </div>
-      )}      <div className="flex justify-between items-center mb-8 pb-2 border-b border-gray-300">
+      )}    
+       <div className="flex justify-between items-center mb-8 pb-2 border-b border-gray-300">
         <SearchBar searchQuery={searchQuery} handleSearch={handleSearch} />
         <div className="flex items-center space-x-6">
           <button onClick={toggleTheme} className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full transition-colors hover:bg-gray-300" aria-label="Toggle theme">
