@@ -729,6 +729,21 @@ const Search = () => {
       price: '500',
       brand: 'Audi'
     },
+    {
+      name: 'Toyota Corolla Cross',
+      mileage: '369',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      rentalRate: '295',
+      image: 'https://i.pinimg.com/736x/3a/a4/6a/3aa46aaba45e09ff09403b42a6127390.jpg',
+      owner: 'Robert Rome',
+      ownerAvatar: 'https://i.pinimg.com/236x/d2/d2/f8/d2d2f8210f500b3e859d8f282e3d0e9b.jpg',
+      carType: 'Coupe',
+      dateListed: '26 Jun',
+      price: '500',
+      brand: 'Audi'
+    },
     // Add more cars as needed
   ];
 
