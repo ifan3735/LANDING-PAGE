@@ -533,7 +533,22 @@ const Search = () => {
       dateListed: '25 Jun',
       price: '500',
       brand: 'Audi'
-    }
+    },
+    {
+      name: 'BMW i4',
+      mileage: '3690',
+      fuelType: 'Petrol',
+      location: 'Dubai',
+      speed: '15.5 km/h',
+      rentalRate: '285',
+      image: 'https://i.pinimg.com/564x/5a/e8/d6/5ae8d6218c3c6a9296936347fc2c2eef.jpg',
+      owner: 'Hussain Jahan',
+      ownerAvatar: 'https://i.pinimg.com/236x/82/cc/d6/82ccd6e43a3334813015ec3247aeca7d.jpg',
+      carType: 'Luxury',
+      dateListed: '25 Jun',
+      price: '500',
+      brand: 'Audi'
+    },
     // Add more cars as needed
   ];
 
