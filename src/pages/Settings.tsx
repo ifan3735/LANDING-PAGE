@@ -27,6 +27,26 @@ const Settings = () => {
     });
   };
 
+  const Profile = () => {
+    // State to manage the selected image
+    const [profileImage, setProfileImage] = useState(
+      "https://i.pinimg.com/236x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg"
+    );
+  
+    // Function to handle the file input
+    const handleImageChange = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        setProfileImage(imageUrl); // Set the new profile image
+      }
+    };
+  
+    // Function to remove the profile image
+    const handleRemoveImage = () => {
+      setProfileImage(null); // Remove the profile image
+    };
+
   // Function to handle tab switching
   const handleTabClick = (tab) => {
     setActiveTab(tab);
