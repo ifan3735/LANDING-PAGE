@@ -160,7 +160,9 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
                   </p>
                 </div>
                 <div className="flex items-center justify-between mt-6 space-x-2">
-                  <button className="flex items-center space-x-2 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-700 hover:bg-gradient-to-r hover:from-gray-300 hover:to-gray-400 px-4 py-2 rounded-full shadow-sm transition-all duration-300 transform hover:scale-105">
+                  <button className="flex items-center space-x-2 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-700 hover:bg-gradient-to-r hover:from-gray-300 hover:to-gray-400 px-4 py-2 rounded-full shadow-sm transition-all duration-300 transform hover:scale-105"
+                    onClick={() => navigate('/settings')}
+                  >
                     <MdOutlineSettings size={20} />
                     <span className="font-semibold">Settings</span>
                   </button>
