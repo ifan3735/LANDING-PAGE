@@ -32,8 +32,10 @@ const Settings = () => {
     }
   };
 
-  const handleRemoveImage = () => {
+   // Function to remove the profile image
+   const handleRemoveImage = () => {
     setProfileImage(null); // Remove the profile image
+    localStorage.removeItem("profileImage"); // Remove from localStorage
   };
 
    // Manage active tab
