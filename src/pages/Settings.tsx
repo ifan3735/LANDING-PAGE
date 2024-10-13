@@ -167,8 +167,6 @@ const Settings = () => {
     </div>
   </form>
 </div>
-
-
         );
       case 'Account':
         return (
@@ -221,10 +219,11 @@ const Settings = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 {/* User Name */}
                 <div>
-                  <label className="block text-lg text-gray-700 font-semibold mb-3">User Name</label>
+                  <label className="block text-lg text-gray-700 font-semibold mb-3">User ID</label>
                   <input
                     type="text"
-                    placeholder="admin"
+                    value={userId ?? ''}
+                    readOnly
                     className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
                   />
                 </div>
@@ -234,7 +233,7 @@ const Settings = () => {
                   <label className="block text-lg text-gray-700 font-semibold mb-3">Display Name</label>
                   <input
                     type="text"
-                    placeholder="Smith Hussain"
+                    placeholder="Enter display name"
                     className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
                   />
                 </div>
@@ -244,21 +243,9 @@ const Settings = () => {
                   <label className="block text-lg text-gray-700 font-semibold mb-3">Your Email</label>
                   <input
                     type="email"
-                    placeholder="thesmithhussain23@gmail.com"
+                    placeholder="Enter your email"
                     className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
                   />
-                </div>
-      
-                {/* Language */}
-                <div>
-                  <label className="block text-lg text-gray-700 font-semibold mb-3">Language</label>
-                  <select className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300">
-                    <option>English</option>
-                    <option>Spanish</option>
-                    <option>French</option>
-                    <option>German</option>
-                    <option>Italian</option>
-                  </select>
                 </div>
               </div>
             </div>
