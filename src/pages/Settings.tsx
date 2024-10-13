@@ -18,8 +18,7 @@ const Settings = () => {
   // State to manage the selected image
   const [profileImage, setProfileImage] = useState(null);
 
-   // Function to handle the file input
-   // Function to handle the file input
+  // Function to handle the file input
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
