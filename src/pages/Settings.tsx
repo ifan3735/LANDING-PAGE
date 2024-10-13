@@ -15,9 +15,8 @@ const Settings = () => {
     style: '',
   });
 
-  const [profileImage, setProfileImage] = useState(
-    "https://i.pinimg.com/236x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg"
-  );
+  // State to manage the selected image
+  const [profileImage, setProfileImage] = useState(null);
 
    // Function to handle the file input
    const handleImageChange = (event) => {
