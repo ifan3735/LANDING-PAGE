@@ -39,9 +39,9 @@ const Settings = () => {
   };
 
    // Function to remove the profile image
-   const handleRemoveImage = () => {
+  const handleRemoveImage = () => {
     setProfileImage(null); // Remove the profile image
-    localStorage.removeItem("profileImage"); // Remove from localStorage
+    localStorage.removeItem(userKey); // Remove from localStorage for this user
   };
 
   useEffect(() => {
