@@ -38,6 +38,13 @@ const Settings = () => {
     localStorage.removeItem("profileImage"); // Remove from localStorage
   };
 
+  useEffect(() => {
+    const savedImage = localStorage.getItem("profileImage");
+    if (savedImage) {
+      setProfileImage(savedImage); // Load the saved image if it exists
+    }
+  }, []);
+
    // Manage active tab
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
