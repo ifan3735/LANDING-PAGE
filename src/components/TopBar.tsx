@@ -40,6 +40,7 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
   const [currentDate, setCurrentDate] = useState('');
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showProfileCard, setShowProfileCard] = useState(false);
+  const [profileImage, setProfileImage] = useState<string | null>(null); // New state for profile image
   const userContext = useContext(UserContext); // Get UserContext
 
   const handleLogOut = () => {
@@ -88,6 +89,14 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
     };
   }, []);
 
+  // Fetch the profile image for the current user from localStorage
+  useEffect(() => {
+    const storedImage = localStorage.getItem(`profileImage_${userId}`);
+    if (storedImage) {
+      setProfileImage(storedImage);
+    }
+  }, [userId]);
+
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
     if (!showNotifications && newNotifications) {
@@ -129,7 +138,12 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
 
           <div className="relative flex items-center space-x-3" onMouseEnter={() => setShowProfileCard(true)} onMouseLeave={() => setShowProfileCard(false)}>
             <div className="relative">
-              <img src="https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg" alt="User Avatar" className="w-10 h-10 rounded-full" />
+              {/* Display the stored profile image or a default image */}
+              <img
+                src={profileImage || "https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg"} // Use default image if none is set
+                alt="User Avatar"
+                className="w-10 h-10 rounded-full"
+              />
               {isOnline && <span className="absolute top-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></span>}
             </div>
 
