@@ -27,6 +27,11 @@ const Settings = () => {
       setProfileImage(imageUrl); // Set the new profile image
     }
   };
+
+  const handleRemoveImage = () => {
+    setProfileImage(null); // Remove the profile image
+  };
+
    // Manage active tab
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
