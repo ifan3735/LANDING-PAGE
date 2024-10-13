@@ -21,12 +21,10 @@ const Settings = () => {
    // Create a unique key for the profile image using the user ID
    const userKey = `profileImage_${userId}`; 
 
-   
-
   // State to manage the selected image
   const [profileImage, setProfileImage] = useState(null);
 
-  // Function to handle the file input
+  // Function to handle the file input and save the image for the specific user
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -34,7 +32,7 @@ const Settings = () => {
       reader.onloadend = () => {
         const base64Image = reader.result;
         setProfileImage(base64Image); // Set the new profile image
-        localStorage.setItem("profileImage", base64Image); // Save to localStorage
+        localStorage.setItem(userKey, base64Image); // Save to localStorage for this user
       };
       reader.readAsDataURL(file); // Convert image to base64
     }
