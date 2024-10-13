@@ -150,86 +150,107 @@ const Settings = () => {
         );
       case 'Account':
         return (
-     <div className="bg-white p-10 rounded-3xl shadow-xl max-w-4xl mx-auto transition-all duration-300">
-  {/* Profile Section */}
-  <h3 className="text-3xl font-extrabold text-gray-900 mb-10">Profile</h3>
-
-  {/* Profile Image Section */}
-  <div className="flex items-center space-x-8 mb-10">
-    <img
-      src="https://i.pinimg.com/236x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg"
-      alt="Profile"
-      className="w-28 h-28 rounded-full object-cover border-4 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300"
-    />
-    <div>
-      <h4 className="text-lg font-medium text-gray-700 mb-3">Choose Image</h4>
-      <button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300 mr-3">
-        Browse
-      </button>
-      <button className="border border-gray-400 px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 shadow-md transition-colors duration-300">
-        Remove
-      </button>
-    </div>
-  </div>
-
-  {/* Information Section */}
-  <div className="space-y-8">
-    <h4 className="text-2xl font-semibold text-gray-800 mb-6">Information</h4>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-      {/* User Name */}
-      <div>
-        <label className="block text-lg text-gray-700 font-semibold mb-3">User Name</label>
-        <input
-          type="text"
-          placeholder="admin"
-          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
-        />
-      </div>
-
-      {/* Display Name */}
-      <div>
-        <label className="block text-lg text-gray-700 font-semibold mb-3">Display Name</label>
-        <input
-          type="text"
-          placeholder="Smith Hussain"
-          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
-        />
-      </div>
-
-      {/* Email */}
-      <div>
-        <label className="block text-lg text-gray-700 font-semibold mb-3">Your Email</label>
-        <input
-          type="email"
-          placeholder="thesmithhussain23@gmail.com"
-          className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
-        />
-      </div>
-
-      {/* Language */}
-      <div>
-        <label className="block text-lg text-gray-700 font-semibold mb-3">Language</label>
-        <select className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300">
-          <option>English</option>
-          <option>Spanish</option>
-          <option>French</option>
-          <option>German</option>
-          <option>Italian</option>
-        </select>
-      </div>
-    </div>
-  </div>
-  {/* Submit Button */}
-  <div className="text-center mt-10">
-      <button
-        type="submit"
-        className="w-1/2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 hover:shadow-xl transform hover:-translate-y-1"
-      >
-        Save Changes
-      </button>
-    </div>
-</div>
+          <div className="bg-white p-10 rounded-3xl shadow-xl max-w-4xl mx-auto transition-all duration-300">
+            {/* Profile Section */}
+            <h3 className="text-3xl font-extrabold text-gray-900 mb-10">Profile</h3>
+      
+            {/* Profile Image Section */}
+            <div className="flex items-center space-x-8 mb-10">
+              {profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="w-28 h-28 rounded-full object-cover border-4 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                />
+              ) : (
+                <div className="w-28 h-28 rounded-full bg-gray-200 border-4 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center">
+                  <span className="text-gray-500">No Image</span>
+                </div>
+              )}
+      
+              <div>
+                <h4 className="text-lg font-medium text-gray-700 mb-3">Choose Image</h4>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+                <label
+                  htmlFor="fileInput"
+                  className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-6 py-2 rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300 mr-3 cursor-pointer"
+                >
+                  Browse
+                </label>
+                <button
+                  onClick={handleRemoveImage}
+                  className="border border-gray-400 px-6 py-2 rounded-full text-gray-700 hover:bg-gray-200 shadow-md transition-colors duration-300"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+      
+            {/* Information Section */}
+            <div className="space-y-8">
+              <h4 className="text-2xl font-semibold text-gray-800 mb-6">Information</h4>
+      
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {/* User Name */}
+                <div>
+                  <label className="block text-lg text-gray-700 font-semibold mb-3">User Name</label>
+                  <input
+                    type="text"
+                    placeholder="admin"
+                    className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
+                  />
+                </div>
+      
+                {/* Display Name */}
+                <div>
+                  <label className="block text-lg text-gray-700 font-semibold mb-3">Display Name</label>
+                  <input
+                    type="text"
+                    placeholder="Smith Hussain"
+                    className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
+                  />
+                </div>
+      
+                {/* Email */}
+                <div>
+                  <label className="block text-lg text-gray-700 font-semibold mb-3">Your Email</label>
+                  <input
+                    type="email"
+                    placeholder="thesmithhussain23@gmail.com"
+                    className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300"
+                  />
+                </div>
+      
+                {/* Language */}
+                <div>
+                  <label className="block text-lg text-gray-700 font-semibold mb-3">Language</label>
+                  <select className="w-full border border-gray-300 p-4 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 shadow-sm text-gray-800 transition-all duration-300">
+                    <option>English</option>
+                    <option>Spanish</option>
+                    <option>French</option>
+                    <option>German</option>
+                    <option>Italian</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+      
+            {/* Submit Button */}
+            <div className="text-center mt-10">
+              <button
+                type="submit"
+                className="w-1/2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 hover:shadow-xl transform hover:-translate-y-1"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
         );
       case 'Notification':
         return (
