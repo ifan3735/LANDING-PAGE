@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { MdOutlineSettings, MdLogout } from 'react-icons/md';
 import { FaBell } from 'react-icons/fa';
 import { FiChevronDown } from 'react-icons/fi';
@@ -7,7 +7,6 @@ import { useFetchUserDetailsQuery } from '../features/API';
 import { useNavigate } from 'react-router';
 import { ToastContainer, toast, ToastOptions } from 'react-toastify'; // Import Toast components
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
-import { UserContext } from '../contexts/userContext'; // Import UserContext
 
 interface TopBarProps {
   searchQuery: string;
@@ -41,7 +40,6 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [showProfileCard, setShowProfileCard] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(null); // New state for profile image
-  const userContext = useContext(UserContext); // Get UserContext
 
   const handleLogOut = () => {
     // Show toast notification for logout
