@@ -18,8 +18,10 @@ const Settings = () => {
   // Retrieve user ID from localStorage
   const userId = localStorage.getItem('userId'); // Make sure user ID is already stored in localStorage during login
 
-   
+   // Create a unique key for the profile image using the user ID
+   const userKey = `profileImage_${userId}`; 
 
+   
 
   // State to manage the selected image
   const [profileImage, setProfileImage] = useState(null);
