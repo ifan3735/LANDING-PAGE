@@ -44,12 +44,15 @@ const Settings = () => {
     localStorage.removeItem(userKey); // Remove from localStorage for this user
   };
 
+  // Load image from localStorage when the component mounts (for the logged-in user)
   useEffect(() => {
-    const savedImage = localStorage.getItem("profileImage");
-    if (savedImage) {
-      setProfileImage(savedImage); // Load the saved image if it exists
+    if (userId) { // Ensure userId exists
+      const savedImage = localStorage.getItem(userKey);
+      if (savedImage) {
+        setProfileImage(savedImage); // Load the saved image for this user if it exists
+      }
     }
-  }, []);
+  }, [userId, userKey]);
 
    // Manage active tab
 
