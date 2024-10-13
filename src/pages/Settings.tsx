@@ -19,11 +19,17 @@ const Settings = () => {
   const [profileImage, setProfileImage] = useState(null);
 
    // Function to handle the file input
-   const handleImageChange = (event) => {
+   // Function to handle the file input
+  const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl); // Set the new profile image
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Image = reader.result;
+        setProfileImage(base64Image); // Set the new profile image
+        localStorage.setItem("profileImage", base64Image); // Save to localStorage
+      };
+      reader.readAsDataURL(file); // Convert image to base64
     }
   };
 
