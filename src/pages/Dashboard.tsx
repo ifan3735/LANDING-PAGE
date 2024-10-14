@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import TopBar from '../components/TopBar';
 import CarCard from '../components/CarCard';
 import ActivityCard from '../components/ActivityCard';
-import UserInfoCard from '../components/UserInfoCard'; // Import UserInfoCard
-import { exportData } from '../utils/ExportData'; // assuming exportData is moved into utils folder
+import UserInfoCard from '../components/UserInfoCard';
 import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
 import { jsPDF } from "jspdf";
 
@@ -11,14 +10,15 @@ const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
-  const [showFilterDropdown, setShowFilterDropdown] = useState(false); // For showing/hiding filter dropdown
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
     color: '',
     style: '',
   });
-  const [visibleActivities, setVisibleActivities] = useState(1); // Control how many activities to show
+  const [visibleActivities, setVisibleActivities] = useState(1);
 
+  // Car Data
   const cars = [
     { name: 'Audi R8 Green', style: 'Audi', type: 'Auto', color: 'Green', price: '$285,892', imageUrl: 'https://media.istockphoto.com/id/174691804/photo/green-supercar-isolated.jpg?s=612x612&w=0&k=20&c=nh6aondlx41IkaHJRG9Ffp6CYjGBOTIUCPrVC0Mn4l0=' },
     { name: 'Bentley Flying Spur', style: 'Bentley', type: 'Petrol', color: 'Brown', price: '$358,174', imageUrl: 'https://i.pinimg.com/1200x/a5/cb/83/a5cb831ea2e399e2e4ede6eab618a4f0.jpg' },
@@ -30,9 +30,9 @@ const Dashboard = () => {
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
+  const handleSearch = (e) => setSearchQuery(e.target.value);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
@@ -40,32 +40,32 @@ const Dashboard = () => {
     }));
   };
 
-  // Function to export data as CSV
+  // Function to export filtered data as CSV
   const exportAsCSV = () => {
-    const headers = Object.keys(data[0]).join(",") + "\n";
-    const rows = data
-      .map(row => Object.values(row).join(","))
+    const headers = "Name,Style,Type,Color,Price\n"; // CSV headers
+    const rows = filteredCars
+      .map(car => `${car.name},${car.style},${car.type},${car.color},${car.price}`)
       .join("\n");
 
-      const csvContent = headers + rows;
+    const csvContent = headers + rows;
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.href = url;
-    link.download = "export.csv";
+    link.download = "cars_export.csv";
     link.click();
     URL.revokeObjectURL(url);
   };
 
-  // Function to export data as PDF
+  // Function to export filtered data as PDF
   const exportAsPDF = () => {
     const doc = new jsPDF();
-    let content = "";
-    data.forEach((row, index) => {
-      content += `${index + 1}. ${Object.values(row).join(", ")}\n`;
+    let content = "Name, Style, Type, Color, Price\n";
+    filteredCars.forEach((car, index) => {
+      content += `${index + 1}. ${car.name}, ${car.style}, ${car.type}, ${car.color}, ${car.price}\n`;
     });
     doc.text(content, 10, 10);
-    doc.save("export.pdf");
+    doc.save("cars_export.pdf");
   };
 
   const filteredCars = cars.filter(car => {
@@ -78,9 +78,7 @@ const Dashboard = () => {
 
   const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
 
-  const toggleExportDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
+  const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
   const userInfo = {
     name: 'John Stevens',
@@ -94,15 +92,14 @@ const Dashboard = () => {
     imageUrl: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
   };
 
-  // Sample activity data
   const recentActivities = [
     { carName: 'Lamborghini Autofill', price: '$194,714', imageUrl: 'https://i.pinimg.com/736x/a7/d7/f2/a7d7f2e76dafcb9045e0065d0a772909.jpg' },
     { carName: 'Tesla Model S', price: '$120,000', imageUrl: 'https://i.pinimg.com/1200x/ba/fa/a9/bafaa9ee834ac42aaf6f08313e930cbe.jpg' },
     { carName: 'Porsche 911', price: '$200,000', imageUrl: 'https://i.pinimg.com/1200x/e1/06/07/e1060739e7e16b2f935ec364c77cddcd.jpg' }
   ];
 
-  const loadMoreActivities = () => setVisibleActivities((prev) => prev + 1); // Increase the number of visible activities
-  const seeLessActivities = () => setVisibleActivities(1); // Reset to showing just one activity
+  const loadMoreActivities = () => setVisibleActivities((prev) => prev + 1);
+  const seeLessActivities = () => setVisibleActivities(1);
 
   return (
     <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
@@ -111,12 +108,10 @@ const Dashboard = () => {
         handleSearch={handleSearch}
         toggleTheme={toggleTheme}
         theme={theme}
-        exportData={() => exportData(filteredCars)}
+        exportData={() => exportAsCSV(filteredCars)}
       />
 
-      {/* New Layer Below Top Bar */}
       <div className="flex justify-between items-center my-6">
-        {/* Left Section: Header and Paragraph */}
         <div>
           <h2 className="text-2xl font-bold text-gray-800">Dashboard</h2>
           <p className="text-sm text-gray-600">
@@ -124,36 +119,34 @@ const Dashboard = () => {
           </p>
         </div>
 
-        {/* Right Section: Export Button with Dropdown */}
         <div className="relative">
-      <button
-        onClick={toggleExportDropdown}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
-      >
-        <FaFileExport className="mr-2" /> Export
-        <FaChevronDown className="ml-2" />
-      </button>
+          <button
+            onClick={toggleExportDropdown}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
+          >
+            <FaFileExport className="mr-2" /> Export
+            <FaChevronDown className="ml-2" />
+          </button>
 
-      {/* Export Dropdown */}
-      {showDropdown && (
-        <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
-          <ul>
-            <li
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-              onClick={exportAsCSV}
-            >
-              Export as CSV
-            </li>
-            <li
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-              onClick={exportAsPDF}
-            >
-              Export as PDF
-            </li>
-          </ul>
+          {showDropdown && (
+            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+              <ul>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={exportAsCSV}
+                >
+                  Export as CSV
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={exportAsPDF}
+                >
+                  Export as PDF
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
-      )}
-    </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -170,7 +163,6 @@ const Dashboard = () => {
                 </button>
                 {showFilterDropdown && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-4 z-10">
-                    {/* Filter dropdown */}
                     <div className="mb-2">
                       <label className="block text-sm text-gray-700">Type:</label>
                       <select name="type" value={selectedFilters.type} onChange={handleFilterChange} className="w-full p-2 border rounded">
@@ -232,7 +224,6 @@ const Dashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
             <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
 
-            {/* Loop through recent activities based on visibleActivities */}
             {recentActivities.slice(0, visibleActivities).map((activity, index) => (
               <ActivityCard
                 key={index}
