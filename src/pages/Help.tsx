@@ -1,13 +1,20 @@
 import { useState } from "react";
 import TopBar from "../components/TopBar";
-import { exportData } from "../utils/ExportData";
 import { FaChevronDown, FaFileExport, FaPhone, FaEnvelope, FaQuestionCircle, FaRegComments } from "react-icons/fa";
+import { jsPDF } from "jspdf";
 
 const Help = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
   const [faqExpanded, setFaqExpanded] = useState<number | null>(null);
+
+  // Mock data for export
+  const helpContent = [
+    { question: "How do I export data?", answer: "Click the Export button and choose CSV or PDF." },
+    { question: "How do I search for content?", answer: "Use the search bar at the top to find specific content." },
+    { question: "How do I change the theme?", answer: "Use the toggle button at the top right to switch themes." }
+  ];
 
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
 
@@ -22,12 +29,38 @@ const Help = () => {
     setFaqExpanded(faqExpanded === index ? null : index);
   };
 
+  // Function to export data as CSV
+  const exportAsCSV = () => {
+    const headers = "Question,Answer\n";
+    const rows = helpContent
+      .map(item => `${item.question},${item.answer}`)
+      .join("\n");
+
+    const csvContent = headers + rows;
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = "help_export.csv";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Function to export data as PDF
+  const exportAsPDF = () => {
+    const doc = new jsPDF();
+    let content = "Help Content:\n\n";
+    helpContent.forEach((item, index) => {
+      content += `${index + 1}. ${item.question}\n   Answer: ${item.answer}\n\n`;
+    });
+    doc.text(content, 10, 10);
+    doc.save("help_export.pdf");
+  };
+
   return (
     <div
       className={`transition-all duration-500 p-6 ${
-        theme === "yellow"
-          ? "bg-yellow-100 text-gray-900"
-          : "bg-gray-100 text-gray-900"
+        theme === "yellow" ? "bg-yellow-100 text-gray-900" : "bg-gray-100 text-gray-900"
       } min-h-screen`}
     >
       {/* Top Bar with Search and Theme Toggle */}
@@ -36,7 +69,7 @@ const Help = () => {
         handleSearch={handleSearch}
         toggleTheme={toggleTheme}
         theme={theme}
-        exportData={() => exportData([])}
+        exportData={() => {}}
       />
 
       {/* Page Header */}
@@ -61,13 +94,13 @@ const Help = () => {
               <ul>
                 <li
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as CSV")}
+                  onClick={exportAsCSV}
                 >
                   Export as CSV
                 </li>
                 <li
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as PDF")}
+                  onClick={exportAsPDF}
                 >
                   Export as PDF
                 </li>
@@ -95,7 +128,7 @@ const Help = () => {
         </ul>
       </div>
 
-      {/* FAQ Section with Smooth Transitions */}
+      {/* FAQ Section */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">
           <FaQuestionCircle className="mr-2 inline-block" /> Frequently Asked Questions (FAQs)
