@@ -67,7 +67,7 @@ export const apiSlice = createApi({
         fetchUserDetails: builder.query<User2, void>({
             query: (id) => `/users/${id}`,
         }),
-        fetchAllVehicles: builder.query<any, void>({
+        fetchAllVehicles: builder.query<Vehicle[], void>({
             query: () => '/vehicles',
         }),
         fetchVehicleById: builder.query<any, void>({
