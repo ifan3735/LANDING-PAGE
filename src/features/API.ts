@@ -64,7 +64,7 @@ export const apiSlice = createApi({
         fetchAllVehicles: builder.query<any, void>({
             query: () => '/vehicles',
         }),
-        fetchVehicleById: builder.query<any, number>({
+        fetchVehicleById: builder.query<any, void>({
             query: (id) => `/vehicles/${id}`,
         }),
     }),
@@ -72,10 +72,11 @@ export const apiSlice = createApi({
 });
 
 export const { useLoginUserMutation, useRegisterUserMutation, useFetchUserDetailsQuery,
-    useFetchAllVehiclesQuery
+    useFetchAllVehiclesQuery, useFetchVehicleByIdQuery
  } = apiSlice as { 
     useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; 
     useRegisterUserMutation: () => ReturnType<typeof apiSlice.endpoints.registerUser.useMutation>;
     useFetchUserDetailsQuery: () => ReturnType<typeof apiSlice.endpoints.fetchUserDetails.useQuery>;
     useFetchAllVehiclesQuery: () => ReturnType<typeof apiSlice.endpoints.fetchAllVehicles.useQuery>;
+    useFetchVehicleByIdQuery: () => ReturnType<typeof apiSlice.endpoints.fetchVehicleById.useQuery>;
 };
