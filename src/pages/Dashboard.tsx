@@ -64,6 +64,9 @@ const Dashboard = () => {
     data.forEach((row, index) => {
       content += `${index + 1}. ${Object.values(row).join(", ")}\n`;
     });
+    doc.text(content, 10, 10);
+    doc.save("export.pdf");
+  };
 
   const filteredCars = cars.filter(car => {
     const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
