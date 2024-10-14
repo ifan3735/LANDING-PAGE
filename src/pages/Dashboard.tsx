@@ -57,6 +57,14 @@ const Dashboard = () => {
     URL.revokeObjectURL(url);
   };
 
+  // Function to export data as PDF
+  const exportAsPDF = () => {
+    const doc = new jsPDF();
+    let content = "";
+    data.forEach((row, index) => {
+      content += `${index + 1}. ${Object.values(row).join(", ")}\n`;
+    });
+
   const filteredCars = cars.filter(car => {
     const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
