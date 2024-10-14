@@ -5,6 +5,7 @@ import ActivityCard from '../components/ActivityCard';
 import UserInfoCard from '../components/UserInfoCard'; // Import UserInfoCard
 import { exportData } from '../utils/ExportData'; // assuming exportData is moved into utils folder
 import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
+import { jsPDF } from "jspdf";
 
 const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
@@ -38,6 +39,13 @@ const Dashboard = () => {
       [name]: value,
     }));
   };
+
+  // Function to export data as CSV
+  const exportAsCSV = () => {
+    const headers = Object.keys(data[0]).join(",") + "\n";
+    const rows = data
+      .map(row => Object.values(row).join(","))
+      .join("\n");
 
   const filteredCars = cars.filter(car => {
     const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
