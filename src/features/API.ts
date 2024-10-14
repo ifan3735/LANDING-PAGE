@@ -68,8 +68,11 @@ export const apiSlice = createApi({
  
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation, useFetchUserDetailsQuery } = apiSlice as { 
+export const { useLoginUserMutation, useRegisterUserMutation, useFetchUserDetailsQuery,
+    useFetchAllVehiclesQuery
+ } = apiSlice as { 
     useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; 
     useRegisterUserMutation: () => ReturnType<typeof apiSlice.endpoints.registerUser.useMutation>;
     useFetchUserDetailsQuery: () => ReturnType<typeof apiSlice.endpoints.fetchUserDetails.useQuery>;
+    useFetchAllVehiclesQuery: () => ReturnType<typeof apiSlice.endpoints.fetchAllVehicles.useQuery>;
 };
