@@ -31,6 +31,12 @@ export interface RegisterResponse {
     address: string;
 }
 
+export interface Vehicle {
+    vehicle_spec_id: number;
+    availability: 'available' | 'booked';
+    rental_rate: number;
+}
+
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ 
