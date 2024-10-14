@@ -47,6 +47,16 @@ const Dashboard = () => {
       .map(row => Object.values(row).join(","))
       .join("\n");
 
+      const csvContent = headers + rows;
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = "export.csv";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   const filteredCars = cars.filter(car => {
     const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
