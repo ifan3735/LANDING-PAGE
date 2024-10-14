@@ -126,34 +126,34 @@ const Dashboard = () => {
 
         {/* Right Section: Export Button with Dropdown */}
         <div className="relative">
-          <button
-            onClick={toggleExportDropdown}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
-          >
-            <FaFileExport className="mr-2" /> Export
-            <FaChevronDown className="ml-2" />
-          </button>
+      <button
+        onClick={toggleExportDropdown}
+        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
+      >
+        <FaFileExport className="mr-2" /> Export
+        <FaChevronDown className="ml-2" />
+      </button>
 
-          {/* Export Dropdown */}
-          {showDropdown && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
-              <ul>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as CSV")}
-                >
-                  Export as CSV
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as PDF")}
-                >
-                  Export as PDF
-                </li>
-              </ul>
-            </div>
-          )}
+      {/* Export Dropdown */}
+      {showDropdown && (
+        <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+          <ul>
+            <li
+              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              onClick={exportAsCSV}
+            >
+              Export as CSV
+            </li>
+            <li
+              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              onClick={exportAsPDF}
+            >
+              Export as PDF
+            </li>
+          </ul>
         </div>
+      )}
+    </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
