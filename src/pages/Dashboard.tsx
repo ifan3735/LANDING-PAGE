@@ -5,6 +5,7 @@ import ActivityCard from '../components/ActivityCard';
 import UserInfoCard from '../components/UserInfoCard';
 import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
 import { jsPDF } from "jspdf";
+import { useFetchAllVehiclesQuery } from '../features/API';
 
 const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
