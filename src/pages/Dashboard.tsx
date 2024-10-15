@@ -46,7 +46,7 @@ const Dashboard = () => {
   const exportAsCSV = () => {
     const headers = "Name,Style,Type,Color,Price\n"; // CSV headers
     const rows = filteredCars
-      .map(car => `${car.name},${car.style},${car.type},${car.color},${car.price}`)
+      .map(Vehicle => `${Vehicle.name},${Vehicle.style},${Vehicle.type},${Vehicle.color},${Vehicle.price}`)
       .join("\n");
 
     const csvContent = headers + rows;
@@ -63,18 +63,18 @@ const Dashboard = () => {
   const exportAsPDF = () => {
     const doc = new jsPDF();
     let content = "Name, Style, Type, Color, Price\n";
-    filteredCars.forEach((car, index) => {
-      content += `${index + 1}. ${car.name}, ${car.style}, ${car.type}, ${car.color}, ${car.price}\n`;
+    filteredCars.forEach((Vehicle, index) => {
+      content += `${index + 1}. ${Vehicle.name}, ${Vehicle.style}, ${Vehicle.type}, ${Vehicle.color}, ${Vehicle.price}\n`;
     });
     doc.text(content, 10, 10);
     doc.save("cars_export.pdf");
   };
 
   const filteredCars = data?.filter(Vehicle => {
-    const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
-    const matchesColor = selectedFilters.color ? car.color === selectedFilters.color : true;
-    const matchesStyle = selectedFilters.style ? car.style === selectedFilters.style : true;
+    const matchesSearch = Vehicle.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesType = selectedFilters.type ? Vehicle.type === selectedFilters.type : true;
+    const matchesColor = selectedFilters.color ? Vehicle.color === selectedFilters.color : true;
+    const matchesStyle = selectedFilters.style ? Vehicle.style === selectedFilters.style : true;
     return matchesSearch && matchesType && matchesColor && matchesStyle;
   });
 
