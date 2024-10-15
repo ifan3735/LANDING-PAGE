@@ -201,9 +201,9 @@ const Dashboard = () => {
                   key={index}
                   name={Vehicle.vehicle_specs.model}
                   style={Vehicle.vehicle_specs.manufacturer}
-                  type={Vehicle.type}
+                  type={Vehicle.fuel_type}
                   color={Vehicle.color}
-                  price={Vehicle.price}
+                  price={Vehicle.rental_rate}
                   imageUrl={Vehicle.image}
                 />
               )) : (
