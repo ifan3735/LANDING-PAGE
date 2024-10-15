@@ -220,7 +220,7 @@ const Dashboard = () => {
                       type={Vehicle.fuel_type}
                       color={Vehicle.color}
                       price={Vehicle.rental_rate}
-                      imageUrl={Vehicle.image}
+                      imageUrl={"https://i.pinimg.com/236x/f2/c0/75/f2c075302e5d0dce06c6e0952baf5081.jpg"}
                     />
                   ))
                 ) : (
