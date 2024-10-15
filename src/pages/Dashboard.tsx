@@ -211,22 +211,25 @@ const Dashboard = () => {
               <p>Error loading cars</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {filteredCars.length > 0 ? (
-                  filteredCars.map((Vehicle) => (
-                    <CarCard
-                      key={Vehicle.vehicle_spec_id}
-                      name={Vehicle.vehicle_specs.model}
-                      style={Vehicle.vehicle_specs.manufacturer}
-                      type={Vehicle.fuel_type}
-                      color={Vehicle.color}
-                      price={Vehicle.rental_rate}
-                      imageUrl={Vehicle.image}
-                    />
-                  ))
-                ) : (
-                  <p className="text-center col-span-3">No cars found</p>
-                )}
-              </div>
+  {filteredCars.length > 0 ? (
+    filteredCars.map((Vehicle) => {
+      console.log("Car Image URL:", Vehicle.image); // Log the image URL here
+      return (
+        <CarCard
+          key={Vehicle.vehicle_spec_id}
+          name={Vehicle.vehicle_specs.model}
+          style={Vehicle.vehicle_specs.manufacturer}
+          type={Vehicle.fuel_type}
+          color={Vehicle.color}
+          price={Vehicle.rental_rate}
+          imageUrl={Vehicle.image}
+        />
+      );
+    })
+  ) : (
+    <p>No cars available</p>
+  )}
+</div>
             )}
           </div>
         </div>
