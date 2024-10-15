@@ -11,7 +11,7 @@ const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
-  const { data, isSuccess, isLoading, error } = useFetchAllVehiclesQuery();
+  const { data, isSuccess, isLoading, error } = useFetchAllVehiclesQuery(); // Fetching data from API
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
@@ -19,7 +19,6 @@ const Dashboard = () => {
     style: '',
   });
   const [visibleActivities, setVisibleActivities] = useState(1);
-
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
 
@@ -33,11 +32,30 @@ const Dashboard = () => {
     }));
   };
 
+  // Filter logic for cars
+  const filteredCars = isSuccess && data
+    ? data.filter((Vehicle) => {
+        const matchesSearch = Vehicle.vehicle_specs.model
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+        const matchesType = selectedFilters.type
+          ? Vehicle.fuel_type === selectedFilters.type
+          : true;
+        const matchesColor = selectedFilters.color
+          ? Vehicle.color === selectedFilters.color
+          : true;
+        const matchesStyle = selectedFilters.style
+          ? Vehicle.vehicle_specs.manufacturer === selectedFilters.style
+          : true;
+        return matchesSearch && matchesType && matchesColor && matchesStyle;
+      })
+    : [];
+
   // Function to export filtered data as CSV
   const exportAsCSV = () => {
     const headers = "Name,Style,Type,Color,Price\n"; // CSV headers
     const rows = filteredCars
-      .map(Vehicle => `${Vehicle.name},${Vehicle.style},${Vehicle.type},${Vehicle.color},${Vehicle.price}`)
+      .map((Vehicle) => `${Vehicle.vehicle_specs.model},${Vehicle.vehicle_specs.manufacturer},${Vehicle.fuel_type},${Vehicle.color},${Vehicle.rental_rate}`)
       .join("\n");
 
     const csvContent = headers + rows;
@@ -55,19 +73,11 @@ const Dashboard = () => {
     const doc = new jsPDF();
     let content = "Name, Style, Type, Color, Price\n";
     filteredCars.forEach((Vehicle, index) => {
-      content += `${index + 1}. ${Vehicle.name}, ${Vehicle.style}, ${Vehicle.type}, ${Vehicle.color}, ${Vehicle.price}\n`;
+      content += `${index + 1}. ${Vehicle.vehicle_specs.model}, ${Vehicle.vehicle_specs.manufacturer}, ${Vehicle.fuel_type}, ${Vehicle.color}, ${Vehicle.rental_rate}\n`;
     });
     doc.text(content, 10, 10);
     doc.save("cars_export.pdf");
   };
-
-  const filteredCars = data?.filter(Vehicle => {
-    const matchesSearch = Vehicle.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType = selectedFilters.type ? Vehicle.type === selectedFilters.type : true;
-    const matchesColor = selectedFilters.color ? Vehicle.color === selectedFilters.color : true;
-    const matchesStyle = selectedFilters.style ? Vehicle.style === selectedFilters.style : true;
-    return matchesSearch && matchesType && matchesColor && matchesStyle;
-  });
 
   const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
 
@@ -148,11 +158,11 @@ const Dashboard = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Available Cars</h2>
               <div className="relative">
-                <button 
+                <button
                   className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
                   onClick={toggleFilterDropdown}
                 >
-                   <FaBars className="mr-2" /> Filter by
+                  <FaBars className="mr-2" /> Filter by
                 </button>
                 {showFilterDropdown && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg p-4 z-10">
@@ -195,21 +205,29 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredCars.length ? filteredCars.map((Vehicle, index) => (
-                <CarCard
-                  key={index}
-                  name={Vehicle.vehicle_specs.model}
-                  style={Vehicle.vehicle_specs.manufacturer}
-                  type={Vehicle.fuel_type}
-                  color={Vehicle.color}
-                  price={Vehicle.rental_rate}
-                  imageUrl={Vehicle.image}
-                />
-              )) : (
-                <p className="text-center col-span-3">No cars found</p>
-              )}
-            </div>
+            {isLoading ? (
+              <p>Loading cars...</p>
+            ) : error ? (
+              <p>Error loading cars</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredCars.length > 0 ? (
+                  filteredCars.map((Vehicle) => (
+                    <CarCard
+                      key={Vehicle.vehicle_spec_id}
+                      name={Vehicle.vehicle_specs.model}
+                      style={Vehicle.vehicle_specs.manufacturer}
+                      type={Vehicle.fuel_type}
+                      color={Vehicle.color}
+                      price={Vehicle.rental_rate}
+                      imageUrl={Vehicle.image}
+                    />
+                  ))
+                ) : (
+                  <p className="text-center col-span-3">No cars found</p>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
