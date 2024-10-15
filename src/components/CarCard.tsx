@@ -16,7 +16,7 @@ interface CarCardProps {
         <p className="text-gray-500">Style: {style}</p>
         <p className="text-gray-500">Type: {type}</p>
         <p className="text-gray-500">Color: {color}</p>
-        <p className="text-blue-600 font-bold">{price}</p>
+        <p className="text-blue-600 font-bold">${price}</p>
       </div>
     </div>
   );
