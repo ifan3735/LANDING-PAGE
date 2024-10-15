@@ -10,7 +10,7 @@ interface CarCardProps {
   
   const CarCard = ({ name, style, type, color, price, imageUrl }: CarCardProps) => (
     <div className="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-md transition-shadow hover:shadow-xl">
-      <img src={imageUrl} alt={name} className="w-full h-32 object-cover rounded-lg mb-4" />
+      <img src={imageUrl || 'https://i.pinimg.com/236x/5c/7e/9d/5c7e9d53460217543a0ca6c87feacc85.jpg'} alt={name} className="w-full h-32 object-cover rounded-lg mb-4" />
       <div className="text-center">
         <h3 className="font-semibold">{name}</h3>
         <p className="text-gray-500">Style: {style}</p>
