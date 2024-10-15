@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
+  const { data, isSuccess, isLoading, error } = useFetchAllVehiclesQuery();
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
