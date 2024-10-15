@@ -217,11 +217,11 @@ const Dashboard = () => {
       console.log("Car Image URL:", Vehicle.image); // Log the image URL here
       return (
         <CarCard
-          key={Vehicle.vehicle_spec_id}
+          key={Vehicle.id}
           name={Vehicle.vehicle_specs.model}
           style={Vehicle.vehicle_specs.manufacturer}
-          type={Vehicle.fuel_type}
-          color={Vehicle.color}
+          type={Vehicle.vehicle_specs.fuel_type}
+          color={Vehicle.vehicle_specs.color}
           price={Vehicle.rental_rate}
           imageUrl={Vehicle.image}
         />
