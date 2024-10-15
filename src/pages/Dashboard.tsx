@@ -213,6 +213,7 @@ const Dashboard = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   {filteredCars.length > 0 ? (
     filteredCars.map((Vehicle) => {
+      console.log("Vehicle Object:", Vehicle); // Log the entire Vehicle object
       console.log("Car Image URL:", Vehicle.image); // Log the image URL here
       return (
         <CarCard
