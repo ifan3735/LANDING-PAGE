@@ -70,7 +70,7 @@ const Dashboard = () => {
     doc.save("cars_export.pdf");
   };
 
-  const filteredCars = cars.filter(car => {
+  const filteredCars = data?.filter(Vehicle => {
     const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
     const matchesColor = selectedFilters.color ? car.color === selectedFilters.color : true;
@@ -205,7 +205,7 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredCars.length ? filteredCars.map((car, index) => (
+              {filteredCars.length ? filteredCars.map((Vehicle, index) => (
                 <CarCard
                   key={index}
                   name={car.name}
@@ -213,7 +213,7 @@ const Dashboard = () => {
                   type={car.type}
                   color={car.color}
                   price={car.price}
-                  imageUrl={car.imageUrl}
+                  imageUrl={Vehicle.image}
                 />
               )) : (
                 <p className="text-center col-span-3">No cars found</p>
