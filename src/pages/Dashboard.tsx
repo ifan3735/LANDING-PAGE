@@ -46,7 +46,7 @@ const Dashboard = () => {
           .toLowerCase()
           .includes(searchQuery.toLowerCase());
         const matchesType = selectedFilters.type
-          ? Vehicle.fuel_type.toLowerCase() === selectedFilters.type.toLowerCase()
+          ? Vehicle.vehicle_specs.fuel_type.toLowerCase() === selectedFilters.type.toLowerCase()
           : true;
         const matchesColor = selectedFilters.color
           ? Vehicle.vehicle_specs.color.toLowerCase() === selectedFilters.color.toLowerCase()
