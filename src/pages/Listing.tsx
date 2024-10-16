@@ -367,6 +367,13 @@ const ListingPage = () => {
     URL.revokeObjectURL(url);
   };
 
+  const exportAsPDF = () => {
+    const doc = new jsPDF();
+    let content = "Name, Style, Type, Color, Price\n";
+    filteredCars.forEach((Vehicle, index) => {
+      content += `${index + 1}. ${Vehicle.vehicle_specs.model}, ${Vehicle.vehicle_specs.manufacturer}, ${Vehicle.fuel_type}, ${Vehicle.color}, ${Vehicle.rental_rate}\n`;
+    });
+
   return (
     <div className={`flex-1 p-6 bg-gray-50 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       <TopBar
