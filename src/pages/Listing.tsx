@@ -51,7 +51,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
         <div className="flex items-center space-x-4 mt-2">
           <p>Style: {Vehicle.vehicle_specs.manufacturer}</p>
           <p>RTO: Pending</p>
-          <p>Speed: {Vehicle.speed}</p>
+          <p>Speed: {Vehicle.vehicle_specs.speed} KM</p>
         </div>
       </div>
       <div className="flex justify-between items-center">
