@@ -304,7 +304,7 @@ const ListingPage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
-  const { data, isSuccess, isLoading, error } = useFetchAllVehiclesQuery();
+  const { data, isSuccess } = useFetchAllVehiclesQuery();
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
     color: '',
@@ -428,9 +428,8 @@ const ListingPage = () => {
                       className="border rounded-lg w-full p-2 mt-1"
                     >
                       <option value="">All Types</option>
-                      <option value="Sedan">Sedan</option>
-                      <option value="Luxury">Luxury</option>
-                      <option value="Coupe">Coupe</option>
+                      <option value="Petrol">Petrol</option>
+                      <option value="Diesel">Diesel</option>
                     </select>
                   </div>
                   <div className="p-4 border-t">
