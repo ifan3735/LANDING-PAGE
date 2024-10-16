@@ -455,9 +455,15 @@ const ListingPage = () => {
                       className="border rounded-lg w-full p-2 mt-1"
                     >
                       <option value="">All Styles</option>
-                      <option value="SUV">SUV</option>
-                      <option value="Convertible">Convertible</option>
-                      <option value="Hatchback">Hatchback</option>
+                      <option value="Toyota">Toyota</option>
+                      <option value="Porshe">Porshe</option>
+                      <option value="Audi">Audi</option>
+                      <option value="BMW">BMW</option>
+                      <option value="Range Rover">Range Rover</option>
+                      <option value="Lexus">Lexus</option>
+                      <option value="Bentley">Bentley</option>
+                      <option value="Mercedes">Mercedes</option>
+                      <option value="Rolls Royce">Rolls Royce</option>
                     </select>
                   </div>
                 </div>
