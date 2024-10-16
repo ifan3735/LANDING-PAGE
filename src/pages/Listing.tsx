@@ -6,6 +6,7 @@ import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFi
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useFetchAllVehiclesQuery } from "../features/API";
+import jsPDF from "jspdf";
 
 // CarCard Component for List and Detail Views
 const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) => (
