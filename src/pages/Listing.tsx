@@ -5,71 +5,72 @@ import TopBar from "../components/TopBar";
 import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useFetchAllVehiclesQuery } from "../features/API";
 
 // CarCard Component for List and Detail Views
-const CarCard = ({ car, onClick }: { car: any; onClick: () => void }) => (
+const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) => (
   <div
     onClick={onClick}
     className="bg-white p-6 rounded-lg shadow-md flex flex-row space-x-4 w-full max-w-lg cursor-pointer"
   >
     <div className="flex items-center">
       <img
-        src={car.image}
-        alt={car.name}
+        src={Vehicle.image}
+        alt={Vehicle.name}
         className="w-46 h-34 rounded-lg object-cover"
       />
     </div>
     <div className="flex-1 flex flex-col justify-center">
       <div className="flex items-center space-x-3 mb-3">
         <img
-          src={car.ownerAvatar}
-          alt={car.owner}
+          src={Vehicle.ownerAvatar}
+          alt={Vehicle.owner}
           className="w-12 h-12 rounded-full border-2 border-green-500"
         />
         <div>
-          <p className="font-semibold text-gray-700">{car.owner}</p>
-          <p className="text-sm text-gray-500">{car.dateListed}</p>
+          <p className="font-semibold text-gray-700">{Vehicle.owner}</p>
+          <p className="text-sm text-gray-500">{Vehicle.dateListed}</p>
         </div>
       </div>
-      <h3 className="font-semibold text-lg text-gray-700 mb-1">{car.name}</h3>
+      <h3 className="font-semibold text-lg text-gray-700 mb-1">{Vehicle.name}</h3>
       <div className="text-sm text-gray-500 mb-2">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-1">
             <FaTachometerAlt className="text-blue-500" />
-            <p>{car.mileage} KM</p>
+            <p>{Vehicle.mileage} KM</p>
           </div>
           <div className="flex items-center space-x-1">
             <FaGasPump className="text-blue-500" />
-            <p>{car.fuelType}</p>
+            <p>{Vehicle.fuelType}</p>
           </div>
           <div className="flex items-center space-x-1">
             <FaMapMarkerAlt className="text-blue-500" />
-            <p>{car.location}</p>
+            <p>{Vehicle.location}</p>
           </div>
         </div>
         <div className="flex items-center space-x-4 mt-2">
-          <p>Style: {car.carType}</p>
+          <p>Style: {Vehicle.carType}</p>
           <p>RTO: Pending</p>
-          <p>Speed: {car.speed}</p>
+          <p>Speed: {Vehicle.speed}</p>
         </div>
       </div>
       <div className="flex justify-between items-center">
         <p className="font-bold text-lg text-gray-500">
           Rate: <span className="font-bold text-lg text-blue-500">
-             ${car.rentalRate} </span></p>
+             ${Vehicle.rentalRate} </span></p>
       </div>
     </div>
   </div>
 );
 
-const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
+const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
-  const rentalRate = car.rentalRate || 100; // Set a rental rate, or use car.rentalRate if it's available
+  const rentalRate = Vehicle.rentalRate || 100; // Set a rental rate, or use car.rentalRate if it's available
   const unavailableDates = [
     new Date(2024, 8, 22), // Example of unavailable date
     new Date(2024, 8, 23),
@@ -146,8 +147,8 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         {/* Car Image Section */}
         <div className="relative">
           <img
-            src={car.image}
-            alt={car.name}
+            src={Vehicle.image}
+            alt={Vehicle.name}
             className="w-full h-100 object-cover rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105"
           />
           <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md">
@@ -157,28 +158,28 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
         {/* Car Info Section */}
         <div className="flex flex-col justify-between">
-          <h2 className="text-4xl font-black text-gray-900 mb-6">{car.name}</h2>
+          <h2 className="text-4xl font-black text-gray-900 mb-6">{Vehicle.name}</h2>
           <p className="text-lg text-gray-800 mb-6">
-            <span className="font-semibold">Owner:</span> {car.owner} <br />
-            <span className="font-semibold">Location:</span> {car.location} <br />
-            <span className="font-semibold">Listed on:</span> {car.dateListed}
+            <span className="font-semibold">Owner:</span> {Vehicle.owner} <br />
+            <span className="font-semibold">Location:</span> {Vehicle.location} <br />
+            <span className="font-semibold">Listed on:</span> {Vehicle.dateListed}
           </p>
           <div className="grid grid-cols-2 gap-6 text-gray-700 mb-8">
             <p className="flex items-center">
               <FaRoad className="mr-2 text-blue-600" />
-              <span className="font-semibold">Mileage:</span> {car.mileage} KM
+              <span className="font-semibold">Mileage:</span> {Vehicle.mileage} KM
             </p>
             <p className="flex items-center">
               <FaGasPump className="mr-2 text-blue-600" />
-              <span className="font-semibold">Fuel Type:</span> {car.fuelType}
+              <span className="font-semibold">Fuel Type:</span> {Vehicle.fuelType}
             </p>
             <p className="flex items-center">
               <FaCar className="mr-2 text-blue-600" />
-              <span className="font-semibold">Style:</span> {car.carType}
+              <span className="font-semibold">Style:</span> {Vehicle.carType}
             </p>
             <p className="flex items-center">
               <FaTachometerAlt className="mr-2 text-blue-600" />
-              <span className="font-semibold">Speed:</span> {car.speed} KM/H
+              <span className="font-semibold">Speed:</span> {Vehicle.speed} KM/H
             </p>
           </div>
           <p className="text-4xl font-bold text-blue-700">
@@ -303,6 +304,7 @@ const ListingPage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
+  const { data, isSuccess, isLoading, error } = useFetchAllVehiclesQuery();
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
     color: '',
@@ -323,150 +325,24 @@ const ListingPage = () => {
     }));
   };
 
-  const cars = [
-    {
-      name: 'Hyundai S Turbo uMT',
-      mileage: '1028',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      type: 'Sedan',
-      color: 'Red',
-      style: 'Luxury',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
-      owner: 'Jonson Hussain',
-      ownerAvatar: 'https://i.pinimg.com/236x/af/9f/1f/af9f1fed99621ae20f9edd2ab6cbb8bd.jpg',
-      carType: 'Sedan',
-      dateListed: '28 Jun',
-    },
-    {
-      name: 'Bentley Flying Spur',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'China',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/2a/7d/4c/2a7d4c4bc1381a476b8b8a85885ac392.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-    },
-    {
-      name: 'Porsche Tayca',
-      mileage: '369',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '295',
-      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
-      owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/ad/15/5b/ad155b4cfd5b6d220c3e5b51b349a37a.jpg',
-      carType: 'Coupe',
-      dateListed: '26 Jun',
-    },
-    {
-      name: 'Mercedes Benz EQS',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/2e/3e/fd/2e3efdc0486a8858f9e0471eee3f68e5.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-    },
-    {
-      name: 'Audi Q4 e-tron',
-      mileage: '369',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '295',
-      image: 'https://i.pinimg.com/236x/47/8b/f6/478bf61e4712ba383a76118a6558bfd4.jpg',
-      owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/f9/58/e4/f958e4ad039823fdc0e5aaa45aae278d.jpg',
-      carType: 'Coupe',
-      dateListed: '26 Jun',
-    },
-    {
-      name: 'Toyota Corolla Cross',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/7f/e6/18/7fe6180f6786437e40174509b3eadd8b.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/78/f1/fa/78f1faef59b24ecc67f1dbef3ddc32ac.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-    },
-    {
-      name: 'BMW i4',
-      mileage: '369',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '295',
-      image: 'https://i.pinimg.com/564x/5b/cc/d0/5bccd0713bc5c9039393f0bc7ba73d45.jpg',
-      owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/8b/85/75/8b8575ca1ecb184466a32b228dbeb3f7.jpg',
-      carType: 'Coupe',
-      dateListed: '26 Jun',
-    },
-    {
-      name: 'Audi Q4 e-tron',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/2c/0d/02/2c0d024d449d8f88e6844caba4748b87.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/03/eb/d6/03ebd625cc0b9d636256ecc44c0ea324.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-    },
-    {
-      name: 'Toyota Corolla Cross',
-      mileage: '369',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '295',
-      image: 'https://i.pinimg.com/736x/3a/a4/6a/3aa46aaba45e09ff09403b42a6127390.jpg',
-      owner: 'Robert Rome',
-      ownerAvatar: 'https://i.pinimg.com/236x/d2/d2/f8/d2d2f8210f500b3e859d8f282e3d0e9b.jpg',
-      carType: 'Coupe',
-      dateListed: '26 Jun',
-    },
-    {
-      name: 'BMW i4',
-      mileage: '3690',
-      fuelType: 'Petrol',
-      location: 'Dubai',
-      speed: '15.5 km/h',
-      rentalRate: '285',
-      image: 'https://i.pinimg.com/564x/5a/e8/d6/5ae8d6218c3c6a9296936347fc2c2eef.jpg',
-      owner: 'Hussain Jahan',
-      ownerAvatar: 'https://i.pinimg.com/236x/82/cc/d6/82ccd6e43a3334813015ec3247aeca7d.jpg',
-      carType: 'Luxury',
-      dateListed: '25 Jun',
-    }
-    // Add more cars as needed
-  ];
-
-  const filteredCars = cars.filter(car => {
-    const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType = selectedFilters.type ? car.type === selectedFilters.type : true;
-    const matchesColor = selectedFilters.color ? car.color === selectedFilters.color : true;
-    const matchesStyle = selectedFilters.style ? car.style === selectedFilters.style : true;
-    return matchesSearch && matchesType && matchesColor && matchesStyle;
-  });
+  // Filtering logic: filter cars based on search and selected filters
+  const filteredCars = isSuccess && data
+    ? data.filter((Vehicle) => {
+        const matchesSearch = Vehicle.vehicle_specs.model
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+        const matchesType = selectedFilters.type
+          ? Vehicle.vehicle_specs.fuel_type.toLowerCase() === selectedFilters.type.toLowerCase()
+          : true;
+        const matchesColor = selectedFilters.color
+          ? Vehicle.vehicle_specs.color.toLowerCase() === selectedFilters.color.toLowerCase()
+          : true;
+        const matchesStyle = selectedFilters.style
+          ? Vehicle.vehicle_specs.manufacturer.toLowerCase() === selectedFilters.style.toLowerCase()
+          : true;
+        return matchesSearch && matchesType && matchesColor && matchesStyle;
+      })
+    : [];
 
   const handleCarClick = (car: any) => {
     setSelectedCar(car);
