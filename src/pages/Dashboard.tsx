@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import TopBar from '../components/TopBar';
 import CarCard from '../components/CarCard';
 import ActivityCard from '../components/ActivityCard';
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
 
-  const handleSearch = (e) => setSearchQuery(e.target.value);
+  const handleSearch = (e: { target: { value: SetStateAction<string>; }; }) => setSearchQuery(e.target.value);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
