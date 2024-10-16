@@ -29,7 +29,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
         />
         <div>
           <p className="font-semibold text-gray-700">{Vehicle.vehicle_specs.owner_name}</p>
-          <p className="text-sm text-gray-500">{Vehicle.dateListed}</p>
+          <p className="text-sm text-gray-500">{Vehicle.vehicle_specs.date}</p>
         </div>
       </div>
       <h3 className="font-semibold text-lg text-gray-700 mb-1">{Vehicle.name}</h3>
@@ -37,7 +37,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-1">
             <FaTachometerAlt className="text-blue-500" />
-            <p>{Vehicle.mileage} KM</p>
+            <p>{Vehicle.vehicle_specs.milage} KM</p>
           </div>
           <div className="flex items-center space-x-1">
             <FaGasPump className="text-blue-500" />
