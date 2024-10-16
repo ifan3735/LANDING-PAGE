@@ -196,6 +196,7 @@ const Dashboard = () => {
                         <option value="Manual">Manual</option>
                         <option value="Electric">Electric</option>
                         <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
                       </select>
                     </div>
                     <div className="mb-2">
@@ -208,6 +209,7 @@ const Dashboard = () => {
                         <option value="Red">Red</option>
                         <option value="Blue">Blue</option>
                         <option value="White">White</option>
+                        <option value="Black">Black</option>
                       </select>
                     </div>
                     <div className="mb-2">
