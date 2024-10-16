@@ -24,7 +24,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
       <div className="flex items-center space-x-3 mb-3">
         <img
           src={Vehicle.vehicle_specs.owner_image}
-          alt={Vehicle.owner}
+          alt={Vehicle.vehicle_specs.owner_name}
           className="w-12 h-12 rounded-full border-2 border-green-500"
         />
         <div>
