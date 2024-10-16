@@ -49,7 +49,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
           </div>
         </div>
         <div className="flex items-center space-x-4 mt-2">
-          <p>Style: {Vehicle.carType}</p>
+          <p>Style: {Vehicle.vehicle_specs.manufacturer}</p>
           <p>RTO: Pending</p>
           <p>Speed: {Vehicle.speed}</p>
         </div>
