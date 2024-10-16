@@ -45,7 +45,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
           </div>
           <div className="flex items-center space-x-1">
             <FaMapMarkerAlt className="text-blue-500" />
-            <p>{Vehicle.location}</p>
+            <p>{Vehicle.vehicle_specs.location}</p>
           </div>
         </div>
         <div className="flex items-center space-x-4 mt-2">
