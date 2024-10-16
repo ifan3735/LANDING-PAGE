@@ -57,7 +57,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
       <div className="flex justify-between items-center">
         <p className="font-bold text-lg text-gray-500">
           Rate: <span className="font-bold text-lg text-blue-500">
-             ${Vehicle.rentalRate} </span></p>
+             ${Vehicle.rental_rate} </span></p>
       </div>
     </div>
   </div>
