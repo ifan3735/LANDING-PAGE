@@ -240,7 +240,7 @@ const Dashboard = () => {
                       name={Vehicle.vehicle_specs.model}
                       style={Vehicle.vehicle_specs.manufacturer}
                       type={Vehicle.vehicle_specs.fuel_type}
-                      color={Vehicle.color}
+                      color={Vehicle.vehicle_specs.color}
                       price={Vehicle.rental_rate}
                       imageUrl={Vehicle.image}
                     />
