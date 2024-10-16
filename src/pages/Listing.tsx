@@ -344,8 +344,8 @@ const ListingPage = () => {
       })
     : [];
 
-  const handleCarClick = (car: any) => {
-    setSelectedCar(car);
+  const handleCarClick = (Vehicle: any) => {
+    setSelectedCar(Vehicle);
   };
 
   const handleBack = () => {
@@ -365,7 +365,7 @@ const ListingPage = () => {
       />
 
 {selectedCar ? (
-        <CarDetailView car={selectedCar} onBack={handleBack} /> 
+        <CarDetailView Vehicle={selectedCar} onBack={handleBack} /> 
       ) : (
         <>
           <div className="flex justify-between items-center my-6">
@@ -467,11 +467,11 @@ const ListingPage = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-6">
-            {filteredCars.map((car) => (
+            {filteredCars.map((Vehicle) => (
               <CarCard
-                key={car.id}
-                car={car}
-                onClick={() => handleCarClick(car)}
+                key={Vehicle.id}
+                Vehicle={Vehicle}
+                onClick={() => handleCarClick(Vehicle)}
               />
             ))}
           </div>
