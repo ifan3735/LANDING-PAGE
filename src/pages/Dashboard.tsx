@@ -35,21 +35,24 @@ const Dashboard = () => {
       ...prevFilters,
       [name]: value,
     }));
+    // Reset to the first page when filters are changed
+    setCurrentPage(1);
   };
 
+  // Filtering logic: filter cars based on search and selected filters
   const filteredCars = isSuccess && data
     ? data.filter((Vehicle) => {
         const matchesSearch = Vehicle.vehicle_specs.model
           .toLowerCase()
           .includes(searchQuery.toLowerCase());
         const matchesType = selectedFilters.type
-          ? Vehicle.fuel_type === selectedFilters.type
+          ? Vehicle.fuel_type.toLowerCase() === selectedFilters.type.toLowerCase()
           : true;
         const matchesColor = selectedFilters.color
-          ? Vehicle.color === selectedFilters.color
+          ? Vehicle.vehicle_specs.color.toLowerCase() === selectedFilters.color.toLowerCase()
           : true;
         const matchesStyle = selectedFilters.style
-          ? Vehicle.vehicle_specs.manufacturer === selectedFilters.style
+          ? Vehicle.vehicle_specs.manufacturer.toLowerCase() === selectedFilters.style.toLowerCase()
           : true;
         return matchesSearch && matchesType && matchesColor && matchesStyle;
       })
@@ -237,7 +240,7 @@ const Dashboard = () => {
                       name={Vehicle.vehicle_specs.model}
                       style={Vehicle.vehicle_specs.manufacturer}
                       type={Vehicle.vehicle_specs.fuel_type}
-                      color={Vehicle.vehicle_specs.color}
+                      color={Vehicle.color}
                       price={Vehicle.rental_rate}
                       imageUrl={Vehicle.image}
                     />
