@@ -32,7 +32,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
           <p className="text-sm text-gray-500">{Vehicle.vehicle_specs.date}</p>
         </div>
       </div>
-      <h3 className="font-semibold text-lg text-gray-700 mb-1">{Vehicle.name}</h3>
+      <h3 className="font-semibold text-lg text-gray-700 mb-1">{Vehicle.vehicle_specs.model}</h3>
       <div className="text-sm text-gray-500 mb-2">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-1">
@@ -41,7 +41,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
           </div>
           <div className="flex items-center space-x-1">
             <FaGasPump className="text-blue-500" />
-            <p>{Vehicle.fuelType}</p>
+            <p>{Vehicle.vehicle_specs.fuel_type}</p>
           </div>
           <div className="flex items-center space-x-1">
             <FaMapMarkerAlt className="text-blue-500" />
