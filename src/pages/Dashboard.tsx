@@ -8,16 +8,21 @@ import { jsPDF } from "jspdf";
 import { useFetchAllVehiclesQuery } from '../features/API';
 
 const Dashboard = () => {
-  const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
+  const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
-  const { data, isSuccess, isLoading, error } = useFetchAllVehiclesQuery(); // Fetching data from API
+  const { data, isSuccess, isLoading, error } = useFetchAllVehiclesQuery();
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
     color: '',
     style: '',
   });
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const carsPerPage = 6;
+
   const [visibleActivities, setVisibleActivities] = useState(1);
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
@@ -32,7 +37,6 @@ const Dashboard = () => {
     }));
   };
 
-  // Filter logic for cars
   const filteredCars = isSuccess && data
     ? data.filter((Vehicle) => {
         const matchesSearch = Vehicle.vehicle_specs.model
@@ -51,9 +55,26 @@ const Dashboard = () => {
       })
     : [];
 
-  // Function to export filtered data as CSV
+  // Pagination logic: Calculate the cars to display for the current page
+  const indexOfLastCar = currentPage * carsPerPage;
+  const indexOfFirstCar = indexOfLastCar - carsPerPage;
+  const currentCars = filteredCars.slice(indexOfFirstCar, indexOfLastCar);
+
+  // Function to change page
+  const goToNextPage = () => {
+    if (currentPage < Math.ceil(filteredCars.length / carsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   const exportAsCSV = () => {
-    const headers = "Name,Style,Type,Color,Price\n"; // CSV headers
+    const headers = "Name,Style,Type,Color,Price\n";
     const rows = filteredCars
       .map((Vehicle) => `${Vehicle.vehicle_specs.model},${Vehicle.vehicle_specs.manufacturer},${Vehicle.fuel_type},${Vehicle.color},${Vehicle.rental_rate}`)
       .join("\n");
@@ -68,7 +89,6 @@ const Dashboard = () => {
     URL.revokeObjectURL(url);
   };
 
-  // Function to export filtered data as PDF
   const exportAsPDF = () => {
     const doc = new jsPDF();
     let content = "Name, Style, Type, Color, Price\n";
@@ -111,7 +131,6 @@ const Dashboard = () => {
         handleSearch={handleSearch}
         toggleTheme={toggleTheme}
         theme={theme}
-        exportData={() => exportAsCSV(filteredCars)}
       />
 
       <div className="flex justify-between items-center my-6">
@@ -211,27 +230,41 @@ const Dashboard = () => {
               <p>Error loading cars</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-  {filteredCars.length > 0 ? (
-    filteredCars.map((Vehicle) => {
-      console.log("Vehicle Object:", Vehicle); // Log the entire Vehicle object
-      console.log("Car Image URL:", Vehicle.image); // Log the image URL here
-      return (
-        <CarCard
-          key={Vehicle.id}
-          name={Vehicle.vehicle_specs.model}
-          style={Vehicle.vehicle_specs.manufacturer}
-          type={Vehicle.vehicle_specs.fuel_type}
-          color={Vehicle.vehicle_specs.color}
-          price={Vehicle.rental_rate}
-          imageUrl={Vehicle.image}
-        />
-      );
-    })
-  ) : (
-    <p>No cars available</p>
-  )}
-</div>
+                {currentCars.length > 0 ? (
+                  currentCars.map((Vehicle) => (
+                    <CarCard
+                      key={Vehicle.id}
+                      name={Vehicle.vehicle_specs.model}
+                      style={Vehicle.vehicle_specs.manufacturer}
+                      type={Vehicle.vehicle_specs.fuel_type}
+                      color={Vehicle.vehicle_specs.color}
+                      price={Vehicle.rental_rate}
+                      imageUrl={Vehicle.image}
+                    />
+                  ))
+                ) : (
+                  <p>No cars available</p>
+                )}
+              </div>
             )}
+
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={goToPreviousPage}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 rounded ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+              >
+                Back
+              </button>
+
+              <button
+                onClick={goToNextPage}
+                disabled={currentPage === Math.ceil(filteredCars.length / carsPerPage)}
+                className={`px-4 py-2 rounded ${currentPage === Math.ceil(filteredCars.length / carsPerPage) ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
 
