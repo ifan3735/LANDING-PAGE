@@ -24,11 +24,11 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
       <div className="flex items-center space-x-3 mb-3">
         <img
           src={Vehicle.vehicle_specs.owner_image}
-          alt={Vehicle.vehicle_specs.owner_name}
+          alt={Vehicle.owner}
           className="w-12 h-12 rounded-full border-2 border-green-500"
         />
         <div>
-          <p className="font-semibold text-gray-700">{Vehicle.owner}</p>
+          <p className="font-semibold text-gray-700">{Vehicle.vehicle_specs.owner_name}</p>
           <p className="text-sm text-gray-500">{Vehicle.dateListed}</p>
         </div>
       </div>
