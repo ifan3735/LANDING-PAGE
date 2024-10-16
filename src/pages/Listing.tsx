@@ -415,7 +415,7 @@ const ListingPage = () => {
                   <ul>
                     <li
                       className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => console.log("Export as CSV")}
+                      onClick={exportAsCSV}
                     >
                       Export as CSV
                     </li>
