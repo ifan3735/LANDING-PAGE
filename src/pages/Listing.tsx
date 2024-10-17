@@ -267,7 +267,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
           {/* Example placeholder car cards */}
           <div className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src=""
+              src= {Vehicle.image2}
               alt="Car 1"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
