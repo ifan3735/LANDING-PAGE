@@ -122,7 +122,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
-  const rentalRate = Vehicle.rentalRate || 100; // Set a rental rate, or use car.rentalRate if it's available
+  const rentalRate = Vehicle.rental_rate; // Set a rental rate, or use car.rentalRate if it's available
   const unavailableDates = [
     new Date(2024, 8, 22), // Example of unavailable date
     new Date(2024, 8, 23),
@@ -479,7 +479,7 @@ const Search = () => {
 
           <div className="grid grid-cols-3 gap-6">
             {filteredCars.map((Vehicle) => (
-              <CarCard key={Vehicle.name} Vehicle={Vehicle} onClick={() => handleCarClick(car)} />
+              <CarCard key={Vehicle.name} Vehicle={Vehicle} onClick={() => handleCarClick(Vehicle)} />
             ))}
           </div>
         </>
