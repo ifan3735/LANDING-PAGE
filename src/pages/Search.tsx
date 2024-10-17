@@ -408,6 +408,13 @@ const Search = () => {
     setSelectedCar(null);
   };
 
+  const exportAsCSV = () => {
+    const headers = "Name,Style,Type,Color,Price\n";
+    const rows = filteredCars
+      .map((Vehicle) => `${Vehicle.vehicle_specs.model},${Vehicle.vehicle_specs.manufacturer},${Vehicle.fuel_type},${Vehicle.color},${Vehicle.rental_rate}`)
+      .join("\n");
+      const csvContent = headers + rows;
+
   return (
     <div className={`flex-1 p-6 bg-gray-50 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       <TopBar
