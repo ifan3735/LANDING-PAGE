@@ -176,7 +176,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
             </p>
             <p className="flex items-center">
               <FaCar className="mr-2 text-blue-600" />
-              <span className="font-semibold">Style:</span> {Vehicle.carType}
+              <span className="font-semibold">Style:</span> {Vehicle.vehicle_specs.manufacturer}
             </p>
             <p className="flex items-center">
               <FaTachometerAlt className="mr-2 text-blue-600" />
