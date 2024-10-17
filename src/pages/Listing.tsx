@@ -267,7 +267,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
           {/* Example placeholder car cards */}
           <div className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src="https://i.pinimg.com/564x/a4/29/40/a42940b02387da4b5898b5bc08062d49.jpg"
+              src=""
               alt="Car 1"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
@@ -276,7 +276,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src="https://i.pinimg.com/564x/2a/0c/55/2a0c552c373f9c978e626b4fc6e5c935.jpg"
+              src=""
               alt="Car 2"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
@@ -285,7 +285,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src="https://i.pinimg.com/564x/aa/93/95/aa9395c2f3f30c7f355c1102d5a53076.jpg"
+              src=""
               alt="Car 3"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
