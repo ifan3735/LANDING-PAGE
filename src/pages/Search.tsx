@@ -327,7 +327,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src="https://i.pinimg.com/564x/2a/0c/55/2a0c552c373f9c978e626b4fc6e5c935.jpg"
+              src={Vehicle.image3}
               alt="Car 2"
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
