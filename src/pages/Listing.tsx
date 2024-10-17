@@ -168,7 +168,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
           <div className="grid grid-cols-2 gap-6 text-gray-700 mb-8">
             <p className="flex items-center">
               <FaRoad className="mr-2 text-blue-600" />
-              <span className="font-semibold">Mileage:</span> {Vehicle.mileage} KM
+              <span className="font-semibold">Mileage:</span> {Vehicle.vehicle_specs.milage} KM
             </p>
             <p className="flex items-center">
               <FaGasPump className="mr-2 text-blue-600" />
