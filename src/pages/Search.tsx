@@ -231,7 +231,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
             </p>
             <p className="flex items-center">
               <FaTachometerAlt className="mr-2 text-blue-600" />
-              <span className="font-semibold">Speed:</span> {Vehicle.speed} KM/H
+              <span className="font-semibold">Speed:</span> {Vehicle.vehicle_specs.speed} KM/H
             </p>
           </div>
           <p className="text-4xl font-bold text-blue-700">
