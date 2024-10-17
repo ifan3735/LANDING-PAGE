@@ -103,7 +103,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
             Style: <span className="text-gray-700">{Vehicle.vehicle_specs.manufacturer}</span>
           </p>
           <p className="font-medium">
-            Type: <span className="text-gray-700">{Vehicle.type}</span>
+            Type: <span className="text-gray-700">{Vehicle.vehicle_specs.fuel_type}</span>
           </p>
           <p className="font-medium">
             Color: <span className="text-gray-700">{Vehicle.vehicle_specs.color}</span>
