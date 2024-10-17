@@ -366,6 +366,8 @@ const Search = () => {
   });
   const [selectedCar, setSelectedCar] = useState<any>(null); // State for selected car
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
+
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
   const toggleFilters = () => setShowFilters(!showFilters);
@@ -415,7 +417,7 @@ const Search = () => {
     <div className={`flex-1 p-6 bg-gray-50 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       <TopBar
         searchQuery={searchTerm}
-        handleSearch={(e) => setSearchTerm(e.target.value)}
+        handleSearch={handleSearch}
         toggleTheme={toggleTheme}
         theme={theme}
         exportData={() => {
