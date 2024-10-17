@@ -223,7 +223,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
             </p>
             <p className="flex items-center">
               <FaGasPump className="mr-2 text-blue-600" />
-              <span className="font-semibold">Fuel Type:</span> {Vehicle.fuelType}
+              <span className="font-semibold">Fuel Type:</span> {Vehicle.vehicle_specs.fuel_type}
             </p>
             <p className="flex items-center">
               <FaCar className="mr-2 text-blue-600" />
