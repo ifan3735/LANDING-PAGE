@@ -149,7 +149,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
         <div className="relative">
           <img
             src={Vehicle.image}
-            alt={Vehicle.name}
+            alt={Vehicle.vehicle_specs.model}
             className="w-full h-100 object-cover rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105"
           />
           <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md">
