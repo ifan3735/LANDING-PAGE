@@ -45,7 +45,7 @@ const FilterBar = ({
       <div className="flex items-center space-x-2">
         <label className="text-gray-600 text-sm font-medium">Brand</label>
         <select
-          name="brand"
+          name="style"
           value={selectedFilters.style}
           onChange={handleFilterChange}
           className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-blue-400"
