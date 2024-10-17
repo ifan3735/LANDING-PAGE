@@ -6,6 +6,7 @@ import { FaGasPump, FaTachometerAlt, FaChevronDown, FaFileExport, FaRoad, FaCar,
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useFetchAllVehiclesQuery } from "../features/API";
+import jsPDF from "jspdf";
 
 const FilterBar = ({
   selectedBrand,
