@@ -12,14 +12,14 @@ const FilterBar = ({
   selectedFilters,
   handleFilterChange,
   handleBrandChange,
-  handleSearch,
+  SearchTerm,
   setSearchTerm,
 }: {
   selectedBrand: string;
   selectedFilters: any;
   handleFilterChange: any;
   handleBrandChange: (value: string) => void;
-  handleSearch: string;
+  SearchTerm: string;
   setSearchTerm: any;
 }) => (
   <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 space-x-6 rounded-lg">
@@ -67,7 +67,7 @@ const FilterBar = ({
         <input
           type="text"
           placeholder="Search"
-          value={handleSearch}
+          value={SearchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
         />
@@ -357,7 +357,6 @@ const Search = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const { data, isSuccess } = useFetchAllVehiclesQuery();
-  const [searchQuery, setSearchQuery] = useState('');
   const [theme, setTheme] = useState('light');
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
@@ -365,9 +364,6 @@ const Search = () => {
     style: '',
   });
   const [selectedCar, setSelectedCar] = useState<any>(null); // State for selected car
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
-
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
   const toggleFilters = () => setShowFilters(!showFilters);
@@ -391,7 +387,7 @@ const Search = () => {
     ? data.filter((Vehicle) => {
         const matchesSearch = Vehicle.vehicle_specs.model
           .toLowerCase()
-          .includes(searchQuery.toLowerCase());
+          .includes(searchTerm.toLowerCase());
         const matchesType = selectedFilters.type
           ? Vehicle.vehicle_specs.fuel_type.toLowerCase() === selectedFilters.type.toLowerCase()
           : true;
@@ -417,7 +413,7 @@ const Search = () => {
     <div className={`flex-1 p-6 bg-gray-50 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       <TopBar
         searchQuery={searchTerm}
-        handleSearch={handleSearch}
+        handleSearch={(e) => setSearchTerm(e.target.value)}
         toggleTheme={toggleTheme}
         theme={theme}
         exportData={() => {
