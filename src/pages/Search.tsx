@@ -110,7 +110,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
           </p>
         </div>
         <div className="text-lg text-blue-500 font-semibold mb-1">
-          ${Vehicle.price}
+          ${Vehicle.rental_rate}
         </div>
       </div>
     </div>
