@@ -12,14 +12,14 @@ const FilterBar = ({
   selectedFilters,
   handleFilterChange,
   handleBrandChange,
-  searchTerm,
+  handleSearch,
   setSearchTerm,
 }: {
   selectedBrand: string;
   selectedFilters: any;
   handleFilterChange: any;
   handleBrandChange: (value: string) => void;
-  searchTerm: string;
+  handleSearch: string;
   setSearchTerm: any;
 }) => (
   <div className="flex justify-between items-center mb-6 bg-gray-100 p-4 space-x-6 rounded-lg">
@@ -67,7 +67,7 @@ const FilterBar = ({
         <input
           type="text"
           placeholder="Search"
-          value={searchTerm}
+          value={handleSearch}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
         />
@@ -95,7 +95,7 @@ const CarCard = ({ Vehicle, onClick }: { Vehicle: any; onClick: () => void }) =>
       <div className="flex flex-col">
         {/* Car Name and Price */}
         <h3 className="font-medium text-lg text-gray-700 mb-1">
-          {Vehicle.name}
+          {Vehicle.vehicle_specs.model}
         </h3>
         {/* Style, Type, and Color */}
         <div className="text-xs text-gray-500 mb-1 flex flex-wrap gap-3">
