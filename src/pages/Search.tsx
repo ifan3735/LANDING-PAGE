@@ -212,7 +212,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
         <div className="flex flex-col justify-between">
           <h2 className="text-4xl font-black text-gray-900 mb-6">{Vehicle.vehicle_specs.model}</h2>
           <p className="text-lg text-gray-800 mb-6">
-            <span className="font-semibold">Owner:</span> {Vehicle.owner} <br />
+            <span className="font-semibold">Owner:</span> {Vehicle.vehicle_specs.owner_name} <br />
             <span className="font-semibold">Location:</span> {Vehicle.location} <br />
             <span className="font-semibold">Listed on:</span> {Vehicle.dateListed}
           </p>
