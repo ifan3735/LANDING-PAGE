@@ -222,7 +222,7 @@ const Bids = () => {
             rto={Vehicle.rto}
             spend={Vehicle.speed}
             price={Vehicle.price}
-            bidPrice={Vehicle.bidPrice}
+            bidPrice={Vehicle.rental_rate}
             onClick={() => handleCarClick(Vehicle)}
           />
         ))}
