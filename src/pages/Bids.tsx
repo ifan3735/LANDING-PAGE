@@ -212,18 +212,18 @@ const Bids = () => {
           </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-        {filteredCars.map((car, index) => (
+        {filteredCars.map((Vehicle, index) => (
           <Bid
             key={index}
-            name={car.name}
-            imageUrl={car.image}
-            location={car.location}
-            style={car.style}
-            rto={car.rto}
-            spend={car.speed}
-            price={car.price}
-            bidPrice={car.bidPrice}
-            onClick={() => handleCarClick(car)}
+            name={Vehicle.name}
+            imageUrl={Vehicle.image}
+            location={Vehicle.location}
+            style={Vehicle.style}
+            rto={Vehicle.rto}
+            spend={Vehicle.speed}
+            price={Vehicle.price}
+            bidPrice={Vehicle.bidPrice}
+            onClick={() => handleCarClick(Vehicle)}
           />
         ))}
       </div>
