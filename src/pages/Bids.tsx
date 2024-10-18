@@ -217,7 +217,7 @@ const Bids = () => {
             key={index}
             name={Vehicle.name}
             imageUrl={Vehicle.image}
-            location={Vehicle.location}
+            location={Vehicle.vehicle_specs.location}
             style={Vehicle.vehicle_specs.manufacturer}
             rto={Vehicle.rto}
             spend={Vehicle.vehicle_specs.speed}
