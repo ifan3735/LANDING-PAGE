@@ -238,6 +238,9 @@ const Bids = () => {
     filteredCars.forEach((Vehicle, index) => {
       content += `${index + 1}. ${Vehicle.vehicle_specs.model}, ${Vehicle.vehicle_specs.manufacturer}, ${Vehicle.fuel_type}, ${Vehicle.color}, ${Vehicle.rental_rate}\n`;
     });
+    doc.text(content, 10, 10);
+    doc.save("cars_export.pdf");
+  };
 
   return (
     <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
