@@ -61,7 +61,6 @@ const Bids = () => {
      return matchesSearch && matchesType && matchesColor && matchesStyle;
    })
  : [];
-  const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
