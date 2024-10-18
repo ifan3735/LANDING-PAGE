@@ -43,7 +43,7 @@ const Bid: React.FC<CarCardProps> = ({ name, imageUrl, location, style, rto, spe
           <div className="flex items-center justify-between">
             <p>Style: <span className="font-medium">{style}</span></p>
             <p>RTO: <span className="font-medium">{rto}</span></p>
-            <p>Speed: <span className="font-medium">{spend}</span></p>
+            <p>Speed: <span className="font-medium">{spend} KMs</span></p>
           </div>
         </div>
 

@@ -220,7 +220,7 @@ const Bids = () => {
             location={Vehicle.location}
             style={Vehicle.style}
             rto={Vehicle.rto}
-            spend={Vehicle.speed}
+            spend={Vehicle.vehicle_specs.speed}
             price={Vehicle.price}
             bidPrice={Vehicle.rental_rate}
             onClick={() => handleCarClick(Vehicle)}
