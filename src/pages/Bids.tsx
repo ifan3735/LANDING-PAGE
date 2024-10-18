@@ -5,12 +5,14 @@ import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
 import  Bid from '../components/Bids';
 import CarDetailView from '../components/CarDetailView';
 import { useFetchAllVehiclesQuery } from '../features/API';
+import jsPDF from 'jspdf';
 
 const Bids = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
+  const { data, isSuccess } = useFetchAllVehiclesQuery();
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState({
     type: '',
@@ -207,13 +209,24 @@ const Bids = () => {
       [name]: value,
     }));
   };
-  const filteredCars = cars.filter(car => {
-    const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesType = selectedFilter.type ? car.type === selectedFilter.type : true;
-    const matchesColor = selectedFilter.color ? car.color === selectedFilter.color : true;
-    const matchesStyle = selectedFilter.style ? car.style === selectedFilter.style : true;
-    return matchesSearch && matchesType && matchesColor && matchesStyle;
-  });
+ // Filtering logic: filter cars based on search and selected filters
+ const filteredCars = isSuccess && data
+ ? data.filter((Vehicle) => {
+     const matchesSearch = Vehicle.vehicle_specs.model
+       .toLowerCase()
+       .includes(searchQuery.toLowerCase());
+     const matchesType = selectedFilter.type
+       ? Vehicle.vehicle_specs.fuel_type.toLowerCase() === selectedFilter.type.toLowerCase()
+       : true;
+     const matchesColor = selectedFilter.color
+       ? Vehicle.vehicle_specs.color.toLowerCase() === selectedFilter.color.toLowerCase()
+       : true;
+     const matchesStyle = selectedFilter.style
+       ? Vehicle.vehicle_specs.manufacturer.toLowerCase() === selectedFilter.style.toLowerCase()
+       : true;
+     return matchesSearch && matchesType && matchesColor && matchesStyle;
+   })
+ : [];
   const toggleFilterDropdown = () => setShowFilterDropdown(!showFilterDropdown);
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
