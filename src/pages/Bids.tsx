@@ -4,6 +4,7 @@ import { exportData } from '../utils/ExportData';
 import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
 import  Bid from '../components/Bids';
 import CarDetailView from '../components/CarDetailView';
+import { useFetchAllVehiclesQuery } from '../features/API';
 
 const Bids = () => {
   const [showDropdown, setShowDropdown] = useState(false);
