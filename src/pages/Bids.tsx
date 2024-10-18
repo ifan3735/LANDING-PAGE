@@ -219,7 +219,7 @@ const Bids = () => {
             imageUrl={Vehicle.image}
             location={Vehicle.vehicle_specs.location}
             style={Vehicle.vehicle_specs.manufacturer}
-            rto={Vehicle.rto}
+            rto={Vehicle.vehicle_specs.transmission}
             spend={Vehicle.vehicle_specs.speed}
             price={Vehicle.price}
             bidPrice={Vehicle.rental_rate}
