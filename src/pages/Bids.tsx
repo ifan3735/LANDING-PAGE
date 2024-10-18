@@ -20,8 +20,8 @@ const Bids = () => {
 
   const [selectedCar, setSelectedCar] = useState<any>(null); // State for selected car
 
-  const handleCarClick = (car: any) => {
-    setSelectedCar(car);
+  const handleCarClick = (Vehicle: any) => {
+    setSelectedCar(Vehicle);
   };
 
   const handleBack = () => {
