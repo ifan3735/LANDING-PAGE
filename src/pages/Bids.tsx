@@ -287,7 +287,7 @@ const Bids = () => {
                 </li>
                 <li
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as PDF")}
+                  onClick={exportAsPDF}
                 >
                   Export as PDF
                 </li>
