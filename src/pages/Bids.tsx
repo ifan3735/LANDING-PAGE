@@ -215,7 +215,7 @@ const Bids = () => {
         {filteredCars.map((Vehicle, index) => (
           <Bid
             key={index}
-            name={Vehicle.name}
+            name={Vehicle.vehicle_specs.model}
             imageUrl={Vehicle.image}
             location={Vehicle.vehicle_specs.location}
             style={Vehicle.vehicle_specs.manufacturer}
