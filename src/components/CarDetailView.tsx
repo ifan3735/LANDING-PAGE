@@ -3,10 +3,12 @@ import { FaSync, FaMoon, FaSun } from 'react-icons/fa'; // Import icons for dark
 import Slider from 'react-slick'; // Import a carousel library like 'react-slick'
 import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
 import 'slick-carousel/slick/slick-theme.css';
+import { useFetchAllVehiclesQuery } from '../features/API';
 
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Loading state for images
+  const { data, isSuccess } = useFetchAllVehiclesQuery();
   const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
