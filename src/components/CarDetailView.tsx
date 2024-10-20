@@ -78,20 +78,22 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
 
           {/* Car Image Carousel */}
           <Slider {...settings}>
-            {Vehicle.images.map((image: string, index: number) => (
-              <div key={index} className="relative">
-                {isLoading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-2xl">
-                    <div className="w-8 h-8 border-t-4 border-blue-600 rounded-full animate-spin"></div>
-                  </div>
-                )}
-                <img
-                  src={image}
-                  alt={`Car View ${index + 1}`}
-                  onLoad={() => setIsLoading(false)} // Handle loading state
-                  className="w-full h-96 object-cover rounded-2xl shadow-lg"
-                />
-              </div>
+            {[Vehicle.image, Vehicle.image2, Vehicle.image3, Vehicle.image4].map((image: string, index: number) => (
+              image ? ( // Only render images that are available (not null or undefined)
+                <div key={index} className="relative">
+                  {isLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-2xl">
+                      <div className="w-8 h-8 border-t-4 border-blue-600 rounded-full animate-spin"></div>
+                    </div>
+                  )}
+                  <img
+                    src={image}
+                    alt={`Car View ${index + 1}`}
+                    onLoad={() => setIsLoading(false)} // Handle loading state
+                    className="w-full h-96 object-cover rounded-2xl shadow-lg"
+                  />
+                </div>
+              ) : null // Skip rendering if image is missing
             ))}
           </Slider>
         </div>
