@@ -3,17 +3,16 @@ import { FaSync, FaMoon, FaSun } from 'react-icons/fa'; // Import icons for dark
 import Slider from 'react-slick'; // Import a carousel library like 'react-slick'
 import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
 import 'slick-carousel/slick/slick-theme.css';
-import { useFetchAllVehiclesQuery } from '../features/API';
+import { useFetchAllVehiclesQuery } from '../features/API'; // Ensure the API hook is correctly imported
 
 const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Loading state for images
-  const { data, isSuccess } = useFetchAllVehiclesQuery();
+  const { data, isSuccess, isLoading: isFetching, error } = useFetchAllVehiclesQuery(); // Fetch the data from API
   const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
-
 
   const settings = {
     dots: true,
@@ -40,6 +39,14 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
     ),
     afterChange: () => setIsLoading(false) // Set loading to false after image changes
   };
+
+  if (isFetching) {
+    return <div>Loading...</div>; // Show a loading indicator while fetching data
+  }
+
+  if (error) {
+    return <div>Error fetching vehicle data</div>; // Show an error message if fetching fails
+  }
 
   return (
     <div className={`${isDarkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'} max-w-7xl mx-auto p-10 rounded-xl shadow-lg transition-colors duration-500`}>
@@ -70,8 +77,8 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
           </button>
 
           {/* Car Image Carousel */}
-          {/* <Slider {...settings}>
-            {carImages.map((image, index) => (
+          <Slider {...settings}>
+            {Vehicle.images.map((image: string, index: number) => (
               <div key={index} className="relative">
                 {isLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-2xl">
@@ -86,81 +93,49 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
                 />
               </div>
             ))}
-          </Slider> */}
+          </Slider>
         </div>
 
         {/* Right Column - Car Info */}
         <div className="flex flex-col justify-between">
-          {/* Car Name and Price */}
-          <h2 className="text-3xl font-black mb-2">{Vehicle.vehicle_specs.model}</h2>
-          <p className="text-blue-700 text-3xl font-bold mb-6">${Vehicle.bidPrice}</p>
+          {/* Display Vehicle Details */}
+          {isSuccess && data?.vehicles?.map((vehicle: any) => (
+            <div key={vehicle.id}>
+              <h2 className="text-3xl font-black mb-2">{vehicle.vehicle_specs.model}</h2>
+              <p className="text-blue-700 text-3xl font-bold mb-6">${vehicle.bidPrice}</p>
 
-          {/* Expanded Car Details */}
-          <div className="space-y-4 text-lg">
-            <div className="flex items-center">
-              <span className="font-semibold">Class:</span>
-              <span className="ml-2">{Vehicle.class || "Compact executive car D"}</span>
+              <div className="space-y-4 text-lg">
+                <div className="flex items-center">
+                  <span className="font-semibold">Class:</span>
+                  <span className="ml-2">{vehicle.class || "Compact executive car D"}</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="font-semibold">Layout:</span>
+                  <span className="ml-2">{vehicle.layout || "Front-engine, rear-wheel drive (4 MATIC)"}</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="font-semibold">Predecessor:</span>
+                  <span className="ml-2">{vehicle.predecessor || "Mercedes Benz 190 E (W201)"}</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="font-semibold">Engine Type:</span>
+                  <span className="ml-2">{vehicle.engine || "2.0L Turbo Inline-4"}</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="font-semibold">Fuel Type:</span>
+                  <span className="ml-2">{vehicle.fuelType || "Petrol"}</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="font-semibold">Mileage:</span>
+                  <span className="ml-2">{vehicle.mileage || "15,000 miles"}KMs</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="font-semibold">Transmission:</span>
+                  <span className="ml-2">{vehicle.transmission || "7-speed Automatic"}</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Layout:</span>
-              <span className="ml-2">{Vehicle.layout || "Front-engine, rear-wheel drive (4 MATIC)"}</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Predecessor:</span>
-              <span className="ml-2">{Vehicle.predecessor || "Mercedes Benz 190 E (W201)"}</span>
-            </div>
-
-            {/* Additional Car Details */}
-            <div className="flex items-center">
-              <span className="font-semibold">Engine Type:</span>
-              <span className="ml-2">{Vehicle.engine || "2.0L Turbo Inline-4"}</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Fuel Type:</span>
-              <span className="ml-2">{Vehicle.fuelType || "Petrol"}</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Mileage:</span>
-              <span className="ml-2">{Vehicle.mileage || "15,000 miles"}KMs</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Transmission:</span>
-              <span className="ml-2">{Vehicle.transmission || "7-speed Automatic"}</span>
-            </div>
-          </div>
-
-          {/* Documents Needed Section */}
-          <div className="mt-6">
-            <h3 className="text-lg font-bold mb-4">Document's Needed</h3>
-            <ul className="space-y-3">
-              <li className="flex items-center">
-                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
-                <label>Bill of sale</label>
-              </li>
-              <li className="flex items-center">
-                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
-                <label>Buyer’s Guide</label>
-              </li>
-              <li className="flex items-center">
-                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
-                <label>Country of title issuance</label>
-              </li>
-              <li className="flex items-center">
-                <input type="checkbox" className="mr-2" disabled />
-                <label className="text-gray-400">Application of Texas</label>
-              </li>
-            </ul>
-
-            {/* Upload Button */}
-            <button className="bg-blue-100 text-blue-600 px-4 py-2 mt-4 rounded-full font-semibold transition-all hover:bg-blue-200">
-              Upload
-            </button>
-          </div>
-
-          {/* Sticky Buy Now Button */}
-          <button className="sticky bottom-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105">
-            Buy Now
-          </button>
+          ))}
         </div>
       </div>
     </div>
