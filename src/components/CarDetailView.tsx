@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
 import 'slick-carousel/slick/slick-theme.css';
 import { useFetchAllVehiclesQuery } from '../features/API';
 
-const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
+const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Loading state for images
   const { data, isSuccess } = useFetchAllVehiclesQuery();
@@ -14,15 +14,6 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
-  // Sample image list (replace with actual car image data)
-  const carImages = car.images || [
-    car.image, // Use the main image as a fallback
-    'https://i.pinimg.com/736x/57/d3/bf/57d3bfff31b68e413a877d58be660e85.jpg',
-    'https://i.pinimg.com/736x/7d/84/45/7d8445cee1a098301fff03f63048e8a1.jpg',
-    'https://i.pinimg.com/736x/a5/86/e6/a586e60d0cdf332840e8ab8bbba4fe94.jpg',
-    'https://i.pinimg.com/736x/5a/7f/a7/5a7fa7df087e17df9c197b79586ac5b4.jpg',
-    'https://i.pinimg.com/736x/f9/cd/a1/f9cda1d501f700f16f37c744f02b8672.jpg'
-  ];
 
   const settings = {
     dots: true,
@@ -79,7 +70,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           </button>
 
           {/* Car Image Carousel */}
-          <Slider {...settings}>
+          {/* <Slider {...settings}>
             {carImages.map((image, index) => (
               <div key={index} className="relative">
                 {isLoading && (
@@ -95,46 +86,46 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
                 />
               </div>
             ))}
-          </Slider>
+          </Slider> */}
         </div>
 
         {/* Right Column - Car Info */}
         <div className="flex flex-col justify-between">
           {/* Car Name and Price */}
-          <h2 className="text-3xl font-black mb-2">{car.name}</h2>
-          <p className="text-blue-700 text-3xl font-bold mb-6">${car.bidPrice}</p>
+          <h2 className="text-3xl font-black mb-2">{Vehicle.vehicle_specs.model}</h2>
+          <p className="text-blue-700 text-3xl font-bold mb-6">${Vehicle.bidPrice}</p>
 
           {/* Expanded Car Details */}
           <div className="space-y-4 text-lg">
             <div className="flex items-center">
               <span className="font-semibold">Class:</span>
-              <span className="ml-2">{car.class || "Compact executive car D"}</span>
+              <span className="ml-2">{Vehicle.class || "Compact executive car D"}</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Layout:</span>
-              <span className="ml-2">{car.layout || "Front-engine, rear-wheel drive (4 MATIC)"}</span>
+              <span className="ml-2">{Vehicle.layout || "Front-engine, rear-wheel drive (4 MATIC)"}</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Predecessor:</span>
-              <span className="ml-2">{car.predecessor || "Mercedes Benz 190 E (W201)"}</span>
+              <span className="ml-2">{Vehicle.predecessor || "Mercedes Benz 190 E (W201)"}</span>
             </div>
 
             {/* Additional Car Details */}
             <div className="flex items-center">
               <span className="font-semibold">Engine Type:</span>
-              <span className="ml-2">{car.engine || "2.0L Turbo Inline-4"}</span>
+              <span className="ml-2">{Vehicle.engine || "2.0L Turbo Inline-4"}</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Fuel Type:</span>
-              <span className="ml-2">{car.fuelType || "Petrol"}</span>
+              <span className="ml-2">{Vehicle.fuelType || "Petrol"}</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Mileage:</span>
-              <span className="ml-2">{car.mileage || "15,000 miles"}KMs</span>
+              <span className="ml-2">{Vehicle.mileage || "15,000 miles"}KMs</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Transmission:</span>
-              <span className="ml-2">{car.transmission || "7-speed Automatic"}</span>
+              <span className="ml-2">{Vehicle.transmission || "7-speed Automatic"}</span>
             </div>
           </div>
 
