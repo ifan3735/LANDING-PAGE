@@ -129,9 +129,41 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
             </div>
           </div>
         </div>
+         {/* Documents Needed Section */}
+         <div className="mt-6">
+            <h3 className="text-lg font-bold mb-4">Document's Needed</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center">
+                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
+                <label>Bill of sale</label>
+              </li>
+              <li className="flex items-center">
+                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
+                <label>Buyer’s Guide</label>
+              </li>
+              <li className="flex items-center">
+                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
+                <label>Country of title issuance</label>
+              </li>
+              <li className="flex items-center">
+                <input type="checkbox" className="mr-2" disabled />
+                <label className="text-gray-400">Application of Texas</label>
+              </li>
+            </ul>
+
+            {/* Upload Button */}
+            <button className="bg-blue-100 text-blue-600 px-4 py-2 mt-4 rounded-full font-semibold transition-all hover:bg-blue-200">
+              Upload
+            </button>
+          </div>
+
+          {/* Sticky Buy Now Button */}
+          <button className="sticky bottom-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105">
+            Buy Now
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default CarDetailView;
