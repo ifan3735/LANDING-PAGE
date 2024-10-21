@@ -36,7 +36,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
     afterChange: () => setIsLoading(false) // Set loading to false after image changes
   };
 
-  // Ensure that `car` is defined before trying to access its properties
+  // Ensure that `car` and its `vehicle_specs` are defined before trying to access them
   if (!car || !car.vehicle_specs) {
     return <div>No vehicle data available</div>;
   }
@@ -99,38 +99,38 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         {/* Right Column - Car Info */}
         <div className="flex flex-col justify-between">
           {/* Display Vehicle Details */}
-          <h2 className="text-3xl font-black mb-2">{car.vehicle_specs.model}</h2>
-          <p className="text-blue-700 text-3xl font-bold mb-6">${car.rental_rate}</p>
+          <h2 className="text-3xl font-black mb-2">{car.vehicle_specs.model || 'Not available'}</h2>
+          <p className="text-blue-700 text-3xl font-bold mb-6">${car.rental_rate || 'N/A'}</p>
 
           <div className="space-y-4 text-lg">
             <div className="flex items-center">
               <span className="font-semibold">Class:</span>
-              <span className="ml-2">{car.vehicle_specs.class || "Not available"}</span>
+              <span className="ml-2">{car.vehicle_specs.class || 'Not available'}</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Layout:</span>
-              <span className="ml-2">{car.vehicle_specs.layout || "Not available"}</span>
+              <span className="ml-2">{car.vehicle_specs.layout || 'Not available'}</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Manufacturer:</span>
-              <span className="ml-2">{car.vehicle_specs.manufacturer || "Not available"}</span>
+              <span className="ml-2">{car.vehicle_specs.manufacturer || 'Not available'}</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Fuel Type:</span>
-              <span className="ml-2">{car.vehicle_specs.fuel_type || "Not available"}</span>
+              <span className="ml-2">{car.vehicle_specs.fuel_type || 'Not available'}</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Mileage:</span>
-              <span className="ml-2">{car.vehicle_specs.mileage || "Not available"} KM</span>
+              <span className="ml-2">{car.vehicle_specs.mileage || 'Not available'} KM</span>
             </div>
             <div className="flex items-center">
               <span className="font-semibold">Transmission:</span>
-              <span className="ml-2">{car.vehicle_specs.transmission || "Not available"}</span>
+              <span className="ml-2">{car.vehicle_specs.transmission || 'Not available'}</span>
             </div>
           </div>
-        </div>
-         {/* Documents Needed Section */}
-         <div className="mt-6">
+
+          {/* Documents Needed Section */}
+          <div className="mt-6">
             <h3 className="text-lg font-bold mb-4">Document's Needed</h3>
             <ul className="space-y-3">
               <li className="flex items-center">
@@ -163,7 +163,8 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
           </button>
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default CarDetailView;
