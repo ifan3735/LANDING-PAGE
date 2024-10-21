@@ -6,6 +6,8 @@ import 'slick-carousel/slick/slick-theme.css';
 import { useFetchAllVehiclesQuery } from '../features/API'; // Ensure the API hook is correctly imported
 
 const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }) => {
+  console.log("Vehicle data:", Vehicle); // Debugging to check if Vehicle is passed correctly
+
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Loading state for images
   const { data, isSuccess, isLoading: isFetching, error } = useFetchAllVehiclesQuery(); // Fetch the data from API
