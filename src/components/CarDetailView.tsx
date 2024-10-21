@@ -3,17 +3,11 @@ import { FaSync, FaMoon, FaSun } from 'react-icons/fa'; // Import icons for dark
 import Slider from 'react-slick'; // Import a carousel library like 'react-slick'
 import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
 import 'slick-carousel/slick/slick-theme.css';
-import { useFetchAllVehiclesQuery } from '../features/API'; // Ensure the API hook is correctly imported
 
-const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }) => {
-  console.log("Vehicle data:", Vehicle); // Debugging to check if Vehicle is passed correctly
-
-  const [showDropdown, setShowDropdown] = useState(false);
+const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [isLoading, setIsLoading] = useState(true); // Loading state for images
-  const { data, isSuccess, isLoading: isFetching, error } = useFetchAllVehiclesQuery(); // Fetch the data from API
   const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
 
-  const toggleExportDropdown = () => setShowDropdown(!showDropdown);
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   const settings = {
@@ -42,23 +36,13 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
     afterChange: () => setIsLoading(false) // Set loading to false after image changes
   };
 
-  // Handle loading state
-  if (isFetching) {
-    return <div>Loading...</div>; // Show a loading indicator while fetching data
-  }
-
-  // Handle error state
-  if (error) {
-    return <div>Error fetching vehicle data</div>; // Show an error message if fetching fails
-  }
-
-  // Ensure that `Vehicle` is defined before trying to access its properties
-  if (!Vehicle) {
+  // Ensure that `car` is defined before trying to access its properties
+  if (!car || !car.vehicle_specs) {
     return <div>No vehicle data available</div>;
   }
 
   // Gather the vehicle images (ensure that they exist)
-  const vehicleImages = [Vehicle.image, Vehicle.image2, Vehicle.image3, Vehicle.image4].filter(Boolean); // Filter out undefined or null images
+  const vehicleImages = [car.image, car.image2, car.image3, car.image4].filter(Boolean); // Filter out undefined or null images
 
   return (
     <div className={`${isDarkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'} max-w-7xl mx-auto p-10 rounded-xl shadow-lg transition-colors duration-500`}>
@@ -115,43 +99,35 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
         {/* Right Column - Car Info */}
         <div className="flex flex-col justify-between">
           {/* Display Vehicle Details */}
-          {isSuccess && data?.vehicles?.map((vehicle: any) => (
-            <div key={vehicle.id}>
-              <h2 className="text-3xl font-black mb-2">{vehicle.vehicle_specs.model}</h2>
-              <p className="text-blue-700 text-3xl font-bold mb-6">${vehicle.bidPrice}</p>
+          <h2 className="text-3xl font-black mb-2">{car.vehicle_specs.model}</h2>
+          <p className="text-blue-700 text-3xl font-bold mb-6">${car.rental_rate}</p>
 
-              <div className="space-y-4 text-lg">
-                <div className="flex items-center">
-                  <span className="font-semibold">Class:</span>
-                  <span className="ml-2">{vehicle.class || "Compact executive car D"}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold">Layout:</span>
-                  <span className="ml-2">{vehicle.layout || "Front-engine, rear-wheel drive (4 MATIC)"}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold">Predecessor:</span>
-                  <span className="ml-2">{vehicle.predecessor || "Mercedes Benz 190 E (W201)"}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold">Engine Type:</span>
-                  <span className="ml-2">{vehicle.engine || "2.0L Turbo Inline-4"}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold">Fuel Type:</span>
-                  <span className="ml-2">{vehicle.fuelType || "Petrol"}</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold">Mileage:</span>
-                  <span className="ml-2">{vehicle.mileage || "15,000 miles"}KMs</span>
-                </div>
-                <div className="flex items-center">
-                  <span className="font-semibold">Transmission:</span>
-                  <span className="ml-2">{vehicle.transmission || "7-speed Automatic"}</span>
-                </div>
-              </div>
+          <div className="space-y-4 text-lg">
+            <div className="flex items-center">
+              <span className="font-semibold">Class:</span>
+              <span className="ml-2">{car.vehicle_specs.class || "Not available"}</span>
             </div>
-          ))}
+            <div className="flex items-center">
+              <span className="font-semibold">Layout:</span>
+              <span className="ml-2">{car.vehicle_specs.layout || "Not available"}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-semibold">Manufacturer:</span>
+              <span className="ml-2">{car.vehicle_specs.manufacturer || "Not available"}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-semibold">Fuel Type:</span>
+              <span className="ml-2">{car.vehicle_specs.fuel_type || "Not available"}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-semibold">Mileage:</span>
+              <span className="ml-2">{car.vehicle_specs.mileage || "Not available"} KM</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-semibold">Transmission:</span>
+              <span className="ml-2">{car.vehicle_specs.transmission || "Not available"}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
