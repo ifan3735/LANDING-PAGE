@@ -40,13 +40,23 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
     afterChange: () => setIsLoading(false) // Set loading to false after image changes
   };
 
+  // Handle loading state
   if (isFetching) {
     return <div>Loading...</div>; // Show a loading indicator while fetching data
   }
 
+  // Handle error state
   if (error) {
     return <div>Error fetching vehicle data</div>; // Show an error message if fetching fails
   }
+
+  // Ensure that `Vehicle` is defined before trying to access its properties
+  if (!Vehicle) {
+    return <div>No vehicle data available</div>;
+  }
+
+  // Gather the vehicle images (ensure that they exist)
+  const vehicleImages = [Vehicle.image, Vehicle.image2, Vehicle.image3, Vehicle.image4].filter(Boolean); // Filter out undefined or null images
 
   return (
     <div className={`${isDarkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'} max-w-7xl mx-auto p-10 rounded-xl shadow-lg transition-colors duration-500`}>
@@ -77,9 +87,9 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
           </button>
 
           {/* Car Image Carousel */}
-          <Slider {...settings}>
-            {[Vehicle.image, Vehicle.image2, Vehicle.image3, Vehicle.image4].map((image: string, index: number) => (
-              image ? ( // Only render images that are available (not null or undefined)
+          {vehicleImages.length > 0 ? (
+            <Slider {...settings}>
+              {vehicleImages.map((image: string, index: number) => (
                 <div key={index} className="relative">
                   {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-2xl">
@@ -93,9 +103,11 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
                     className="w-full h-96 object-cover rounded-2xl shadow-lg"
                   />
                 </div>
-              ) : null // Skip rendering if image is missing
-            ))}
-          </Slider>
+              ))}
+            </Slider>
+          ) : (
+            <div>No images available</div>
+          )}
         </div>
 
         {/* Right Column - Car Info */}
