@@ -84,11 +84,13 @@ export const apiSlice = createApi({
 });
 
 export const { useLoginUserMutation, useRegisterUserMutation, useFetchUserDetailsQuery,
-    useFetchAllVehiclesQuery, useFetchVehicleByIdQuery
+    useFetchAllVehiclesQuery, useFetchVehicleByIdQuery, useFetchAllPaymentsQuery, useFetchPaymentByIdQuery
  } = apiSlice as { 
     useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; 
     useRegisterUserMutation: () => ReturnType<typeof apiSlice.endpoints.registerUser.useMutation>;
     useFetchUserDetailsQuery: () => ReturnType<typeof apiSlice.endpoints.fetchUserDetails.useQuery>;
     useFetchAllVehiclesQuery: () => ReturnType<typeof apiSlice.endpoints.fetchAllVehicles.useQuery>;
     useFetchVehicleByIdQuery: () => ReturnType<typeof apiSlice.endpoints.fetchVehicleById.useQuery>;
+    useFetchAllPaymentsQuery: () => ReturnType<typeof apiSlice.endpoints.fetchAllPayments.useQuery>;
+    useFetchPaymentByIdQuery: () => ReturnType<typeof apiSlice.endpoints.fetchPaymentById.useQuery>;
 };
