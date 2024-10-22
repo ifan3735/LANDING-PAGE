@@ -91,8 +91,8 @@ const Transactions = () => {
   const { data, error, isLoading } = useFetchAllPaymentsQuery();
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
-    carType: "",
-    status: "",
+    payment_method: "",
+    payment_status: "",
   });
 
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
@@ -111,7 +111,7 @@ const Transactions = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const filteredTransactions = isSuccess && data
+  const filteredTransactions = isLoading && data
     ? data.filter((payments) => {
         const matchesSearch = payments.payment_method
           .toLowerCase()
