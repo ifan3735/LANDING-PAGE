@@ -76,6 +76,9 @@ export const apiSlice = createApi({
         fetchAllPayments: builder.query<Payment[], void>({
             query: () => '/payments',
         }),
+        fetchPaymentById: builder.query<Payment, void>({
+            query: (id) => `/payments/${id}`,
+        }),
     }),
  
 });
