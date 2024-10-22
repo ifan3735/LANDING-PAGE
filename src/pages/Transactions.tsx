@@ -193,28 +193,28 @@ const Transactions = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm">
-            {filteredTransactions.map((transaction) => (
+            {filteredTransactions.map((Payments) => (
               <tr
-                key={transaction.id}
+                key={Payments.id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
                 <td className="py-3 px-6"><span className="text-gray-400">{transaction.id}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   <img
-                    src={transaction.profileImage}
-                    alt={transaction.owner}
+                    src={Payments.profileImage}
+                    alt={Payments.owner}
                     className="w-10 h-10 rounded-full mr-3"
                   />
-                  {transaction.owner}
+                  {Payments.owner}
                 </td>
                 <td className="py-3 px-6"><span className="text-gray-400">{transaction.creationDate}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   <img
-                    src={transaction.carImage}
-                    alt={transaction.carType}
+                    src={Payments.carImage}
+                    alt={Payments.carType}
                     className="w-8 h-8 mr-2"
                   />
-                  {transaction.carType}
+                  {Payments.carType}
                 </td>
                 <td className="py-3 px-6"><span className="text-gray-400">{transaction.date}</span></td>
                 <td className="py-3 px-6">
@@ -222,12 +222,12 @@ const Transactions = () => {
                 <td className="py-3 px-6">
                   <span
                     className={`text-sm font-semibold ${
-                      transaction.status === "Paid"
+                      Payments.status === "Paid"
                         ? "text-green-500 bg-green-100 rounded-xl py-1 px-3"
                         : "text-yellow-500 bg-yellow-100 rounded-xl py-1 px-3"
                     }`}
                   >
-                    {transaction.status}
+                    {Payments.status}
                   </span>
                 </td>
               </tr>
