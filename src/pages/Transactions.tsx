@@ -147,8 +147,8 @@ const Transactions = () => {
     const exportAsPDF = () => {
       const doc = new jsPDF();
       let content = "Name, Style, Type, Color, Price\n";
-      filteredCars.forEach((Vehicle, index) => {
-        content += `${index + 1}. ${Vehicle.vehicle_specs.model}, ${Vehicle.vehicle_specs.manufacturer}, ${Vehicle.fuel_type}, ${Vehicle.color}, ${Vehicle.rental_rate}\n`;
+      filteredTransactions.forEach((Payments, index) => {
+        content += `${index + 1}. ${Payments.payment_id}, ${Payments.booking_id}, ${Payments.amount}, ${Payments.payment_status}, ${Payments.payment_method}, ${Payments.payment_date}\n`;
       });
       doc.text(content, 10, 10);
       doc.save("cars_export.pdf");
