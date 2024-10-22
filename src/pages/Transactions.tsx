@@ -116,11 +116,13 @@ const Transactions = () => {
         const matchesSearch = payments.payment_method
           .toLowerCase()
           .includes(searchQuery.toLowerCase());
-        const matchesPaymentMethod = payments.payment_method
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase());
-          
-
+        const matchesPaymentMethod = selectedFilters.payment_method
+          ? payments.payment_method.toLowerCase() === selectedFilters.payment_method.toLowerCase()
+          : true;
+        const matchesPaymentStatus = selectedFilters.payment_status
+          ? payments.payment_status.toLowerCase() === selectedFilters.payment_status.toLowerCase()
+          : true;
+        
 })
     : [];
 
