@@ -88,6 +88,7 @@ const Transactions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
+  const { data, error, isLoading } = useFetchAllPaymentsQuery();
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     carType: "",
@@ -110,14 +111,14 @@ const Transactions = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const filteredTransactions = transactions.filter((transaction) => {
-    return (
-      (selectedFilters.carType
-        ? transaction.carType === selectedFilters.carType
-        : true) &&
-      (selectedFilters.status ? transaction.status === selectedFilters.status : true)
-    );
-  });
+  const filteredTransactions = isSuccess && data
+    ? data.filter((payments) => {
+        const matchesPaymentMethod = payments.payment_method
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+          
+})
+    : [];
 
   return (
     <div
