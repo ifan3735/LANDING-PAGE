@@ -113,10 +113,14 @@ const Transactions = () => {
 
   const filteredTransactions = isSuccess && data
     ? data.filter((payments) => {
+        const matchesSearch = payments.payment_method
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
         const matchesPaymentMethod = payments.payment_method
           .toLowerCase()
           .includes(searchQuery.toLowerCase());
           
+
 })
     : [];
 
