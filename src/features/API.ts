@@ -38,7 +38,7 @@ export interface Vehicle {
 }
 
 export interface Payment {
-    payment_id: number;
+    id: number;
     booking_id: number;
     amount: number;
     payment_status: 'paid' | 'pending';
