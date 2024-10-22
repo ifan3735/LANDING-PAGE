@@ -143,6 +143,17 @@ const Transactions = () => {
       URL.revokeObjectURL(url);
     };
 
+    const exportAsPDF = () => {
+      const doc = new jsPDF();
+      let content = "Name, Style, Type, Color, Price\n";
+      filteredCars.forEach((Vehicle, index) => {
+        content += `${index + 1}. ${Vehicle.vehicle_specs.model}, ${Vehicle.vehicle_specs.manufacturer}, ${Vehicle.fuel_type}, ${Vehicle.color}, ${Vehicle.rental_rate}\n`;
+      });
+      doc.text(content, 10, 10);
+      doc.save("cars_export.pdf");
+    };
+  
+
   return (
     <div
       className={`transition-all duration-500 p-6 ${
