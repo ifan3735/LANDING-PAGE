@@ -122,6 +122,7 @@ const Transactions = () => {
         const matchesPaymentStatus = selectedFilters.payment_status
           ? payments.payment_status.toLowerCase() === selectedFilters.payment_status.toLowerCase()
           : true;
+          return matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
         
 })
     : [];
