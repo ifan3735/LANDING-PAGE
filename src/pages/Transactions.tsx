@@ -4,86 +4,6 @@ import { FaBars, FaChevronDown, FaFileExport } from "react-icons/fa";
 import { useFetchAllPaymentsQuery } from "../features/API";
 import jsPDF from "jspdf";
 
-// Sample transaction data with profile images and car images (You can replace this with your actual data fetching logic)
-const transactions = [
-  {
-    id: '#1588955',
-    owner: 'Albert Hussain',
-    profileImage: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg', // Replace with the actual path to profile image
-    carType: 'Hyundai',
-    carImage: 'https://i.pinimg.com/564x/b4/98/19/b49819361c4458ad4256ca04a6aab850.jpg', // Replace with the actual path to car image
-    creationDate: '01 July, 2023',
-    date: '03 July, 2023',
-    totalMoney: '$287.12',
-    status: 'Paid',
-  },
-  {
-    id: '#1588955',
-    owner: 'Smith Hasan',
-    profileImage: 'https://i.pinimg.com/236x/ad/15/5b/ad155b4cfd5b6d220c3e5b51b349a37a.jpg',
-    carType: 'Hyundai',
-    carImage: 'https://i.pinimg.com/564x/b4/98/19/b49819361c4458ad4256ca04a6aab850.jpg',
-    creationDate: '01 July, 2023',
-    date: '03 July, 2023',
-    totalMoney: '$120.14',
-    status: 'Pending',
-  },
-  {
-    id: '#1588955',
-    owner: 'Jackson Kever',
-    profileImage: 'https://i.pinimg.com/474x/92/2c/7b/922c7bf1789889bdd77c9244da54c1ea.jpg',
-    carType: 'Porsche',
-    carImage: 'https://i.pinimg.com/564x/b4/98/19/b49819361c4458ad4256ca04a6aab850.jpg',
-    creationDate: '01 July, 2023',
-    date: '03 July, 2023',
-    totalMoney: '$751.32',
-    status: 'Paid',
-  },
-  {
-    id: '#1588955',
-    owner: 'Alex Jahan',
-    profileImage: 'https://i.pinimg.com/236x/a7/70/93/a77093488d790ab3a2b1a86c37af19a7.jpg',
-    carType: 'Bentley',
-    carImage: 'https://i.pinimg.com/564x/b4/98/19/b49819361c4458ad4256ca04a6aab850.jpg',
-    creationDate: '01 July, 2023',
-    date: '03 July, 2023',
-    totalMoney: '$214.32',
-    status: 'Pending',
-  },
-  {
-    id: '#1588955',
-    owner: 'Jonson Lee',
-    profileImage: 'https://i.pinimg.com/236x/55/63/31/556331581172c567af13dc5787455d74.jpg',
-    carType: 'Mercedes',
-    carImage: 'https://i.pinimg.com/564x/b4/98/19/b49819361c4458ad4256ca04a6aab850.jpg',
-    creationDate: '01 July, 2023',
-    date: '03 July, 2023',
-    totalMoney: '$142.00',
-    status: 'Paid',
-  },
-  {
-    id: '#1588955',
-    owner: 'Robert Luicee',
-    profileImage: 'https://i.pinimg.com/564x/5d/81/ed/5d81ed175d9b3d943b7f259bb0eb8b79.jpg',
-    carType: 'Panamera',
-    carImage: 'https://i.pinimg.com/564x/b4/98/19/b49819361c4458ad4256ca04a6aab850.jpg',
-    creationDate: '01 July, 2023',
-    date: '03 July, 2023',
-    totalMoney: '$71.10',
-    status: 'Pending',
-  },
-  {
-    id: '#1588955',
-    owner: 'Robert Luicee',
-    profileImage: 'https://i.pinimg.com/236x/ca/4d/c3/ca4dc36ae9c8795248059a8ac9dbc52c.jpg',
-    carType: 'Bentley',
-    carImage: 'https://i.pinimg.com/564x/b4/98/19/b49819361c4458ad4256ca04a6aab850.jpg',
-    creationDate: '01 July, 2023',
-    date: '03 July, 2023',
-    totalMoney: '$211.22',
-    status: 'Paid',
-  },
-];
 
 const Transactions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -227,8 +147,8 @@ const Transactions = () => {
                   Car Type
                 </label>
                 <select
-                  name="carType"
-                  value={selectedFilters.carType}
+                  name="payment_method"
+                  value={selectedFilters.payment_method}
                   onChange={handleFilterChange}
                   className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
                 >
@@ -243,11 +163,11 @@ const Transactions = () => {
 
               <div className="mt-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Status
+                payment_status
                 </label>
                 <select
                   name="status"
-                  value={selectedFilters.status}
+                  value={selectedFilters.payment_status}
                   onChange={handleFilterChange}
                   className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
                 >
