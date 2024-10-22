@@ -37,6 +37,17 @@ export interface Vehicle {
     rental_rate: number;
 }
 
+export interface Payment {
+    payment_id: number;
+    booking_id: number;
+    amount: number;
+    payment_status: 'paid' | 'pending';
+    payment_date: string;
+    payment_method: 'cash' | 'card';
+    created_at: string;
+    updated_at: string;
+}
+
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ 
