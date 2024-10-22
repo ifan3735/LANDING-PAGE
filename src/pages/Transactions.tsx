@@ -130,8 +130,8 @@ const Transactions = () => {
 
     const exportAsCSV = () => {
       const headers = "Name,Style,Type,Color,Price\n";
-      const rows = filteredCars
-        .map((Vehicle) => `${Vehicle.vehicle_specs.model},${Vehicle.vehicle_specs.manufacturer},${Vehicle.fuel_type},${Vehicle.color},${Vehicle.rental_rate}`)
+      const rows = filteredTransactions
+        .map((Payments) => `${Payments.payment_id}, ${Payments.booking_id}, ${Payments.amount}, ${Payments.payment_status}, ${Payments.payment_method}, ${Payments.payment_date}`)
         .join("\n");
   
       const csvContent = headers + rows;
