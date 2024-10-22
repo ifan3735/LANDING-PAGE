@@ -153,11 +153,8 @@ const Transactions = () => {
                   className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
                 >
                   <option value="">All</option>
-                  <option value="Hyundai">Hyundai</option>
-                  <option value="Porsche">Porsche</option>
-                  <option value="Bentley">Bentley</option>
-                  <option value="Mercedes">Mercedes</option>
-                  <option value="Panamera">Panamera</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Card">Card</option>
                 </select>
               </div>
 
