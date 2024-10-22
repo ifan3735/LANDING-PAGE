@@ -198,7 +198,7 @@ const Transactions = () => {
                 key={Payments.id}
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
-                <td className="py-3 px-6"><span className="text-gray-400">{transaction.id}</span></td>
+                <td className="py-3 px-6"><span className="text-gray-400">{Payments.id}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   <img
                     src={Payments.profileImage}
@@ -207,7 +207,7 @@ const Transactions = () => {
                   />
                   {Payments.owner}
                 </td>
-                <td className="py-3 px-6"><span className="text-gray-400">{transaction.creationDate}</span></td>
+                <td className="py-3 px-6"><span className="text-gray-400">{Payments.creationDate}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   <img
                     src={Payments.carImage}
@@ -216,9 +216,9 @@ const Transactions = () => {
                   />
                   {Payments.carType}
                 </td>
-                <td className="py-3 px-6"><span className="text-gray-400">{transaction.date}</span></td>
+                <td className="py-3 px-6"><span className="text-gray-400">{Payments.date}</span></td>
                 <td className="py-3 px-6">
-                  <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">{transaction.totalMoney}</span></td>
+                  <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">{Payments.totalMoney}</span></td>
                 <td className="py-3 px-6">
                   <span
                     className={`text-sm font-semibold ${
