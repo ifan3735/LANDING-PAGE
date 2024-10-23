@@ -9,7 +9,7 @@ const Transactions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, error, isLoading } = useFetchAllPaymentsQuery();
+  const { data, isLoading } = useFetchAllPaymentsQuery();
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     payment_method: "",
