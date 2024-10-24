@@ -32,21 +32,20 @@ const Transactions = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const filteredTransactions = isLoading && data
-    ? data.filter((payments) => {
-        const matchesSearch = payments.payment_method
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase());
-        const matchesPaymentMethod = selectedFilters.payment_method
-          ? payments.payment_method.toLowerCase() === selectedFilters.payment_method.toLowerCase()
-          : true;
-        const matchesPaymentStatus = selectedFilters.payment_status
-          ? payments.payment_status.toLowerCase() === selectedFilters.payment_status.toLowerCase()
-          : true;
-          return matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
-        
-})
-    : [];
+  const filteredTransactions = !isLoading && data
+  ? data.filter((payments) => {
+      const matchesSearch = payments.payment_method
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      const matchesPaymentMethod = selectedFilters.payment_method
+        ? payments.payment_method.toLowerCase() === selectedFilters.payment_method.toLowerCase()
+        : true;
+      const matchesPaymentStatus = selectedFilters.payment_status
+        ? payments.payment_status.toLowerCase() === selectedFilters.payment_status.toLowerCase()
+        : true;
+      return matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
+    })
+  : [];
 
     const exportAsCSV = () => {
       const headers = "Name,Style,Type,Color,Price\n";
