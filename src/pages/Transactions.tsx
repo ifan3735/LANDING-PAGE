@@ -226,7 +226,7 @@ const Transactions = () => {
                         : "text-yellow-500 bg-yellow-100 rounded-xl py-1 px-3"
                     }`}
                   >
-                    {Payments.status}
+                    {Payments.payment_status}
                   </span>
                 </td>
               </tr>
