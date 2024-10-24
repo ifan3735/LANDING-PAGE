@@ -199,12 +199,7 @@ const Transactions = () => {
               >
                 <td className="py-3 px-6"><span className="text-gray-400">{Payments.id}</span></td>
                 <td className="py-3 px-6 flex items-center">
-                  <img
-                    src={Payments.profileImage}
-                    alt={Payments.owner}
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
-                  {Payments.owner}
+                  {Payments.booking_id}
                 </td>
                 <td className="py-3 px-6"><span className="text-gray-400">{Payments.created_at}</span></td>
                 <td className="py-3 px-6 flex items-center">
