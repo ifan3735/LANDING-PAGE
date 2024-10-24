@@ -185,7 +185,7 @@ const Transactions = () => {
               <th className="py-3 px-6 text-left">No.</th>
               <th className="py-3 px-6 text-left">Owner Name</th>
               <th className="py-3 px-6 text-left">Creation Date</th>
-              <th className="py-3 px-6 text-left">Car Type</th>
+              <th className="py-3 px-6 text-left">Method</th>
               <th className="py-3 px-6 text-left">Date</th>
               <th className="py-3 px-6 text-left">Total Money($)</th>
               <th className="py-3 px-6 text-left">Status</th>
