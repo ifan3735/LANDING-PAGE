@@ -206,7 +206,7 @@ const Transactions = () => {
                   />
                   {Payments.owner}
                 </td>
-                <td className="py-3 px-6"><span className="text-gray-400">{Payments.creationDate}</span></td>
+                <td className="py-3 px-6"><span className="text-gray-400">{Payments.created_at}</span></td>
                 <td className="py-3 px-6 flex items-center">
                   {Payments.payment_method}
                 </td>
