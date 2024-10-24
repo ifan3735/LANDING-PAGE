@@ -208,12 +208,7 @@ const Transactions = () => {
                 </td>
                 <td className="py-3 px-6"><span className="text-gray-400">{Payments.creationDate}</span></td>
                 <td className="py-3 px-6 flex items-center">
-                  <img
-                    src={Payments.carImage}
-                    alt={Payments.carType}
-                    className="w-8 h-8 mr-2"
-                  />
-                  {Payments.carType}
+                  {Payments.payment_method}
                 </td>
                 <td className="py-3 px-6"><span className="text-gray-400">{Payments.date}</span></td>
                 <td className="py-3 px-6">
