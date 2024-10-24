@@ -217,7 +217,7 @@ const Transactions = () => {
                 </td>
                 <td className="py-3 px-6"><span className="text-gray-400">{Payments.date}</span></td>
                 <td className="py-3 px-6">
-                  <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">{Payments.amount}</span></td>
+                  <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">${Payments.amount}</span></td>
                 <td className="py-3 px-6">
                   <span
                     className={`text-sm font-semibold ${
