@@ -183,7 +183,7 @@ const Transactions = () => {
           <thead>
             <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
               <th className="py-3 px-6 text-left">No.</th>
-              <th className="py-3 px-6 text-left">Owner Name</th>
+              <th className="py-3 px-6 text-left">booking_id</th>
               <th className="py-3 px-6 text-left">Creation Date</th>
               <th className="py-3 px-6 text-left">Method</th>
               <th className="py-3 px-6 text-left">Date</th>
