@@ -4,7 +4,6 @@ import { FaBars, FaChevronDown, FaFileExport } from "react-icons/fa";
 import { useFetchAllPaymentsQuery } from "../features/API";
 import jsPDF from "jspdf";
 
-
 const Transactions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
@@ -18,7 +17,8 @@ const Transactions = () => {
 
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
 
-  const handleSearch = (e: { target: { value: SetStateAction<string>; }; }) => setSearchQuery(e.target.value);
+  const handleSearch = (e: { target: { value: SetStateAction<string> } }) =>
+    setSearchQuery(e.target.value);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -32,47 +32,52 @@ const Transactions = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const filteredTransactions = !isLoading && data
-  ? data.filter((payments) => {
-      const matchesSearch = payments.payment_method
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase());
-      const matchesPaymentMethod = selectedFilters.payment_method
-        ? payments.payment_method.toLowerCase() === selectedFilters.payment_method.toLowerCase()
-        : true;
-      const matchesPaymentStatus = selectedFilters.payment_status
-        ? payments.payment_status.toLowerCase() === selectedFilters.payment_status.toLowerCase()
-        : true;
-      return matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
-    })
-  : [];
+  const filteredTransactions =
+    !isLoading && data
+      ? data.filter((payments) => {
+          const matchesSearch = payments.payment_method
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+          const matchesPaymentMethod = selectedFilters.payment_method
+            ? payments.payment_method.toLowerCase() ===
+              selectedFilters.payment_method.toLowerCase()
+            : true;
+          const matchesPaymentStatus = selectedFilters.payment_status
+            ? payments.payment_status.toLowerCase() ===
+              selectedFilters.payment_status.toLowerCase()
+            : true;
+          return matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
+        })
+      : [];
 
-    const exportAsCSV = () => {
-      const headers = "Name,Style,Type,Color,Price\n";
-      const rows = filteredTransactions
-        .map((Payments) => `${Payments.payment_id}, ${Payments.booking_id}, ${Payments.amount}, ${Payments.payment_status}, ${Payments.payment_method}, ${Payments.payment_date}`)
-        .join("\n");
-  
-      const csvContent = headers + rows;
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-      const link = document.createElement("a");
-      const url = URL.createObjectURL(blob);
-      link.href = url;
-      link.download = "cars_export.csv";
-      link.click();
-      URL.revokeObjectURL(url);
-    };
+  const exportAsCSV = () => {
+    const headers = "Name,Style,Type,Color,Price\n";
+    const rows = filteredTransactions
+      .map(
+        (Payments) =>
+          `${Payments.payment_id}, ${Payments.booking_id}, ${Payments.amount}, ${Payments.payment_status}, ${Payments.payment_method}, ${Payments.payment_date}`
+      )
+      .join("\n");
 
-    const exportAsPDF = () => {
-      const doc = new jsPDF();
-      let content = "Name, Style, Type, Color, Price\n";
-      filteredTransactions.forEach((Payments, index) => {
-        content += `${index + 1}. ${Payments.payment_id}, ${Payments.booking_id}, ${Payments.amount}, ${Payments.payment_status}, ${Payments.payment_method}, ${Payments.payment_date}\n`;
-      });
-      doc.text(content, 10, 10);
-      doc.save("cars_export.pdf");
-    };
-  
+    const csvContent = headers + rows;
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = "cars_export.csv";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const exportAsPDF = () => {
+    const doc = new jsPDF();
+    let content = "Name, Style, Type, Color, Price\n";
+    filteredTransactions.forEach((Payments, index) => {
+      content += `${index + 1}. ${Payments.payment_id}, ${Payments.booking_id}, ${Payments.amount}, ${Payments.payment_status}, ${Payments.payment_method}, ${Payments.payment_date}\n`;
+    });
+    doc.text(content, 10, 10);
+    doc.save("cars_export.pdf");
+  };
 
   return (
     <div
@@ -87,7 +92,6 @@ const Transactions = () => {
         theme={theme}
       />
 
-      {/* New Layer Below Top Bar */}
       <div className="flex justify-between items-center my-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">Transactions</h2>
@@ -96,7 +100,6 @@ const Transactions = () => {
           </p>
         </div>
 
-        {/* Export Button with Dropdown */}
         <div className="relative">
           <button
             onClick={toggleExportDropdown}
@@ -106,7 +109,6 @@ const Transactions = () => {
             <FaChevronDown className="ml-2" />
           </button>
 
-          {/* Export Dropdown */}
           {showDropdown && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
               <ul>
@@ -128,8 +130,7 @@ const Transactions = () => {
         </div>
       </div>
 
-      {/* Filter Section */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 relative">
         <h2 className="text-xl font-semibold">Transaction List</h2>
         <div className="flex items-center">
           <button
@@ -140,10 +141,10 @@ const Transactions = () => {
             Filter by
           </button>
           {showFilterDropdown && (
-            <div className="absolute right-0 top-0 ml-4 p-4 bg-white border rounded-lg shadow-lg">
+            <div className="absolute right-0 top-12 mt-2 bg-white border rounded-lg shadow-lg p-4 w-64 z-10">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                payment_method
+                  Payment Method
                 </label>
                 <select
                   name="payment_method"
@@ -159,7 +160,7 @@ const Transactions = () => {
 
               <div className="mt-2">
                 <label className="block text-sm font-medium text-gray-700">
-                payment_status
+                  Payment Status
                 </label>
                 <select
                   name="payment_status"
@@ -177,44 +178,35 @@ const Transactions = () => {
         </div>
       </div>
 
-      {/* Transaction Table */}
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow-lg">
           <thead>
             <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
               <th className="py-3 px-6 text-left">No.</th>
-              <th className="py-3 px-6 text-left">booking_id</th>
+              <th className="py-3 px-6 text-left">Booking ID</th>
               <th className="py-3 px-6 text-left">Creation Date</th>
               <th className="py-3 px-6 text-left">Method</th>
               <th className="py-3 px-6 text-left">Date</th>
-              <th className="py-3 px-6 text-left">Total Money($)</th>
+              <th className="py-3 px-6 text-left">Total Money ($)</th>
               <th className="py-3 px-6 text-left">Status</th>
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm">
-            {filteredTransactions.map((Payments) => (
-              <tr
-                key={Payments.id}
-                className="border-b border-gray-200 hover:bg-gray-100"
-              >
-                <td className="py-3 px-6"><span className="text-gray-400">{Payments.id}</span></td>
-                <td className="py-3 px-6 flex items-center">
-                  {Payments.booking_id}
-                </td>
-                <td className="py-3 px-6"><span className="text-gray-400">{Payments.created_at}</span></td>
-                <td className="py-3 px-6 flex items-center">
-                  {Payments.payment_method}
-                </td>
-                <td className="py-3 px-6"><span className="text-gray-400">{Payments.payment_date}</span></td>
-                <td className="py-3 px-6">
-                  <span className="text-blue-600 bg-blue-100 rounded-xl py-1 px-3">{Payments.amount}</span></td>
+            {filteredTransactions.map((Payments, index) => (
+              <tr key={Payments.id} className="border-b border-gray-200 hover:bg-gray-100">
+                <td className="py-3 px-6">{index + 1}</td>
+                <td className="py-3 px-6">{Payments.booking_id}</td>
+                <td className="py-3 px-6">{Payments.created_at}</td>
+                <td className="py-3 px-6">{Payments.payment_method}</td>
+                <td className="py-3 px-6">{Payments.payment_date}</td>
+                <td className="py-3 px-6">{Payments.amount}</td>
                 <td className="py-3 px-6">
                   <span
                     className={`text-sm font-semibold ${
-                      Payments.status === "Paid"
-                        ? "text-green-500 bg-green-100 rounded-xl py-1 px-3"
-                        : "text-yellow-500 bg-yellow-100 rounded-xl py-1 px-3"
-                    }`}
+                      Payments.payment_status === "Paid"
+                        ? "text-green-500 bg-green-100"
+                        : "text-yellow-500 bg-yellow-100"
+                    } rounded-xl py-1 px-3`}
                   >
                     {Payments.payment_status}
                   </span>
