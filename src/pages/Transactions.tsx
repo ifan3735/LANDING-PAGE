@@ -186,6 +186,12 @@ const Transactions = () => {
         </div>
       </div>
 
+      {filteredTransactions.length === 0 ? (
+        <p className="text-center text-gray-500 mt-8">
+          You have not made any transactions yet.
+        </p>
+      ) : (
+
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white rounded-lg shadow-lg">
           <thead>
@@ -224,6 +230,7 @@ const Transactions = () => {
           </tbody>
         </table>
       </div>
+      )}
     </div>
   );
 };
