@@ -6,6 +6,7 @@ import UserInfoCard from '../components/UserInfoCard';
 import { FaBars, FaChevronDown, FaFileExport } from 'react-icons/fa';
 import { jsPDF } from "jspdf";
 import { useFetchAllVehiclesQuery } from '../features/API';
+import Loader from '../components/Loader';
 
 const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -38,6 +39,8 @@ const Dashboard = () => {
     // Reset to the first page when filters are changed
     setCurrentPage(1);
   };
+
+  if (isLoading) return <Loader />;
 
   // Filtering logic: filter cars based on search and selected filters
   const filteredCars = isSuccess && data
