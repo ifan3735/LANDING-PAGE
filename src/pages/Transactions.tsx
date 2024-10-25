@@ -16,6 +16,9 @@ const Transactions = () => {
     payment_status: "",
   });
 
+  const userId = localStorage.getItem("userId");
+
+
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
 
   const handleSearch = (e: { target: { value: SetStateAction<string> } }) =>
