@@ -162,7 +162,7 @@ const Transactions = () => {
                 payment_status
                 </label>
                 <select
-                  name="status"
+                  name="payment_status"
                   value={selectedFilters.payment_status}
                   onChange={handleFilterChange}
                   className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
