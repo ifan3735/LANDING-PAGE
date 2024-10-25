@@ -143,7 +143,7 @@ const Transactions = () => {
             <div className="absolute right-0 top-0 ml-4 p-4 bg-white border rounded-lg shadow-lg">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Car Type
+                payment_method
                 </label>
                 <select
                   name="payment_method"
