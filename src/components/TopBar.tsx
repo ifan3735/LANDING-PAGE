@@ -102,7 +102,13 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
     }
   };
 
-  if (isLoading) return <div>Loading user details...</div>;
+  const Loader = () => (
+    <div className="flex justify-center items-center h-16">
+      <div className="loader"></div>
+    </div>
+  );
+
+  if (isLoading) return <Loader />;
   if (error) {
     console.error('Error fetching user details:', error);
     return <div>Error loading user details</div>;
