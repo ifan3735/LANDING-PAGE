@@ -48,6 +48,16 @@ export interface Payment {
     updated_at: string;
 }
 
+export interface booking {
+    id: number;
+    user_id: number;
+    vehicle_id: number;
+    location_id: number;
+    booking_date: string;
+    return_date: string;
+    total_amount: string;
+}
+
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ 
@@ -110,7 +120,7 @@ export const apiSlice = createApi({
 
 export const { useLoginUserMutation, useRegisterUserMutation, useFetchUserDetailsQuery,
     useFetchAllVehiclesQuery, useFetchVehicleByIdQuery, useFetchAllPaymentsQuery, useFetchPaymentByIdQuery,
-    useCheckoutMutation 
+    useCheckoutMutation , useBookVehicleMutation
  } = apiSlice as { 
     useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; 
     useRegisterUserMutation: () => ReturnType<typeof apiSlice.endpoints.registerUser.useMutation>;
@@ -120,4 +130,5 @@ export const { useLoginUserMutation, useRegisterUserMutation, useFetchUserDetail
     useFetchAllPaymentsQuery: () => ReturnType<typeof apiSlice.endpoints.fetchAllPayments.useQuery>;
     useFetchPaymentByIdQuery: () => ReturnType<typeof apiSlice.endpoints.fetchPaymentById.useQuery>;
     useCheckoutMutation: () => ReturnType<typeof apiSlice.endpoints.checkout.useMutation>;
+    useBookVehicleMutation: () => ReturnType<typeof apiSlice.endpoints.bookVehicle.useMutation>;
 };
