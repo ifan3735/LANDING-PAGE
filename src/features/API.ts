@@ -90,6 +90,13 @@ export const apiSlice = createApi({
         fetchPaymentById: builder.query<Payment, void>({
             query: (id) => `/payments/${id}`,
         }),
+        checkout: builder.mutation({
+            query: (chekout) => ({
+                url: '/create-checkout-session',
+                method: 'POST',
+                body: chekout,
+            }),
+        }),
     }),
  
 });
