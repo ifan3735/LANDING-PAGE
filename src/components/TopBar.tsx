@@ -104,7 +104,11 @@ const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: T
 
   const Loader = () => (
     <div className="flex justify-center items-center h-16">
-      <div className="loader"></div>
+      <div className="loader">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
   );
 
