@@ -5,7 +5,7 @@ import TopBar from "../components/TopBar";
 import { FaMapMarkerAlt, FaGasPump, FaTachometerAlt, FaChevronDown, FaBars, FaFileExport, FaRoad, FaCar } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useFetchAllVehiclesQuery, useCheckoutMutation } from "../features/API";
+import { useFetchAllVehiclesQuery, useCheckoutMutation, useBookVehicleMutation } from "../features/API";
 import jsPDF from "jspdf";
 
 // CarCard Component for List and Detail Views
@@ -69,7 +69,8 @@ const CarDetailView = ({ Vehicle, onBack }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [error, setError] = useState('');
-  const [createCheckoutSession] = useCheckoutMutation(); // use checkout mutation
+  const [createCheckoutSession] = useCheckoutMutation();
+  const [bookVehicle] = useBookVehicleMutation();  // use checkout mutation
   const rentalRate = Vehicle.rental_rate;
   const unavailableDates = [
     new Date(2024, 8, 22),
@@ -104,8 +105,8 @@ const CarDetailView = ({ Vehicle, onBack }) => {
       user_id: 5, // Replace with the actual user ID
       vehicle_id: Vehicle.id,
       location_id: 5, // Replace with the actual location ID
-      booking_date: startDate,
-      return_date: endDate,
+      booking_date: startDate ? startDate.toISOString() : '',
+      return_date: endDate ? endDate.toISOString() : '',
       total_amount: totalAmount.toFixed(2),
     };
 
