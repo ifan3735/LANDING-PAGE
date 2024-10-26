@@ -100,7 +100,8 @@ const CarDetailView = ({ Vehicle, onBack }) => {
   const totalCost = calculateTotal();
 
   const handleRentNow = async () => {
-    const userId = localStorage.getItem('userId'); // Ensure you use the correct key
+    const userId = localStorage.getItem('userId');   // Ensure you use the correct key
+    console.log(userId);
     const totalAmount = totalCost;
   
     const bookingPayload = {
