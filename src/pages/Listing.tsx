@@ -68,6 +68,7 @@ const CarDetailView = ({ Vehicle, onBack }: { Vehicle: any; onBack: () => void }
   const [showDropdown, setShowDropdown] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+  const [createCheckoutSession] = useCheckoutMutation();
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
