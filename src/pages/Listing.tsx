@@ -286,9 +286,12 @@ const CarDetailView = ({ Vehicle, onBack }) => {
         {/* Conditionally Render "Rent Now" Button */}
         {startDate && endDate && (
           <div className="mt-6">
-            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full">
-              Rent Now
-            </button>
+            <button
+                onClick={handleRentNow}
+                className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full"
+              >
+                Rent Now
+              </button>
           </div>
         )}
       </div>
