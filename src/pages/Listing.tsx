@@ -132,106 +132,202 @@ const CarDetailView = ({ Vehicle, onBack }) => {
 
   return (
     <div>
-      <div className="flex justify-between items-center my-6">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-800">Car Information</h2>
-          <p className="text-sm text-gray-600">Get your latest update for the past 7 days</p>
-        </div>
-        <div className="relative">
-          <button
-            onClick={toggleExportDropdown}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
-          >
-            <FaFileExport className="mr-2" /> Export
-            <FaChevronDown className="ml-2" />
-          </button>
-          {showDropdown && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
-              <ul>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as CSV")}
-                >
-                  Export as CSV
-                </li>
-                <li
-                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as PDF")}
-                >
-                  Export as PDF
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="bg-gray-50 shadow-xl rounded-2xl p-10 w-full max-w-7xl mx-auto">
-        <button onClick={onBack} className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold">
-          Back
-        </button>
-
-        {/* Car Information and Booking Details */}
-
-        <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
-          <h3 className="text-2xl font-semibold mb-4">Rental Date Picker</h3>
-          <div className="flex items-center gap-6">
-            <div className="w-1/2">
-              <label className="block mb-2 text-sm font-semibold text-gray-700">Start Date:</label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-                className="w-full p-2 bg-gray-200 rounded-lg text-gray-700"
-                minDate={new Date()}
-                filterDate={(date) => !isDateUnavailable(date)}
-                placeholderText="Pick a start date"
-                dateFormat="dd/MM/yyyy"
-              />
-            </div>
-            <div className="w-1/2">
-              <label className="block mb-2 text-sm font-semibold text-gray-700">End Date:</label>
-              <DatePicker
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                selectsEnd
-                startDate={startDate}
-                endDate={endDate}
-                className="w-full p-2 bg-gray-200 rounded-lg text-gray-700"
-                minDate={startDate || new Date()}
-                filterDate={(date) => !isDateUnavailable(date)}
-                placeholderText="Pick an end date"
-                dateFormat="dd/MM/yyyy"
-              />
-            </div>
-          </div>
-
-          {startDate && endDate && (
-            <div className="mt-4">
-              <p className="font-semibold">
-                Total Rental Cost: <span className="text-blue-600">${totalCost.toLocaleString()}</span>
+       <div className="flex justify-between items-center my-6">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-800">Car Information</h2>
+              <p className="text-sm text-gray-600">
+                Get your latest update for the past 7 days
               </p>
             </div>
-          )}
-          {(!startDate || !endDate) && (
-            <p className="text-red-500 font-semibold mt-4">Please select both start and end dates.</p>
-          )}
 
-          {/* Conditionally Render "Rent Now" Button */}
-          {startDate && endDate && (
-            <div className="mt-6">
+            <div className="relative">
               <button
-                onClick={handleRentNow}
-                className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full"
+                onClick={toggleExportDropdown}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
               >
-                Rent Now
+                <FaFileExport className="mr-2" /> Export
+                <FaChevronDown className="ml-2" />
               </button>
+
+              {showDropdown && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+                  <ul>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => console.log("Export as CSV")}
+                    >
+                      Export as CSV
+                    </li>
+                    <li
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => console.log("Export as PDF")}
+                    >
+                      Export as PDF
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
-          )}
-          {error && <p className="text-red-500 font-semibold mt-4">{error}</p>}
+          </div>
+    <div className="bg-gray-50 shadow-xl rounded-2xl p-10 w-full max-w-7xl mx-auto">
+      <button
+        onClick={onBack}
+        className="bg-blue-100 text-blue-600 px-6 py-3 rounded-full text-base font-semibold"
+      >
+        Back
+      </button>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
+        {/* Car Image Section */}
+        <div className="relative">
+          <img
+            src={Vehicle.image}
+            alt={Vehicle.vehicle_specs.model}
+            className="w-full h-100 object-cover rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105"
+          />
+          <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md">
+            Featured
+          </div>
+        </div>
+
+        {/* Car Info Section */}
+        <div className="flex flex-col justify-between">
+          <h2 className="text-4xl font-black text-gray-900 mb-6">{Vehicle.vehicle_specs.model}</h2>
+          <p className="text-lg text-gray-800 mb-6">
+            <span className="font-semibold">Owner:</span> {Vehicle.vehicle_specs.owner_name} <br />
+            <span className="font-semibold">Location:</span> {Vehicle.vehicle_specs.location} <br />
+            <span className="font-semibold">Listed on:</span> {Vehicle.vehicle_specs.date}
+          </p>
+          <div className="grid grid-cols-2 gap-6 text-gray-700 mb-8">
+            <p className="flex items-center">
+              <FaRoad className="mr-2 text-blue-600" />
+              <span className="font-semibold">Mileage:</span> {Vehicle.vehicle_specs.milage} KM
+            </p>
+            <p className="flex items-center">
+              <FaGasPump className="mr-2 text-blue-600" />
+              <span className="font-semibold">Fuel Type:</span> {Vehicle.vehicle_specs.fuel_type}
+            </p>
+            <p className="flex items-center">
+              <FaCar className="mr-2 text-blue-600" />
+              <span className="font-semibold">Style:</span> {Vehicle.vehicle_specs.manufacturer}
+            </p>
+            <p className="flex items-center">
+              <FaTachometerAlt className="mr-2 text-blue-600" />
+              <span className="font-semibold">Speed:</span> {Vehicle.vehicle_specs.speed} KM/H
+            </p>
+          </div>
+          <p className="text-4xl font-bold text-blue-700">
+            ${rentalRate.toLocaleString()} / day
+          </p>
         </div>
       </div>
+
+      {/* Rental Date Picker Section */}
+      <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
+        <h3 className="text-2xl font-semibold mb-4">Rental Date Picker</h3>
+        <div className="flex items-center gap-6">
+          <div className="w-1/2">
+            <label className="block mb-2 text-sm font-semibold text-gray-700">
+              Start Date:
+            </label>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+              className="w-full p-2 bg-gray-200 rounded-lg text-gray-700"
+              minDate={new Date()} // Only allow future dates
+              filterDate={(date) => !isDateUnavailable(date)} // Disable unavailable dates
+              placeholderText="Pick a start date"
+              dateFormat="dd/MM/yyyy"
+            />
+          </div>
+          <div className="w-1/2">
+            <label className="block mb-2 text-sm font-semibold text-gray-700">
+              End Date:
+            </label>
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              selectsEnd
+              startDate={startDate}
+              endDate={endDate}
+              className="w-full p-2 bg-gray-200 rounded-lg text-gray-700"
+              minDate={startDate || new Date()} // Ensure end date is after start date
+              filterDate={(date) => !isDateUnavailable(date)} // Disable unavailable dates
+              placeholderText="Pick an end date"
+              dateFormat="dd/MM/yyyy"
+            />
+          </div>
+        </div>
+
+        {startDate && endDate && (
+          <div className="mt-4">
+            <p className="font-semibold">
+              Total Rental Cost:{" "}
+              <span className="text-blue-600">
+                ${totalCost.toLocaleString()}
+              </span>
+            </p>
+          </div>
+        )}
+        {!startDate && (
+          <p className="text-red-500 font-semibold mt-4">
+            Please select a start date.
+          </p>
+        )}
+        {!endDate && startDate && (
+          <p className="text-red-500 font-semibold mt-4">
+            Please select an end date.
+          </p>
+        )}
+
+        {/* Conditionally Render "Rent Now" Button */}
+        {startDate && endDate && (
+          <div className="mt-6">
+            <button className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full">
+              Rent Now
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Similar Cars Section */}
+      <div className="mt-10">
+        <h3 className="text-2xl font-semibold mb-4">Interior View</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Example placeholder car cards */}
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <img
+              src= {Vehicle.image2}
+              alt="Car 1"
+              className="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <h4 className="text-lg font-semibold">View 1</h4>
+            <p className="text-blue-600 font-bold">90deg</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <img
+              src= {Vehicle.image3}
+              alt="Car 2"
+              className="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <h4 className="text-lg font-semibold">View 2</h4>
+            <p className="text-blue-600 font-bold">60deg</p>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <img
+              src= {Vehicle.image4}
+              alt="Car 3"
+              className="w-full h-48 object-cover rounded-lg mb-4"
+            />
+            <h4 className="text-lg font-semibold">View 3</h4>
+            <p className="text-blue-600 font-bold">120deg</p>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   );
 };
