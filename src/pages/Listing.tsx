@@ -100,28 +100,30 @@ const CarDetailView = ({ Vehicle, onBack }) => {
   const totalCost = calculateTotal();
 
   const handleRentNow = async () => {
+    const userId = localStorage.getItem('userId'); // Ensure you use the correct key
     const totalAmount = totalCost;
+  
     const bookingPayload = {
-      user_id: 5, // Replace with the actual user ID
+      user_id: userId, // Use the retrieved user ID
       vehicle_id: Vehicle.id,
       location_id: 5, // Replace with the actual location ID
       booking_date: startDate ? startDate.toISOString() : '',
       return_date: endDate ? endDate.toISOString() : '',
       total_amount: totalAmount.toFixed(2),
     };
-
+  
     try {
       const bookingResponse = await bookVehicle(bookingPayload).unwrap();
       const bookingId = bookingResponse.id;
-
+  
       if (!bookingId) throw new Error("Booking ID not returned");
-
+  
       const paymentPayload = {
         amount: totalAmount * 100,
         currency: "kes",
         booking_id: bookingId,
       };
-
+  
       const checkoutResponse = await createCheckoutSession(paymentPayload).unwrap();
       window.location.href = `${checkoutResponse.checkoutUrl}`;
     } catch (error) {
@@ -129,6 +131,7 @@ const CarDetailView = ({ Vehicle, onBack }) => {
       setError("Failed to create checkout session. Please try again later.");
     }
   };
+  
 
   return (
     <div>
