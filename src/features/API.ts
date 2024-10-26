@@ -97,6 +97,13 @@ export const apiSlice = createApi({
                 body: chekout,
             }),
         }),
+        bookVehicle: builder.mutation<booking, Partial<booking>>({
+            query: (booking) => ({
+                url: '/bookings',
+                method: 'POST',
+                body: booking,
+            }),
+        }),
     }),
  
 });
