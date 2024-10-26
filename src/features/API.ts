@@ -103,7 +103,7 @@ export const apiSlice = createApi({
 
 export const { useLoginUserMutation, useRegisterUserMutation, useFetchUserDetailsQuery,
     useFetchAllVehiclesQuery, useFetchVehicleByIdQuery, useFetchAllPaymentsQuery, useFetchPaymentByIdQuery,
-    useCheckOutMutation 
+    useCheckoutMutation 
  } = apiSlice as { 
     useLoginUserMutation: () => ReturnType<typeof apiSlice.endpoints.loginUser.useMutation>; 
     useRegisterUserMutation: () => ReturnType<typeof apiSlice.endpoints.registerUser.useMutation>;
