@@ -40,8 +40,6 @@ const Dashboard = () => {
     setCurrentPage(1);
   };
 
-  if (isLoading) return <Loader />;
-
   // Filtering logic: filter cars based on search and selected filters
   const filteredCars = isSuccess && data
     ? data.filter((Vehicle) => {
@@ -233,7 +231,7 @@ const Dashboard = () => {
             </div>
 
             {isLoading ? (
-              <p>Loading cars...</p>
+              <p><Loader /></p>
             ) : error ? (
               <p>Error loading cars</p>
             ) : (
