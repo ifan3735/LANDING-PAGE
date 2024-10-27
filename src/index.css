@@ -78,3 +78,31 @@
     transform: translateY(-10px);
   }
 }
+
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out;
+}
+
+.confetti {
+  background-image: radial-gradient(circle at 10% 10%, #ffdd57, transparent 30%), 
+                    radial-gradient(circle at 50% 50%, #ff57b2, transparent 30%);
+  background-size: 100px 100px;
+  animation: confetti 2s linear infinite;
+}
+
+@keyframes confetti {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(100vw, -100vh); }
+}
