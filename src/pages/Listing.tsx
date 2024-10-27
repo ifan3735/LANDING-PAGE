@@ -101,26 +101,31 @@ const CarDetailView = ({ Vehicle, onBack }) => {
 
   const handleRentNow = async () => {
     const userId = localStorage.getItem('userId'); // Ensure you use the correct key
-    console.log("User ID:", userId);
+    
+    if (!userId || !startDate || !endDate) {
+      setError("Please ensure all fields are selected and you are logged in.");
+      return;
+    }
     
     const totalAmount = totalCost;
     const bookingPayload = {
       user_id: userId,
       vehicle_id: Vehicle.id,
       location_id: 5,
-      booking_date: startDate ? startDate.toISOString() : '',
-      return_date: endDate ? endDate.toISOString() : '',
+      booking_date: startDate.toISOString(),
+      return_date: endDate.toISOString(),
       total_amount: totalAmount.toFixed(2),
     };
   
-    console.log("Booking Payload:", bookingPayload);
-  
     try {
+      console.log("Sending booking payload:", bookingPayload);
+  
       const bookingResponse = await bookVehicle(bookingPayload).unwrap();
       const bookingId = bookingResponse.id;
   
-      if (!bookingId) throw new Error("Booking ID not returned");
+      if (!bookingId) throw new Error("Booking ID not returned from server");
   
+      // Payment payload
       const paymentPayload = {
         amount: totalAmount * 100,
         currency: "kes",
@@ -131,12 +136,10 @@ const CarDetailView = ({ Vehicle, onBack }) => {
       window.location.href = `${checkoutResponse.checkoutUrl}`;
     } catch (error) {
       console.error("Error creating booking:", error);
-      if (error.response) {
-        console.error("Response data:", error.response.data);
-      }
       setError("Failed to create booking. Please try again later.");
     }
   };
+  
   return (
     <div>
        <div className="flex justify-between items-center my-6">
