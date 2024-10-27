@@ -43,6 +43,7 @@ const App: React.FC = () => {
               <Route path="/services" element={<Services />} />
               <Route path="/faq" element={<Faq />} />
               <Route path="/success" element={<SuccessPage />} />
+              <Route path="/cancel" element={<CancelPage />} />
 
               {/* Protected Routes */}
               <Route path="/dashboard" element={<MainLayout><Dashboard /></MainLayout>} />
@@ -56,7 +57,6 @@ const App: React.FC = () => {
               <Route path="/deals" element={<MainLayout><Deals /></MainLayout>} />
               <Route path="/search" element={<MainLayout><Search /></MainLayout>} />
               <Route path="/help" element={<MainLayout><Help /></MainLayout>} />
-              <Route path="/cancel" element={<MainLayout><CancelPage /></MainLayout>} />
             </Routes>
           </div>
         </Router>
