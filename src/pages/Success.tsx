@@ -1,6 +1,7 @@
 // SuccessPage.tsx
 import React from 'react';
 import { CheckCircleIcon } from '@heroicons/react/solid';
+import { Link } from 'react-router-dom';
 
 const SuccessPage: React.FC = () => {
   return (
@@ -29,9 +30,12 @@ const SuccessPage: React.FC = () => {
 
         {/* Button */}
         <div className="flex justify-center mt-8">
-          <button className="px-8 py-3 font-semibold text-white bg-indigo-600 rounded-full hover:bg-indigo-700 focus:outline-none transition-all duration-300">
+          <Link
+            to="/dashboard"
+            className="px-8 py-3 font-semibold text-white bg-indigo-600 rounded-full hover:bg-indigo-700 focus:outline-none transition-all duration-300"
+          >
             Go Back to Dashboard
-          </button>
+          </Link>
         </div>
       </div>
     </div>
