@@ -24,6 +24,7 @@ import StatisticsPage from './pages/Statistics';
 import Deals from './pages/Deals';
 import Search from './pages/Search';
 import Help from './pages/Help';
+import SuccessPage from './pages/Success';
 
 const App: React.FC = () => {
   return (
@@ -53,6 +54,7 @@ const App: React.FC = () => {
               <Route path="/deals" element={<MainLayout><Deals /></MainLayout>} />
               <Route path="/search" element={<MainLayout><Search /></MainLayout>} />
               <Route path="/help" element={<MainLayout><Help /></MainLayout>} />
+              <Route path="/success" element={<MainLayout><SuccessPage /></MainLayout>} />
             </Routes>
           </div>
         </Router>
