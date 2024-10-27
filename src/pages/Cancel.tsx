@@ -37,7 +37,7 @@ const CancelPage: React.FC = () => {
         {/* Home Button */}
         <div className="flex justify-center mt-4">
           <Link
-            to="/"
+            to="/dashboard"
             className="text-gray-400 hover:underline hover:text-gray-300 transition-all"
           >
             Return to Home
