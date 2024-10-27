@@ -137,9 +137,6 @@ const CarDetailView = ({ Vehicle, onBack }) => {
       setError("Failed to create booking. Please try again later.");
     }
   };
-  
-  
-
   return (
     <div>
        <div className="flex justify-between items-center my-6">
