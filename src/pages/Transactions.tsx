@@ -38,30 +38,43 @@ const Transactions = () => {
   
   if (isLoading) return <Loader />;
   
- const filteredTransactions =
+  const filteredTransactions =
   !isLoading && data
     ? data
-        .filter((payment) => payment.bookings?.user_id === userId) // Check if userId matches
+        .filter((payment) => {
+          const isUserMatch = payment.bookings?.user_id === userId;
+          console.log("Checking user match for transaction:", payment);
+          console.log("Is user match:", isUserMatch);
+          return isUserMatch;
+        })
         .filter((payment) => {
           // Filter based on search query
           const matchesSearch = searchQuery
             ? payment.payment_method.toLowerCase().includes(searchQuery.toLowerCase())
             : true;
+          console.log("Search query match:", matchesSearch, "for payment:", payment);
 
           // Filter based on selected payment method
           const matchesPaymentMethod = selectedFilters.payment_method
             ? payment.payment_method.toLowerCase() === selectedFilters.payment_method.toLowerCase()
             : true;
+          console.log("Payment method match:", matchesPaymentMethod, "for payment:", payment);
 
           // Filter based on selected payment status
           const matchesPaymentStatus = selectedFilters.payment_status
             ? payment.payment_status.toLowerCase() === selectedFilters.payment_status.toLowerCase()
             : true;
+          console.log("Payment status match:", matchesPaymentStatus, "for payment:", payment);
 
           // Return true if all conditions match
-          return matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
+          const isMatch = matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
+          console.log("Final match result for payment:", isMatch, "for payment:", payment);
+          return isMatch;
         })
     : [];
+
+console.log("Final filtered transactions:", filteredTransactions);
+
 
 
   const exportAsCSV = () => {
