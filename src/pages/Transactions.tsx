@@ -42,9 +42,13 @@ const Transactions = () => {
   !isLoading && data
     ? data
         .filter((payment) => {
-          const isUserMatch = payment.bookings?.user_id === userId;
-          console.log("Checking user match for transaction:", payment);
-          console.log("Is user match:", isUserMatch);
+          const paymentUserId = payment.booking?.user_id; // Capture `user_id` in `booking`
+          console.log("Logged-in userId:", userId);
+          console.log("Transaction user_id from booking:", paymentUserId);
+          
+          const isUserMatch = paymentUserId == userId; // Loose equality check
+          console.log("Does userId match for this transaction?", isUserMatch);
+          
           return isUserMatch;
         })
         .filter((payment) => {
@@ -74,7 +78,6 @@ const Transactions = () => {
     : [];
 
 console.log("Final filtered transactions:", filteredTransactions);
-
 
 
   const exportAsCSV = () => {
