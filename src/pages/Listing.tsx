@@ -316,40 +316,54 @@ const CarDetailView = ({ Vehicle, onBack }) => {
         )}
       </div>
 
-      {/* Similar Cars Section */}
-      <div className="mt-10">
-        <h3 className="text-2xl font-semibold mb-4">Interior View</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Example placeholder car cards */}
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <img
-              src= {Vehicle.image2}
-              alt="Car 1"
-              className="w-full h-48 object-cover rounded-lg mb-4"
-            />
-            <h4 className="text-lg font-semibold">View 1</h4>
-            <p className="text-blue-600 font-bold">90deg</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <img
-              src= {Vehicle.image3}
-              alt="Car 2"
-              className="w-full h-48 object-cover rounded-lg mb-4"
-            />
-            <h4 className="text-lg font-semibold">View 2</h4>
-            <p className="text-blue-600 font-bold">60deg</p>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow-md">
-            <img
-              src= {Vehicle.image4}
-              alt="Car 3"
-              className="w-full h-48 object-cover rounded-lg mb-4"
-            />
-            <h4 className="text-lg font-semibold">View 3</h4>
-            <p className="text-blue-600 font-bold">120deg</p>
-          </div>
-        </div>
+      {/* Enhanced "Interior View" Section */}
+<div className="mt-10 px-6 py-10 bg-gradient-to-br from-gray-50 to-gray-200 rounded-2xl shadow-lg">
+  <h3 className="text-3xl font-extrabold text-gray-800 mb-6 tracking-tight">Interior View</h3>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {/* Card 1 */}
+    <div className="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-500 hover:scale-105 hover:rotate-1 group">
+      <img
+        src={Vehicle.image2}
+        alt="Interior View 1"
+        className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-300 group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute bottom-4 left-4 text-white">
+        <h4 className="text-lg font-bold">View 1</h4>
+        <p className="text-yellow-400 font-semibold">90° Angle</p>
       </div>
+    </div>
+
+    {/* Card 2 */}
+    <div className="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-500 hover:scale-105 hover:rotate-1 group">
+      <img
+        src={Vehicle.image3}
+        alt="Interior View 2"
+        className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-300 group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute bottom-4 left-4 text-white">
+        <h4 className="text-lg font-bold">View 2</h4>
+        <p className="text-yellow-400 font-semibold">60° Angle</p>
+      </div>
+    </div>
+
+    {/* Card 3 */}
+    <div className="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-500 hover:scale-105 hover:rotate-1 group">
+      <img
+        src={Vehicle.image4}
+        alt="Interior View 3"
+        className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-300 group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute bottom-4 left-4 text-white">
+        <h4 className="text-lg font-bold">View 3</h4>
+        <p className="text-yellow-400 font-semibold">120° Angle</p>
+      </div>
+    </div>
+  </div>
+</div>
+
     </div>
     </div>
   );
