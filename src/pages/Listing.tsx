@@ -242,79 +242,82 @@ const CarDetailView = ({ Vehicle, onBack }) => {
     </p>
   </div>
 </div>
-      {/* Rental Date Picker Section */}
-      <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
-        <h3 className="text-2xl font-semibold mb-4">Rental Date Picker</h3>
-        <div className="flex items-center gap-6">
-          <div className="w-1/2">
-            <label className="block mb-2 text-sm font-semibold text-gray-700">
-              Start Date:
-            </label>
-            <DatePicker
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-              className="w-full p-2 bg-gray-200 rounded-lg text-gray-700"
-              minDate={new Date()} // Only allow future dates
-              filterDate={(date) => !isDateUnavailable(date)} // Disable unavailable dates
-              placeholderText="Pick a start date"
-              dateFormat="dd/MM/yyyy"
-            />
-          </div>
-          <div className="w-1/2">
-            <label className="block mb-2 text-sm font-semibold text-gray-700">
-              End Date:
-            </label>
-            <DatePicker
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              selectsEnd
-              startDate={startDate}
-              endDate={endDate}
-              className="w-full p-2 bg-gray-200 rounded-lg text-gray-700"
-              minDate={startDate || new Date()} // Ensure end date is after start date
-              filterDate={(date) => !isDateUnavailable(date)} // Disable unavailable dates
-              placeholderText="Pick an end date"
-              dateFormat="dd/MM/yyyy"
-            />
-          </div>
-        </div>
+      {/* Enhanced Rental Date Picker Section */}
+<div className="mt-10 bg-gradient-to-br from-white/90 to-gray-50 p-8 rounded-2xl shadow-2xl backdrop-blur-lg border border-gray-200">
+  <h3 className="text-3xl font-bold text-gray-800 mb-6">Rental Date Picker</h3>
+  
+  <div className="flex items-center gap-6">
+    <div className="w-1/2">
+      <label className="block mb-2 text-sm font-semibold text-gray-700">
+        Start Date:
+      </label>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        selectsStart
+        startDate={startDate}
+        endDate={endDate}
+        className="w-full p-3 bg-gray-100 rounded-lg text-gray-800 shadow-inner transition-all duration-200 hover:bg-gray-200 focus:ring-2 focus:ring-blue-300"
+        minDate={new Date()}
+        filterDate={(date) => !isDateUnavailable(date)}
+        placeholderText="Select start date"
+        dateFormat="dd/MM/yyyy"
+      />
+    </div>
+    <div className="w-1/2">
+      <label className="block mb-2 text-sm font-semibold text-gray-700">
+        End Date:
+      </label>
+      <DatePicker
+        selected={endDate}
+        onChange={(date) => setEndDate(date)}
+        selectsEnd
+        startDate={startDate}
+        endDate={endDate}
+        className="w-full p-3 bg-gray-100 rounded-lg text-gray-800 shadow-inner transition-all duration-200 hover:bg-gray-200 focus:ring-2 focus:ring-blue-300"
+        minDate={startDate || new Date()}
+        filterDate={(date) => !isDateUnavailable(date)}
+        placeholderText="Select end date"
+        dateFormat="dd/MM/yyyy"
+      />
+    </div>
+  </div>
 
-        {startDate && endDate && (
-          <div className="mt-4">
-            <p className="font-semibold">
-              Total Rental Cost:{" "}
-              <span className="text-blue-600">
-                ${totalCost.toLocaleString()}
-              </span>
-            </p>
-          </div>
-        )}
-        {!startDate && (
-          <p className="text-red-500 font-semibold mt-4">
-            Please select a start date.
-          </p>
-        )}
-        {!endDate && startDate && (
-          <p className="text-red-500 font-semibold mt-4">
-            Please select an end date.
-          </p>
-        )}
+  {/* Animated Total Rental Cost */}
+  {startDate && endDate && (
+    <div className="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600 shadow-inner animate-fade-in">
+      <p className="text-lg font-semibold text-gray-700">
+        Total Rental Cost:{" "}
+        <span className="text-blue-600">${totalCost.toLocaleString()}</span>
+      </p>
+    </div>
+  )}
+  
+  {/* Dynamic Error Messages */}
+  {!startDate && (
+    <p className="text-red-500 font-semibold mt-4 animate-fade-in">
+      Please select a start date.
+    </p>
+  )}
+  {!endDate && startDate && (
+    <p className="text-red-500 font-semibold mt-4 animate-fade-in">
+      Please select an end date.
+    </p>
+  )}
 
-        {/* Conditionally Render "Rent Now" Button */}
-        {startDate && endDate && (
-          <div className="mt-6">
-            <button
-                onClick={handleRentNow}
-                className="bg-blue-100 text-blue-600 px-6 py-4 rounded-full text-lg font-bold shadow-lg w-full"
-              >
-                Rent Now
-              </button>
-          </div>
-        )}
-      </div>
+  {/* Animated "Rent Now" Button */}
+  {startDate && endDate && (
+    <div className="mt-8">
+      <button
+        onClick={handleRentNow}
+        className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-4 rounded-full text-lg font-bold shadow-xl w-full transition-transform duration-300 transform hover:scale-105 hover:shadow-2xl animate-bounce-slow"
+      >
+        Rent Now
+      </button>
+    </div>
+  )}
+</div>
+
 
       {/* Enhanced "Interior View" Section */}
 <div className="mt-10 px-6 py-10 bg-gradient-to-br from-gray-50 to-gray-200 rounded-2xl shadow-lg">
