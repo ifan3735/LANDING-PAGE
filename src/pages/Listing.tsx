@@ -187,50 +187,61 @@ const CarDetailView = ({ Vehicle, onBack }) => {
         Back
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
-        {/* Car Image Section */}
-        <div className="relative">
-          <img
-            src={Vehicle.image}
-            alt={Vehicle.vehicle_specs.model}
-            className="w-full h-100 object-cover rounded-2xl shadow-lg transition-transform duration-500 hover:scale-105"
-          />
-          <div className="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md">
-            Featured
-          </div>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8 px-4 md:px-0">
+  {/* Car Image Section */}
+  <div className="relative group">
+    <img
+      src={Vehicle.image}
+      alt={Vehicle.vehicle_specs.model}
+      className="w-full h-96 object-cover rounded-2xl shadow-xl transition-transform duration-500 transform group-hover:scale-105 group-hover:shadow-2xl"
+    />
+    <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md transition-transform duration-300 transform hover:scale-105">
+      Featured
+    </div>
+  </div>
 
-        {/* Car Info Section */}
-        <div className="flex flex-col justify-between">
-          <h2 className="text-4xl font-black text-gray-900 mb-6">{Vehicle.vehicle_specs.model}</h2>
-          <p className="text-lg text-gray-800 mb-6">
-            <span className="font-semibold">Owner:</span> {Vehicle.vehicle_specs.owner_name} <br />
-            <span className="font-semibold">Location:</span> {Vehicle.vehicle_specs.location} <br />
-            <span className="font-semibold">Listed on:</span> {Vehicle.vehicle_specs.date}
-          </p>
-          <div className="grid grid-cols-2 gap-6 text-gray-700 mb-8">
-            <p className="flex items-center">
-              <FaRoad className="mr-2 text-blue-600" />
-              <span className="font-semibold">Mileage:</span> {Vehicle.vehicle_specs.milage} KM
-            </p>
-            <p className="flex items-center">
-              <FaGasPump className="mr-2 text-blue-600" />
-              <span className="font-semibold">Fuel Type:</span> {Vehicle.vehicle_specs.fuel_type}
-            </p>
-            <p className="flex items-center">
-              <FaCar className="mr-2 text-blue-600" />
-              <span className="font-semibold">Style:</span> {Vehicle.vehicle_specs.manufacturer}
-            </p>
-            <p className="flex items-center">
-              <FaTachometerAlt className="mr-2 text-blue-600" />
-              <span className="font-semibold">Speed:</span> {Vehicle.vehicle_specs.speed} KM/H
-            </p>
-          </div>
-          <p className="text-4xl font-bold text-blue-700">
-            ${rentalRate.toLocaleString()} / day
-          </p>
-        </div>
-      </div>
+  {/* Car Info Section */}
+  <div className="flex flex-col justify-between space-y-6">
+    <h2 className="text-4xl font-extrabold text-gray-800 tracking-tight leading-tight mb-4 md:mb-6 transition-transform duration-300 hover:scale-105">
+      {Vehicle.vehicle_specs.model}
+    </h2>
+    <p className="text-lg text-gray-700 leading-relaxed">
+      <span className="font-semibold text-gray-900">Owner:</span> {Vehicle.vehicle_specs.owner_name}
+      <br />
+      <span className="font-semibold text-gray-900">Location:</span> {Vehicle.vehicle_specs.location}
+      <br />
+      <span className="font-semibold text-gray-900">Listed on:</span> {Vehicle.vehicle_specs.date}
+    </p>
+    
+    <div className="grid grid-cols-2 gap-6 text-gray-600 mb-6">
+      <p className="flex items-center space-x-2">
+        <FaRoad className="text-blue-600" />
+        <span className="font-medium text-gray-800">Mileage:</span>
+        <span className="text-gray-700">{Vehicle.vehicle_specs.mileage} KM</span>
+      </p>
+      <p className="flex items-center space-x-2">
+        <FaGasPump className="text-blue-600" />
+        <span className="font-medium text-gray-800">Fuel Type:</span>
+        <span className="text-gray-700">{Vehicle.vehicle_specs.fuel_type}</span>
+      </p>
+      <p className="flex items-center space-x-2">
+        <FaCar className="text-blue-600" />
+        <span className="font-medium text-gray-800">Style:</span>
+        <span className="text-gray-700">{Vehicle.vehicle_specs.manufacturer}</span>
+      </p>
+      <p className="flex items-center space-x-2">
+        <FaTachometerAlt className="text-blue-600" />
+        <span className="font-medium text-gray-800">Top Speed:</span>
+        <span className="text-gray-700">{Vehicle.vehicle_specs.speed} KM/H</span>
+      </p>
+    </div>
+    
+    <p className="text-4xl font-bold text-blue-700 tracking-tight leading-snug shadow-sm">
+      ${rentalRate.toLocaleString()} <span className="text-lg text-gray-600 font-medium">/ day</span>
+    </p>
+  </div>
+</div>
+
 
       {/* Rental Date Picker Section */}
       <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
