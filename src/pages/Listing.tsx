@@ -189,60 +189,59 @@ const CarDetailView = ({ Vehicle, onBack }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8 px-4 md:px-0">
   {/* Car Image Section */}
-  <div className="relative group">
+  <div className="relative group overflow-hidden rounded-2xl shadow-2xl">
     <img
       src={Vehicle.image}
       alt={Vehicle.vehicle_specs.model}
-      className="w-full h-96 object-cover rounded-2xl shadow-xl transition-transform duration-500 transform group-hover:scale-105 group-hover:shadow-2xl"
+      className="w-full h-96 object-cover transition-transform duration-500 transform group-hover:scale-110"
     />
-    <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-md transition-transform duration-300 transform hover:scale-105">
+    <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-300"></div>
+    <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-lg transform transition-transform duration-300 hover:scale-110">
       Featured
     </div>
   </div>
 
   {/* Car Info Section */}
-  <div className="flex flex-col justify-between space-y-6">
-    <h2 className="text-4xl font-extrabold text-gray-800 tracking-tight leading-tight mb-4 md:mb-6 transition-transform duration-300 hover:scale-105">
+  <div className="flex flex-col justify-between p-6 bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg space-y-6">
+    <h2 className="text-4xl font-black text-gray-800 tracking-tight leading-tight mb-2 md:mb-4 transition-transform duration-300 hover:scale-105">
       {Vehicle.vehicle_specs.model}
     </h2>
-    <p className="text-lg text-gray-700 leading-relaxed">
+    <p className="text-lg text-gray-700 leading-relaxed mb-6">
       <span className="font-semibold text-gray-900">Owner:</span> {Vehicle.vehicle_specs.owner_name}
       <br />
       <span className="font-semibold text-gray-900">Location:</span> {Vehicle.vehicle_specs.location}
       <br />
       <span className="font-semibold text-gray-900">Listed on:</span> {Vehicle.vehicle_specs.date}
     </p>
-    
-    <div className="grid grid-cols-2 gap-6 text-gray-600 mb-6">
-      <p className="flex items-center space-x-2">
-        <FaRoad className="text-blue-600" />
-        <span className="font-medium text-gray-800">Mileage:</span>
+
+    <div className="grid grid-cols-2 gap-6 text-gray-600 mb-6 border-t border-b border-gray-300 py-4">
+      <div className="flex items-center space-x-2 transition-transform duration-200 hover:scale-105">
+        <FaRoad className="text-yellow-500" />
+        <span className="font-semibold text-gray-800">Mileage:</span>
         <span className="text-gray-700">{Vehicle.vehicle_specs.mileage} KM</span>
-      </p>
-      <p className="flex items-center space-x-2">
-        <FaGasPump className="text-blue-600" />
-        <span className="font-medium text-gray-800">Fuel Type:</span>
+      </div>
+      <div className="flex items-center space-x-2 transition-transform duration-200 hover:scale-105">
+        <FaGasPump className="text-yellow-500" />
+        <span className="font-semibold text-gray-800">Fuel Type:</span>
         <span className="text-gray-700">{Vehicle.vehicle_specs.fuel_type}</span>
-      </p>
-      <p className="flex items-center space-x-2">
-        <FaCar className="text-blue-600" />
-        <span className="font-medium text-gray-800">Style:</span>
+      </div>
+      <div className="flex items-center space-x-2 transition-transform duration-200 hover:scale-105">
+        <FaCar className="text-yellow-500" />
+        <span className="font-semibold text-gray-800">Style:</span>
         <span className="text-gray-700">{Vehicle.vehicle_specs.manufacturer}</span>
-      </p>
-      <p className="flex items-center space-x-2">
-        <FaTachometerAlt className="text-blue-600" />
-        <span className="font-medium text-gray-800">Top Speed:</span>
+      </div>
+      <div className="flex items-center space-x-2 transition-transform duration-200 hover:scale-105">
+        <FaTachometerAlt className="text-yellow-500" />
+        <span className="font-semibold text-gray-800">Top Speed:</span>
         <span className="text-gray-700">{Vehicle.vehicle_specs.speed} KM/H</span>
-      </p>
+      </div>
     </div>
-    
-    <p className="text-4xl font-bold text-blue-700 tracking-tight leading-snug shadow-sm">
+
+    <p className="text-5xl font-extrabold text-yellow-600 tracking-tight leading-snug shadow-sm transition-transform duration-300 transform hover:scale-105">
       ${rentalRate.toLocaleString()} <span className="text-lg text-gray-600 font-medium">/ day</span>
     </p>
   </div>
 </div>
-
-
       {/* Rental Date Picker Section */}
       <div className="mt-10 bg-white p-6 rounded-xl shadow-md">
         <h3 className="text-2xl font-semibold mb-4">Rental Date Picker</h3>
