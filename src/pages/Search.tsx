@@ -5,8 +5,9 @@ import TopBar from "../components/TopBar";
 import { FaGasPump, FaTachometerAlt, FaChevronDown, FaFileExport, FaRoad, FaCar, FaSearch } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useFetchAllVehiclesQuery } from "../features/API";
 import jsPDF from "jspdf";
+import { useFetchAllVehiclesQuery, useCheckoutMutation, useBookVehicleMutation } from "../features/API";
+
 
 const FilterBar = ({
   selectedBrand,
