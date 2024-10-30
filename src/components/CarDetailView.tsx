@@ -97,71 +97,78 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         </div>
 
         {/* Right Column - Car Info */}
-        <div className="flex flex-col justify-between">
-          {/* Display Vehicle Details */}
-          <h2 className="text-3xl font-black mb-2">{car.vehicle_specs.model || 'Not available'}</h2>
-          <p className="text-blue-700 text-3xl font-bold mb-6">${car.rental_rate || 'N/A'}</p>
+<div className="flex flex-col justify-between space-y-8">
+  {/* Vehicle Details Section */}
+  <div className="vehicle-info bg-white/10 p-6 rounded-xl shadow-lg backdrop-blur-md">
+    <h2 className="text-4xl font-black mb-3">{car.vehicle_specs.model || 'Not Available'}</h2>
+    <p className="text-blue-700 text-2xl font-bold mb-4">${car.rental_rate || 'N/A'}</p>
 
-          <div className="space-y-4 text-lg">
-            <div className="flex items-center">
-              <span className="font-semibold">Class:</span>
-              <span className="ml-2">{car.vehicle_specs.class || 'Not available'}</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Layout:</span>
-              <span className="ml-2">{car.vehicle_specs.layout || 'Not available'}</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Manufacturer:</span>
-              <span className="ml-2">{car.vehicle_specs.manufacturer || 'Not available'}</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Fuel Type:</span>
-              <span className="ml-2">{car.vehicle_specs.fuel_type || 'Not available'}</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Mileage:</span>
-              <span className="ml-2">{car.vehicle_specs.milage || 'Not available'} KM</span>
-            </div>
-            <div className="flex items-center">
-              <span className="font-semibold">Transmission:</span>
-              <span className="ml-2">{car.vehicle_specs.transmission || 'Not available'}</span>
-            </div>
+    <div className="space-y-4 text-lg">
+      {[
+        { label: 'Class', value: car.vehicle_specs.class, icon: '🚗' },
+        { label: 'Layout', value: car.vehicle_specs.layout, icon: '🛠️' },
+        { label: 'Manufacturer', value: car.vehicle_specs.manufacturer, icon: '🏭' },
+        { label: 'Fuel Type', value: car.vehicle_specs.fuel_type, icon: '⛽' },
+        { label: 'Mileage', value: `${car.vehicle_specs.milage || 'N/A'} KM`, icon: '📏' },
+        { label: 'Transmission', value: car.vehicle_specs.transmission, icon: '⚙️' }
+      ].map(({ label, value, icon }, idx) => (
+        <div key={idx} className="flex items-center space-x-3">
+          <span className="text-2xl">{icon}</span>
+          <div className="flex flex-col">
+            <span className="font-semibold">{label}</span>
+            <span className="text-gray-600 dark:text-gray-300">{value || 'Not available'}</span>
           </div>
-
-          {/* Documents Needed Section */}
-          <div className="mt-6">
-            <h3 className="text-lg font-bold mb-4">Document's Needed</h3>
-            <ul className="space-y-3">
-              <li className="flex items-center">
-                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
-                <label>Bill of sale</label>
-              </li>
-              <li className="flex items-center">
-                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
-                <label>Buyer’s Guide</label>
-              </li>
-              <li className="flex items-center">
-                <input type="checkbox" className="mr-2 transition-transform transform hover:scale-105" />
-                <label>Country of title issuance</label>
-              </li>
-              <li className="flex items-center">
-                <input type="checkbox" className="mr-2" disabled />
-                <label className="text-gray-400">Application of Texas</label>
-              </li>
-            </ul>
-
-            {/* Upload Button */}
-            <button className="bg-blue-100 text-blue-600 px-4 py-2 mt-4 rounded-full font-semibold transition-all hover:bg-blue-200">
-              Upload
-            </button>
-          </div>
-
-          {/* Sticky Buy Now Button */}
-          <button className="sticky bottom-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105">
-            Buy Now
-          </button>
         </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Documents Needed Section with Progress Bar */}
+  <div className="documents-section bg-white/10 p-6 rounded-xl shadow-lg backdrop-blur-md">
+    <h3 className="text-lg font-bold mb-4">Documents Needed</h3>
+    
+    {/* Document Checklist with Progress */}
+    <div className="flex items-center mb-4">
+      <div className="w-full bg-gray-300 rounded-full h-2.5 dark:bg-gray-700">
+        <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: '75%' }}></div>
+      </div>
+      <span className="ml-2 text-sm text-gray-500">75% Complete</span>
+    </div>
+
+    <ul className="space-y-3">
+      {[
+        { label: 'Bill of sale', completed: true },
+        { label: 'Buyer’s Guide', completed: true },
+        { label: 'Country of title issuance', completed: false },
+        { label: 'Application of Texas', completed: false, disabled: true }
+      ].map(({ label, completed, disabled }, idx) => (
+        <li key={idx} className="flex items-center">
+          <input
+            type="checkbox"
+            className="mr-2"
+            disabled={disabled}
+            checked={completed}
+            readOnly
+          />
+          <label className={disabled ? 'text-gray-400' : ''}>{label}</label>
+        </li>
+      ))}
+    </ul>
+
+    <button className="bg-blue-100 text-blue-600 px-4 py-2 mt-4 rounded-full font-semibold transition-transform hover:scale-105">
+      Upload Documents
+    </button>
+  </div>
+
+  {/* Sticky Buy Now Button with Loading Feedback */}
+  <button
+    className="sticky bottom-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105 active:scale-95"
+    onClick={() => alert('Purchase Initiated')}
+  >
+    Buy Now
+  </button>
+</div>
+
       </div>
     </div>
   );
