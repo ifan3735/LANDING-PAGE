@@ -42,6 +42,15 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
       total_amount: totalAmount.toFixed(2)
     };
 
+    try {
+      console.log("Sending booking payload:", bookingPayload);
+
+    }
+
+    catch {
+      
+    }
+
   const settings = {
     dots: true,
     infinite: true,
