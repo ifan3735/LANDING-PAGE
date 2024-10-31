@@ -32,15 +32,15 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
       return;
     }
 
-    const totalAmount = totalCost;
-    const bookingPayload = {
-      user_id: userId,
-      vehicle_id: car.id,
-      location_id: 5, // Replace with the actual location ID
-      booking_date: currentDate,
-      return_date: currentDate,
-      total_amount: totalAmount.toFixed(2)
-    };
+    const totalAmount = Number(totalCost); // Ensure totalCost is a number
+const bookingPayload = {
+  user_id: userId,
+  vehicle_id: car.id,
+  location_id: 5, // Replace with the actual location ID
+  booking_date: currentDate,
+  return_date: currentDate,
+  total_amount: totalAmount.toFixed(2)
+};
 
     try {
       console.log("Sending booking payload:", bookingPayload);
