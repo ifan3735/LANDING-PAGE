@@ -46,8 +46,15 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
       console.log("Sending booking payload:", bookingPayload);
       const bookingResponse = await bookVehicle(bookingPayload).unwrap();
       const bookingId = bookingResponse.id;
-      
+
       if (!bookingId) throw new Error("Booking ID not returned from server");
+
+       // Payment payload
+       const paymentPayload = {
+        amount: totalAmount * 100,
+        currency: "kes",
+        booking_id: bookingId,
+      };
 
 
     }
