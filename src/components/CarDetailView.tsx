@@ -44,11 +44,16 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
     try {
       console.log("Sending booking payload:", bookingPayload);
+      const bookingResponse = await bookVehicle(bookingPayload).unwrap();
+      const bookingId = bookingResponse.id;
+      
+      if (!bookingId) throw new Error("Booking ID not returned from server");
+
 
     }
 
     catch {
-      
+
     }
 
   const settings = {
