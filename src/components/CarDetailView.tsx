@@ -22,7 +22,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
-  const totalCost = car.rental_rate || 0;
+  const totalCost = car.price || 0;
 
   const handleBuyNow = async () => {
     const userId = localStorage.getItem('userId');
@@ -158,7 +158,7 @@ const bookingPayload = {
   {/* Vehicle Details Section */}
   <div className="vehicle-info bg-white/10 p-6 rounded-xl shadow-lg backdrop-blur-md">
     <h2 className="text-4xl font-black mb-3">{car.vehicle_specs.model || 'Not Available'}</h2>
-    <p className="text-blue-700 text-2xl font-bold mb-4">${car.rental_rate || 'N/A'}</p>
+    <p className="text-blue-700 text-2xl font-bold mb-4">${car.price || 'N/A'}</p>
 
     <div className="space-y-4 text-lg">
       {[
