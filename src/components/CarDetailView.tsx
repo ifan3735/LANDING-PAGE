@@ -11,6 +11,8 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [createCheckoutSession] = useCheckoutMutation();
   const [bookVehicle] = useBookVehicleMutation();  // use checkout mutation
   const [error, setError] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
+
 
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
