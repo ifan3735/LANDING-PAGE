@@ -10,10 +10,20 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
   const [createCheckoutSession] = useCheckoutMutation();
   const [bookVehicle] = useBookVehicleMutation();  // use checkout mutation
+  const [error, setError] = useState('');
+
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   const totalCost = car.rental_rate || 0;
+
+  const handleBuyNow = async () => {
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      setError("Please ensure all fields are selected and you are logged in.");
+      return;
+    }
 
   const settings = {
     dots: true,
