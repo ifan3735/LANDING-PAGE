@@ -28,7 +28,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
     const totalAmount = totalCost;
     const bookingPayload = {
       user_id: userId,
-      vehicle_id: Vehicle.id,
+      vehicle_id: car.id,
       location_id: 5, // Replace with the actual location ID
       booking_date: startDate,
       return_date: endDate,
