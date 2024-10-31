@@ -13,6 +13,8 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
+  const totalCost = car.rental_rate || 0;
+
   const settings = {
     dots: true,
     infinite: true,
