@@ -61,8 +61,9 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
 
     }
 
-    catch {
-
+    catch (error) {
+      console.error("Error creating booking:", error);
+      setError("Failed to create booking. Please try again later.");
     }
 
   const settings = {
