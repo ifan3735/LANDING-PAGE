@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaSync, FaMoon, FaSun } from 'react-icons/fa'; // Import icons for dark mode toggle
 import Slider from 'react-slick'; // Import a carousel library like 'react-slick'
 import 'slick-carousel/slick/slick.css'; // Import the CSS for slick-carousel
@@ -13,7 +13,12 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [error, setError] = useState('');
   const [currentDate, setCurrentDate] = useState('');
 
-
+ // Dynamically update the date
+ useEffect(() => {
+  const date = new Date();
+  const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+  setCurrentDate(date.toLocaleDateString(undefined, options));
+}, []);
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
