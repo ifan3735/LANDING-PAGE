@@ -8,6 +8,8 @@ import { useCheckoutMutation, useBookVehicleMutation } from '../features/API';
 const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   const [isLoading, setIsLoading] = useState(true); // Loading state for images
   const [isDarkMode, setIsDarkMode] = useState(false); // Dark mode state
+  const [createCheckoutSession] = useCheckoutMutation();
+
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
