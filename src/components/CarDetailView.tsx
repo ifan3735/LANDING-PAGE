@@ -220,7 +220,7 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
   {/* Sticky Buy Now Button with Loading Feedback */}
   <button
     className="sticky bottom-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full py-4 mt-8 rounded-full text-lg font-bold shadow-lg transition-transform transform hover:scale-105 active:scale-95"
-    onClick={() => alert('Purchase Initiated')}
+    onClick={handleBuyNow}
   >
     Buy Now
   </button>
