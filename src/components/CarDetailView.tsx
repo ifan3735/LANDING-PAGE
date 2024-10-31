@@ -56,6 +56,8 @@ const CarDetailView = ({ car, onBack }: { car: any; onBack: () => void }) => {
         booking_id: bookingId,
       };
 
+      const checkoutResponse = await createCheckoutSession(paymentPayload).unwrap();
+      window.location.href = `${checkoutResponse.checkoutUrl}`;
 
     }
 
