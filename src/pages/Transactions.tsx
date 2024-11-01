@@ -52,6 +52,8 @@ const Transactions = () => {
           return isUserMatch;
         })
         .filter((payment) => {
+          // New condition to filter by amount >= 1,000,000
+        const meetsAmountCriteria = payment.amount < 1000000;
           // Filter based on search query
           const matchesSearch = searchQuery
             ? payment.payment_method.toLowerCase().includes(searchQuery.toLowerCase())
@@ -71,7 +73,7 @@ const Transactions = () => {
           console.log("Payment status match:", matchesPaymentStatus, "for payment:", payment);
 
           // Return true if all conditions match
-          const isMatch = matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
+          const isMatch = matchesSearch && meetsAmountCriteria && matchesPaymentMethod && matchesPaymentStatus;
           console.log("Final match result for payment:", isMatch, "for payment:", payment);
           return isMatch;
         })
