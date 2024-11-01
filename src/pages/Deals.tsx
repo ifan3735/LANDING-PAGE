@@ -2,6 +2,7 @@ import TopBar from "../components/TopBar";
 import { useState } from "react";
 import { exportData } from "../utils/ExportData";
 import { FaBars, FaChevronDown, FaFileExport } from "react-icons/fa";
+import { useFetchAllPaymentsQuery } from "../features/API";
 
 const deals = [
   {
@@ -97,6 +98,7 @@ const Deals = () => {
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const { data, isLoading } = useFetchAllPaymentsQuery();
   const [selectedFilters, setSelectedFilters] = useState({
     carType: "",
     status: "",
