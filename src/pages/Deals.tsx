@@ -3,7 +3,7 @@ import { useState } from "react";
 import { exportData } from "../utils/ExportData";
 import { FaBars, FaChevronDown, FaFileExport } from "react-icons/fa";
 import { useFetchAllPaymentsQuery } from "../features/API";
-
+import { useFetchAllVehiclesQuery } from "../features/API";
 
 
 const Deals = () => {
