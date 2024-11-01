@@ -12,7 +12,7 @@ const Deals = () => {
   const [filteredDeals, setFilteredDeals] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({
     payment_method: "",
-    carType: "",
+    payment_status: "",
   });
 
   const userId = localStorage.getItem("userId");
