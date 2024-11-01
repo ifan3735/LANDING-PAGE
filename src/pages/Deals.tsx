@@ -207,17 +207,41 @@ const Deals = () => {
           <tbody className="text-gray-700 text-sm">
             {filteredDeals.length > 0 ? (
               filteredDeals.map((deal, index) => (
-                <tr key={deal.id} className="border-b border-gray-200 hover:bg-gray-100">
-                  <td className="py-3 px-6"><span className="text-gray-400">{index + 1}</span></td>
-                  <td className="py-3 px-6 flex items-center">{deal.owner}</td>
-                  <td className="py-3 px-6"><span className="text-gray-400">{deal.created_at}</span></td>
-                  <td className="py-3 px-6 flex items-center">{deal.payment_status}</td>
-                  <td className="py-3 px-6"><span className="text-gray-400">{deal.payment_date}</span></td>
-                  <td className="py-3 px-6">{deal.payment_method}</td>
-                  <td className="py-3 px-6">
-                    <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.amount}</span> 
-                  </td>
-                </tr>
+                <tr key={deal.id} className="border-b hover:bg-gray-100 transition duration-200 ease-in-out">
+  <td className="py-4 px-6 text-center text-gray-500 font-medium">{index + 1}</td>
+  <td className="py-4 px-6 flex items-center font-semibold text-gray-800">
+    {deal.owner}
+  </td>
+  <td className="py-4 px-6 text-gray-500">
+    <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-md">
+      {new Date(deal.created_at).toLocaleDateString()}
+    </span>
+  </td>
+  <td className="py-4 px-6 text-center">
+    <span
+      className={`py-1 px-3 rounded-full font-semibold ${
+        deal.payment_status === "Paid"
+          ? "bg-green-100 text-green-600"
+          : "bg-yellow-100 text-yellow-600"
+      }`}
+    >
+      {deal.payment_status}
+    </span>
+  </td>
+  <td className="py-4 px-6 text-gray-500">
+    <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-md">
+      {new Date(deal.payment_date).toLocaleDateString()}
+    </span>
+  </td>
+  <td className="py-4 px-6 text-center text-gray-800 font-semibold">
+    {deal.payment_method}
+  </td>
+  <td className="py-4 px-6 text-center">
+    <span className="text-white bg-blue-500 py-1 px-3 rounded-full font-semibold text-sm shadow-md">
+      ${deal.amount.toLocaleString()}
+    </span>
+  </td>
+</tr>
               ))
             ) : (
               <tr>
