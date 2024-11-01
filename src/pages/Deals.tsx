@@ -50,7 +50,7 @@ const Deals = () => {
 
           return {
             ...payment,
-            owner: Vehicle?.vehicle_specs.owner_name || "Unknown Owner",  // Owner from vehicles data
+            owner: Vehicle?.vehicle_specs.owner_name || "Nazarene",  // Owner from vehicles data
             carType: Vehicle?.vehicle_specs.manufacturer || "Unknown Car Type", // Car Type from vehicles data
           };
         })
