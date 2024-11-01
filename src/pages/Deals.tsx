@@ -14,11 +14,7 @@ const Deals = () => {
   const { data, isLoading } = useFetchAllPaymentsQuery();
   const [selectedFilters, setSelectedFilters] = useState({
     payment_method: "",
-    status: "",
-  });
-  const [filters, setFilters] = useState({
     carType: "",
-    status: "",
   });
 
   const userId = localStorage.getItem("userId");
