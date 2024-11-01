@@ -12,6 +12,7 @@ const Deals = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const { data, isLoading } = useFetchAllPaymentsQuery();
+  const { Vehicle } = useFetchAllVehiclesQuery();
   const [selectedFilters, setSelectedFilters] = useState({
     payment_method: "",
     carType: "",
