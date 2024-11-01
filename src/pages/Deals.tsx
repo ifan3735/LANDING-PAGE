@@ -100,7 +100,7 @@ const Deals = () => {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const { data, isLoading } = useFetchAllPaymentsQuery();
   const [selectedFilters, setSelectedFilters] = useState({
-    carType: "",
+    payment_method: "",
     status: "",
   });
 
@@ -126,13 +126,43 @@ const Deals = () => {
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
   // Filtering logic
-  const filteredDeals = deals.filter((deal) => {
-    const matchesCarType =
-      !selectedFilters.carType || deal.carType === selectedFilters.carType;
-    const matchesStatus =
-      !selectedFilters.status || deal.status === selectedFilters.status;
-    return matchesCarType && matchesStatus;
-  });
+  const filteredDeals = !isLoading && data
+  ? data
+      .filter((payment) => {
+        const paymentUserId = payment.booking?.user_id; // Capture `user_id` in `booking`
+        console.log("Logged-in userId:", userId);
+        console.log("Transaction user_id from booking:", paymentUserId);
+        
+        const isUserMatch = paymentUserId == userId; // Loose equality check
+        console.log("Does userId match for this transaction?", isUserMatch);
+        
+        return isUserMatch;
+      })
+      .filter((payment) => {
+        // Filter based on search query
+        const matchesSearch = searchQuery
+          ? payment.payment_method.toLowerCase().includes(searchQuery.toLowerCase())
+          : true;
+        console.log("Search query match:", matchesSearch, "for payment:", payment);
+
+        // Filter based on selected payment method
+        const matchesPaymentMethod = selectedFilters.payment_method
+          ? payment.payment_method.toLowerCase() === selectedFilters.payment_method.toLowerCase()
+          : true;
+        console.log("Payment method match:", matchesPaymentMethod, "for payment:", payment);
+
+        // Filter based on selected payment status
+        const matchesPaymentStatus = selectedFilters.payment_status
+          ? payment.payment_status.toLowerCase() === selectedFilters.payment_status.toLowerCase()
+          : true;
+        console.log("Payment status match:", matchesPaymentStatus, "for payment:", payment);
+
+        // Return true if all conditions match
+        const isMatch = matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
+        console.log("Final match result for payment:", isMatch, "for payment:", payment);
+        return isMatch;
+      })
+  : [];
 
   return (
     <div
