@@ -46,12 +46,12 @@ const Deals = () => {
         .filter((payment) => payment.booking?.user_id == userId) // Only deals for the logged-in user
         .map((payment) => {
           // Find the vehicle associated with this payment
-          const vehicle = vehiclesData.find((v) => v.id === payment.vehicleId);
+          const Vehicle = vehiclesData.find((v) => v.id === payment.vehicleId);
 
           return {
             ...payment,
-            owner: vehicle?.vehicle_specs.owner_name || "Unknown Owner",  // Owner from vehicles data
-            carType: vehicle?.vehicle_specs.manufacturer || "Unknown Car Type", // Car Type from vehicles data
+            owner: Vehicle?.vehicle_specs.owner_name || "Unknown Owner",  // Owner from vehicles data
+            carType: Vehicle?.vehicle_specs.manufacturer || "Unknown Car Type", // Car Type from vehicles data
           };
         })
         .filter((deal) => {
@@ -154,7 +154,7 @@ const Deals = () => {
                   <td className="py-3 px-6"><span className="text-gray-400">{deal.updated_at}</span></td>
                   <td className="py-3 px-6">{deal.type}</td>
                   <td className="py-3 px-6">
-                    <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.totalPrice}</span> 
+                    <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.amount}</span> 
                   </td>
                 </tr>
               ))
