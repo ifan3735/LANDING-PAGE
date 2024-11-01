@@ -149,9 +149,9 @@ const Deals = () => {
                 <tr key={deal.id} className="border-b border-gray-200 hover:bg-gray-100">
                   <td className="py-3 px-6"><span className="text-gray-400">{index + 1}</span></td>
                   <td className="py-3 px-6 flex items-center">{deal.owner}</td>
-                  <td className="py-3 px-6"><span className="text-gray-400">{deal.creationDate}</span></td>
+                  <td className="py-3 px-6"><span className="text-gray-400">{deal.created_at}</span></td>
                   <td className="py-3 px-6 flex items-center">{deal.carType}</td>
-                  <td className="py-3 px-6"><span className="text-gray-400">{deal.returnDate}</span></td>
+                  <td className="py-3 px-6"><span className="text-gray-400">{deal.updated_at}</span></td>
                   <td className="py-3 px-6">{deal.type}</td>
                   <td className="py-3 px-6">
                     <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.totalPrice}</span> 
