@@ -9,7 +9,17 @@ const Deals = () => {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredDeals, setFilteredDeals] = useState([]);
+  interface Deal {
+    id: string;
+    owner: string;
+    created_at: string;
+    payment_status: string;
+    payment_date: string;
+    payment_method: string;
+    amount: number;
+  }
+
+  const [filteredDeals, setFilteredDeals] = useState<Deal[]>([]);
   const [selectedFilters, setSelectedFilters] = useState({
     payment_method: "",
     payment_status: "",
