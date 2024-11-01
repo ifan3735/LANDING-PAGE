@@ -201,7 +201,7 @@ const Deals = () => {
         <th className="py-3 px-6 text-center">Status</th>
         <th className="py-3 px-6 text-center">Payment Date</th>
         <th className="py-3 px-6 text-center">Type</th>
-        <th className="py-3 px-6 text-center">Total Price</th>
+        <th className="py-3 px-6 text-center">Total Price(Ksh)</th>
       </tr>
     </thead>
     <tbody className="text-gray-700 text-sm">
@@ -235,7 +235,7 @@ const Deals = () => {
   </td>
             <td className="py-4 px-6 text-center">
               <span className="text-white bg-blue-600 py-1 px-3 rounded-full font-semibold text-sm shadow-md">
-                ${deal.amount.toLocaleString()}
+                {deal.amount.toLocaleString()}
               </span>
             </td>
           </tr>
