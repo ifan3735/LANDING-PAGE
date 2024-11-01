@@ -65,8 +65,8 @@ const Deals = () => {
             ? deal.payment_method.toLowerCase() === selectedFilters.payment_method.toLowerCase()
             : true;
 
-          const matchesCarType = selectedFilters.carType
-            ? deal.carType.toLowerCase() === selectedFilters.carType.toLowerCase()
+          const matchesCarType = selectedFilters.payment_status
+            ? deal.carType.toLowerCase() === selectedFilters.payment_status.toLowerCase()
             : true;
 
           return matchesSearch && matchesPaymentMethod && matchesCarType;
