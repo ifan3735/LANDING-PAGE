@@ -191,68 +191,66 @@ const Deals = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-lg shadow-lg">
-          <thead>
-            <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
-              <th className="py-3 px-6 text-center">No.</th>
-              <th className="py-3 px-6 text-center">Owner Name</th>
-              <th className="py-3 px-6 text-center">Creation Date</th>
-              <th className="py-3 px-6 text-center">Car Type</th>
-              <th className="py-3 px-6 text-center">Payment Date</th>
-              <th className="py-3 px-6 text-center">Type</th>
-              <th className="py-3 px-6 text-center">Total Price</th>
-            </tr>
-          </thead>
-          <tbody className="text-gray-700 text-sm">
-            {filteredDeals.length > 0 ? (
-              filteredDeals.map((deal, index) => (
-                <tr key={deal.id} className="border-b hover:bg-gray-100 transition duration-200 ease-in-out">
-  <td className="py-4 px-6 text-center text-gray-500 font-medium">{index + 1}</td>
-  <td className="py-4 px-6 flex items-center font-semibold text-gray-800">
-    {deal.owner}
-  </td>
-  <td className="py-4 px-6 text-gray-500">
-    <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-md">
-      {new Date(deal.created_at).toLocaleDateString()}
-    </span>
-  </td>
-  <td className="py-4 px-6 text-center">
-    <span
-      className={`py-1 px-3 rounded-full font-semibold ${
-        deal.payment_status === "Paid"
-          ? "bg-green-100 text-green-600"
-          : "bg-yellow-100 text-yellow-600"
-      }`}
-    >
-      {deal.payment_status}
-    </span>
-  </td>
-  <td className="py-4 px-6 text-gray-500">
-    <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-md">
-      {new Date(deal.payment_date).toLocaleDateString()}
-    </span>
-  </td>
-  <td className="py-4 px-6 text-center text-gray-800 font-semibold">
+      <div className="overflow-x-auto p-4">
+  <table className="min-w-full bg-white rounded-lg shadow-md">
+    <thead>
+      <tr className="bg-gray-800 text-white text-sm font-semibold uppercase tracking-wide">
+        <th className="py-3 px-6 text-center">No.</th>
+        <th className="py-3 px-6 text-center">Owner Name</th>
+        <th className="py-3 px-6 text-center">Creation Date</th>
+        <th className="py-3 px-6 text-center">Method</th>
+        <th className="py-3 px-6 text-center">Payment Date</th>
+        <th className="py-3 px-6 text-center">Type</th>
+        <th className="py-3 px-6 text-center">Total Price</th>
+      </tr>
+    </thead>
+    <tbody className="text-gray-700 text-sm">
+      {filteredDeals.length > 0 ? (
+        filteredDeals.map((deal, index) => (
+          <tr
+            key={deal.id}
+            className="border-b hover:bg-gray-100 transition duration-200 ease-in-out"
+          >
+            <td className="py-4 px-6 text-center text-gray-500 font-medium">
+              {index + 1}
+            </td>
+            <td className="py-4 px-6 text-center font-semibold text-gray-800">
+              {deal.owner}
+            </td>
+            <td className="py-4 px-6 text-center text-gray-500">
+              <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-lg">
+                {new Date(deal.created_at).toLocaleDateString()}
+              </span>
+            </td>
+            <td className="py-4 px-6 text-center font-semibold text-gray-800">
+              {deal.payment_status}
+            </td>
+            <td className="py-4 px-6 text-center text-gray-500">
+              <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-lg">
+                {new Date(deal.payment_date).toLocaleDateString()}
+              </span>
+            </td>
+            <td className="py-4 px-6 text-center text-gray-800 font-semibold">
     {deal.payment_method}
   </td>
-  <td className="py-4 px-6 text-center">
-    <span className="text-white bg-blue-500 py-1 px-3 rounded-full font-semibold text-sm shadow-md">
-      ${deal.amount.toLocaleString()}
-    </span>
-  </td>
-</tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={7} className="text-center py-4 text-gray-500">
-                  No deals found for the current user.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+            <td className="py-4 px-6 text-center">
+              <span className="text-white bg-blue-600 py-1 px-3 rounded-full font-semibold text-sm shadow-md">
+                ${deal.amount.toLocaleString()}
+              </span>
+            </td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan={7} className="text-center py-4 text-gray-500">
+            No deals found for the current user.
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
+
     </div>
   );
 };
