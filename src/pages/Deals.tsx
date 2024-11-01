@@ -195,13 +195,13 @@ const Deals = () => {
         <table className="min-w-full bg-white rounded-lg shadow-lg">
           <thead>
             <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
-              <th className="py-3 px-6 text-left">No.</th>
-              <th className="py-3 px-6 text-left">Owner Name</th>
-              <th className="py-3 px-6 text-left">Creation Date</th>
-              <th className="py-3 px-6 text-left">Car Type</th>
-              <th className="py-3 px-6 text-left">Payment Date</th>
-              <th className="py-3 px-6 text-left">Type</th>
-              <th className="py-3 px-6 text-left">Total Price</th>
+              <th className="py-3 px-6 text-center">No.</th>
+              <th className="py-3 px-6 text-center">Owner Name</th>
+              <th className="py-3 px-6 text-center">Creation Date</th>
+              <th className="py-3 px-6 text-center">Car Type</th>
+              <th className="py-3 px-6 text-center">Payment Date</th>
+              <th className="py-3 px-6 text-center">Type</th>
+              <th className="py-3 px-6 text-center">Total Price</th>
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm">
