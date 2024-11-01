@@ -52,7 +52,7 @@ const Deals = () => {
           return {
             ...payment,
             owner: vehicle?.vehicle_specs.owner_name || "Unknown Owner",  // Owner from vehicles data
-            carType: vehicle?.carType || "Unknown Car Type", // Car Type from vehicles data
+            carType: vehicle?.vehicle_specs.manufacturer || "Unknown Car Type", // Car Type from vehicles data
           };
         })
         .filter((deal) => {
@@ -150,10 +150,10 @@ const Deals = () => {
                 <td className="py-3 px-6 flex items-center">{deal.owner}</td>
                 <td className="py-3 px-6"><span className="text-gray-400">{deal.creationDate}</span></td>
                 <td className="py-3 px-6 flex items-center">{deal.carType}</td>
-                <td className="py-3 px-6"><span className="text-gray-400">{deal.date}</span></td>
+                <td className="py-3 px-6"><span className="text-gray-400">{deal.returnDate}</span></td>
                 <td className="py-3 px-6">{deal.type}</td>
                 <td className="py-3 px-6">
-                  <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.totalMoney}</span> 
+                  <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.totalPrice}</span> 
                 </td>
               </tr>
             ))}
