@@ -104,6 +104,8 @@ const Deals = () => {
     status: "",
   });
 
+  const userId = localStorage.getItem("userId");
+
   const toggleTheme = () =>
     setTheme((prevTheme) => (prevTheme === "light" ? "yellow" : "light"));
 
