@@ -198,7 +198,7 @@ const Deals = () => {
         <th className="py-3 px-6 text-center">No.</th>
         <th className="py-3 px-6 text-center">Owner Name</th>
         <th className="py-3 px-6 text-center">Creation Date</th>
-        <th className="py-3 px-6 text-center">Method</th>
+        <th className="py-3 px-6 text-center">Status</th>
         <th className="py-3 px-6 text-center">Payment Date</th>
         <th className="py-3 px-6 text-center">Type</th>
         <th className="py-3 px-6 text-center">Total Price</th>
