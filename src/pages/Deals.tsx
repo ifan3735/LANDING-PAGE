@@ -152,7 +152,7 @@ const Deals = () => {
                   <td className="py-3 px-6"><span className="text-gray-400">{deal.created_at}</span></td>
                   <td className="py-3 px-6 flex items-center">{deal.carType}</td>
                   <td className="py-3 px-6"><span className="text-gray-400">{deal.updated_at}</span></td>
-                  <td className="py-3 px-6">{deal.type}</td>
+                  <td className="py-3 px-6">{deal.payment_method}</td>
                   <td className="py-3 px-6">
                     <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.amount}</span> 
                   </td>
