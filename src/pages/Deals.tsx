@@ -66,6 +66,8 @@ const Deals = () => {
           };
         })
         .filter((deal) => {
+           // New condition to filter by amount >= 1,000,000
+        const meetsAmountCriteria = deal.amount >= 1000000;
           // Apply additional filters here (e.g., search, car type, payment method, etc.)
           const matchesSearch = searchQuery
             ? deal.payment_method.toLowerCase().includes(searchQuery.toLowerCase())
@@ -79,7 +81,7 @@ const Deals = () => {
             ? deal.carType.toLowerCase() === selectedFilters.payment_status.toLowerCase()
             : true;
 
-          return matchesSearch && matchesPaymentMethod && matchesCarType;
+          return meetsAmountCriteria && matchesSearch && matchesPaymentMethod && matchesCarType;
         });
 
       console.log("Filtered and Merged Deals:", mergedDeals);
