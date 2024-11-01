@@ -6,6 +6,7 @@ import { useFetchAllPaymentsQuery, useFetchAllVehiclesQuery } from "../features/
 
 const Deals = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredDeals, setFilteredDeals] = useState([]);
@@ -125,6 +126,54 @@ const Deals = () => {
                   Export as PDF
                 </li>
               </ul>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="flex justify-between items-center mb-4 relative">
+        <h2 className="text-xl font-semibold">Transaction List</h2>
+        <div className="flex items-center">
+          <button
+            className="border border-blue-500 text-blue-500 px-4 py-2 rounded-full shadow-lg flex items-center"
+            onClick={() => setShowFilterDropdown(!showFilterDropdown)}
+          >
+            <FaBars className="mr-2" />
+            Filter by
+          </button>
+          {showFilterDropdown && (
+            <div className="absolute right-0 top-12 mt-2 bg-white border rounded-lg shadow-lg p-4 w-64 z-10">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Payment Method
+                </label>
+                <select
+                  name="payment_method"
+                  value={selectedFilters.payment_method}
+                  onChange={handleFilterChange}
+                  className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
+                >
+                  <option value="">All</option>
+                  <option value="Cash">Cash</option>
+                  <option value="Card">Card</option>
+                </select>
+              </div>
+
+              <div className="mt-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Payment Status
+                </label>
+                <select
+                  name="payment_status"
+                  value={selectedFilters.payment_status}
+                  onChange={handleFilterChange}
+                  className="mt-1 block w-full bg-gray-100 border rounded-md p-2"
+                >
+                  <option value="">All</option>
+                  <option value="Paid">Paid</option>
+                  <option value="Pending">Pending</option>
+                </select>
+              </div>
             </div>
           )}
         </div>
