@@ -8,7 +8,6 @@ const Deals = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [filteredDeals, setFilteredDeals] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({
     payment_method: "",
@@ -31,9 +30,6 @@ const Deals = () => {
     }));
   };
 
-  const toggleFilterDropdown = () =>
-    setShowFilterDropdown((prev) => !prev);
-
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
   // Fetch and merge payments and vehicles data
@@ -42,6 +38,9 @@ const Deals = () => {
 
   useEffect(() => {
     if (!isPaymentsLoading && !isVehiclesLoading && paymentsData && vehiclesData) {
+      console.log("Payments Data:", paymentsData);
+      console.log("Vehicles Data:", vehiclesData);
+
       // Combine payments and vehicles data
       const mergedDeals = paymentsData
         .filter((payment) => payment.booking?.user_id == userId) // Only deals for the logged-in user
@@ -72,6 +71,7 @@ const Deals = () => {
           return matchesSearch && matchesPaymentMethod && matchesCarType;
         });
 
+      console.log("Filtered and Merged Deals:", mergedDeals);
       setFilteredDeals(mergedDeals);
     }
   }, [paymentsData, vehiclesData, isPaymentsLoading, isVehiclesLoading, searchQuery, selectedFilters, userId]);
@@ -144,19 +144,27 @@ const Deals = () => {
             </tr>
           </thead>
           <tbody className="text-gray-700 text-sm">
-            {filteredDeals.map((deal, index) => (
-              <tr key={deal.id} className="border-b border-gray-200 hover:bg-gray-100">
-                <td className="py-3 px-6"><span className="text-gray-400">{index + 1}</span></td>
-                <td className="py-3 px-6 flex items-center">{deal.owner}</td>
-                <td className="py-3 px-6"><span className="text-gray-400">{deal.creationDate}</span></td>
-                <td className="py-3 px-6 flex items-center">{deal.carType}</td>
-                <td className="py-3 px-6"><span className="text-gray-400">{deal.returnDate}</span></td>
-                <td className="py-3 px-6">{deal.type}</td>
-                <td className="py-3 px-6">
-                  <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.totalPrice}</span> 
+            {filteredDeals.length > 0 ? (
+              filteredDeals.map((deal, index) => (
+                <tr key={deal.id} className="border-b border-gray-200 hover:bg-gray-100">
+                  <td className="py-3 px-6"><span className="text-gray-400">{index + 1}</span></td>
+                  <td className="py-3 px-6 flex items-center">{deal.owner}</td>
+                  <td className="py-3 px-6"><span className="text-gray-400">{deal.creationDate}</span></td>
+                  <td className="py-3 px-6 flex items-center">{deal.carType}</td>
+                  <td className="py-3 px-6"><span className="text-gray-400">{deal.returnDate}</span></td>
+                  <td className="py-3 px-6">{deal.type}</td>
+                  <td className="py-3 px-6">
+                    <span className="text-blue-600 bg-blue-50 rounded-xl py-1 px-3">{deal.totalPrice}</span> 
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={7} className="text-center py-4 text-gray-500">
+                  No deals found for the current user.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
