@@ -16,6 +16,10 @@ const Deals = () => {
     payment_method: "",
     status: "",
   });
+  const [filters, setFilters] = useState({
+    carType: "",
+    status: "",
+  });
 
   const userId = localStorage.getItem("userId");
 
