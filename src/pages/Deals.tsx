@@ -192,49 +192,51 @@ const Deals = () => {
       </div>
 
       <div className="overflow-x-auto p-4">
-  <table className="min-w-full bg-white rounded-lg shadow-md">
+  <table className="min-w-full bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl shadow-lg border-separate border-spacing-0 border border-gray-200">
     <thead>
-      <tr className="bg-gray-800 text-white text-sm font-semibold uppercase tracking-wide">
-        <th className="py-3 px-6 text-center">No.</th>
-        <th className="py-3 px-6 text-center">Owner Name</th>
-        <th className="py-3 px-6 text-center">Creation Date</th>
-        <th className="py-3 px-6 text-center">Status</th>
-        <th className="py-3 px-6 text-center">Payment Date</th>
-        <th className="py-3 px-6 text-center">Type</th>
-        <th className="py-3 px-6 text-center">Total Price(Ksh)</th>
+      <tr className="bg-gradient-to-r from-gray-700 to-gray-900 text-white text-xs lg:text-sm font-semibold uppercase tracking-wider shadow-sm">
+        <th className="py-4 px-6 text-center rounded-tl-lg">No.</th>
+        <th className="py-4 px-6 text-center">Owner Name</th>
+        <th className="py-4 px-6 text-center">Creation Date</th>
+        <th className="py-4 px-6 text-center">Status</th>
+        <th className="py-4 px-6 text-center">Payment Date</th>
+        <th className="py-4 px-6 text-center">Type</th>
+        <th className="py-4 px-6 text-center rounded-tr-lg">Total Price (Ksh)</th>
       </tr>
     </thead>
-    <tbody className="text-gray-700 text-sm">
+    <tbody className="text-gray-800 text-xs lg:text-sm font-medium">
       {filteredDeals.length > 0 ? (
         filteredDeals.map((deal, index) => (
           <tr
             key={deal.id}
-            className="border-b hover:bg-gray-100 transition duration-200 ease-in-out"
+            className="border-b border-gray-200 hover:bg-gradient-to-r hover:from-gray-100 hover:to-gray-50 transition duration-300 ease-in-out"
           >
-            <td className="py-4 px-6 text-center text-gray-500 font-medium">
-              {index + 1}
-            </td>
-            <td className="py-4 px-6 text-center font-semibold text-gray-800">
-              {deal.owner}
-            </td>
-            <td className="py-4 px-6 text-center text-gray-500">
-              <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-lg">
+            <td className="py-4 px-6 text-center text-gray-500 font-semibold">{index + 1}</td>
+            <td className="py-4 px-6 text-center text-gray-900">{deal.owner}</td>
+            <td className="py-4 px-6 text-center">
+              <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg shadow-inner">
                 {new Date(deal.created_at).toLocaleDateString()}
               </span>
             </td>
-            <td className="py-4 px-6 text-center font-semibold text-gray-800">
-              {deal.payment_status}
+            <td className="py-4 px-6 text-center">
+              <span
+                className={`px-3 py-1 rounded-lg font-bold shadow ${
+                  deal.payment_status === "Paid"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-yellow-100 text-yellow-600"
+                }`}
+              >
+                {deal.payment_status}
+              </span>
             </td>
-            <td className="py-4 px-6 text-center text-gray-500">
-              <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-lg">
+            <td className="py-4 px-6 text-center">
+              <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-lg shadow-inner">
                 {new Date(deal.payment_date).toLocaleDateString()}
               </span>
             </td>
-            <td className="py-4 px-6 text-center text-gray-800 font-semibold">
-    {deal.payment_method}
-  </td>
+            <td className="py-4 px-6 text-center text-gray-900">{deal.payment_method}</td>
             <td className="py-4 px-6 text-center">
-              <span className="text-white bg-blue-600 py-1 px-3 rounded-full font-semibold text-sm shadow-md">
+              <span className="text-white bg-gradient-to-r from-blue-500 to-indigo-600 py-1 px-4 rounded-full font-semibold text-sm shadow-lg transform hover:scale-105 transition duration-200">
                 {deal.amount.toLocaleString()}
               </span>
             </td>
@@ -242,7 +244,7 @@ const Deals = () => {
         ))
       ) : (
         <tr>
-          <td colSpan={7} className="text-center py-4 text-gray-500">
+          <td colSpan={7} className="text-center py-6 text-gray-500 font-semibold">
             No deals found for the current user.
           </td>
         </tr>
@@ -250,6 +252,7 @@ const Deals = () => {
     </tbody>
   </table>
 </div>
+
 
     </div>
   );
