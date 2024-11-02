@@ -275,14 +275,14 @@ const Dashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
             <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
 
-            {recentActivities.slice(0, visibleActivities).map((activity, index) => (
-              <ActivityCard
-                key={index}
-                carName={activity.carName}
-                price={activity.price}
-                imageUrl={activity.imageUrl}
-              />
-            ))}
+            {recentActivities.map((car, index) => (
+    <ActivityCard
+      key={car.id}
+      carName={car.vehicle_specs.model}
+      price={`$${car.rental_rate}`}
+      imageUrl={car.image}
+    />
+  ))}
 
             <div className="flex justify-center mt-4 space-x-4">
               {visibleActivities < recentActivities.length && (
