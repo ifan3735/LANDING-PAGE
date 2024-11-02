@@ -266,18 +266,34 @@ const Dashboard = () => {
         </div>
 
         <div className="col-span-1 lg:col-span-4">
-          <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
-            <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+        <div className="relative bg-gradient-to-b from-white to-blue-50 p-8 rounded-2xl shadow-xl mb-8 border border-gray-200 overflow-hidden">
+  {/* Decorative Background Element */}
+  <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-blue-100 opacity-10 rounded-2xl pointer-events-none"></div>
 
-            {recentActivities.map((car, index) => (
-    <ActivityCard
-      key={car.id}
-      carName={car.vehicle_specs.model}
-      price={`$${car.rental_rate}`}
-      imageUrl={car.image}
-    />
-  ))}
-          </div>
+  {/* Header Section */}
+  <div className="flex items-center justify-between mb-6">
+    <h2 className="text-2xl font-extrabold text-gray-800 tracking-wide">
+      Recent Activity
+    </h2>
+    <span className="text-sm text-gray-500 italic">Your latest car rentals</span>
+  </div>
+
+  {/* Activity Cards */}
+  <div className="space-y-4">
+    {recentActivities.map((vehicle, index) => (
+      <ActivityCard
+        key={vehicle.id}
+        carName={vehicle.vehicle_specs.model}
+        price={`$${vehicle.rental_rate}`}
+        imageUrl={vehicle.image}
+      />
+    ))}
+  </div>
+
+  {/* Optional Decorative Border */}
+  <div className="absolute top-0 left-0 w-full h-full rounded-2xl border-2 border-transparent bg-gradient-to-r from-transparent to-purple-300 opacity-20 pointer-events-none"></div>
+</div>
+
           <UserInfoCard
             name={userInfo.name}
             locationFrom={userInfo.locationFrom}
