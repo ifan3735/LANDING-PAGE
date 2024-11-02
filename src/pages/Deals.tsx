@@ -190,7 +190,6 @@ const Deals = () => {
           )}
         </div>
       </div>
-
       <div className="overflow-x-auto p-4">
   <table className="min-w-full bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl shadow-lg border-separate border-spacing-0 border border-gray-200">
     <thead>
@@ -252,8 +251,6 @@ const Deals = () => {
     </tbody>
   </table>
 </div>
-
-
     </div>
   );
 };
