@@ -276,7 +276,7 @@ const Dashboard = () => {
     <h2 className="text-3xl font-bold text-gray-800 tracking-wide relative z-10">
       Recent Activity
     </h2>
-    <span className="text-sm text-gray-500 italic relative z-10">Your latest car rentals</span>
+    <span className="text-sm text-gray-500 italic relative z-10">Your latest added cars</span>
   </div>
   <div className="w-full h-1 bg-gradient-to-r from-purple-300 to-blue-300 rounded-full mb-6"></div>
 
