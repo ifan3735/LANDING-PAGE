@@ -266,20 +266,22 @@ const Dashboard = () => {
         </div>
 
         <div className="col-span-1 lg:col-span-4">
-        <div className="relative bg-gradient-to-b from-white to-blue-50 p-8 rounded-2xl shadow-xl mb-8 border border-gray-200 overflow-hidden">
+        <div className="relative bg-gradient-to-br from-white to-blue-50 p-10 rounded-3xl shadow-2xl mb-10 border border-gray-100 overflow-hidden transform transition-all duration-300 hover:shadow-[0px_4px_30px_rgba(0,0,0,0.1)]">
+  
   {/* Decorative Background Element */}
-  <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-blue-100 opacity-10 rounded-2xl pointer-events-none"></div>
+  <div className="absolute inset-0 bg-gradient-to-r from-purple-200 to-blue-200 opacity-20 rounded-3xl pointer-events-none"></div>
 
-  {/* Header Section */}
+  {/* Header Section with Decorative Divider */}
   <div className="flex items-center justify-between mb-6">
-    <h2 className="text-2xl font-extrabold text-gray-800 tracking-wide">
+    <h2 className="text-3xl font-bold text-gray-800 tracking-wide relative z-10">
       Recent Activity
     </h2>
-    <span className="text-sm text-gray-500 italic">Your latest car rentals</span>
+    <span className="text-sm text-gray-500 italic relative z-10">Your latest car rentals</span>
   </div>
+  <div className="w-full h-1 bg-gradient-to-r from-purple-300 to-blue-300 rounded-full mb-6"></div>
 
-  {/* Activity Cards */}
-  <div className="space-y-4">
+  {/* Activity Cards with Animated Entry */}
+  <div className="space-y-6">
     {recentActivities.map((vehicle, index) => (
       <ActivityCard
         key={vehicle.id}
@@ -290,9 +292,13 @@ const Dashboard = () => {
     ))}
   </div>
 
-  {/* Optional Decorative Border */}
-  <div className="absolute top-0 left-0 w-full h-full rounded-2xl border-2 border-transparent bg-gradient-to-r from-transparent to-purple-300 opacity-20 pointer-events-none"></div>
+  {/* Bottom Glow Effect for Visual Depth */}
+  <div className="absolute -bottom-5 -right-5 w-24 h-24 bg-purple-300 rounded-full opacity-30 blur-xl pointer-events-none transform scale-125 transition-transform duration-300 group-hover:scale-150"></div>
+
+  {/* Subtle Glow Border */}
+  <div className="absolute top-0 left-0 w-full h-full rounded-3xl border-[1.5px] border-transparent bg-gradient-to-r from-purple-200 to-blue-200 opacity-20 pointer-events-none"></div>
 </div>
+
 
           <UserInfoCard
             name={userInfo.name}
