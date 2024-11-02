@@ -283,28 +283,7 @@ const Dashboard = () => {
       imageUrl={car.image}
     />
   ))}
-
-            <div className="flex justify-center mt-4 space-x-4">
-              {visibleActivities < recentActivities.length && (
-                <button
-                  className="text-blue-500 hover:underline"
-                  onClick={loadMoreActivities}
-                >
-                  See More
-                </button>
-              )}
-
-              {visibleActivities > 1 && (
-                <button
-                  className="text-blue-500 hover:underline"
-                  onClick={seeLessActivities}
-                >
-                  See Less
-                </button>
-              )}
-            </div>
           </div>
-
           <UserInfoCard
             name={userInfo.name}
             locationFrom={userInfo.locationFrom}
