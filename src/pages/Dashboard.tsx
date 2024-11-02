@@ -119,11 +119,8 @@ const Dashboard = () => {
     imageUrl: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
   };
 
-  const recentActivities = [
-    { carName: 'Lamborghini Autofill', price: '$194,714', imageUrl: 'https://i.pinimg.com/736x/a7/d7/f2/a7d7f2e76dafcb9045e0065d0a772909.jpg' },
-    { carName: 'Tesla Model S', price: '$120,000', imageUrl: 'https://i.pinimg.com/1200x/ba/fa/a9/bafaa9ee834ac42aaf6f08313e930cbe.jpg' },
-    { carName: 'Porsche 911', price: '$200,000', imageUrl: 'https://i.pinimg.com/1200x/e1/06/07/e1060739e7e16b2f935ec364c77cddcd.jpg' }
-  ];
+  const recentActivities = isSuccess && data ? data.slice(0, 3) : [];
+
 
   const loadMoreActivities = () => setVisibleActivities((prev) => prev + 1);
   const seeLessActivities = () => setVisibleActivities(1);
