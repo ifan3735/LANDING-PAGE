@@ -24,8 +24,6 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const carsPerPage = 6;
 
-  const [visibleActivities, setVisibleActivities] = useState(1);
-
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
 
   const handleSearch = (e: { target: { value: SetStateAction<string>; }; }) => setSearchQuery(e.target.value);
@@ -120,10 +118,6 @@ const Dashboard = () => {
   };
 
   const recentActivities = isSuccess && data ? data.slice(0, 3) : [];
-
-
-  const loadMoreActivities = () => setVisibleActivities((prev) => prev + 1);
-  const seeLessActivities = () => setVisibleActivities(1);
 
   return (
     <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
