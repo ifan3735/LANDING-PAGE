@@ -18,7 +18,6 @@ const Transactions = () => {
 
   const userId = localStorage.getItem("userId");
 
-
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
 
   const handleSearch = (e: { target: { value: SetStateAction<string> } }) =>
@@ -32,62 +31,33 @@ const Transactions = () => {
     }));
   };
 
-  const toggleExportDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };  
-  
-  if (isLoading) return <Loader />;
-  
-  const filteredTransactions =
-  !isLoading && data
+  const toggleExportDropdown = () => setShowDropdown(!showDropdown);
+
+  const filteredTransactions = data
     ? data
+        .filter((payment) => payment.booking?.user_id == userId) // Filter by user ID
         .filter((payment) => {
-          const paymentUserId = payment.booking?.user_id; // Capture `user_id` in `booking`
-          console.log("Logged-in userId:", userId);
-          console.log("Transaction user_id from booking:", paymentUserId);
-          
-          const isUserMatch = paymentUserId == userId; // Loose equality check
-          console.log("Does userId match for this transaction?", isUserMatch);
-          
-          return isUserMatch;
-        })
-        .filter((payment) => {
-          // New condition to filter by amount >= 1,000,000
-        const meetsAmountCriteria = payment.amount < 1000000;
-          // Filter based on search query
+          const meetsAmountCriteria = payment.amount < 1000000;
           const matchesSearch = searchQuery
             ? payment.payment_method.toLowerCase().includes(searchQuery.toLowerCase())
             : true;
-          console.log("Search query match:", matchesSearch, "for payment:", payment);
-
-          // Filter based on selected payment method
           const matchesPaymentMethod = selectedFilters.payment_method
             ? payment.payment_method.toLowerCase() === selectedFilters.payment_method.toLowerCase()
             : true;
-          console.log("Payment method match:", matchesPaymentMethod, "for payment:", payment);
-
-          // Filter based on selected payment status
           const matchesPaymentStatus = selectedFilters.payment_status
             ? payment.payment_status.toLowerCase() === selectedFilters.payment_status.toLowerCase()
             : true;
-          console.log("Payment status match:", matchesPaymentStatus, "for payment:", payment);
 
-          // Return true if all conditions match
-          const isMatch = matchesSearch && meetsAmountCriteria && matchesPaymentMethod && matchesPaymentStatus;
-          console.log("Final match result for payment:", isMatch, "for payment:", payment);
-          return isMatch;
+          return meetsAmountCriteria && matchesSearch && matchesPaymentMethod && matchesPaymentStatus;
         })
     : [];
 
-console.log("Final filtered transactions:", filteredTransactions);
-
-
   const exportAsCSV = () => {
-    const headers = "Name,Style,Type,Color,Price\n";
+    const headers = "Payment ID, Booking ID, Amount, Status, Method, Date\n";
     const rows = filteredTransactions
       .map(
-        (Payments) =>
-          `${Payments.payment_id}, ${Payments.booking_id}, ${Payments.amount}, ${Payments.payment_status}, ${Payments.payment_method}, ${Payments.payment_date}`
+        (payment) =>
+          `${payment.payment_id}, ${payment.booking_id}, ${payment.amount}, ${payment.payment_status}, ${payment.payment_method}, ${payment.payment_date}`
       )
       .join("\n");
 
@@ -96,19 +66,19 @@ console.log("Final filtered transactions:", filteredTransactions);
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.href = url;
-    link.download = "cars_export.csv";
+    link.download = "transactions_export.csv";
     link.click();
     URL.revokeObjectURL(url);
   };
 
   const exportAsPDF = () => {
     const doc = new jsPDF();
-    let content = "Name, Style, Type, Color, Price\n";
-    filteredTransactions.forEach((Payments, index) => {
-      content += `${index + 1}. ${Payments.payment_id}, ${Payments.booking_id}, ${Payments.amount}, ${Payments.payment_status}, ${Payments.payment_method}, ${Payments.payment_date}\n`;
+    let content = "Payment ID, Booking ID, Amount, Status, Method, Date\n";
+    filteredTransactions.forEach((payment, index) => {
+      content += `${index + 1}. ${payment.payment_id}, ${payment.booking_id}, ${payment.amount}, ${payment.payment_status}, ${payment.payment_method}, ${payment.payment_date}\n`;
     });
     doc.text(content, 10, 10);
-    doc.save("cars_export.pdf");
+    doc.save("transactions_export.pdf");
   };
 
   return (
@@ -210,76 +180,81 @@ console.log("Final filtered transactions:", filteredTransactions);
         </div>
       </div>
 
-      {filteredTransactions.length === 0 ? (
-  <div className="flex flex-col items-center justify-center mt-16 p-8 rounded-lg shadow-lg bg-gradient-to-br from-gray-100 to-gray-200">
-    <svg
-      className="w-16 h-16 text-blue-500 mb-6 animate-bounce-slow"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M8 12h.01M12 12h.01M16 12h.01M9 16h6m-7 4h8a2 2 0 002-2V6a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2z"
-      ></path>
-    </svg>
-    <p className="text-2xl font-semibold text-gray-800 mb-3">
-      No Transactions Found
-    </p>
-    <p className="text-gray-600 text-center max-w-xs mb-6 leading-relaxed">
-      It seems you haven’t made any transactions yet. Explore our listings or make a booking to get started.
-    </p>
-    <button
-      className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105"
-      onClick={() => window.location.href = '/listings'}
-    >
-      Browse Listings
-    </button>
-  </div>
-) : (
-
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-lg shadow-lg">
-          <thead>
-            <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
-              <th className="py-3 px-6 text-left">No.</th>
-              <th className="py-3 px-6 text-left">Booking ID</th>
-              <th className="py-3 px-6 text-left">Creation Date</th>
-              <th className="py-3 px-6 text-left">Method</th>
-              <th className="py-3 px-6 text-left">Date</th>
-              <th className="py-3 px-6 text-left">Total Money (Ksh)</th>
-              <th className="py-3 px-6 text-left">Status</th>
-            </tr>
-          </thead>
-          <tbody className="text-gray-700 text-sm">
-            {filteredTransactions.map((Payments, index) => (
-              <tr key={Payments.id} className="border-b border-gray-200 hover:bg-gray-100">
-                <td className="py-3 px-6">{index + 1}</td>
-                <td className="py-3 px-6">{Payments.booking_id}</td>
-                <td className="py-3 px-6">{Payments.created_at}</td>
-                <td className="py-3 px-6">{Payments.payment_method}</td>
-                <td className="py-3 px-6">{Payments.payment_date}</td>
-                <td className="py-3 px-6">{Payments.amount}</td>
-                <td className="py-3 px-6">
-                  <span
-                    className={`text-sm font-semibold ${
-                      Payments.payment_status === "Paid"
-                        ? "text-green-500 bg-green-100"
-                        : "text-yellow-500 bg-yellow-100"
-                    } rounded-xl py-1 px-3`}
-                  >
-                    {Payments.payment_status}
-                  </span>
-                </td>
+        {isLoading ? (
+          <div className="flex justify-center items-center py-10">
+            <p className="text-lg font-medium text-gray-600 animate-pulse">
+              Loading transactions, please wait...
+            </p>
+          </div>
+        ) : filteredTransactions.length === 0 ? (
+          <div className="flex flex-col items-center justify-center mt-16 p-8 rounded-lg shadow-lg bg-gradient-to-br from-gray-100 to-gray-200">
+            <svg
+              className="w-16 h-16 text-blue-500 mb-6 animate-bounce-slow"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M9 16h6m-7 4h8a2 2 0 002-2V6a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2z"
+              ></path>
+            </svg>
+            <p className="text-2xl font-semibold text-gray-800 mb-3">
+              No Transactions Found
+            </p>
+            <p className="text-gray-600 text-center max-w-xs mb-6 leading-relaxed">
+              It seems you haven’t made any transactions yet. Explore our listings or make a booking to get started.
+            </p>
+            <button
+              className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-full shadow-lg transform transition-all duration-300 ease-in-out hover:scale-105"
+              onClick={() => (window.location.href = '/listings')}
+            >
+              Browse Listings
+            </button>
+          </div>
+        ) : (
+          <table className="min-w-full bg-white rounded-lg shadow-lg">
+            <thead>
+              <tr className="bg-gray-200 text-gray-600 text-sm leading-normal">
+                <th className="py-3 px-6 text-left">No.</th>
+                <th className="py-3 px-6 text-left">Booking ID</th>
+                <th className="py-3 px-6 text-left">Creation Date</th>
+                <th className="py-3 px-6 text-left">Method</th>
+                <th className="py-3 px-6 text-left">Date</th>
+                <th className="py-3 px-6 text-left">Total Money (Ksh)</th>
+                <th className="py-3 px-6 text-left">Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="text-gray-700 text-sm">
+              {filteredTransactions.map((payment, index) => (
+                <tr key={payment.id} className="border-b border-gray-200 hover:bg-gray-100">
+                  <td className="py-3 px-6">{index + 1}</td>
+                  <td className="py-3 px-6">{payment.booking_id}</td>
+                  <td className="py-3 px-6">{payment.created_at}</td>
+                  <td className="py-3 px-6">{payment.payment_method}</td>
+                  <td className="py-3 px-6">{payment.payment_date}</td>
+                  <td className="py-3 px-6">{payment.amount}</td>
+                  <td className="py-3 px-6">
+                    <span
+                      className={`text-sm font-semibold ${
+                        payment.payment_status === "Paid"
+                          ? "text-green-500 bg-green-100"
+                          : "text-yellow-500 bg-yellow-100"
+                      } rounded-xl py-1 px-3`}
+                    >
+                      {payment.payment_status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
-      )}
     </div>
   );
 };
