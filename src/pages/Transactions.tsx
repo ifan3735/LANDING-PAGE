@@ -3,7 +3,6 @@ import TopBar from "../components/TopBar";
 import { FaBars, FaChevronDown, FaFileExport } from "react-icons/fa";
 import { useFetchAllPaymentsQuery } from "../features/API";
 import jsPDF from "jspdf";
-import Loader from "../components/Loader";
 
 const Transactions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
