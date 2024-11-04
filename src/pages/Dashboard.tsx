@@ -308,7 +308,7 @@ const Dashboard = () => {
   estimatedDistance={companyInfo.estimatedDistance}
   estimatedTime={companyInfo.estimatedTime}
   estimatedFuel={companyInfo.estimatedFuel}
-  passengers={companyInfo.vehicleCapacity}
+  vehicleCapacity={companyInfo.vehicleCapacity}
   average={companyInfo.sustainabilityRating}
   imageUrl={companyInfo.companyLogoUrl}
 />
