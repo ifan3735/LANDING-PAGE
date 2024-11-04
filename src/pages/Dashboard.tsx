@@ -105,17 +105,18 @@ const Dashboard = () => {
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
-  const userInfo = {
-    name: 'John Stevens',
-    locationFrom: 'Georgia, 25 Mile',
-    locationTo: '106 Saint Laurence, UK',
-    distance: '48 KM',
-    duration: '2h 15m',
-    fuel: '12 Liters',
-    passengers: '4 Person',
-    average: 'Average',
-    imageUrl: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg',
+  const companyInfo = {
+    companyName: 'EcoRides Inc.',
+    locationFrom: 'Downtown Hub, Georgia',         // Starting point
+    locationTo: 'Corporate Office, 106 Saint Laurence, UK',  // Destination
+    estimatedDistance: '48 KM',                     // Estimated distance
+    estimatedTime: '2h 15m',                        // Estimated travel time
+    estimatedFuel: '12 Liters',                     // Estimated fuel usage
+    vehicleCapacity: '4 Passengers',                // Vehicle capacity information
+    sustainabilityRating: 'Eco-Friendly',           // A sustainability or eco rating for the company
+    companyLogoUrl: 'https://i.pinimg.com/236x/07/33/ba/0733ba760b29378474dea0fdbcb97107.jpg', // Company logo or image
   };
+  
 
   const recentActivities = isSuccess && data ? data.slice(0, 3) : [];
 
