@@ -246,23 +246,33 @@ const Dashboard = () => {
               </div>
             )}
 
-            <div className="flex justify-between mt-4">
-              <button
-                onClick={goToPreviousPage}
-                disabled={currentPage === 1}
-                className={`px-4 py-2 rounded ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
-              >
-                Back
-              </button>
+<div className="flex justify-center space-x-8 mt-10">
+  <button
+    onClick={goToPreviousPage}
+    disabled={currentPage === 1}
+    className={`px-8 py-3 rounded-full font-semibold text-lg transition duration-300 ease-in-out transform ${
+      currentPage === 1
+        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+        : 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 shadow-md hover:shadow-lg hover:-translate-y-1'
+    }`}
+  >
+    Back
+  </button>
 
-              <button
-                onClick={goToNextPage}
-                disabled={currentPage === Math.ceil(filteredCars.length / carsPerPage)}
-                className={`px-4 py-2 rounded ${currentPage === Math.ceil(filteredCars.length / carsPerPage) ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-600'}`}
-              >
-                Next
-              </button>
-            </div>
+  <button
+    onClick={goToNextPage}
+    disabled={currentPage === Math.ceil(filteredCars.length / carsPerPage)}
+    className={`px-8 py-3 rounded-full font-semibold text-lg transition duration-300 ease-in-out transform ${
+      currentPage === Math.ceil(filteredCars.length / carsPerPage)
+        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+        : 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 shadow-md hover:shadow-lg hover:-translate-y-1'
+    }`}
+  >
+    Next
+  </button>
+</div>
+
+
           </div>
         </div>
 
