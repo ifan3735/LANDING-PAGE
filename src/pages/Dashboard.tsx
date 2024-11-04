@@ -302,11 +302,11 @@ const Dashboard = () => {
 
 
 <UserInfoCard
-  name={companyInfo.companyName}
+  companyName={companyInfo.companyName}
   locationFrom={companyInfo.locationFrom}
   locationTo={companyInfo.locationTo}
-  distance={companyInfo.estimatedDistance}
-  duration={companyInfo.estimatedTime}
+  estimatedDistance={companyInfo.estimatedDistance}
+  estimatedTime={companyInfo.estimatedTime}
   fuel={companyInfo.estimatedFuel}
   passengers={companyInfo.vehicleCapacity}
   average={companyInfo.sustainabilityRating}
