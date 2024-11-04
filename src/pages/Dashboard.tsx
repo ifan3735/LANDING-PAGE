@@ -301,17 +301,18 @@ const Dashboard = () => {
 </div>
 
 
-          <UserInfoCard
-            name={userInfo.name}
-            locationFrom={userInfo.locationFrom}
-            locationTo={userInfo.locationTo}
-            distance={userInfo.distance}
-            duration={userInfo.duration}
-            fuel={userInfo.fuel}
-            passengers={userInfo.passengers}
-            average={userInfo.average}
-            imageUrl={userInfo.imageUrl}
-          />
+<UserInfoCard
+  name={companyInfo.companyName}
+  locationFrom={companyInfo.locationFrom}
+  locationTo={companyInfo.locationTo}
+  distance={companyInfo.estimatedDistance}
+  duration={companyInfo.estimatedTime}
+  fuel={companyInfo.estimatedFuel}
+  passengers={companyInfo.vehicleCapacity}
+  average={companyInfo.sustainabilityRating}
+  imageUrl={companyInfo.companyLogoUrl}
+/>
+
         </div>
       </div>
     </div>
