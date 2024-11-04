@@ -309,7 +309,7 @@ const Dashboard = () => {
   estimatedTime={companyInfo.estimatedTime}
   estimatedFuel={companyInfo.estimatedFuel}
   vehicleCapacity={companyInfo.vehicleCapacity}
-  average={companyInfo.sustainabilityRating}
+  sustainabilityRating={companyInfo.sustainabilityRating}
   imageUrl={companyInfo.companyLogoUrl}
 />
 
