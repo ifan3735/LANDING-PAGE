@@ -310,7 +310,7 @@ const Dashboard = () => {
   estimatedFuel={companyInfo.estimatedFuel}
   vehicleCapacity={companyInfo.vehicleCapacity}
   sustainabilityRating={companyInfo.sustainabilityRating}
-  imageUrl={companyInfo.companyLogoUrl}
+  companyLogoUrl={companyInfo.companyLogoUrl}
 />
 
         </div>
