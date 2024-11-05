@@ -4,24 +4,11 @@ import { FaBars, FaChevronDown, FaFileExport } from "react-icons/fa";
 import { useFetchAllPaymentsQuery } from "../features/API";
 import jsPDF from "jspdf";
 
-type Payment = {
-  payment_id: string;
-  booking_id: string;
-  amount: number;
-  payment_status: string;
-  payment_method: string;
-  payment_date: string;
-  created_at: string;
-  booking?: {
-    user_id: string;
-  };
-};
-
 const Transactions = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, isLoading } = useFetchAllPaymentsQuery<Payment[]>();
+  const { data, isLoading } = useFetchAllPaymentsQuery();
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({
     payment_method: "",
@@ -32,10 +19,10 @@ const Transactions = () => {
 
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handleSearch = (e: { target: { value: SetStateAction<string> } }) =>
     setSearchQuery(e.target.value);
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
@@ -45,9 +32,9 @@ const Transactions = () => {
 
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
-  const filteredTransactions: Payment[] = data
+  const filteredTransactions = data
     ? data
-        .filter((payment) => payment.booking?.user_id === userId) // Filter by user ID
+        .filter((payment) => payment.booking?.user_id == userId) // Filter by user ID
         .filter((payment) => {
           const meetsAmountCriteria = payment.amount < 1000000;
           const matchesSearch = searchQuery
