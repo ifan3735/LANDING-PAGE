@@ -2,7 +2,7 @@ import { useState} from "react";
 import TopBar from "../components/TopBar";
 import { FaChevronDown, FaFileExport, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
-import { use}
+import { useFetchAllBookingsQuery } from "../features/API";
 
 const Calendar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
