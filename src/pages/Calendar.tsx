@@ -8,7 +8,7 @@ const Calendar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const { data: bookings, error, isLoading } = useFetchAllBookingsQuery();
+  const { data } = useFetchAllBookingsQuery();
   const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState({
     type: "",
@@ -67,6 +67,7 @@ const Calendar = () => {
     { id: 16, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[2], type: "car" },
   ];
 
+
   // Dropdown Handlers
   const handleTodayClick = () => {
     setToday(new Date());
@@ -80,6 +81,8 @@ const Calendar = () => {
       [name]: value,
     }));
   };
+
+  const filteredBookings = data ? data.filter((booking) => booking.user_id === userId) : [];
 
   return (
     <div
