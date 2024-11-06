@@ -171,7 +171,7 @@ const Calendar = () => {
                 .filter((booking) => new Date(booking.booking_date).toDateString() === date.toDateString())
                 .map((booking) => (
                   <div
-                    key={booking.booking_id}
+                    key={booking.id}
                     className={`p-4 rounded-lg shadow-md mb-4 transition-transform transform hover:scale-105 cursor-pointer ${
                       booking.type === "urgent"
                         ? "bg-red-100 border border-red-500"
