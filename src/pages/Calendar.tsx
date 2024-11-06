@@ -111,8 +111,8 @@ const Calendar = () => {
   const exportAsPDF = () => {
     const doc = new jsPDF();
     let content = "Payment ID, Booking ID, Amount, Status, Method, Date\n";
-    filteredTransactions.forEach((payment, index) => {
-      content += `${index + 1}. ${payment.payment_id}, ${payment.booking_id}, ${payment.amount}, ${payment.payment_status}, ${payment.payment_method}, ${payment.payment_date}\n`;
+    filteredBookings.forEach((booking, index) => {
+      content += `${index + 1}. ${booking.payment_id}, ${booking.booking_id}, ${booking.amount}, ${booking.payment_status}, ${booking.payment_method}, ${booking.payment_date}\n`;
     });
     doc.text(content, 10, 10);
     doc.save("transactions_export.pdf");
