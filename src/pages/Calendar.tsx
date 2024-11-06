@@ -8,6 +8,7 @@ const Calendar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
+  const { data: bookings, error, isLoading } = useFetchAllBookingsQuery();
   const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState({
     type: "",
