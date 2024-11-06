@@ -10,6 +10,7 @@ const Calendar = () => {
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useFetchAllBookingsQuery();
+console.log("Fetched data:", data);
   const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
   const [selectedFilters, setSelectedFilters] = useState({
     type: "",
@@ -46,9 +47,8 @@ const Calendar = () => {
   const currentDates = getCurrentWeekDates();
 
   // Filter bookings for the logged-in user
-  const filteredBookings = data
-    ? data.filter((booking) => booking.user_id === userId)
-    : [];
+  const filteredBookings = data ? data.filter((booking) => booking.user_id === userId) : [];
+console.log("Filtered Bookings:", filteredBookings);
 
   // Export functions
   const exportAsCSV = () => {
@@ -164,31 +164,36 @@ const Calendar = () => {
         </div>
 
         <div className="grid grid-cols-7 gap-0">
-          {/* Calendar Slots */}
-          {currentDates.map((date, dayIndex) => (
-            <div key={dayIndex} className={`col-span-1 p-2 border-t ${dayIndex > 0 ? "border-l" : ""}`}>
-              {filteredBookings
-                .filter((booking) => new Date(booking.booking_date).toDateString() === date.toDateString())
-                .map((booking) => (
-                  <div
-                    key={booking.id}
-                    className={`p-4 rounded-lg shadow-md mb-4 transition-transform transform hover:scale-105 cursor-pointer ${
-                      booking.type === "urgent"
-                        ? "bg-red-100 border border-red-500"
-                        : booking.type === "car"
-                        ? "bg-blue-100 border border-blue-500"
-                        : "bg-yellow-100 border border-yellow-500"
-                    }`}
-                    data-tip={`${booking.vehicle.vehicle_specs.model} - ${booking.booking_date} - ${booking.return_date}`}
-                  >
-                    <h3 className="text-lg font-semibold">{booking.vehicle.vehicle_specs.model}</h3>
-                    <p className="text-sm">{booking.booking_date}</p>
-                    <p className="text-sm text-gray-600">{booking.return_date}</p>
-                  </div>
-                ))}
-            </div>
-          ))}
-        </div>
+  {currentDates.map((date, dayIndex) => (
+    <div key={dayIndex} className={`col-span-1 p-2 border-t ${dayIndex > 0 ? "border-l" : ""}`}>
+      {filteredBookings
+        .filter((booking) => {
+          const bookingDate = new Date(booking.booking_date).toDateString();
+          const calendarDate = date.toDateString();
+          console.log(`Comparing ${bookingDate} with ${calendarDate}`);
+          return bookingDate === calendarDate;
+        })
+        .map((booking) => (
+          <div
+            key={booking.id}
+            className={`p-4 rounded-lg shadow-md mb-4 transition-transform transform hover:scale-105 cursor-pointer ${
+              booking.type === "urgent"
+                ? "bg-red-100 border border-red-500"
+                : booking.type === "car"
+                ? "bg-blue-100 border border-blue-500"
+                : "bg-yellow-100 border border-yellow-500"
+            }`}
+            data-tip={`${booking.vehicle?.vehicle_specs?.model || "Unknown Model"} - ${booking.booking_date} - ${booking.return_date}`}
+          >
+            <h3 className="text-lg font-semibold">{booking.vehicle?.vehicle_specs?.model || "Unknown Model"}</h3>
+            <p className="text-sm">{new Date(booking.booking_date).toLocaleString()}</p>
+            <p className="text-sm text-gray-600">{new Date(booking.return_date).toLocaleString()}</p>
+          </div>
+        ))}
+    </div>
+  ))}
+</div>
+
       </div>
 
       <Tooltip place="top" type="dark" effect="float" />
