@@ -179,7 +179,7 @@ const Calendar = () => {
                         ? "bg-blue-100 border border-blue-500"
                         : "bg-yellow-100 border border-yellow-500"
                     }`}
-                    data-tip={`${booking.vehicle_name} - ${booking.time} - ${booking.location}`}
+                    data-tip={`${booking.vehicle.vehicle_specs.model} - ${booking.time} - ${booking.location}`}
                   >
                     <h3 className="text-lg font-semibold">{booking.vehicle_name}</h3>
                     <p className="text-sm">{booking.time}</p>
