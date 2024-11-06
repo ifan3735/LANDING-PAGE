@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState } from "react";
 import TopBar from "../components/TopBar";
 import { FaChevronDown, FaFileExport, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
@@ -17,24 +17,23 @@ const Calendar = () => {
   });
   const [today, setToday] = useState(new Date());
 
+  const userId = localStorage.getItem("userId");
+
+  // Toggle functions
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
-  
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setSearchQuery(e.target.value);
 
+  // Date utility functions for calendar navigation
   const nextWeek = () => setCurrentWeekOffset((prevOffset) => prevOffset + 1);
   const prevWeek = () =>
     setCurrentWeekOffset((prevOffset) => (prevOffset > 0 ? prevOffset - 1 : 0));
 
-  // Calculate the start date of the current week based on the offset
   const getWeekStartDate = () => {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + currentWeekOffset * 7);
     return new Date(currentDate.setDate(currentDate.getDate() - currentDate.getDay()));
   };
 
-  // Generate dates for the current week dynamically
   const getCurrentWeekDates = () => {
     const startOfWeek = getWeekStartDate();
     return Array.from({ length: 7 }, (_, index) => {
@@ -46,49 +45,12 @@ const Calendar = () => {
 
   const currentDates = getCurrentWeekDates();
 
-  const userId = localStorage.getItem("userId");
+  // Filter bookings for the logged-in user
+  const filteredBookings = data
+    ? data.filter((booking) => booking.user_id === userId)
+    : [];
 
-  // Sample event data for dynamic rendering
-  const events = [
-    { id: 1, title: "Panamera Car", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[0], type: "car" },
-    { id: 2, title: "Hyundai Turbo", time: "8AM-10PM", location: "Nottingham", date: currentDates[1], type: "car" },
-    { id: 3, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[2], type: "car" },
-    { id: 4, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[3], type: "car" },
-    { id: 5, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[5], type: "urgent" },
-    { id: 6, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[6], type: "request" },
-    { id: 7, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[0], type: "car" },
-    { id: 8, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[1], type: "car" },
-    { id: 9, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[2], type: "urgent" },
-    { id: 10, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[3], type: "request" },
-    { id: 11, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[4], type: "car" },
-    { id: 12, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[5], type: "car" },
-    { id: 13, title: "Hyundai Turbo", time: "9AM-11PM", location: "Southampton", date: currentDates[6], type: "urgent" },
-    { id: 14, title: "Bentley", time: "Available at request", location: "Southampton", date: currentDates[0], type: "request" },
-    { id: 15, title: "Porsche Tayca", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[1], type: "car" },
-    { id: 16, title: "Mercedes", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[2], type: "car" },
-  ];
-
-
-  // Dropdown Handlers
-  const handleTodayClick = () => {
-    setToday(new Date());
-    setCurrentWeekOffset(0);
-  };
-
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setSelectedFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
-  };
-
-  const filteredBookings = data 
-  ? data
-  .filter((booking) => booking.user_id === userId)
-   
-  : [];
-
+  // Export functions
   const exportAsCSV = () => {
     const headers = "Payment ID, Booking ID, Amount, Status, Method, Date\n";
     const rows = filteredBookings
@@ -126,12 +88,9 @@ const Calendar = () => {
     >
       <TopBar
         searchQuery={searchQuery}
-        handleSearch={handleSearch}
+        handleSearch={(e) => setSearchQuery(e.target.value)}
         toggleTheme={toggleTheme}
         theme={theme}
-        exportData={() => {
-          console.log("Data exported");
-        }}
       />
 
       {/* Header with Export and Dropdowns */}
@@ -190,48 +149,6 @@ const Calendar = () => {
             <FaChevronRight />
           </button>
         </div>
-        <div className="space-x-4">
-          {/* Dropdown for Today */}
-          <select
-            className="bg-white border border-gray-300 rounded-md px-4 py-2"
-            onChange={handleTodayClick}
-          >
-            <option>Today</option>
-            {currentDates.map((date, index) => (
-              <option key={index}>{date.toDateString()}</option>
-            ))}
-          </select>
-
-          {/* Dropdown for Types */}
-          <select
-            name="type"
-            value={selectedFilters.type}
-            onChange={handleFilterChange}
-            className="bg-white border border-gray-300 rounded-md px-4 py-2"
-          >
-            <option value="">All Types</option>
-            <option value="car">Car</option>
-            <option value="urgent">Urgent</option>
-            <option value="request">Request</option>
-          </select>
-
-          {/* Dropdown for Year */}
-          <select
-            name="year"
-            value={selectedFilters.year}
-            onChange={handleFilterChange}
-            className="bg-white border border-gray-300 rounded-md px-4 py-2"
-          >
-            {[...Array(5)].map((_, i) => {
-              const year = new Date().getFullYear() - i;
-              return (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              );
-            })}
-          </select>
-        </div>
       </div>
 
       {/* Calendar View Section */}
@@ -250,28 +167,23 @@ const Calendar = () => {
           {/* Calendar Slots */}
           {currentDates.map((date, dayIndex) => (
             <div key={dayIndex} className={`col-span-1 p-2 border-t ${dayIndex > 0 ? "border-l" : ""}`}>
-              {events
-                .filter((event) => event.date.toDateString() === date.toDateString())
-                .map((event) => (
+              {filteredBookings
+                .filter((booking) => new Date(booking.booking_date).toDateString() === date.toDateString())
+                .map((booking) => (
                   <div
-                    key={event.id}
+                    key={booking.booking_id}
                     className={`p-4 rounded-lg shadow-md mb-4 transition-transform transform hover:scale-105 cursor-pointer ${
-                      event.type === "urgent"
+                      booking.type === "urgent"
                         ? "bg-red-100 border border-red-500"
-                        : event.type === "car"
+                        : booking.type === "car"
                         ? "bg-blue-100 border border-blue-500"
                         : "bg-yellow-100 border border-yellow-500"
                     }`}
-                    data-tip={`${event.title} - ${event.time} - ${event.location}`}
+                    data-tip={`${booking.vehicle_name} - ${booking.time} - ${booking.location}`}
                   >
-                    <h3 className="text-lg font-semibold">{event.title}</h3>
-                    <p className="text-sm">{event.time}</p>
-                    <p className="text-sm text-gray-600">{event.location}</p>
-                    {event.type === "urgent" && (
-                      <span className="text-xs font-semibold text-red-600">
-                        Pick Time is over. Collect soon.
-                      </span>
-                    )}
+                    <h3 className="text-lg font-semibold">{booking.vehicle_name}</h3>
+                    <p className="text-sm">{booking.time}</p>
+                    <p className="text-sm text-gray-600">{booking.location}</p>
                   </div>
                 ))}
             </div>
