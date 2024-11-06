@@ -114,6 +114,9 @@ export const apiSlice = createApi({
                 body: booking,
             }),
         }),
+        fetchAllBookings: builder.query<booking[], void>({
+            query: () => '/bookings',
+        }),
     }),
  
 });
