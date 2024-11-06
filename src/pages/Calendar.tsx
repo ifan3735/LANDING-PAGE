@@ -3,6 +3,7 @@ import TopBar from "../components/TopBar";
 import { FaChevronDown, FaFileExport, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
 import { useFetchAllBookingsQuery } from "../features/API";
+import jsPDF from "jspdf";
 
 const Calendar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -105,6 +106,16 @@ const Calendar = () => {
     link.download = "transactions_export.csv";
     link.click();
     URL.revokeObjectURL(url);
+  };
+
+  const exportAsPDF = () => {
+    const doc = new jsPDF();
+    let content = "Payment ID, Booking ID, Amount, Status, Method, Date\n";
+    filteredTransactions.forEach((payment, index) => {
+      content += `${index + 1}. ${payment.payment_id}, ${payment.booking_id}, ${payment.amount}, ${payment.payment_status}, ${payment.payment_method}, ${payment.payment_date}\n`;
+    });
+    doc.text(content, 10, 10);
+    doc.save("transactions_export.pdf");
   };
 
   return (
