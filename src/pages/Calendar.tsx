@@ -45,6 +45,8 @@ const Calendar = () => {
 
   const currentDates = getCurrentWeekDates();
 
+  const userId = localStorage.getItem("userId");
+
   // Sample event data for dynamic rendering
   const events = [
     { id: 1, title: "Panamera Car", time: "7PM-9AM", location: "Newcastle upon Tyne", date: currentDates[0], type: "car" },
