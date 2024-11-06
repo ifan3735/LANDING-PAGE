@@ -82,7 +82,30 @@ const Calendar = () => {
     }));
   };
 
-  const filteredBookings = data ? data.filter((booking) => booking.user_id === userId) : [];
+  const filteredBookings = data 
+  ? data
+  .filter((booking) => booking.user_id === userId)
+   
+  : [];
+
+  const exportAsCSV = () => {
+    const headers = "Payment ID, Booking ID, Amount, Status, Method, Date\n";
+    const rows = filteredBookings
+      .map(
+        (booking) =>
+          `${booking.payment_id}, ${booking.booking_id}, ${booking.amount}, ${booking.payment_status}, ${booking.payment_method}, ${booking.payment_date}`
+      )
+      .join("\n");
+
+    const csvContent = headers + rows;
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = "transactions_export.csv";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div
