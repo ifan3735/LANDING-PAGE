@@ -50,6 +50,7 @@ const Calendar = () => {
   const filteredBookings = data
     ? data.filter((booking) => booking.user_id === userId)
     : [];
+    console.log(filteredBookings);
 
   // Export functions
   const exportAsCSV = () => {
