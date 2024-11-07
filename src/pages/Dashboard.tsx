@@ -170,7 +170,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="col-span-1 lg:col-span-8">
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-12">
               <h2 className="text-xl font-semibold">Available Cars</h2>
               <div className="relative">
                 <button
