@@ -9,10 +9,8 @@ const Calendar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const { data } = useFetchAllBookingsQuery();
-  console.log(data);
+  const { data, refetch } = useFetchAllBookingsQuery(); // Refetch to get new bookings when added
   const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
-  const [today, setToday] = useState(new Date());
 
   const userId = localStorage.getItem("userId");
 
@@ -22,7 +20,7 @@ const Calendar = () => {
 
   // Date utility functions for calendar navigation
   const nextWeek = () => setCurrentWeekOffset((prevOffset) => prevOffset + 1);
-  const prevWeek = () => setCurrentWeekOffset((prevOffset) => (prevOffset > 0 ? prevOffset - 1 : 0));
+  const prevWeek = () => setCurrentWeekOffset((prevOffset) => prevOffset - 1);
 
   const getWeekStartDate = () => {
     const currentDate = new Date();
@@ -41,9 +39,8 @@ const Calendar = () => {
 
   const currentDates = getCurrentWeekDates();
 
-  // Filter bookings for the logged-in user
+  // Filter all bookings for the logged-in user
   const filteredBookings = data ? data.filter((booking) => booking.user_id == userId) : [];
-  console.log(filteredBookings);
 
   // Export functions
   const exportAsCSV = () => {
@@ -93,7 +90,7 @@ const Calendar = () => {
       <div className="flex justify-between items-center my-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">Calendar</h2>
-          <p className="text-sm text-gray-600">Check your pick-up reminders for this week</p>
+          <p className="text-sm text-gray-600">See your booking history and reminders</p>
         </div>
 
         <div className="relative flex items-center space-x-4">
@@ -117,7 +114,7 @@ const Calendar = () => {
       <div className="flex justify-between items-center mb-6 space-x-4">
         <div className="flex items-center">
           <button onClick={prevWeek} className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600"><FaChevronLeft /></button>
-          <h2 className="text-xl font-semibold mx-4">Pick-up Reminders</h2>
+          <h2 className="text-xl font-semibold mx-4">Booking History</h2>
           <button onClick={nextWeek} className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600"><FaChevronRight /></button>
         </div>
       </div>
