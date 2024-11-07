@@ -114,7 +114,7 @@ const Calendar = () => {
       <div className="flex justify-between items-center mb-6 space-x-4">
         <div className="flex items-center">
           <button onClick={prevWeek} className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600"><FaChevronLeft /></button>
-          <h2 className="text-xl font-semibold mx-4">Booking History</h2>
+          <h2 className="text-xl font-semibold mx-4">Booking Schedule</h2>
           <button onClick={nextWeek} className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600"><FaChevronRight /></button>
         </div>
       </div>
