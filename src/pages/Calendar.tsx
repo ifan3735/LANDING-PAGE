@@ -48,9 +48,9 @@ const Calendar = () => {
 
   // Filter bookings for the logged-in user
   const filteredBookings = data
-    ? data.filter((booking) => booking.user_id === userId)
+    ? data.filter((booking) => booking.user_id == userId)
     : [];
-    console.log(filteredBookings);
+    console.log(filteredBookings , "filteredBookings");
 
   // Export functions
   const exportAsCSV = () => {
