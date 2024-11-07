@@ -47,7 +47,7 @@ console.log("Fetched data:", data);
   const currentDates = getCurrentWeekDates();
 
   // Filter bookings for the logged-in user
-  const filteredBookings = data ? data.filter((booking) => booking.user_id === userId) : [];
+  const filteredBookings = data ? data.filter((booking) => booking.user_id == userId) : [];
 console.log("Filtered Bookings:", filteredBookings);
 
   // Export functions
