@@ -9,7 +9,7 @@ const Calendar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, refetch } = useFetchAllBookingsQuery(); // Refetch to get new bookings when added
+  const { data, refetch } = useFetchAllBookingsQuery();
   const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
 
   const userId = localStorage.getItem("userId");
@@ -89,8 +89,8 @@ const Calendar = () => {
       {/* Header with Export and Dropdowns */}
       <div className="flex justify-between items-center my-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">Calendar</h2>
-          <p className="text-sm text-gray-600">See your booking history and reminders</p>
+          <h2 className="text-2xl font-bold text-gray-800">My Booking Calendar</h2>
+          <p className="text-sm text-gray-600">View pick-up and return reminders for your bookings</p>
         </div>
 
         <div className="relative flex items-center space-x-4">
@@ -134,18 +134,29 @@ const Calendar = () => {
           {currentDates.map((date, dayIndex) => (
             <div key={dayIndex} className={`col-span-1 p-2 border-t ${dayIndex > 0 ? "border-l" : ""}`}>
               {filteredBookings
-                .filter((booking) => booking.booking_date === date.toISOString().split("T")[0])
-                .map((booking) => (
-                  <div
-                    key={booking.id}
-                    className="p-4 rounded-lg shadow-md mb-4 bg-blue-100 border border-blue-500 transition-transform transform hover:scale-105 cursor-pointer"
-                    data-tip={`${booking.vehicle?.vehicle_specs?.model || "Unknown Model"} - Pick-up: ${booking.booking_date}`}
-                  >
-                    <h3 className="text-lg font-semibold">{booking.vehicle?.vehicle_specs?.model || "Unknown Model"}</h3>
-                    <p className="text-sm">Pick-up Date: {booking.booking_date}</p>
-                    <p className="text-sm text-gray-600">Return Date: {booking.return_date}</p>
-                  </div>
-                ))}
+                .filter((booking) => {
+                  const bookingDate = booking.booking_date;
+                  const returnDate = booking.return_date;
+                  const calendarDate = date.toISOString().split("T")[0];
+                  return bookingDate === calendarDate || returnDate === calendarDate;
+                })
+                .map((booking) => {
+                  const isPickUpDate = booking.booking_date === date.toISOString().split("T")[0];
+                  const isReturnDate = booking.return_date === date.toISOString().split("T")[0];
+                  return (
+                    <div
+                      key={booking.id}
+                      className={`p-4 rounded-lg shadow-md mb-4 transition-transform transform hover:scale-105 cursor-pointer ${
+                        isPickUpDate ? "bg-blue-100 border border-blue-500" : "bg-red-100 border border-red-500"
+                      }`}
+                      data-tip={`${booking.vehicle?.vehicle_specs?.model || "Unknown Model"} - ${isPickUpDate ? "Pick-up" : "Return"}: ${isPickUpDate ? booking.booking_date : booking.return_date}`}
+                    >
+                      <h3 className="text-lg font-semibold">{booking.vehicle?.vehicle_specs?.model || "Unknown Model"}</h3>
+                      <p className="text-sm">{isPickUpDate ? "Pick-up Date:" : "Return Date:"} {isPickUpDate ? booking.booking_date : booking.return_date}</p>
+                      <p className="text-sm text-gray-600">{isPickUpDate ? `Return: ${booking.return_date}` : `Pick-up: ${booking.booking_date}`}</p>
+                    </div>
+                  );
+                })}
             </div>
           ))}
         </div>
