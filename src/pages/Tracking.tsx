@@ -14,6 +14,10 @@ const Tracking: React.FC = () => {
 
   const filteredCars = data?.filter((booking) => booking.user_id == localStorage.getItem('userId'));
 
+  const handleSelectCar = (car: any) => {
+    setSelectedCar(car === selectedCar ? null : car); // Toggle selection
+  };
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <Topbar />
@@ -22,7 +26,7 @@ const Tracking: React.FC = () => {
       <div className="grid grid-cols-12 gap-6 mt-6">
         {/* Car List Section */}
         <div className="col-span-4">
-          <CarTrackingList cars={filteredCars} onSelectCar={setSelectedCar} />
+          <CarTrackingList cars={filteredCars} selectedCar={selectedCar} onSelectCar={handleSelectCar} />
         </div>
 
         {/* Car Details Section */}

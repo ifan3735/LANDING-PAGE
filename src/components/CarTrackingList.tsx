@@ -3,10 +3,11 @@ import CarCard from './CarCards';
 
 interface CarTrackingListProps {
   cars: any[];
+  selectedCar: any;
   onSelectCar: (car: any) => void;
 }
 
-const CarTrackingList: React.FC<CarTrackingListProps> = ({ cars, onSelectCar }) => {
+const CarTrackingList: React.FC<CarTrackingListProps> = ({ cars, selectedCar, onSelectCar }) => {
   const calculateDurationInDays = (bookingDate: string, returnDate: string) => {
     const booking = new Date(bookingDate);
     const returnD = new Date(returnDate);
@@ -27,6 +28,7 @@ const CarTrackingList: React.FC<CarTrackingListProps> = ({ cars, onSelectCar }) 
           return (
             <div onClick={() => onSelectCar(vehicle)} key={vehicle.id}>
               <CarCard
+                isSelected={selectedCar?.id === vehicle.id}
                 imageUrl={vehicle.vehicle.image}
                 carName={vehicle.vehicle.vehicle_specs.manufacturer}
                 status={status}

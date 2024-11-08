@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 interface CarCardProps {
@@ -8,6 +8,7 @@ interface CarCardProps {
   location: string;
   duration: string;
   imageUrl: string;
+  isSelected: boolean;
 }
 
 const CarCard: React.FC<CarCardProps> = ({
@@ -17,12 +18,14 @@ const CarCard: React.FC<CarCardProps> = ({
   location,
   duration,
   imageUrl,
+  isSelected,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
+  // Expand/collapse based on isSelected prop
+  useEffect(() => {
+    setIsExpanded(isSelected);
+  }, [isSelected]);
 
   return (
     <div
@@ -49,7 +52,7 @@ const CarCard: React.FC<CarCardProps> = ({
           <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
             {status}
           </span>
-          <button onClick={toggleExpand} className="text-gray-400 mt-2">
+          <button onClick={() => setIsExpanded(!isExpanded)} className="text-gray-400 mt-2">
             {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
           </button>
         </div>
