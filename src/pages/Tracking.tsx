@@ -16,6 +16,8 @@ const Tracking: React.FC = () => {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
+  const filteredBookings = data ? data.filter((booking) => booking.user_id == localStorage.getItem('userId')) : [];
+
   return (
     <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
       {/* Topbar */}
