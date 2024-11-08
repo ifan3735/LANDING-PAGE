@@ -35,6 +35,7 @@ const Tracking: React.FC = () => {
             <CarDetails
               carName={selectedCar.vehicle.vehicle_specs.manufacturer}
               imageUrl={selectedCar.vehicle.image}
+              features={selectedCar.vehicle.features || []} // Pass features from the backend response
             />
           ) : (
             <div className="text-gray-500 text-center mt-4">Select a car to view details</div>
@@ -46,3 +47,4 @@ const Tracking: React.FC = () => {
 };
 
 export default Tracking;
+
