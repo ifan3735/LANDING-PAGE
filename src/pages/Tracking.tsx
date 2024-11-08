@@ -9,6 +9,7 @@ import { useFetchAllBookingsQuery } from '../features/API';
 const Tracking: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
   const [theme, setTheme] = useState('light');
+  const { data } = useFetchAllBookingsQuery();
   const [searchQuery, setSearchQuery] = useState('');
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
