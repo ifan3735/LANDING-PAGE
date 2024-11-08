@@ -4,12 +4,14 @@ import { useFetchAllBookingsQuery } from '../features/API';
 
 const CarTrackingList: React.FC = () => {
   const { data, error, isLoading } = useFetchAllBookingsQuery();
+  console.log(data);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
 
   // Filter data if needed, such as filtering based on a specific user ID
   const filteredCars = data?.filter((booking) => booking.user_id == localStorage.getItem('userId'));
+  console.log(filteredCars, 'filteredCars');
 
   return (
     <div className="col-span-4 bg-white rounded-lg shadow-md p-4">
