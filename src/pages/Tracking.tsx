@@ -1,44 +1,40 @@
 import React, { useState } from 'react';
-import Topbar from '../components/TopBar'; // Assuming Topbar is already built
+import Topbar from '../components/TopBar';
 import PageHeader from '../components/PageHeader';
 import CarTrackingList from '../components/CarTrackingList';
 import CarDetails from '../components/CarDetails';
-import RouteDetails from '../components/RouteDetails';
+import { useFetchAllBookingsQuery } from '../features/API';
 
 const Tracking: React.FC = () => {
-  const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
-  const [theme, setTheme] = useState('light');
-  const [searchQuery, setSearchQuery] = useState('');
+  const { data, error, isLoading } = useFetchAllBookingsQuery();
+  const [selectedCar, setSelectedCar] = useState<any>(null);
 
-  const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
-  const toggleExportDropdown = () => setShowDropdown(!showDropdown);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading data</div>;
+
+  const filteredCars = data?.filter((booking) => booking.user_id == localStorage.getItem('userId'));
 
   return (
-    <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
-      {/* Topbar */}
-      <Topbar 
-        searchQuery={searchQuery}
-        handleSearch={handleSearch}
-        toggleTheme={toggleTheme}
-        theme={theme}
-      />
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <Topbar />
+      <PageHeader />
 
-      {/* Page Header */}
-      <PageHeader toggleExportDropdown={toggleExportDropdown} showDropdown={showDropdown} />
+      <div className="grid grid-cols-12 gap-6 mt-6">
+        {/* Car List Section */}
+        <div className="col-span-4">
+          <CarTrackingList cars={filteredCars} onSelectCar={setSelectedCar} />
+        </div>
 
-      {/* Main Content */}
-      <div className="grid grid-cols-12 gap-6">
-        {/* Car Tracking List */}
-        <CarTrackingList />
-
-        {/* Car Details & Route */}
-        <div className="col-span-8 space-y-6">
-          <CarDetails
-            carName="Panamera Platinum"
-            imageUrl="https://i.pinimg.com/564x/b9/6c/cc/b96ccc62ba9c2306b35dc6882c535892.jpg"
-          />
-          <RouteDetails />
+        {/* Car Details Section */}
+        <div className="col-span-8">
+          {selectedCar ? (
+            <CarDetails
+              carName={selectedCar.vehicle.vehicle_specs.manufacturer}
+              imageUrl={selectedCar.vehicle.image}
+            />
+          ) : (
+            <div className="text-gray-500 text-center mt-4">Select a car to view details</div>
+          )}
         </div>
       </div>
     </div>
