@@ -24,17 +24,27 @@ const CarTrackingList: React.FC = () => {
     <div className="col-span-4 bg-white rounded-lg shadow-md p-4">
       <h3 className="font-semibold text-lg mb-4">Car Tracking</h3>
       <div className="space-y-4">
-        {filteredCars?.map((vehicle) => (
-          <CarCard
-            key={vehicle.id} // Assuming each booking has a unique `id`
-            imageUrl={vehicle.vehicle.image} // Replace with correct property from the API data
-            carName={vehicle.vehicle.vehicle_specs.manufacturer} // Replace with correct property from the API data
-            status={vehicle.total_amount > 499000 ? "For Sell" : "For Ride"} 
-            time={vehicle.booking_date} // Replace with correct property from the API data
-            location={vehicle.location || "Nairobi CBD"} // Replace with correct property from the API data
-            duration={`${calculateDurationInDays(vehicle.booking_date, vehicle.return_date)} days`} // Calculated duration in days
-          />
-        ))}
+        {filteredCars?.map((vehicle) => {
+          // Conditionally set status based on amount
+          const status = vehicle.total_amount > 499000 ? "For Sell" : "For Ride";
+          
+          // Conditionally set duration text based on status
+          const duration = status === "For Sell"
+            ? "Bought by User"
+            : `${calculateDurationInDays(vehicle.booking_date, vehicle.return_date)} days`;
+
+          return (
+            <CarCard
+              key={vehicle.id} // Assuming each booking has a unique `id`
+              imageUrl={vehicle.vehicle.image} // Replace with correct property from the API data
+              carName={vehicle.vehicle.vehicle_specs.manufacturer} // Replace with correct property from the API data
+              status={status} 
+              time={vehicle.booking_date} // Replace with correct property from the API data
+              location={vehicle.location || "Nairobi CBD"} // Replace with correct property from the API data
+              duration={duration} // Display "Bought by User" or calculated duration in days
+            />
+          );
+        })}
       </div>
     </div>
   );
