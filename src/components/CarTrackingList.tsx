@@ -21,7 +21,7 @@ const CarTrackingList: React.FC = () => {
           <CarCard
             key={vehicle.id} // Assuming each booking has a unique `id`
             imageUrl={vehicle.vehicle.image} // Replace with correct property from the API data
-            carName={vehicle.carName} // Replace with correct property from the API data
+            carName={vehicle.vehicle.vehicle_specs.manufacturer} // Replace with correct property from the API data
             status={vehicle.status} // Replace with correct property from the API data
             time={vehicle.time} // Replace with correct property from the API data
             location={vehicle.location} // Replace with correct property from the API data
