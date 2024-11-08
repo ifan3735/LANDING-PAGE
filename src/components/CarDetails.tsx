@@ -46,7 +46,4 @@ const CarDetails: React.FC<CarDetailsProps> = ({ carName, imageUrl, features }) 
     </div>
   );
 };
-
-
-
 export default CarDetails;

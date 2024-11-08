@@ -33,7 +33,7 @@ const Tracking: React.FC = () => {
         <div className="col-span-8">
           {selectedCar ? (
             <CarDetails
-              carName={selectedCar.vehicle.vehicle_specs.manufacturer}
+              carName={selectedCar.vehicle.vehicle_specs.model}
               imageUrl={selectedCar.vehicle.image}
               features={selectedCar.vehicle.vehicle_specs.features || []} // Pass features from the backend response
             />
