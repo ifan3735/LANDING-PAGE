@@ -9,9 +9,16 @@ const CarTrackingList: React.FC = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
 
-  // Filter data if needed, such as filtering based on a specific user ID
   const filteredCars = data?.filter((booking) => booking.user_id == localStorage.getItem('userId'));
   console.log(filteredCars, 'filteredCars');
+
+  // Helper function to calculate the duration in days
+  const calculateDurationInDays = (bookingDate: string, returnDate: string) => {
+    const booking = new Date(bookingDate);
+    const returnD = new Date(returnDate);
+    const differenceInTime = returnD.getTime() - booking.getTime();
+    return Math.ceil(differenceInTime / (1000 * 3600 * 24)); // Convert ms to days
+  };
 
   return (
     <div className="col-span-4 bg-white rounded-lg shadow-md p-4">
@@ -25,7 +32,7 @@ const CarTrackingList: React.FC = () => {
             status={vehicle.status || "For Ride"} // Replace with correct property from the API data
             time={vehicle.booking_date} // Replace with correct property from the API data
             location={vehicle.location || "Nairobi CBD"} // Replace with correct property from the API data
-            duration={vehicle.return_date} // Replace with correct property from the API data
+            duration={`${calculateDurationInDays(vehicle.booking_date, vehicle.return_date)} days`} // Calculated duration in days
           />
         ))}
       </div>

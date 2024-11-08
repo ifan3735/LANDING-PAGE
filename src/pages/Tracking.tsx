@@ -4,19 +4,15 @@ import PageHeader from '../components/PageHeader';
 import CarTrackingList from '../components/CarTrackingList';
 import CarDetails from '../components/CarDetails';
 import RouteDetails from '../components/RouteDetails';
-import { useFetchAllBookingsQuery } from '../features/API';
 
 const Tracking: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false); // To toggle export dropdown
   const [theme, setTheme] = useState('light');
-  const { data } = useFetchAllBookingsQuery();
   const [searchQuery, setSearchQuery] = useState('');
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value);
   const toggleExportDropdown = () => setShowDropdown(!showDropdown);
-
-  const filteredBookings = data ? data.filter((booking) => booking.user_id == localStorage.getItem('userId')) : [];
 
   return (
     <div className={`transition-all duration-500 p-6 ${theme === 'yellow' ? 'bg-yellow-100 text-gray-900' : 'bg-gray-100 text-gray-900'} min-h-screen`}>
