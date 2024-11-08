@@ -9,7 +9,7 @@ const CarTrackingList: React.FC = () => {
   if (error) return <div>Error loading data</div>;
 
   // Filter data if needed, such as filtering based on a specific user ID
-  const filteredCars = data?.filter((booking) => booking.user_id === localStorage.getItem('userId'));
+  const filteredCars = data?.filter((booking) => booking.user_id == localStorage.getItem('userId'));
 
   return (
     <div className="col-span-4 bg-white rounded-lg shadow-md p-4">
