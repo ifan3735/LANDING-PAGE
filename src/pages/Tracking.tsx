@@ -31,16 +31,45 @@ const Tracking: React.FC = () => {
 
         {/* Car Details Section */}
         <div className="col-span-8">
-          {selectedCar ? (
-            <CarDetails
-              carName={selectedCar.vehicle.vehicle_specs.manufacturer}
-              imageUrl={selectedCar.vehicle.image}
-              features={selectedCar.vehicle.vehicle_specs.features || []} // Pass features from the backend response
-            />
-          ) : (
-            <div className="text-gray-500 text-center mt-4">Select a car to view details</div>
-          )}
+  {selectedCar ? (
+    <>
+      <CarDetails
+        carName={selectedCar.vehicle.vehicle_specs.manufacturer}
+        imageUrl={selectedCar.vehicle.image}
+        features={selectedCar.vehicle.vehicle_specs.features || []}
+      />
+      
+      {/* Additional Information */}
+      <div className="mt-6">
+        <div className="grid grid-cols-2 gap-6">
+          {/* Booking Details */}
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Booking Details</h3>
+            <p><strong>Booking Status:</strong> {selectedCar.booking_status}</p>
+            <p><strong>Rental Period:</strong> {selectedCar.start_date} - {selectedCar.end_date}</p>
+            <p><strong>Payment Status:</strong> {selectedCar.payment_status}</p>
+          </div>
+
+          {/* Related Cars */}
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <h3 className="text-xl font-semibold mb-4">Other Cars You Might Like</h3>
+            <div className="grid grid-cols-2 gap-4">
+              {filteredCars.map((car) => (
+                <div key={car.id} className="bg-gray-200 p-4 rounded-lg shadow-md">
+                  <img src={car.vehicle.image} alt={car.vehicle.vehicle_specs.manufacturer} className="w-full h-32 object-cover rounded-md" />
+                  <h4 className="text-lg font-semibold mt-2">{car.vehicle.vehicle_specs.manufacturer}</h4>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
+      </div>
+    </>
+  ) : (
+    <div className="text-gray-500 text-center mt-4">Select a car to view details</div>
+  )}
+</div>
+
       </div>
     </div>
   );
