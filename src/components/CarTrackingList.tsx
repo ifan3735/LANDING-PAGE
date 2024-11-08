@@ -17,15 +17,15 @@ const CarTrackingList: React.FC = () => {
     <div className="col-span-4 bg-white rounded-lg shadow-md p-4">
       <h3 className="font-semibold text-lg mb-4">Car Tracking</h3>
       <div className="space-y-4">
-        {filteredCars?.map((car) => (
+        {filteredCars?.map((vehicle) => (
           <CarCard
-            key={car.id} // Assuming each booking has a unique `id`
-            imageUrl={car.imageUrl} // Replace with correct property from the API data
-            carName={car.carName} // Replace with correct property from the API data
-            status={car.status} // Replace with correct property from the API data
-            time={car.time} // Replace with correct property from the API data
-            location={car.location} // Replace with correct property from the API data
-            duration={car.duration} // Replace with correct property from the API data
+            key={vehicle.id} // Assuming each booking has a unique `id`
+            imageUrl={vehicle.vehicle.image} // Replace with correct property from the API data
+            carName={vehicle.carName} // Replace with correct property from the API data
+            status={vehicle.status} // Replace with correct property from the API data
+            time={vehicle.time} // Replace with correct property from the API data
+            location={vehicle.location} // Replace with correct property from the API data
+            duration={vehicle.duration} // Replace with correct property from the API data
           />
         ))}
       </div>
