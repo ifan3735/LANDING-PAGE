@@ -16,7 +16,7 @@ const CarCard: React.FC<CarCardProps> = ({
   time,
   location,
   duration,
-  imageUrl
+  imageUrl,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
