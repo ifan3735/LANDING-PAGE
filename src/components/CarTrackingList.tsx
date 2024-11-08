@@ -23,7 +23,7 @@ const CarTrackingList: React.FC = () => {
             imageUrl={vehicle.vehicle.image} // Replace with correct property from the API data
             carName={vehicle.vehicle.vehicle_specs.manufacturer} // Replace with correct property from the API data
             status={vehicle.status || "For Ride"} // Replace with correct property from the API data
-            time={vehicle.time} // Replace with correct property from the API data
+            time={vehicle.booking_date} // Replace with correct property from the API data
             location={vehicle.location} // Replace with correct property from the API data
             duration={vehicle.duration} // Replace with correct property from the API data
           />
