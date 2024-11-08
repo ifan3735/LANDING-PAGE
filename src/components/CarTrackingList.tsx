@@ -30,7 +30,7 @@ const CarTrackingList: React.FC<CarTrackingListProps> = ({ cars, selectedCar, on
               <CarCard
                 isSelected={selectedCar?.id === vehicle.id}
                 imageUrl={vehicle.vehicle.image}
-                carName={vehicle.vehicle.vehicle_specs.manufacturer}
+                carName={vehicle.vehicle.vehicle_specs.model}
                 status={status}
                 time={vehicle.booking_date}
                 location={vehicle.location || "Nairobi CBD"}
