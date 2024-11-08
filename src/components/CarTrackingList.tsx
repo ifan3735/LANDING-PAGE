@@ -29,7 +29,7 @@ const CarTrackingList: React.FC = () => {
             key={vehicle.id} // Assuming each booking has a unique `id`
             imageUrl={vehicle.vehicle.image} // Replace with correct property from the API data
             carName={vehicle.vehicle.vehicle_specs.manufacturer} // Replace with correct property from the API data
-            status={vehicle.status || "For Ride"} // Replace with correct property from the API data
+            status={vehicle.total_amount > 499000 ? "For Sell" : "For Ride"} 
             time={vehicle.booking_date} // Replace with correct property from the API data
             location={vehicle.location || "Nairobi CBD"} // Replace with correct property from the API data
             duration={`${calculateDurationInDays(vehicle.booking_date, vehicle.return_date)} days`} // Calculated duration in days
