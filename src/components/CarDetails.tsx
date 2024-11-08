@@ -1,7 +1,7 @@
 interface CarDetailsProps {
   carName: string;
   imageUrl: string;
-  features: string; // Update features to be an array of strings
+  features: string[]; // Update features to be an array of strings
 }
 
 const CarDetails: React.FC<CarDetailsProps> = ({ carName, imageUrl, features }) => {
@@ -16,7 +16,9 @@ const CarDetails: React.FC<CarDetailsProps> = ({ carName, imageUrl, features }) 
         
         {/* Display features list */}
         <ul className="mt-4 text-sm text-gray-600 list-disc list-inside">
-          {features}
+          {features.map((feature, index) => (
+            <li key={index}>{feature}</li>
+          ))}
         </ul>
       </div>
 
