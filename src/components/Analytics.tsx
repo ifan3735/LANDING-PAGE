@@ -47,7 +47,7 @@ const AnalyticsReport: React.FC = () => {
 
       <div className="relative">
         <div className="absolute left-0 bottom-0 flex flex-col justify-between h-full py-4 text-xs text-gray-500">
-          <span>10000</span><span>8000</span><span>6000</span><span>4000</span><span>2000</span><span>0</span>
+        <span>60000</span><span>50000</span><span>40000</span><span>30000</span><span>20000</span><span>10000</span><span>0</span>
         </div>
         <div className="ml-6 flex justify-between items-end h-60">
           {data.map((item, index) => (
