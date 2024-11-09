@@ -7,7 +7,15 @@ const AnalyticsReport: React.FC = () => {
 
   const userId = localStorage.getItem('userId');
 
-  // Filter and aggregate booking data for the logged-in user
+  // Function to calculate the week number
+  const getWeekNumber = (date: Date) => {
+    const startDate = new Date(date.getFullYear(), 0, 1);
+    const diff = date.getTime() - startDate.getTime();
+    const oneWeek = 1000 * 60 * 60 * 24 * 7;
+    return Math.floor(diff / oneWeek) + 1;
+  };
+
+  // Monthly Data Calculation
   const monthlyData = useMemo(() => {
     const monthlyTotals = Array.from({ length: 12 }, () => ({ spent: 0, gotBack: 0 }));
 
@@ -20,13 +28,41 @@ const AnalyticsReport: React.FC = () => {
           monthlyTotals[bookingMonth].spent += amountSpent;
         });
     }
+
     return monthlyTotals.map((totals, index) => ({
       label: new Date(0, index).toLocaleString('default', { month: 'short' }),
       ...totals,
     }));
   }, [bookingsData, userId]);
 
-  const data = viewMode === 'monthly' ? monthlyData : []; // Placeholder for weeklyData
+  // Weekly Data Calculation
+  const weeklyData = useMemo(() => {
+    const weeklyTotals: Record<number, { spent: number; gotBack: number }> = {};
+
+    if (bookingsData) {
+      bookingsData
+        .filter((booking) => booking.user_id == userId)
+        .forEach((booking) => {
+          const bookingDate = new Date(booking.booking_date);
+          const weekNumber = getWeekNumber(bookingDate);
+          const amountSpent = parseFloat(booking.total_amount);
+
+          if (!weeklyTotals[weekNumber]) {
+            weeklyTotals[weekNumber] = { spent: 0, gotBack: 0 };
+          }
+
+          weeklyTotals[weekNumber].spent += amountSpent;
+        });
+    }
+
+    // Convert weeklyTotals into an array
+    return Object.entries(weeklyTotals).map(([week, totals]) => ({
+      label: `Week ${week}`,
+      ...totals,
+    }));
+  }, [bookingsData, userId]);
+
+  const data = viewMode === 'monthly' ? monthlyData : weeklyData;
 
   // Determine the maximum amount spent for scaling
   const maxSpent = Math.max(...data.map(item => item.spent), 0);
