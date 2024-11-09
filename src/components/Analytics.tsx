@@ -4,33 +4,58 @@ import { useFetchAllBookingsQuery } from '../features/API';
 const AnalyticsReport: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
   const [viewMode, setViewMode] = useState<'monthly' | 'weekly'>('monthly');
-
   const userId = localStorage.getItem('userId');
 
-  // Filter and aggregate booking data for the logged-in user
+  // Calculate Monthly Spending
   const monthlyData = useMemo(() => {
-    const monthlyTotals = Array.from({ length: 12 }, () => ({ spent: 0, gotBack: 0 }));
-
+    const monthlyTotals = Array(12).fill({ spent: 0, gotBack: 0 });
+    
     if (bookingsData) {
       bookingsData
         .filter((booking) => booking.user_id == userId)
         .forEach((booking) => {
           const bookingMonth = new Date(booking.booking_date).getMonth();
-          const amountSpent = parseFloat(booking.total_amount);
-          monthlyTotals[bookingMonth].spent += amountSpent;
+          const amountSpent = parseFloat(booking.total_amount) || 0;
+          monthlyTotals[bookingMonth] = {
+            spent: monthlyTotals[bookingMonth].spent + amountSpent,
+            gotBack: 0,
+          };
         });
     }
+    console.log("Monthly Data:", monthlyTotals);
     return monthlyTotals.map((totals, index) => ({
       label: new Date(0, index).toLocaleString('default', { month: 'short' }),
       ...totals,
     }));
   }, [bookingsData, userId]);
 
-  const data = viewMode === 'monthly' ? monthlyData : []; // Placeholder for weeklyData
+  // Calculate Weekly Spending
+  const weeklyData = useMemo(() => {
+    const weeklyTotals = Array(7).fill({ spent: 0, gotBack: 0 });
 
-  // Determine the maximum amount spent for scaling
-  const maxSpent = Math.max(...data.map(item => item.spent), 0);
-  const scaleFactor = maxSpent > 0 ? 200 / maxSpent : 1; // Adjust 200px max bar height dynamically
+    if (bookingsData) {
+      bookingsData
+        .filter((booking) => booking.user_id == userId)
+        .forEach((booking) => {
+          const bookingDay = new Date(booking.booking_date).getDay();
+          const amountSpent = parseFloat(booking.total_amount) || 0;
+          weeklyTotals[bookingDay] = {
+            spent: weeklyTotals[bookingDay].spent + amountSpent,
+            gotBack: 0,
+          };
+        });
+    }
+    console.log("Weekly Data:", weeklyTotals);
+    return weeklyTotals.map((totals, index) => ({
+      label: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][index],
+      ...totals,
+    }));
+  }, [bookingsData, userId]);
+
+  // Determine graph scale based on max spending
+  const data = viewMode === 'monthly' ? monthlyData : weeklyData;
+  const maxSpent = Math.max(...data.map(item => item.spent));
+  const scale = maxSpent > 0 ? Math.ceil(maxSpent / 10) * 10 : 50;
 
   return (
     <div className="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
@@ -39,24 +64,20 @@ const AnalyticsReport: React.FC = () => {
         <div className="text-sm space-x-4 flex items-center">
           <span className="text-[#4F76C1]">● Spent</span>
           <span className="text-[#4CAF50]">● Got Back</span>
-          <select
-            className="ml-4 border rounded p-1"
-            onChange={(e) => setViewMode(e.target.value as 'monthly' | 'weekly')}
-          >
+          <select className="ml-4 border rounded p-1" onChange={(e) => setViewMode(e.target.value as 'monthly' | 'weekly')}>
             <option value="monthly">Monthly</option>
             <option value="weekly">Weekly</option>
           </select>
         </div>
       </div>
 
+      {/* Graph Container */}
       <div className="relative">
-        {/* Scale Labels, dynamically calculated */}
         <div className="absolute left-0 bottom-0 flex flex-col justify-between h-full py-4 text-xs text-gray-500">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i}>{Math.round((maxSpent * (5 - i) / 5) / 100) * 100}</span>
+          {[...Array(6)].map((_, i) => (
+            <span key={i}>{(scale / 5) * (5 - i)}</span>
           ))}
         </div>
-
         <div className="ml-6 flex justify-between items-end h-60">
           {data.map((item, index) => (
             <div key={index} className="flex flex-col items-center">
@@ -64,7 +85,7 @@ const AnalyticsReport: React.FC = () => {
                 <div
                   className="w-12 rounded-md"
                   style={{
-                    height: `${item.spent * scaleFactor}px`, // Adjusts dynamically based on max spent
+                    height: `${(item.spent / scale) * 100}%`,
                     background: 'linear-gradient(180deg, #4F76C1 0%, #003366 100%)',
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
                   }}
