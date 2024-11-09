@@ -3,6 +3,7 @@ import { useFetchAllBookingsQuery } from '../features/API';
 
 const AnalyticsReport: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
+  console.log(bookingsData);
   const [viewMode, setViewMode] = useState<'monthly' | 'weekly'>('monthly');
 
   const userId = localStorage.getItem('userId');
@@ -17,14 +18,13 @@ const AnalyticsReport: React.FC = () => {
         .forEach((booking) => {
           const bookingMonth = new Date(booking.booking_date).getMonth(); // get month as index (0-11)
           const amountSpent = booking.total_amount; // Replace with actual field in your booking data
-
+console.log(amountSpent);
           monthlyTotals[bookingMonth] = {
             spent: monthlyTotals[bookingMonth].spent + amountSpent,
             gotBack: 0, // Adjust if any amount is returned
           };
         });
     }
-    
     return monthlyTotals.map((totals, index) => ({
       label: new Date(0, index).toLocaleString('default', { month: 'short' }),
       ...totals,
