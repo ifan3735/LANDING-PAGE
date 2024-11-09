@@ -3,33 +3,36 @@ import { useFetchAllBookingsQuery } from '../features/API';
 
 const AnalyticsReport: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
-  console.log(bookingsData);
   const [viewMode, setViewMode] = useState<'monthly' | 'weekly'>('monthly');
-
+  
   const userId = localStorage.getItem('userId');
 
-  // Filter and aggregate booking data for the logged-in user
+  // Filter bookings for the logged-in user and log them to the console
+  const userBookings = useMemo(() => {
+    const filteredBookings = bookingsData?.filter((booking) => booking.user_id == userId) || [];
+    console.log("Logged-in user's bookings:", filteredBookings);
+    return filteredBookings;
+  }, [bookingsData, userId]);
+
+  // Aggregate the filtered bookings data to calculate monthly totals
   const monthlyData = useMemo(() => {
     const monthlyTotals = Array(12).fill({ spent: 0, gotBack: 0 });
+
+    userBookings.forEach((booking) => {
+      const bookingMonth = new Date(booking.booking_date).getMonth();
+      const amountSpent = booking.total_amount;
+      
+      monthlyTotals[bookingMonth] = {
+        spent: monthlyTotals[bookingMonth].spent + amountSpent,
+        gotBack: 0, // Adjust if there are amounts to be returned
+      };
+    });
     
-    if (bookingsData) {
-      bookingsData
-        .filter((booking) => booking.user_id == userId)
-        .forEach((booking) => {
-          const bookingMonth = new Date(booking.booking_date).getMonth(); // get month as index (0-11)
-          const amountSpent = booking.total_amount; // Replace with actual field in your booking data
-console.log(amountSpent);
-          monthlyTotals[bookingMonth] = {
-            spent: monthlyTotals[bookingMonth].spent + amountSpent,
-            gotBack: 0, // Adjust if any amount is returned
-          };
-        });
-    }
     return monthlyTotals.map((totals, index) => ({
       label: new Date(0, index).toLocaleString('default', { month: 'short' }),
       ...totals,
     }));
-  }, [bookingsData, userId]);
+  }, [userBookings]);
 
   const data = viewMode === 'monthly' ? monthlyData : weeklyData;
 
