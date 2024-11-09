@@ -15,6 +15,25 @@ const AnalyticsReport: React.FC = () => {
     return startDate;
   };
 
+  // Monthly Data Calculation
+  const monthlyData = useMemo(() => {
+    const monthlyTotals = Array.from({ length: 12 }, () => ({ spent: 0 }));
+
+    if (bookingsData) {
+      bookingsData
+        .filter((booking) => booking.user_id == userId)
+        .forEach((booking) => {
+          const bookingMonth = new Date(booking.booking_date).getMonth();
+          const amountSpent = parseFloat(booking.total_amount);
+          monthlyTotals[bookingMonth].spent += amountSpent;
+        });
+    }
+    return monthlyTotals.map((totals, index) => ({
+      label: new Date(0, index).toLocaleString('default', { month: 'short' }),
+      ...totals,
+    }));
+  }, [bookingsData, userId]);
+
   // Weekly Data Calculation (current week, Sunday to Saturday)
   const weeklyData = useMemo(() => {
     const currentDate = new Date();
@@ -47,7 +66,7 @@ const AnalyticsReport: React.FC = () => {
     }));
   }, [bookingsData, userId]);
 
-  const data = viewMode === 'monthly' ? [] : weeklyData;
+  const data = viewMode === 'monthly' ? monthlyData : weeklyData;
 
   // Determine the maximum amount spent for scaling
   const maxSpent = Math.max(...data.map(item => item.spent), 0);
