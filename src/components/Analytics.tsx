@@ -1,11 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { useFetchAllBookingsQuery } from '../features/API';
-import { BarChart, Bar, PieChart, Pie, Tooltip, Legend, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
+import { 
+  BarChart, Bar, PieChart, Pie, LineChart, Line, AreaChart, Area, 
+  Tooltip, Legend, XAxis, YAxis, ResponsiveContainer, Cell 
+} from 'recharts';
 
 const AnalyticsReport: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
   const userId = localStorage.getItem('userId');
-  const [chartType, setChartType] = useState<'bar' | 'pie'>('bar'); // State to handle chart type
+  const [chartType, setChartType] = useState<'bar' | 'pie' | 'line' | 'area'>('bar');
 
   // Monthly Data Calculation
   const monthlyData = useMemo(() => {
@@ -27,8 +30,6 @@ const AnalyticsReport: React.FC = () => {
   }, [bookingsData, userId]);
 
   const data = monthlyData;
-  const maxSpent = Math.max(...data.map(item => item.spent), 0);
-  const scaleFactor = maxSpent > 0 ? 200 / maxSpent : 1;
 
   return (
     <div className="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
@@ -41,28 +42,30 @@ const AnalyticsReport: React.FC = () => {
         {/* Dropdown for chart selection */}
         <select
           value={chartType}
-          onChange={(e) => setChartType(e.target.value as 'bar' | 'pie')}
+          onChange={(e) => setChartType(e.target.value as 'bar' | 'pie' | 'line' | 'area')}
           className="border rounded p-1 text-sm"
         >
           <option value="bar">Bar Chart</option>
           <option value="pie">Pie Chart</option>
+          <option value="line">Line Chart</option>
+          <option value="area">Area Chart</option>
         </select>
       </div>
 
       {/* Conditional Rendering of Chart Types */}
-      {chartType === 'bar' ? (
-        <div className="relative">
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-              <XAxis dataKey="label" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="spent" fill="#4F76C1" />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      ) : (
+      {chartType === 'bar' && (
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <XAxis dataKey="label" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="spent" fill="#4F76C1" />
+          </BarChart>
+        </ResponsiveContainer>
+      )}
+
+      {chartType === 'pie' && (
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie
@@ -82,6 +85,30 @@ const AnalyticsReport: React.FC = () => {
             <Tooltip />
             <Legend />
           </PieChart>
+        </ResponsiveContainer>
+      )}
+
+      {chartType === 'line' && (
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <XAxis dataKey="label" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="spent" stroke="#4F76C1" strokeWidth={2} />
+          </LineChart>
+        </ResponsiveContainer>
+      )}
+
+      {chartType === 'area' && (
+        <ResponsiveContainer width="100%" height={300}>
+          <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <XAxis dataKey="label" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Area type="monotone" dataKey="spent" stroke="#4F76C1" fill="#4F76C1" />
+          </AreaChart>
         </ResponsiveContainer>
       )}
     </div>
