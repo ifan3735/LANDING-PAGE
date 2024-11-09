@@ -15,8 +15,8 @@ const AnalyticsReport: React.FC = () => {
       bookingsData
         .filter((booking) => booking.user_id == userId)
         .forEach((booking) => {
-          const bookingMonth = new Date(booking.date).getMonth(); // get month as index (0-11)
-          const amountSpent = booking.amount; // Replace with actual field in your booking data
+          const bookingMonth = new Date(booking.booking_date).getMonth(); // get month as index (0-11)
+          const amountSpent = booking.total_amount; // Replace with actual field in your booking data
 
           monthlyTotals[bookingMonth] = {
             spent: monthlyTotals[bookingMonth].spent + amountSpent,
