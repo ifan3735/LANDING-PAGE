@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useFetchAllBookingsQuery } from '../features/API';
 
 // Data for Monthly and Weekly stats
 const monthlyData = [
