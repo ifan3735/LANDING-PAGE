@@ -7,62 +7,47 @@ const AnalyticsReport: React.FC = () => {
 
   const userId = localStorage.getItem('userId');
 
-  // Function to calculate the week number
-  const getWeekNumber = (date: Date) => {
-    const startDate = new Date(date.getFullYear(), 0, 1);
-    const diff = date.getTime() - startDate.getTime();
-    const oneWeek = 1000 * 60 * 60 * 24 * 7;
-    return Math.floor(diff / oneWeek) + 1;
+  // Function to get the start of the current week (Sunday)
+  const getStartOfWeek = (date: Date) => {
+    const day = date.getDay() || 7; // Sunday is 0, Monday is 1, so we adjust to make Sunday 0
+    const startDate = new Date(date);
+    startDate.setDate(date.getDate() - day); // Move back to the previous Sunday
+    return startDate;
   };
 
-  // Monthly Data Calculation
-  const monthlyData = useMemo(() => {
-    const monthlyTotals = Array.from({ length: 12 }, () => ({ spent: 0, gotBack: 0 }));
-
-    if (bookingsData) {
-      bookingsData
-        .filter((booking) => booking.user_id == userId)
-        .forEach((booking) => {
-          const bookingMonth = new Date(booking.booking_date).getMonth();
-          const amountSpent = parseFloat(booking.total_amount);
-          monthlyTotals[bookingMonth].spent += amountSpent;
-        });
-    }
-
-    return monthlyTotals.map((totals, index) => ({
-      label: new Date(0, index).toLocaleString('default', { month: 'short' }),
-      ...totals,
-    }));
-  }, [bookingsData, userId]);
-
-  // Weekly Data Calculation
+  // Weekly Data Calculation (current week, Sunday to Saturday)
   const weeklyData = useMemo(() => {
-    const weeklyTotals: Record<number, { spent: number; gotBack: number }> = {};
+    const currentDate = new Date();
+    const startOfWeek = getStartOfWeek(currentDate); // Get the start of the week (Sunday)
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6); // Get the end of the week (Saturday)
+
+    // Initialize an array for each day of the current week (Sunday to Saturday)
+    const weeklyTotals = Array.from({ length: 7 }, () => ({ spent: 0 }));
 
     if (bookingsData) {
       bookingsData
         .filter((booking) => booking.user_id == userId)
         .forEach((booking) => {
           const bookingDate = new Date(booking.booking_date);
-          const weekNumber = getWeekNumber(bookingDate);
-          const amountSpent = parseFloat(booking.total_amount);
-
-          if (!weeklyTotals[weekNumber]) {
-            weeklyTotals[weekNumber] = { spent: 0, gotBack: 0 };
+          const dayOfWeek = bookingDate.getDay(); // Sunday is 0, Saturday is 6
+          
+          // Only include bookings within the current week (Sunday to Saturday)
+          if (bookingDate >= startOfWeek && bookingDate <= endOfWeek) {
+            const amountSpent = parseFloat(booking.total_amount);
+            weeklyTotals[dayOfWeek].spent += amountSpent;
           }
-
-          weeklyTotals[weekNumber].spent += amountSpent;
         });
     }
 
-    // Convert weeklyTotals into an array
-    return Object.entries(weeklyTotals).map(([week, totals]) => ({
-      label: `Week ${week}`,
+    // Return the data in the format needed for charting (days of the week: Sunday to Saturday)
+    return weeklyTotals.map((totals, index) => ({
+      label: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][index], // Labels for days of the week
       ...totals,
     }));
   }, [bookingsData, userId]);
 
-  const data = viewMode === 'monthly' ? monthlyData : weeklyData;
+  const data = viewMode === 'monthly' ? [] : weeklyData;
 
   // Determine the maximum amount spent for scaling
   const maxSpent = Math.max(...data.map(item => item.spent), 0);
@@ -111,7 +96,7 @@ const AnalyticsReport: React.FC = () => {
                   </div>
                 </div>
               )}
-              <span className="text-sm mt-2">{item.label}</span>
+              <span className="text-sm mt-2">{item.label}</span> {/* Labels: Sun, Mon, Tue, ... */}
             </div>
           ))}
         </div>
