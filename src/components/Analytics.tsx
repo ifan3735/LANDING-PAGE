@@ -12,6 +12,7 @@ const AnalyticsReport: React.FC = () => {
     const day = date.getDay() || 7; // Sunday is 0, Monday is 1, so we adjust to make Sunday 0
     const startDate = new Date(date);
     startDate.setDate(date.getDate() - day); // Move back to the previous Sunday
+    startDate.setHours(0, 0, 0, 0); // Set to the start of the day
     return startDate;
   };
 
@@ -37,7 +38,7 @@ const AnalyticsReport: React.FC = () => {
   // Weekly Data Calculation (current week, Sunday to Saturday)
   const weeklyData = useMemo(() => {
     const currentDate = new Date();
-    const startOfWeek = getStartOfWeek(currentDate); // Get the start of the week (Sunday)
+    const startOfWeek = getStartOfWeek(currentDate); // Get the start of the current week (Sunday)
     const endOfWeek = new Date(startOfWeek);
     endOfWeek.setDate(startOfWeek.getDate() + 6); // Get the end of the week (Saturday)
 
@@ -50,7 +51,7 @@ const AnalyticsReport: React.FC = () => {
         .forEach((booking) => {
           const bookingDate = new Date(booking.booking_date);
           const dayOfWeek = bookingDate.getDay(); // Sunday is 0, Saturday is 6
-          
+
           // Only include bookings within the current week (Sunday to Saturday)
           if (bookingDate >= startOfWeek && bookingDate <= endOfWeek) {
             const amountSpent = parseFloat(booking.total_amount);
@@ -66,6 +67,7 @@ const AnalyticsReport: React.FC = () => {
     }));
   }, [bookingsData, userId]);
 
+  // Choose the correct data based on the selected view mode
   const data = viewMode === 'monthly' ? monthlyData : weeklyData;
 
   // Determine the maximum amount spent for scaling
