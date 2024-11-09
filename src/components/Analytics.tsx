@@ -3,18 +3,7 @@ import { useFetchAllBookingsQuery } from '../features/API';
 
 const AnalyticsReport: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
-  const [viewMode, setViewMode] = useState<'monthly' | 'weekly'>('monthly');
-
   const userId = localStorage.getItem('userId');
-
-  // Function to get the start of the current week (Sunday)
-  const getStartOfWeek = (date: Date) => {
-    const day = date.getDay() || 7; // Sunday is 0, Monday is 1, so we adjust to make Sunday 0
-    const startDate = new Date(date);
-    startDate.setDate(date.getDate() - day); // Move back to the previous Sunday
-    startDate.setHours(0, 0, 0, 0); // Set to the start of the day
-    return startDate;
-  };
 
   // Monthly Data Calculation
   const monthlyData = useMemo(() => {
@@ -35,40 +24,8 @@ const AnalyticsReport: React.FC = () => {
     }));
   }, [bookingsData, userId]);
 
-  // Weekly Data Calculation (current week, Sunday to Saturday)
-  const weeklyData = useMemo(() => {
-    const currentDate = new Date();
-    const startOfWeek = getStartOfWeek(currentDate); // Get the start of the current week (Sunday)
-    const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6); // Get the end of the week (Saturday)
-
-    // Initialize an array for each day of the current week (Sunday to Saturday)
-    const weeklyTotals = Array.from({ length: 7 }, () => ({ spent: 0 }));
-
-    if (bookingsData) {
-      bookingsData
-        .filter((booking) => booking.user_id == userId)
-        .forEach((booking) => {
-          const bookingDate = new Date(booking.booking_date);
-          const dayOfWeek = bookingDate.getDay(); // Sunday is 0, Saturday is 6
-
-          // Only include bookings within the current week (Sunday to Saturday)
-          if (bookingDate >= startOfWeek && bookingDate <= endOfWeek) {
-            const amountSpent = parseFloat(booking.total_amount);
-            weeklyTotals[dayOfWeek].spent += amountSpent;
-          }
-        });
-    }
-
-    // Return the data in the format needed for charting (days of the week: Sunday to Saturday)
-    return weeklyTotals.map((totals, index) => ({
-      label: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][index], // Labels for days of the week
-      ...totals,
-    }));
-  }, [bookingsData, userId]);
-
-  // Choose the correct data based on the selected view mode
-  const data = viewMode === 'monthly' ? monthlyData : weeklyData;
+  // Choose the data (monthly only, no dropdown)
+  const data = monthlyData;
 
   // Determine the maximum amount spent for scaling
   const maxSpent = Math.max(...data.map(item => item.spent), 0);
@@ -77,17 +34,10 @@ const AnalyticsReport: React.FC = () => {
   return (
     <div className="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold">Analytics Report</h3>
+        <h3 className="text-lg font-semibold">Analytics Report (Monthly)</h3> {/* Explicitly indicating Monthly */}
         <div className="text-sm space-x-4 flex items-center">
           <span className="text-[#4F76C1]">● Spent</span>
           <span className="text-[#4CAF50]">● Got Back</span>
-          <select
-            className="ml-4 border rounded p-1"
-            onChange={(e) => setViewMode(e.target.value as 'monthly' | 'weekly')}
-          >
-            <option value="monthly">Monthly</option>
-            <option value="weekly">Weekly</option>
-          </select>
         </div>
       </div>
 
@@ -117,7 +67,7 @@ const AnalyticsReport: React.FC = () => {
                   </div>
                 </div>
               )}
-              <span className="text-sm mt-2">{item.label}</span> {/* Labels: Sun, Mon, Tue, ... */}
+              <span className="text-sm mt-2">{item.label}</span> {/* Labels: Jan, Feb, Mar, ... */}
             </div>
           ))}
         </div>
