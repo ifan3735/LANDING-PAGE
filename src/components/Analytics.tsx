@@ -1,9 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { useFetchAllBookingsQuery } from '../features/API';
+import { BarChart, Bar, PieChart, Pie, Tooltip, Legend, XAxis, YAxis, ResponsiveContainer, Cell } from 'recharts';
 
 const AnalyticsReport: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
   const userId = localStorage.getItem('userId');
+  const [chartType, setChartType] = useState<'bar' | 'pie'>('bar'); // State to handle chart type
 
   // Monthly Data Calculation
   const monthlyData = useMemo(() => {
@@ -24,54 +26,64 @@ const AnalyticsReport: React.FC = () => {
     }));
   }, [bookingsData, userId]);
 
-  // Choose the data (monthly only, no dropdown)
   const data = monthlyData;
-
-  // Determine the maximum amount spent for scaling
   const maxSpent = Math.max(...data.map(item => item.spent), 0);
-  const scaleFactor = maxSpent > 0 ? 200 / maxSpent : 1; // Adjust 200px max bar height dynamically
+  const scaleFactor = maxSpent > 0 ? 200 / maxSpent : 1;
 
   return (
     <div className="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold">Analytics Report (Monthly)</h3> {/* Explicitly indicating Monthly */}
-        <div className="text-sm space-x-4 flex items-center">
+        <h3 className="text-lg font-semibold">Analytics Report (Monthly)</h3>
+        <div className="flex items-center space-x-4">
           <span className="text-[#4F76C1]">● Spent</span>
           <span className="text-[#4CAF50]">● Got Back</span>
         </div>
+        {/* Dropdown for chart selection */}
+        <select
+          value={chartType}
+          onChange={(e) => setChartType(e.target.value as 'bar' | 'pie')}
+          className="border rounded p-1 text-sm"
+        >
+          <option value="bar">Bar Chart</option>
+          <option value="pie">Pie Chart</option>
+        </select>
       </div>
 
-      <div className="relative">
-        {/* Scale Labels, dynamically calculated */}
-        <div className="absolute left-0 bottom-0 flex flex-col justify-between h-full py-4 text-xs text-gray-500">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i}>{Math.round((maxSpent * (5 - i) / 5) / 100) * 100}</span>
-          ))}
+      {/* Conditional Rendering of Chart Types */}
+      {chartType === 'bar' ? (
+        <div className="relative">
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+              <XAxis dataKey="label" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="spent" fill="#4F76C1" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
-
-        <div className="ml-6 flex justify-between items-end h-60">
-          {data.map((item, index) => (
-            <div key={index} className="flex flex-col items-center">
-              {item.spent > 0 && (
-                <div
-                  className="w-12 rounded-md"
-                  style={{
-                    height: `${item.spent * scaleFactor}px`, // Adjusts dynamically based on max spent
-                    background: 'linear-gradient(180deg, #4F76C1 0%, #003366 100%)',
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                  }}
-                  title={`Spent: ${item.spent}`}
-                >
-                  <div className="h-full w-full flex items-end justify-center text-white text-xs font-semibold">
-                    {item.spent}
-                  </div>
-                </div>
-              )}
-              <span className="text-sm mt-2">{item.label}</span> {/* Labels: Jan, Feb, Mar, ... */}
-            </div>
-          ))}
-        </div>
-      </div>
+      ) : (
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Pie
+              data={data}
+              dataKey="spent"
+              nameKey="label"
+              cx="50%"
+              cy="50%"
+              outerRadius={100}
+              fill="#4F76C1"
+              label={(entry) => entry.label}
+            >
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={`hsl(${index * 30}, 70%, 60%)`} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </ResponsiveContainer>
+      )}
     </div>
   );
 };
