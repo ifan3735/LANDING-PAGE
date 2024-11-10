@@ -1,44 +1,42 @@
 import React from 'react';
-
-interface CarUsage {
-  name: string;
-  hours: number;
-  color: string;
-}
-
-const carUsageData: CarUsage[] = [
-  { name: 'Mercedes', hours: 9, color: 'bg-blue-500' },
-  { name: 'Bentley', hours: 7, color: 'bg-teal-500' },
-  { name: 'Porsche Tayca', hours: 6, color: 'bg-yellow-500' },
-  { name: 'Lamborghini', hours: 4, color: 'bg-green-500' },
-];
+import { useFetchAllVehiclesQuery } from '../features/API';
 
 const CarUsage: React.FC = () => {
+  const { data: vehiclesData, error, isLoading } = useFetchAllVehiclesQuery();
+
+  // Maximum days used for calculating progress bar width
+  const maxDaysUsed = vehiclesData 
+    ? Math.max(...vehiclesData.map((vehicle) => vehicle.days_used))
+    : 1;
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
-      <h3 className="text-lg font-semibold mb-6">Car's Used</h3>
+      <h3 className="text-lg font-semibold mb-6">Car's Usage</h3>
+
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error loading data.</p>}
 
       <div className="space-y-6">
-        {carUsageData.map((car, index) => (
+        {vehiclesData && vehiclesData.map((vehicle, index) => (
           <div key={index}>
             <div className="flex justify-between mb-2">
-              <span className="text-gray-800 font-semibold">{car.name}</span>
-              <span className="text-gray-500">{car.hours} hours</span>
+              <span className="text-gray-800 font-semibold">{vehicle.name}</span>
+              <span className="text-gray-500">{vehicle.days_used} days</span>
             </div>
 
             {/* Progress bar */}
             <div className="relative w-full">
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className={`${car.color} h-3 rounded-full`}
-                  style={{ width: `${(car.hours / 9) * 100}%` }}
+                  className="bg-blue-500 h-3 rounded-full"
+                  style={{ width: `${(vehicle.days_used / maxDaysUsed) * 100}%` }}
                 ></div>
               </div>
 
               {/* Markers under the progress bar */}
               <div className="flex justify-between text-xs text-gray-400 mt-2">
-                {[2, 4, 6, 7, 8, 9].map((hour) => (
-                  <span key={hour}>{hour} hour</span>
+                {[2, 4, 6, 8, 10, maxDaysUsed].map((day) => (
+                  <span key={day}>{day} day{day > 1 ? 's' : ''}</span>
                 ))}
               </div>
             </div>
