@@ -5,12 +5,25 @@ const CarUsage: React.FC = () => {
   const { data: vehiclesData, error, isLoading } = useFetchAllVehiclesQuery();
   const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
 
-  // Filter vehicles data by the logged-in user
+  // Helper function to calculate days used based on booking and return dates
+  const calculateDaysUsed = (bookingDate: string, returnDate: string): number => {
+    const start = new Date(bookingDate);
+    const end = new Date(returnDate);
+    const diffInMs = end.getTime() - start.getTime();
+    return Math.max(Math.ceil(diffInMs / (1000 * 60 * 60 * 24)), 0); // Ensure non-negative days
+  };
+
+  // Filter vehicles data by the logged-in user and calculate days used
   const filteredVehicles = vehiclesData
-    ? vehiclesData.filter((vehicle) => vehicle.user_id == userId)
+    ? vehiclesData
+        .filter((vehicle) => vehicle.user_id === userId)
+        .map((vehicle) => ({
+          ...vehicle,
+          days_used: calculateDaysUsed(vehicle.booking_date, vehicle.return_date),
+        }))
     : [];
 
-  // Maximum days used for calculating progress bar width
+  // Determine the maximum days used for calculating progress bar width
   const maxDaysUsed = filteredVehicles.length > 0 
     ? Math.max(...filteredVehicles.map((vehicle) => vehicle.days_used))
     : 1;
@@ -26,7 +39,7 @@ const CarUsage: React.FC = () => {
         {filteredVehicles.map((vehicle, index) => (
           <div key={index}>
             <div className="flex justify-between mb-2">
-              <span className="text-gray-800 font-semibold">{vehicle.name}</span>
+              <span className="text-gray-800 font-semibold">{vehicle.vehicle_specs.model}</span>
               <span className="text-gray-500">{vehicle.days_used} days</span>
             </div>
 
