@@ -1,31 +1,31 @@
 import React from 'react';
-import { useFetchAllVehiclesQuery } from '../features/API';
+import { useFetchAllBookingsQuery } from '../features/API';
 
 const CarUsage: React.FC = () => {
-  const { data: vehiclesData, error, isLoading } = useFetchAllVehiclesQuery();
+  const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
   const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
 
-  // Helper function to calculate days used based on booking and return dates
-  const calculateDaysUsed = (bookingDate: string, returnDate: string): number => {
-    const start = new Date(bookingDate);
-    const end = new Date(returnDate);
-    const diffInMs = end.getTime() - start.getTime();
-    return Math.max(Math.ceil(diffInMs / (1000 * 60 * 60 * 24)), 0); // Ensure non-negative days
-  };
+  // Filter bookings data by the logged-in user and calculate days used
+  const carUsageData = bookingsData
+    ? bookingsData
+        .filter((booking) => booking.user_id == userId)
+        .map((booking) => {
+          const bookingDate = new Date(booking.booking_date);
+          const returnDate = new Date(booking.return_date);
+          const daysUsed = Math.ceil(
+            (returnDate.getTime() - bookingDate.getTime()) / (1000 * 60 * 60 * 24)
+          );
 
-  // Filter vehicles data by the logged-in user and calculate days used
-  const filteredVehicles = vehiclesData
-    ? vehiclesData
-        .filter((vehicle) => vehicle.user_id === userId)
-        .map((vehicle) => ({
-          ...vehicle,
-          days_used: calculateDaysUsed(vehicle.booking_date, vehicle.return_date),
-        }))
+          return {
+            model: booking.vehicle_specs.model,
+            daysUsed,
+          };
+        })
     : [];
 
-  // Determine the maximum days used for calculating progress bar width
-  const maxDaysUsed = filteredVehicles.length > 0 
-    ? Math.max(...filteredVehicles.map((vehicle) => vehicle.days_used))
+  // Calculate the maximum days used for scaling the progress bar
+  const maxDaysUsed = carUsageData.length > 0 
+    ? Math.max(...carUsageData.map((car) => car.daysUsed))
     : 1;
 
   return (
@@ -36,11 +36,11 @@ const CarUsage: React.FC = () => {
       {error && <p>Error loading data.</p>}
 
       <div className="space-y-6">
-        {filteredVehicles.map((vehicle, index) => (
+        {carUsageData.map((car, index) => (
           <div key={index}>
             <div className="flex justify-between mb-2">
-              <span className="text-gray-800 font-semibold">{vehicle.vehicle_specs.model}</span>
-              <span className="text-gray-500">{vehicle.days_used} days</span>
+              <span className="text-gray-800 font-semibold">{car.model}</span>
+              <span className="text-gray-500">{car.daysUsed} days</span>
             </div>
 
             {/* Progress bar */}
@@ -48,7 +48,7 @@ const CarUsage: React.FC = () => {
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
                   className="bg-blue-500 h-3 rounded-full"
-                  style={{ width: `${(vehicle.days_used / maxDaysUsed) * 100}%` }}
+                  style={{ width: `${(car.daysUsed / maxDaysUsed) * 100}%` }}
                 ></div>
               </div>
 
