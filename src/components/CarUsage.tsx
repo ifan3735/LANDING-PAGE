@@ -7,7 +7,7 @@ const CarUsage: React.FC = () => {
 
   // Filter vehicles data by the logged-in user
   const filteredVehicles = vehiclesData
-    ? vehiclesData.filter((vehicle) => vehicle.user_id === userId)
+    ? vehiclesData.filter((vehicle) => vehicle.user_id == userId)
     : [];
 
   // Maximum days used for calculating progress bar width
