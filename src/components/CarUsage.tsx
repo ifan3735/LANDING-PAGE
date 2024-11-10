@@ -1,9 +1,11 @@
 import React from 'react';
 import { useFetchAllBookingsQuery } from '../features/API';
 
+const colors = ['bg-blue-500', 'bg-teal-500', 'bg-yellow-500', 'bg-green-500', 'bg-purple-500'];
+
 const CarUsage: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
-  const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
+  const userId = localStorage.getItem('userId');
 
   // Filter bookings data by the logged-in user and calculate days used
   const carUsageData = bookingsData
@@ -24,40 +26,41 @@ const CarUsage: React.FC = () => {
     : [];
 
   // Calculate the maximum days used for scaling the progress bar
-  const maxDaysUsed = carUsageData.length > 0 
+  const maxDaysUsed = carUsageData.length > 0
     ? Math.max(...carUsageData.map((car) => car.daysUsed))
     : 1;
 
+  // Define the range for the label markers based on maxDaysUsed
+  const markers = Array.from({ length: 6 }, (_, i) => Math.ceil((maxDaysUsed / 5) * i));
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
-      <h3 className="text-lg font-semibold mb-6">Car's Usage</h3>
+      <h3 className="text-lg font-semibold mb-6 text-gray-700">Car's Usage</h3>
 
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error loading data.</p>}
+      {isLoading && <p className="text-gray-500">Loading...</p>}
+      {error && <p className="text-red-500">Error loading data.</p>}
 
       <div className="space-y-6">
         {carUsageData.map((car, index) => (
-          <div key={index}>
-            <div className="flex justify-between mb-2">
+          <div key={index} className="space-y-2">
+            <div className="flex justify-between mb-1">
               <span className="text-gray-800 font-semibold">{car.model}</span>
               <span className="text-gray-500">{car.daysUsed} days</span>
             </div>
 
-            {/* Progress bar */}
-            <div className="relative w-full">
-              <div className="w-full bg-gray-200 rounded-full h-3">
-                <div
-                  className="bg-blue-500 h-3 rounded-full"
-                  style={{ width: `${(car.daysUsed / maxDaysUsed) * 100}%` }}
-                ></div>
-              </div>
+            {/* Progress bar with dynamic colors */}
+            <div className="relative w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all duration-300 ${colors[index % colors.length]}`}
+                style={{ width: `${(car.daysUsed / maxDaysUsed) * 100}%` }}
+              ></div>
+            </div>
 
-              {/* Markers under the progress bar */}
-              <div className="flex justify-between text-xs text-gray-400 mt-2">
-                {[2, 4, 6, 8, 10, maxDaysUsed].map((day) => (
-                  <span key={day}>{day} day{day > 1 ? 's' : ''}</span>
-                ))}
-              </div>
+            {/* Dynamic markers for the progress bar */}
+            <div className="flex justify-between text-xs text-gray-400 mt-1">
+              {markers.map((day) => (
+                <span key={day}>{day} {day === 1 ? 'day' : 'days'}</span>
+              ))}
             </div>
           </div>
         ))}
