@@ -3,10 +3,16 @@ import { useFetchAllVehiclesQuery } from '../features/API';
 
 const CarUsage: React.FC = () => {
   const { data: vehiclesData, error, isLoading } = useFetchAllVehiclesQuery();
+  const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
+
+  // Filter vehicles data by the logged-in user
+  const filteredVehicles = vehiclesData
+    ? vehiclesData.filter((vehicle) => vehicle.user_id === userId)
+    : [];
 
   // Maximum days used for calculating progress bar width
-  const maxDaysUsed = vehiclesData 
-    ? Math.max(...vehiclesData.map((vehicle) => vehicle.days_used))
+  const maxDaysUsed = filteredVehicles.length > 0 
+    ? Math.max(...filteredVehicles.map((vehicle) => vehicle.days_used))
     : 1;
 
   return (
@@ -17,7 +23,7 @@ const CarUsage: React.FC = () => {
       {error && <p>Error loading data.</p>}
 
       <div className="space-y-6">
-        {vehiclesData && vehiclesData.map((vehicle, index) => (
+        {filteredVehicles.map((vehicle, index) => (
           <div key={index}>
             <div className="flex justify-between mb-2">
               <span className="text-gray-800 font-semibold">{vehicle.name}</span>
