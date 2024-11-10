@@ -17,7 +17,7 @@ const CarUsage: React.FC = () => {
           );
 
           return {
-            model: booking.vehicle_specs.model,
+            model: booking.vehicle.vehicle_specs.model,
             daysUsed,
           };
         })
