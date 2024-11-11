@@ -17,15 +17,6 @@ const StatisticsPage = () => {
   const toggleExportDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-
-  const data = [
-    { name: 'Mercedes', breakdown: '20/10', value: 10 },
-    { name: 'Bentley', breakdown: '14/09', value: 14 },
-    { name: 'Lamborghini', breakdown: '11/20', value: 13 },
-    { name: 'Porsche', breakdown: '01/24', value: 24 },
-    { name: 'Maruti Suzuki', breakdown: '12/18', value: 31 },
-  ];
-
   // Search logic
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -101,7 +92,7 @@ const StatisticsPage = () => {
   <Analytics />
 
   {/* Breakdown Section */}
-  <CarBreakdown data={data} searchQuery={searchQuery} />
+  <CarBreakdown searchQuery={searchQuery} />
 
   {/* Car's Used Section */}
   <div className="lg:col-span-2">
