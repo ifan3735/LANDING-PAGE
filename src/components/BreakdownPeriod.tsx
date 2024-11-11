@@ -2,14 +2,30 @@ import React from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+interface ManufacturerData {
+  name: string;
+  days: number; // Total days of usage for that manufacturer
+  color: string; // Unique color for each manufacturer
+}
+
 const BreakdownPeriod: React.FC = () => {
-  const totalPeriodDays = 15;
+  // Sample data for manufacturers
+  const manufacturersData: ManufacturerData[] = [
+    { name: 'Mercedes', days: 20, color: '#1D4ED8' },
+    { name: 'Bentley', days: 15, color: '#14B8A6' },
+    { name: 'Lamborghini', days: 10, color: '#F59E0B' },
+    { name: 'Porsche', days: 8, color: '#EF4444' },
+    { name: 'Maruti Suzuki', days: 5, color: '#10B981' },
+  ];
+
+  // Find the maximum days for scaling the progress bars
+  const maxDays = Math.max(...manufacturersData.map((m) => m.days));
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 w-full">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg font-semibold">Breakdown Period</h3>
+        <h3 className="text-lg font-semibold">Manufacturer Rental Periods</h3>
         <button className="text-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,46 +42,41 @@ const BreakdownPeriod: React.FC = () => {
         </button>
       </div>
 
-      {/* Circular Progress Bars */}
-      <div className="relative flex justify-center items-center mb-6">
-        <div className="w-36 h-36 absolute">
-          <CircularProgressbar
-            value={66} // Percentage for the first arc
-            strokeWidth={10}
-            styles={buildStyles({
-              pathColor: '#1D4ED8', // Blue arc
-              trailColor: 'transparent',
-            })}
-          />
-        </div>
-        <div className="w-36 h-36">
-          <CircularProgressbar
-            value={33} // Percentage for the second arc
-            strokeWidth={10}
-            styles={buildStyles({
-              pathColor: '#14B8A6', // Teal arc
-              trailColor: 'transparent',
-              rotation: 0.25, // For starting the arc position
-            })}
-          />
-        </div>
-
-        {/* Inner Circle with Total Period */}
-        <div className="absolute flex flex-col justify-center items-center">
-          <span className="text-lg font-bold">Total Period</span>
-          <span className="text-gray-500">{totalPeriodDays} Days</span>
-        </div>
+      {/* Circular Progress Bars for each manufacturer */}
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
+        {manufacturersData.map((manufacturer, index) => (
+          <div key={index} className="relative flex flex-col items-center">
+            <div className="w-24 h-24 mb-4">
+              <CircularProgressbar
+                value={(manufacturer.days / maxDays) * 100} // Calculate the percentage
+                strokeWidth={10}
+                styles={buildStyles({
+                  pathColor: manufacturer.color,
+                  trailColor: '#e5e7eb',
+                })}
+              />
+            </div>
+            <div className="text-center">
+              <h4 className="text-sm font-semibold">{manufacturer.name}</h4>
+              <p className="text-gray-500">{manufacturer.days} Days</p>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Legend */}
-      <div className="flex justify-center space-x-6">
-        <div className="flex items-center space-x-2">
-          <span className="w-3 h-3 bg-blue-600 rounded-full"></span>
-          <span className="text-sm text-gray-600">20/30 Days</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="w-3 h-3 bg-teal-400 rounded-full"></span>
-          <span className="text-sm text-gray-600">114 Weeks</span>
+      <div className="mt-6">
+        <h4 className="text-sm font-semibold mb-3">Legend</h4>
+        <div className="flex flex-wrap justify-center space-x-4">
+          {manufacturersData.map((manufacturer, index) => (
+            <div key={index} className="flex items-center space-x-2">
+              <span
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: manufacturer.color }}
+              ></span>
+              <span className="text-sm text-gray-600">{manufacturer.name}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
