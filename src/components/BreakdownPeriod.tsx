@@ -9,10 +9,14 @@ interface ManufacturerData {
 }
 
 interface BreakdownPeriodProps {
-  carData: ManufacturerData[];
+  carData: ManufacturerData[] | undefined; // Allow carData to be undefined initially
 }
 
 const BreakdownPeriod: React.FC<BreakdownPeriodProps> = ({ carData }) => {
+  if (!carData || carData.length === 0) {
+    return <p>No data available.</p>; // Render a fallback message if carData is undefined or empty
+  }
+
   // Assign colors to manufacturers
   const manufacturerColors: Record<string, string> = {
     Mercedes: '#1D4ED8',
@@ -33,21 +37,21 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = ({ carData }) => {
 
       {/* Circular Progress Bars */}
       <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-        {carData.map((manufacturer, index) => (
+        {carData.map((data, index) => (
           <div key={index} className="relative flex flex-col items-center">
             <div className="w-24 h-24 mb-4">
               <CircularProgressbar
-                value={(manufacturer.rentedCount / maxCount) * 100}
+                value={(data.rentedCount / maxCount) * 100}
                 strokeWidth={10}
                 styles={buildStyles({
-                  pathColor: manufacturerColors[manufacturer.manufacturer] || '#888888',
+                  pathColor: manufacturerColors[data.manufacturer] || '#888888',
                   trailColor: '#e5e7eb',
                 })}
               />
             </div>
             <div className="text-center">
-              <h4 className="text-sm font-semibold text-gray-800">{manufacturer.manufacturer}</h4>
-              <p className="text-gray-500">{manufacturer.rentedCount} Rentals</p>
+              <h4 className="text-sm font-semibold text-gray-800">{data.manufacturer}</h4>
+              <p className="text-gray-500">{data.rentedCount} Rentals</p>
             </div>
           </div>
         ))}
@@ -57,16 +61,16 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = ({ carData }) => {
       <div className="mt-8">
         <h4 className="text-sm font-semibold text-gray-700 mb-3">Legend</h4>
         <div className="flex flex-wrap justify-center space-x-4">
-          {carData.map((manufacturer, index) => (
+          {carData.map((data, index) => (
             <div key={index} className="flex items-center space-x-2 mb-2">
               <span
                 className="w-3 h-3 rounded-full"
                 style={{
                   backgroundColor:
-                    manufacturerColors[manufacturer.manufacturer] || '#888888',
+                    manufacturerColors[data.manufacturer] || '#888888',
                 }}
               ></span>
-              <span className="text-sm text-gray-600">{manufacturer.manufacturer}</span>
+              <span className="text-sm text-gray-600">{data.manufacturer}</span>
             </div>
           ))}
         </div>
