@@ -4,7 +4,7 @@ import TopBar from '../components/TopBar';
 import { saveAs } from 'file-saver';
 import Analytics from '../components/Analytics';
 import CarBreakdown from '../components/CarBreakdown';
-import CarUsage from '../components/CarUsage'; // Import the CarBreakdown component
+import CarUsage from '../components/CarUsage';
 import BreakdownPeriod from '../components/BreakdownPeriod';
 
 const StatisticsPage = () => {
@@ -14,23 +14,23 @@ const StatisticsPage = () => {
 
   const toggleTheme = () => setTheme(theme === 'light' ? 'yellow' : 'light');
 
-  const toggleExportDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
-  // Search logic
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  const toggleExportDropdown = () => setShowDropdown(!showDropdown);
 
-  // Export Logic
+  // Search logic
+  const handleSearch = (e) => setSearchQuery(e.target.value);
+
+  // Export Logic (PDF, CSV, SVG)
   const exportData = (format: string) => {
     if (format === 'svg') {
-      const svgData = '<svg>...</svg>';
+      const svgData = '<svg>...</svg>'; // Replace with actual SVG data
       const blob = new Blob([svgData], { type: 'image/svg+xml' });
       saveAs(blob, 'chart.svg');
     } else if (format === 'pdf') {
       const pdfBlob = new Blob(['PDF content'], { type: 'application/pdf' });
       saveAs(pdfBlob, 'chart.pdf');
+    } else if (format === 'csv') {
+      // Implement CSV export logic (perhaps using a library like `json2csv`)
+      console.log('Export as CSV');
     }
   };
 
@@ -70,15 +70,21 @@ const StatisticsPage = () => {
               <ul>
                 <li
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as CSV")}
+                  onClick={() => exportData('csv')}
                 >
                   Export as CSV
                 </li>
                 <li
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log("Export as PDF")}
+                  onClick={() => exportData('pdf')}
                 >
                   Export as PDF
+                </li>
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => exportData('svg')}
+                >
+                  Export as SVG
                 </li>
               </ul>
             </div>
@@ -88,20 +94,20 @@ const StatisticsPage = () => {
 
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-  {/* Analytics Report */}
-  <Analytics />
+        {/* Analytics Report */}
+        <Analytics />
 
-  {/* Breakdown Section */}
-  <CarBreakdown searchQuery={searchQuery} />
+        {/* Breakdown Section */}
+        <CarBreakdown searchQuery={searchQuery} />
 
-  {/* Car's Used Section */}
-  <div className="lg:col-span-2">
-    <CarUsage />
-  </div>
+        {/* Car's Used Section */}
+        <div className="lg:col-span-2">
+          <CarUsage />
+        </div>
 
-  {/* Breakdown Period Section */}
-  <BreakdownPeriod />
-</div>
+        {/* Breakdown Period Section */}
+        <BreakdownPeriod carData={carData} />
+        </div>
     </div>
   );
 };

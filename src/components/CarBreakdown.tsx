@@ -1,6 +1,5 @@
 import React from 'react';
 import { useFetchAllBookingsQuery } from '../features/API';
-import BreakdownPeriod from './BreakdownPeriod';
 
 interface Car {
   manufacturer: string;
@@ -75,7 +74,6 @@ const CarBreakdown: React.FC<CarBreakdownProps> = ({ searchQuery }) => {
           </tbody>
         </table>
       </div>
-      <BreakdownPeriod carData={carData} />
     </div>
   );
 };

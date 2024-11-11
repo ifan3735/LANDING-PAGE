@@ -1,20 +1,65 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useFetchAllBookingsQuery } from '../features/API';
 
-interface ManufacturerData {
+export interface ManufacturerData {
   manufacturer: string;
   rentedCount: number;
   issuesReported: number | null;
 }
 
-interface BreakdownPeriodProps {
-  carData: ManufacturerData[] | undefined; // Allow carData to be undefined initially
+export interface BreakdownPeriodProps {
+  // No need for carData as it will be fetched here
 }
 
-const BreakdownPeriod: React.FC<BreakdownPeriodProps> = ({ carData }) => {
-  if (!carData || carData.length === 0) {
-    return <p>No data available.</p>; // Render a fallback message if carData is undefined or empty
+const BreakdownPeriod: React.FC<BreakdownPeriodProps> = () => {
+  const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
+  const [carData, setCarData] = useState<ManufacturerData[]>([]);
+  const userId = localStorage.getItem('userId');
+
+  useEffect(() => {
+    if (bookingsData && userId) {
+      // Filter bookings based on userId and aggregate by manufacturer
+      const aggregatedData: Record<string, ManufacturerData> = {};
+
+      bookingsData
+        .filter((booking) => booking.user_id == userId)
+        .forEach((booking) => {
+          const manufacturer = booking.vehicle.vehicle_specs.manufacturer;
+
+          if (!aggregatedData[manufacturer]) {
+            aggregatedData[manufacturer] = {
+              manufacturer,
+              rentedCount: 0,
+              issuesReported: 0,
+            };
+          }
+
+          // Increase rented count
+          aggregatedData[manufacturer].rentedCount += 1;
+
+          // Count issues
+          if (booking.vehicle.has_issues) {
+            aggregatedData[manufacturer].issuesReported += 1;
+          }
+        });
+
+      // Convert the aggregated data into an array
+      setCarData(Object.values(aggregatedData));
+    }
+  }, [bookingsData, userId]);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error loading data.</p>;
+  }
+
+  if (!carData.length) {
+    return <p>No data available.</p>;
   }
 
   // Assign colors to manufacturers
@@ -24,9 +69,7 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = ({ carData }) => {
     Lamborghini: '#F59E0B',
     Porsche: '#EF4444',
     'Maruti Suzuki': '#10B981',
-    // Add colors dynamically as needed
     Ford: '#6B7280',
-    porsche: '#EF4444',
     Range_Rover: '#8B5CF6',
     mazda: '#F87171',
   };
@@ -34,7 +77,7 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = ({ carData }) => {
   const maxCount = Math.max(...carData.map((m) => m.rentedCount), 1);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 w-full">
+    <div className="bg-white rounded-lg shadow-md p-6 w-full mt-6">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold text-gray-700">Rental Period by Manufacturer</h3>
       </div>
@@ -70,8 +113,7 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = ({ carData }) => {
               <span
                 className="w-3 h-3 rounded-full"
                 style={{
-                  backgroundColor:
-                    manufacturerColors[data.manufacturer] || '#888888',
+                  backgroundColor: manufacturerColors[data.manufacturer] || '#888888',
                 }}
               ></span>
               <span className="text-sm text-gray-600">{data.manufacturer}</span>
