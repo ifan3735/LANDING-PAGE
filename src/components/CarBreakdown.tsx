@@ -31,7 +31,7 @@ const CarBreakdown: React.FC<CarBreakdownProps> = ({ searchQuery }) => {
             }
             acc[manufacturer].rentedCount += 1;
 
-            // Check if this vehicle had issues (you may need to adapt this based on data structure)
+            // Check if this vehicle had issues
             if (booking.vehicle.has_issues) {
               acc[manufacturer].issuesReported =
                 (acc[manufacturer].issuesReported || 0) + 1;
@@ -42,39 +42,38 @@ const CarBreakdown: React.FC<CarBreakdownProps> = ({ searchQuery }) => {
       )
     : [];
 
-  // Calculate maximum rented count for dynamic styling
-  const maxRentedCount = carData.length > 0
-    ? Math.max(...carData.map((car) => car.rentedCount))
-    : 1;
-
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h3 className="text-lg font-bold mb-4">Car Rental Breakdown</h3>
+    <div className="bg-white rounded-lg shadow-lg p-6">
+      <h3 className="text-xl font-semibold mb-4 text-gray-700">Car Rental Breakdown</h3>
       {isLoading && <p>Loading...</p>}
       {error && <p>Error loading data.</p>}
-      
-      <table className="w-full text-left">
-        <thead>
-          <tr>
-            <th className="border-b pb-2 text-gray-500">Manufacturer</th>
-            <th className="border-b pb-2 text-gray-500">Total Rented</th>
-            <th className="border-b pb-2 text-gray-500">Issues Reported</th>
-          </tr>
-        </thead>
-        <tbody>
-          {carData
-            .filter((car) =>
-              car.manufacturer.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-            .map((car, index) => (
-              <tr key={index} className="border-b">
-                <td className="py-2">{car.manufacturer}</td>
-                <td className="text-blue-500 font-semibold">{car.rentedCount}</td>
-                <td className="text-red-500">{car.issuesReported ?? 'None'}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+
+      <div className="overflow-x-auto">
+        <table className="w-full table-fixed border-collapse bg-white rounded-lg shadow-sm">
+          <thead>
+            <tr>
+              <th className="p-4 text-left text-gray-600 font-semibold border-b border-gray-200">Manufacturer</th>
+              <th className="p-4 text-left text-gray-600 font-semibold border-b border-gray-200">Total Rented</th>
+              <th className="p-4 text-left text-gray-600 font-semibold border-b border-gray-200">Issues Reported</th>
+            </tr>
+          </thead>
+          <tbody>
+            {carData
+              .filter((car) =>
+                car.manufacturer.toLowerCase().includes(searchQuery.toLowerCase())
+              )
+              .map((car, index) => (
+                <tr key={index} className="border-b last:border-0 hover:bg-gray-50 transition-colors">
+                  <td className="p-4 font-medium text-gray-800">{car.manufacturer}</td>
+                  <td className="p-4 font-semibold text-blue-600">{car.rentedCount}</td>
+                  <td className={`p-4 ${car.issuesReported ? 'text-red-500' : 'text-gray-400'}`}>
+                    {car.issuesReported ?? 'None'}
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
