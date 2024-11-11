@@ -51,15 +51,15 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = () => {
   }, [bookingsData, userId]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <div className="flex justify-center items-center p-8"><span className="text-lg text-gray-700">Loading...</span></div>;
   }
 
   if (error) {
-    return <p>Error loading data.</p>;
+    return <div className="flex justify-center items-center p-8"><span className="text-lg text-red-500">Error loading data.</span></div>;
   }
 
   if (!carData.length) {
-    return <p>No data available.</p>;
+    return <div className="flex justify-center items-center p-8"><span className="text-lg text-gray-700">No data available.</span></div>;
   }
 
   // Assign colors to manufacturers
@@ -77,28 +77,29 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = () => {
   const maxCount = Math.max(...carData.map((m) => m.rentedCount), 1);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 w-full mt-6">
+    <div className="bg-white rounded-lg shadow-lg p-6 w-full mt-6">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg font-semibold text-gray-700">Rental Period by Manufacturer</h3>
+        <h3 className="text-xl font-semibold text-gray-800">Rental Period by Manufacturer</h3>
       </div>
 
       {/* Circular Progress Bars */}
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {carData.map((data, index) => (
-          <div key={index} className="relative flex flex-col items-center">
-            <div className="w-24 h-24 mb-4">
+          <div key={index} className="relative flex flex-col items-center p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+            <div className="w-28 h-28 mb-4">
               <CircularProgressbar
                 value={(data.rentedCount / maxCount) * 100}
-                strokeWidth={10}
+                strokeWidth={12}
                 styles={buildStyles({
                   pathColor: manufacturerColors[data.manufacturer] || '#888888',
-                  trailColor: '#e5e7eb',
+                  trailColor: '#f3f4f6',
+                  strokeLinecap: 'round',
                 })}
               />
             </div>
             <div className="text-center">
-              <h4 className="text-sm font-semibold text-gray-800">{data.manufacturer}</h4>
-              <p className="text-gray-500">{data.rentedCount} Rentals</p>
+              <h4 className="text-sm font-semibold text-gray-900">{data.manufacturer}</h4>
+              <p className="text-gray-600 text-xs">{data.rentedCount} Rentals</p>
             </div>
           </div>
         ))}
@@ -107,11 +108,11 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = () => {
       {/* Legend */}
       <div className="mt-8">
         <h4 className="text-sm font-semibold text-gray-700 mb-3">Legend</h4>
-        <div className="flex flex-wrap justify-center space-x-4">
+        <div className="flex flex-wrap justify-center space-x-6">
           {carData.map((data, index) => (
             <div key={index} className="flex items-center space-x-2 mb-2">
               <span
-                className="w-3 h-3 rounded-full"
+                className="w-4 h-4 rounded-full"
                 style={{
                   backgroundColor: manufacturerColors[data.manufacturer] || '#888888',
                 }}
