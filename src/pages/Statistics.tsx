@@ -106,7 +106,7 @@ const StatisticsPage = () => {
         </div>
 
         {/* Breakdown Period Section */}
-        <BreakdownPeriod carData={carData} />
+        <BreakdownPeriod/>
         </div>
     </div>
   );
