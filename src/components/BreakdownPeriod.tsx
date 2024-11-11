@@ -72,6 +72,8 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = () => {
     Ford: '#6B7280',
     "Range Rover": '#8B5CF6',
     mazda: '#F87171',
+    Honda: '#3B82F6',
+    Audi: '#F472B6',
   };
 
   const maxCount = Math.max(...carData.map((m) => m.rentedCount), 1);
