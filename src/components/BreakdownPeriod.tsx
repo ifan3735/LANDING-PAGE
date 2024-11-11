@@ -67,10 +67,10 @@ const BreakdownPeriod: React.FC<BreakdownPeriodProps> = () => {
     Mercedes: '#1D4ED8',
     Bentley: '#14B8A6',
     Lamborghini: '#F59E0B',
-    Porsche: '#EF4444',
+    porsche: '#EF4444',
     'Maruti Suzuki': '#10B981',
     Ford: '#6B7280',
-    Range_Rover: '#8B5CF6',
+    "Range Rover": '#8B5CF6',
     mazda: '#F87171',
   };
 
