@@ -1,54 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useFetchAllBookingsQuery } from '../yourApiHooks'; // Update with your actual hook path
 
 interface ManufacturerData {
   name: string;
-  days: number; // Total days of usage for that manufacturer
-  color: string; // Unique color for each manufacturer
+  days: number;
+  color: string;
 }
 
-const BreakdownPeriod: React.FC = () => {
-  // Sample data for manufacturers
-  const manufacturersData: ManufacturerData[] = [
-    { name: 'Mercedes', days: 20, color: '#1D4ED8' },
-    { name: 'Bentley', days: 15, color: '#14B8A6' },
-    { name: 'Lamborghini', days: 10, color: '#F59E0B' },
-    { name: 'Porsche', days: 8, color: '#EF4444' },
-    { name: 'Maruti Suzuki', days: 5, color: '#10B981' },
-  ];
+const BreakdownPeriod: React.FC<{ userId: string }> = ({ userId }) => {
+  const { data: bookings, isLoading, error } = useFetchAllBookingsQuery();
+  const [manufacturerData, setManufacturerData] = useState<ManufacturerData[]>([]);
 
-  // Find the maximum days for scaling the progress bars
-  const maxDays = Math.max(...manufacturersData.map((m) => m.days));
+  // Manufacturer colors (can be expanded or adjusted as needed)
+  const manufacturerColors: Record<string, string> = {
+    Mercedes: '#1D4ED8',
+    Bentley: '#14B8A6',
+    Lamborghini: '#F59E0B',
+    Porsche: '#EF4444',
+    'Maruti Suzuki': '#10B981',
+  };
+
+  useEffect(() => {
+    if (bookings) {
+      // Filter bookings by logged-in user and aggregate rental days by manufacturer
+      const userBookings = bookings.filter((booking) => booking.userId === userId);
+
+      const manufacturerDays = userBookings.reduce<Record<string, number>>((acc, booking) => {
+        const { manufacturer, rentalDays } = booking.vehicle;
+        acc[manufacturer] = (acc[manufacturer] || 0) + rentalDays;
+        return acc;
+      }, {});
+
+      // Transform data for visualization
+      const data = Object.entries(manufacturerDays).map(([name, days]) => ({
+        name,
+        days,
+        color: manufacturerColors[name] || '#888888', // Default color if not listed
+      }));
+
+      setManufacturerData(data);
+    }
+  }, [bookings, userId]);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
+
+  const maxDays = Math.max(...manufacturerData.map((m) => m.days), 1); // Prevent division by zero
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 w-full">
-      {/* Header */}
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg font-semibold">Manufacturer Rental Periods</h3>
-        <button className="text-gray-400">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M18 8a2 2 0 11-4 0 2 2 0 014 0zm-4 2a2 2 0 110 4 2 2 0 010-4zM4 8a2 2 0 11-4 0 2 2 0 014 0zm0 2a2 2 0 100 4 2 2 0 000-4z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
+        <h3 className="text-lg font-semibold">Rental Period by Manufacturer</h3>
       </div>
 
-      {/* Circular Progress Bars for each manufacturer */}
+      {/* Circular Progress Bars */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-        {manufacturersData.map((manufacturer, index) => (
+        {manufacturerData.map((manufacturer, index) => (
           <div key={index} className="relative flex flex-col items-center">
             <div className="w-24 h-24 mb-4">
               <CircularProgressbar
-                value={(manufacturer.days / maxDays) * 100} // Calculate the percentage
+                value={(manufacturer.days / maxDays) * 100}
                 strokeWidth={10}
                 styles={buildStyles({
                   pathColor: manufacturer.color,
@@ -68,7 +81,7 @@ const BreakdownPeriod: React.FC = () => {
       <div className="mt-6">
         <h4 className="text-sm font-semibold mb-3">Legend</h4>
         <div className="flex flex-wrap justify-center space-x-4">
-          {manufacturersData.map((manufacturer, index) => (
+          {manufacturerData.map((manufacturer, index) => (
             <div key={index} className="flex items-center space-x-2">
               <span
                 className="w-3 h-3 rounded-full"
