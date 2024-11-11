@@ -44,7 +44,7 @@ const CarBreakdown: React.FC<CarBreakdownProps> = ({ searchQuery }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
-      <h3 className="text-xl font-semibold mb-4 text-gray-700">Car Rental Breakdown</h3>
+      <h3 className="text-xl font-semibold mb-4 text-gray-700">Car Rental Summary</h3>
       {isLoading && <p>Loading...</p>}
       {error && <p>Error loading data.</p>}
 
