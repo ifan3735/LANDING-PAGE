@@ -195,24 +195,45 @@ const Help = () => {
         </button>
 
         {showFeedbackForm && (
-  <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-    <div className="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md mx-4 transition-transform transform scale-105 sm:scale-100">
-      <h3 className="text-2xl font-semibold text-gray-800 mb-6">We Value Your Feedback</h3>
-      
+  <div className="fixed inset-0 bg-gray-900 bg-opacity-60 flex justify-center items-center z-50">
+    <div className="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md mx-4 transition-transform transform scale-105 sm:scale-100 animate-fade-in">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-2xl font-semibold text-gray-800">We Value Your Feedback</h3>
+        <button
+          className="text-gray-500 hover:text-gray-800 transition"
+          onClick={() => setShowFeedbackForm(false)}
+        >
+          ✕
+        </button>
+      </div>
+
       <textarea
         placeholder="Share your feedback here..."
-        className="w-full h-32 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none text-gray-700 mb-6"
+        className="w-full h-32 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none text-gray-700 mb-6 placeholder-gray-400"
       />
       
-      <button
-        className="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg font-medium px-4 py-3 rounded-lg transition-transform transform hover:scale-105"
-        onClick={() => setShowFeedbackForm(false)}
-      >
-        Submit Feedback
-      </button>
+      <div className="flex space-x-4">
+        <button
+          className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium px-4 py-2 rounded-lg transition transform hover:scale-105"
+          onClick={() => setShowFeedbackForm(false)}
+        >
+          Back
+        </button>
+        
+        <button
+          className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded-lg transition transform hover:scale-105"
+          onClick={() => {
+            // You can add submission functionality here
+            setShowFeedbackForm(false);
+          }}
+        >
+          Submit Feedback
+        </button>
+      </div>
     </div>
   </div>
 )}
+
 
       </div>
     </div>
