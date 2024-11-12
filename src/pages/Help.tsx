@@ -22,8 +22,9 @@ const Help = () => {
 
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
+  };
 
   const toggleExportDropdown = () => {
     setShowDropdown(!showDropdown);
