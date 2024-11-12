@@ -14,7 +14,10 @@ const Help = () => {
   const helpContent = [
     { question: "How do I export data?", answer: "Click the Export button and choose CSV or PDF." },
     { question: "How do I search for content?", answer: "Use the search bar at the top to find specific content." },
-    { question: "How do I change the theme?", answer: "Use the toggle button at the top right to switch themes." }
+    { question: "How do I change the theme?", answer: "Use the toggle button at the top right to switch themes." },
+    { question: "How do I contact support?", answer: "Call or email our support team for assistance." },
+    { question: "How do I leave feedback?", answer: "Click the Leave Feedback button and submit your feedback." },
+    { question: "How do I view FAQs?", answer: "Click on the questions to view the answers." },
   ];
 
   const toggleTheme = () => setTheme(theme === "light" ? "yellow" : "light");
