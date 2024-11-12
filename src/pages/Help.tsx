@@ -8,6 +8,7 @@ const Help = () => {
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
   const [faqExpanded, setFaqExpanded] = useState<number | null>(null);
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
   // Mock data for export
   const helpContent = [
@@ -134,65 +135,26 @@ const Help = () => {
           <FaQuestionCircle className="mr-2 inline-block" /> Frequently Asked Questions (FAQs)
         </h3>
         <div className="space-y-4">
-          {/* FAQ 1 */}
-          <div>
-            <button
-              className="w-full text-left flex justify-between items-center p-4 bg-gray-200 rounded-lg focus:outline-none transition-colors duration-200"
-              onClick={() => toggleFaq(1)}
-            >
-              <span>How do I export data?</span>
-              <FaChevronDown
-                className={`transform transition-transform ${
-                  faqExpanded === 1 ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {faqExpanded === 1 && (
-              <div className="p-4 bg-gray-50 rounded-lg mt-2 text-gray-700">
-                To export data, click the "Export" button at the top of the page and select either CSV or PDF format.
-              </div>
-            )}
-          </div>
-
-          {/* FAQ 2 */}
-          <div>
-            <button
-              className="w-full text-left flex justify-between items-center p-4 bg-gray-200 rounded-lg focus:outline-none transition-colors duration-200"
-              onClick={() => toggleFaq(2)}
-            >
-              <span>How do I search for content?</span>
-              <FaChevronDown
-                className={`transform transition-transform ${
-                  faqExpanded === 2 ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {faqExpanded === 2 && (
-              <div className="p-4 bg-gray-50 rounded-lg mt-2 text-gray-700">
-                Use the search bar at the top of the page to type in keywords or phrases, and the system will filter results accordingly.
-              </div>
-            )}
-          </div>
-
-          {/* FAQ 3 */}
-          <div>
-            <button
-              className="w-full text-left flex justify-between items-center p-4 bg-gray-200 rounded-lg focus:outline-none transition-colors duration-200"
-              onClick={() => toggleFaq(3)}
-            >
-              <span>How do I change the theme?</span>
-              <FaChevronDown
-                className={`transform transition-transform ${
-                  faqExpanded === 3 ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {faqExpanded === 3 && (
-              <div className="p-4 bg-gray-50 rounded-lg mt-2 text-gray-700">
-                You can switch between light and yellow themes by clicking the toggle button at the top-right corner of the page.
-              </div>
-            )}
-          </div>
+          {helpContent.map((item, index) => (
+            <div key={index}>
+              <button
+                className="w-full text-left flex justify-between items-center p-4 bg-gray-200 rounded-lg focus:outline-none transition-colors duration-200"
+                onClick={() => toggleFaq(index)}
+              >
+                <span>{item.question}</span>
+                <FaChevronDown
+                  className={`transform transition-transform ${
+                    faqExpanded === index ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {faqExpanded === index && (
+                <div className="p-4 bg-gray-50 rounded-lg mt-2 text-gray-700">
+                  {item.answer}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
@@ -205,20 +167,47 @@ const Help = () => {
           If you need additional assistance or have any specific inquiries, feel free to contact our support team.
         </p>
         <div className="flex space-x-4">
-          <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full flex items-center">
+          <button
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full flex items-center"
+            onClick={() => window.location.href = 'tel:+1234567890'}
+          >
             <FaPhone className="mr-2" /> Call Support
           </button>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center"
+            onClick={() => window.location.href = 'mailto:support@example.com'}
+          >
             <FaEnvelope className="mr-2" /> Email Support
           </button>
         </div>
       </div>
 
-      {/* Feedback Button */}
+      {/* Feedback Button and Modal */}
       <div className="mt-8">
-        <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full shadow-lg flex items-center">
+        <button
+          className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full shadow-lg flex items-center"
+          onClick={() => setShowFeedbackForm(true)}
+        >
           <FaRegComments className="mr-2" /> Leave Feedback
         </button>
+
+        {showFeedbackForm && (
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+              <h3 className="text-lg font-semibold mb-4">Feedback</h3>
+              <textarea
+                placeholder="Write your feedback here..."
+                className="border w-full p-2 rounded-lg mb-4"
+              />
+              <button
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full"
+                onClick={() => setShowFeedbackForm(false)} // Close modal on submission
+              >
+                Submit Feedback
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
