@@ -169,13 +169,13 @@ const Help = () => {
         <div className="flex space-x-4">
           <button
             className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full flex items-center"
-            onClick={() => window.location.href = 'tel:+1234567890'}
+            onClick={() => window.location.href = 'tel:+0705241326'}
           >
             <FaPhone className="mr-2" /> Call Support
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center"
-            onClick={() => window.location.href = 'mailto:support@example.com'}
+            onClick={() => window.location.href = 'mailto:ifanmaina@gmail.com'}
           >
             <FaEnvelope className="mr-2" /> Email Support
           </button>
