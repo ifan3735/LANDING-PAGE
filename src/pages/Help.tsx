@@ -138,34 +138,37 @@ const Help = () => {
         </ul>
       </div>
 
-      {/* FAQ Section */}
-      <div className="mt-10">
+     {/* FAQ Section */}
+     <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">
           <FaQuestionCircle className="mr-2 inline-block" /> Frequently Asked Questions (FAQs)
         </h3>
         <div className="space-y-4">
-          {helpContent.map((item, index) => (
-            <div key={index}>
-              <button
-                className="w-full text-left flex justify-between items-center p-4 bg-gray-200 rounded-lg focus:outline-none transition-colors duration-200"
-                onClick={() => toggleFaq(index)}
-              >
-                <span>{item.question}</span>
-                <FaChevronDown
-                  className={`transform transition-transform ${
-                    faqExpanded === index ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-              {faqExpanded === index && (
-                <div className="p-4 bg-gray-50 rounded-lg mt-2 text-gray-700">
-                  {item.answer}
-                </div>
-              )}
-            </div>
-          ))}
+          {filteredHelpContent.length > 0 ? (
+            filteredHelpContent.map((item, index) => (
+              <div key={index}>
+                <button
+                  className="w-full text-left flex justify-between items-center p-4 bg-gray-200 rounded-lg focus:outline-none transition-colors duration-200"
+                  onClick={() => toggleFaq(index)}
+                >
+                  <span>{item.question}</span>
+                  <FaChevronDown
+                    className={`transform transition-transform ${
+                      faqExpanded === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                {faqExpanded === index && (
+                  <div className="p-4 bg-gray-50 rounded-lg mt-2 text-gray-700">
+                    {item.answer}
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-500">No FAQs match your search query.</p>
+          )}
         </div>
-      </div>
 
       {/* Contact and Feedback Section */}
       <div className="mt-10">
