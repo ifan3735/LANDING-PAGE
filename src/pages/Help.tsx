@@ -62,6 +62,11 @@ const Help = () => {
     doc.save("help_export.pdf");
   };
 
+  // Filter the FAQ content based on search query
+  const filteredHelpContent = helpContent.filter(item =>
+    item.question.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div
       className={`transition-all duration-500 p-6 ${
