@@ -138,8 +138,8 @@ const Help = () => {
         </ul>
       </div>
 
-     {/* FAQ Section */}
-     <div className="mt-10">
+      {/* FAQ Section */}
+      <div className="mt-10">
         <h3 className="text-xl font-semibold mb-4">
           <FaQuestionCircle className="mr-2 inline-block" /> Frequently Asked Questions (FAQs)
         </h3>
@@ -169,6 +169,7 @@ const Help = () => {
             <p className="text-gray-500">No FAQs match your search query.</p>
           )}
         </div>
+      </div>
 
       {/* Contact and Feedback Section */}
       <div className="mt-10">
