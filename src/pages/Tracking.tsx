@@ -20,7 +20,13 @@ const Tracking: React.FC = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <Topbar />
+      <Topbar 
+        searchQuery="" 
+        handleSearch={() => {}} 
+        toggleTheme={() => {}} 
+        theme="light" 
+        exportData={() => {}} 
+      />
       <PageHeader />
 
       <div className="grid grid-cols-12 gap-6 mt-6">
