@@ -27,7 +27,9 @@ const Tracking: React.FC = () => {
         theme="light" 
         exportData={() => {}} 
       />
-      <PageHeader />
+      <PageHeader toggleExportDropdown={function (): void {
+        throw new Error('Function not implemented.');
+      } } showDropdown={false} />
 
       <div className="grid grid-cols-12 gap-6 mt-6">
         {/* Car List Section */}
