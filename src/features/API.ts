@@ -66,6 +66,11 @@ export interface Fleet {
     maintenance_cost: number;
     status: string;
 }
+export interface Location {
+    name: string;
+    address: string;
+    contact_phone: string;
+}
 
 export const apiSlice = createApi({
     reducerPath: 'api',
