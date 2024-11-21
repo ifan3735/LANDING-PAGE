@@ -72,6 +72,13 @@ export interface Location {
     contact_phone: string;
 }
 
+export interface SupportTicket {
+    user_id: number;
+    subject: string;
+    description: string;
+    status: 'closed' | 'open';
+}
+
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ 
