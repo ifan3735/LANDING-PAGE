@@ -79,6 +79,15 @@ export interface SupportTicket {
     status: 'closed' | 'open';
 }
 
+export interface Fleet {
+    vehicle_id: number;
+    acquisition_date: string;
+    depreciation_rate: number;
+    current_value: number;
+    maintenance_cost: number;
+    status: string;
+}
+
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ 
