@@ -87,6 +87,9 @@ export interface Fleet {
     maintenance_cost: number;
     status: string;
 }
+export interface Id {
+    id: number;
+}
 
 export const apiSlice = createApi({
     reducerPath: 'api',
