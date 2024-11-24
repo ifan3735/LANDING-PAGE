@@ -91,6 +91,9 @@ export interface Id {
     id: number;
 }
 
+export interface RegisterResponse {}
+
+
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ 
