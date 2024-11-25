@@ -6,7 +6,7 @@ import {
 } from 'recharts';
 
 const AnalyticsReport: React.FC = () => {
-  const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
+  const { data: bookingsData } = useFetchAllBookingsQuery();
   const userId = localStorage.getItem('userId');
   const [chartType, setChartType] = useState<'bar' | 'pie' | 'line' | 'area'>('bar');
 
@@ -78,7 +78,7 @@ const AnalyticsReport: React.FC = () => {
               fill="#4F76C1"
               label={(entry) => entry.label}
             >
-              {data.map((entry, index) => (
+              {data.map(( index) => (
                 <Cell key={`cell-${index}`} fill={`hsl(${index * 30}, 70%, 60%)`} />
               ))}
             </Pie>
