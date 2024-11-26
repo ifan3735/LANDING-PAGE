@@ -90,8 +90,9 @@ const Transactions = () => {
         searchQuery={searchQuery}
         handleSearch={handleSearch}
         toggleTheme={toggleTheme}
-        theme={theme}
-      />
+        theme={theme} exportData={function (): void {
+          throw new Error("Function not implemented.");
+        } }      />
 
       <div className="flex justify-between items-center my-6">
         <div>
