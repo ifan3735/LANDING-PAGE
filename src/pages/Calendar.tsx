@@ -9,7 +9,7 @@ const Calendar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [theme, setTheme] = useState("light");
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, refetch } = useFetchAllBookingsQuery();
+  const { data } = useFetchAllBookingsQuery();
   const [currentWeekOffset, setCurrentWeekOffset] = useState(0);
 
   const userId = localStorage.getItem("userId");
