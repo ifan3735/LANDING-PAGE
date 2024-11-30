@@ -156,6 +156,13 @@ export const apiSlice = createApi({
         fetchAllLocations: builder.query<Location[], void>({
             query: () => '/locations',
         }),
+        updateLocation: builder.mutation<Location, { id: number; location: Location }>({
+            query: ({ id, location }) => ({
+                url: `/locations/${id}`,
+                method: 'PUT',
+                body: location,
+            }),
+        }),
     }),
  
 });
