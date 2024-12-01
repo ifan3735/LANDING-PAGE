@@ -29,7 +29,7 @@ export interface User {
   updated_at: string;
 }
 
-const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme, exportData }: TopBarProps) => {
+const TopBar = ({ searchQuery, handleSearch, toggleTheme, theme }: TopBarProps) => {
   const navigate = useNavigate();
   const userId = parseInt(localStorage.getItem('userId') || '10');
   const { data: user, error, isLoading } = useFetchUserDetailsQuery(userId);
