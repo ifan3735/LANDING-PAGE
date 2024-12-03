@@ -805,7 +805,7 @@ const Settings = () => {
         </div>
 
         {/* Right Section: Export Button with Dropdown */}
-        <div className="relative z-50">
+        <div className="relative">
           <button
             onClick={toggleExportDropdown}
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg flex items-center"
