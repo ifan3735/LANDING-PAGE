@@ -3,6 +3,18 @@ import { useFetchAllBookingsQuery } from '../features/API';
 
 const colors = ['bg-blue-500', 'bg-teal-500', 'bg-yellow-500', 'bg-green-500', 'bg-purple-500'];
 
+// Define types for booking and vehicle structure
+interface Booking {
+  user_id: string;
+  booking_date: string;
+  return_date: string;
+  vehicle: {
+    vehicle_specs: {
+      model: string;
+    };
+  };
+}
+
 const CarUsage: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
   const userId = localStorage.getItem('userId');
@@ -10,8 +22,8 @@ const CarUsage: React.FC = () => {
   // Filter bookings data by the logged-in user and calculate days used
   const carUsageData = bookingsData
     ? bookingsData
-        .filter((booking) => booking.user_id == userId)
-        .map((booking) => {
+        .filter((booking: Booking) => booking.user_id === userId)
+        .map((booking: Booking) => {
           const bookingDate = new Date(booking.booking_date);
           const returnDate = new Date(booking.return_date);
           const daysUsed = Math.ceil(
@@ -26,9 +38,8 @@ const CarUsage: React.FC = () => {
     : [];
 
   // Calculate the maximum days used for scaling the progress bar
-  const maxDaysUsed = carUsageData.length > 0
-    ? Math.max(...carUsageData.map((car) => car.daysUsed))
-    : 1;
+  const maxDaysUsed =
+    carUsageData.length > 0 ? Math.max(...carUsageData.map((car) => car.daysUsed)) : 1;
 
   // Define the range for the label markers based on maxDaysUsed
   const markers = Array.from({ length: 6 }, (_, i) => Math.ceil((maxDaysUsed / 5) * i));
