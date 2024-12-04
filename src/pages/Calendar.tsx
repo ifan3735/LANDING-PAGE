@@ -83,8 +83,9 @@ const Calendar = () => {
         searchQuery={searchQuery}
         handleSearch={(e) => setSearchQuery(e.target.value)}
         toggleTheme={toggleTheme}
-        theme={theme}
-      />
+        theme={theme} exportData={function (): void {
+          throw new Error("Function not implemented.");
+        } }      />
 
       {/* Header with Export and Dropdowns */}
       <div className="flex justify-between items-center my-6">
