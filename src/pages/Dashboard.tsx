@@ -78,7 +78,7 @@ const Dashboard = () => {
   const exportAsCSV = () => {
     const headers = "Name,Style,Type,Color,Price\n";
     const rows = filteredCars
-      .map((Vehicle) => `${Vehicle.vehicle_specs.model},${Vehicle.vehicle_specs.manufacturer},${Vehicle.fuel_type},${Vehicle.color},${Vehicle.rental_rate}`)
+      .map((Vehicle: { vehicle_specs: { model: any; manufacturer: any; }; fuel_type: any; color: any; rental_rate: any; }) => `${Vehicle.vehicle_specs.model},${Vehicle.vehicle_specs.manufacturer},${Vehicle.fuel_type},${Vehicle.color},${Vehicle.rental_rate}`)
       .join("\n");
 
     const csvContent = headers + rows;
