@@ -6,7 +6,6 @@ import Analytics from '../components/Analytics';
 import CarBreakdown from '../components/CarBreakdown';
 import CarUsage from '../components/CarUsage';
 import BreakdownPeriod from '../components/BreakdownPeriod';
-
 const StatisticsPage = () => {
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
