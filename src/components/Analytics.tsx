@@ -68,23 +68,24 @@ const AnalyticsReport: React.FC = () => {
       {chartType === 'pie' && (
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
-            <Pie
-              data={data}
-              dataKey="spent"
-              nameKey="label"
-              cx="50%"
-              cy="50%"
-              outerRadius={100}
-              fill="#4F76C1"
-              label={(entry) => entry.label}
-            >
-              {data.map(( index) => (
-                <Cell key={`cell-${index}`} fill={`hsl(${index * 30}, 70%, 60%)`} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
+  <Pie
+    data={data}
+    dataKey="spent"
+    nameKey="label"
+    cx="50%"
+    cy="50%"
+    outerRadius={100}
+    fill="#4F76C1"
+    label={(entry) => entry.label}
+  >
+    {data.map((_, index) => (
+      <Cell key={`cell-${index}`} fill={`hsl(${index * 30}, 70%, 50%)`} />
+    ))}
+  </Pie>
+  <Tooltip />
+  <Legend />
+</PieChart>
+
         </ResponsiveContainer>
       )}
 
