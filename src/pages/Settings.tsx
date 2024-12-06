@@ -8,7 +8,6 @@ const Settings = () => {
   const [theme, setTheme] = useState('light');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('General');
-  const [showFilterDropdown, setShowFilterDropdown] = useState(false); // For showing/hiding filter dropdown
   const [selectedFilters, setSelectedFilters] = useState({
     type: '',
     color: '',
