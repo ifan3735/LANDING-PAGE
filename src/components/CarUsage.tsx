@@ -27,7 +27,7 @@ const CarUsage: React.FC = () => {
     ? bookingsData
         .filter((booking: Booking) => {
           console.log('Filtering Booking:', booking);
-          return booking.user_id == userId;
+          return booking.user_id == userId; // Filter bookings by the logged-in user
         })
         .map((booking: Booking) => {
           const bookingDate = new Date(booking.booking_date);
