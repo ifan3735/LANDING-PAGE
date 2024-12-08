@@ -18,7 +18,7 @@ const CarUsage: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
   const userId = localStorage.getItem('userId');
 
-  console.log('Bookings Data:', bookingsData);
+  console.log('Bookings Data:', bookingsData); // Log the bookings data
   console.log('Error:', error);
   console.log('Loading:', isLoading);
   console.log('Logged-in User ID:', userId);
