@@ -19,7 +19,7 @@ const CarUsage: React.FC = () => {
   const userId = localStorage.getItem('userId');
 
   console.log('Bookings Data:', bookingsData); // Log the bookings data
-  console.log('Error:', error);
+  console.log('Error:', error);  // Log the error
   console.log('Loading:', isLoading);
   console.log('Logged-in User ID:', userId);
 
