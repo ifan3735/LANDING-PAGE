@@ -20,7 +20,7 @@ const CarUsage: React.FC = () => {
 
   console.log('Bookings Data:', bookingsData); // Log the bookings data
   console.log('Error:', error);  // Log the error
-  console.log('Loading:', isLoading);
+  console.log('Loading:', isLoading); // Log the loading state
   console.log('Logged-in User ID:', userId);
 
   const carUsageData = bookingsData
