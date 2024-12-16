@@ -16,7 +16,7 @@ interface Booking {
 
 const CarUsage: React.FC = () => {
   const { data: bookingsData, error, isLoading } = useFetchAllBookingsQuery();
-  const userId = localStorage.getItem('userId'); 
+  const userId = localStorage.getItem('userId'); // Get the logged-in user ID
 
   console.log('Bookings Data:', bookingsData); // Log the bookings data
   console.log('Error:', error);  // Log the error
